@@ -9,21 +9,21 @@ export default defineConfig({
     react(),
     typescript({
       target: 'es5',
-      rootDir: resolve(__dirname, 'src/'),
+      rootDir: resolve(__dirname, "packages/"),
       declaration: true,
-      declarationDir: resolve(__dirname, 'lib'),
-      exclude: resolve(__dirname, 'node_modules/**'),
+      declarationDir: resolve(__dirname, "lib"),
+      exclude: resolve(__dirname, "node_modules/**"),
       allowSyntheticDefaultImports: true,
     })
   ],
   build: {
     outDir: 'lib',
-    cssTarget: 'chrome61',
+    cssTarget: 'chrome56',
     lib: {
-      entry: resolve(__dirname, 'index.tsx'),
-      name: 'LandDesign',
+      entry: resolve(__dirname, 'packages/index.ts'),
+      name: 'land-design',
       formats: ['es'],
-      fileName: 'land-design',
+      fileName: (format) => `land-design.${format}.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
@@ -33,12 +33,6 @@ export default defineConfig({
           'react-dom': 'react-dom',
         }
       }
-    }
-  },
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, ".")
     },
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   }
 })

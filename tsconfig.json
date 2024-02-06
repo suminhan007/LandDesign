@@ -4,23 +4,25 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "paths":{
-      "@/*":["./src/*"],
-    },
+    // "paths":{
+    //   "@/*":["packages/*"],
+    // },
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationDir": "lib",
     "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
   },
-  "include": ["./src", "index.tsx"],
+  "include": ["packages", "index.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
