@@ -1,14 +1,13 @@
 {
-  "name": "land-design",
-  "version": "0.0.12",
-  "author": "minnasu",
-  "main": "./dist/land-design.umd.cjs",
-  "module": "./dist/land-design.js",
+  "name": "@suminhan/land-design",
+  "version": "0.0.2",
+  "main": "./dist/suminhan.umd.cjs",
+  "module": "./dist/suminhan.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/land-design.js",
-      "require": "./dist/land-design.umd.cjs"
+      "import": "./dist/suminhan.js",
+      "require": "./dist/suminhan.umd.cjs"
     }
   },
   "publishConfig": {

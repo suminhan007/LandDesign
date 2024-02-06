@@ -22,7 +22,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'packages/index.tsx'),
       name: 'land-design',
-      fileName: (format) => `land-design.${format}.js`,
+      fileName: 'suminhan',
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
