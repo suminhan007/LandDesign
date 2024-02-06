@@ -1,14 +1,14 @@
 {
   "name": "land-design",
   "private": false,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "minnasu",
-  "description": "minnaland components",
-  "keywords": ["javascript", "components"],
   "type": "module",
-  "files":["lib"],
-  "main": "./lib/index.umd.cjs",
-  "module": "./lib/index.es.js",
+  "files":[
+    "lib"
+  ],
+  "main": "./lib/land-design.umd.cjs",
+  "module": "./lib/land-design.es.js",
   "typings": "./lib/index.d.ts",
   "exports": {
     ".": {
