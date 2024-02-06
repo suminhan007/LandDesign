@@ -8,7 +8,7 @@ const LandButton: React.FC<LandButtonProps> = ({
 }) => {
     return (
         <div>
-            LandButton
+            land-design LandButton
         </div>
     )
 }

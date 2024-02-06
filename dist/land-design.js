@@ -626,7 +626,7 @@ Check the top-level render call using <` + t + ">.");
 }
 process.env.NODE_ENV === "production" ? H.exports = ir() : H.exports = ur();
 var sr = H.exports;
-const lr = ({}) => /* @__PURE__ */ sr.jsx("div", { children: "LandButton" });
+const lr = ({}) => /* @__PURE__ */ sr.jsx("div", { children: "land-design LandButton" });
 export {
   lr as LandButton
 };

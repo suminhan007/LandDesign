@@ -1,21 +1,18 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path'
+import { resolve } from 'path'
 import typescript from '@rollup/plugin-typescript'
 
-function resolve(str: string) {
-  return path.resolve(__dirname, str);
-}
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     typescript({
-      target: 'es6',
-      rootDir: resolve('packages/'),
+      target: 'es5',
+      rootDir: resolve(__dirname, 'packages/'),
       declaration: true,
-      declarationDir: resolve('dist'),
-      exclude: resolve('node_modules/**'),
+      declarationDir: resolve(__dirname, 'dist'),
+      exclude: resolve(__dirname, 'node_modules/**'),
       allowSyntheticDefaultImports: true,
     })
   ],
@@ -23,7 +20,7 @@ export default defineConfig({
     outDir: 'dist',
     cssTarget: 'chrome61',
     lib: {
-      entry: resolve('packages/index.tsx'),
+      entry: resolve(__dirname, 'packages/index.tsx'),
       name: 'LandDesign',
       fileName: 'land-design',
     },

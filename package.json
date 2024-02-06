@@ -1,7 +1,7 @@
 {
   "name": "land-design",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "minnasu",
   "description": "minnaland components",
   "keywords": ["javascript", "components"],
@@ -25,7 +25,6 @@
   "dependencies": {
     "@types/node": "^20.11.5",
     "react-router-dom": "^6.21.3",
-    "sass": "^1.70.0",
     "styled-components": "^6.1.8",
     "vite-plugin-dts": "^3.7.1"
   },
