@@ -1,27 +1,27 @@
 {
   "name": "land-design",
   "private": false,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "minnasu",
   "description": "minnaland components",
   "keywords": ["javascript", "components"],
-  "files": ["dist/*"],
-  "type": "module",
-  "main": "./dist/land-design.umd.cjs",
-  "module": "./dist/land-design.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./lib/index.umd.cjs",
+  "module": "./lib/index.js",
+  "types": "./lib/apps/index/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/land-design.js",
-      "require": "./dist/land-design.umd.cjs"
+      "import": "./lib/index.es.js",
+      "require": "./lib/index.umd.cjs",
+      "types": "./lib/index.d.ts"
     }
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build && tsc",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "files": ["lib"],
   "dependencies": {
     "@types/node": "^20.11.5",
     "react-router-dom": "^6.21.3",
