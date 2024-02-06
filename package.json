@@ -1,7 +1,7 @@
 {
   "name": "land-design",
   "private": false,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "minnasu",
   "description": "minnaland components",
   "keywords": ["javascript", "components"],
@@ -13,8 +13,7 @@
   "exports": {
     ".": {
       "import": "./lib/land-design.js",
-      "require": "./lib/land-design.umd.cjs",
-      "types": "./lib/index.d.ts"
+      "require": "./lib/land-design.umd.cjs"
     }
   },
   "scripts": {
