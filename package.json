@@ -2,7 +2,7 @@
   "name": "land-design",
   "author": "style'me",
   "private": false,
-  "version": "0.0.5",
+  "version": "0.0.8",
   "type": "module",
   "main": "./dist/land-design.umd.js",
   "module": "./dist/land-design.es.js",
