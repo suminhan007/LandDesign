@@ -1,6 +1,6 @@
 {
   "name": "@suminhan/land-design",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "main": "./dist/suminhan.cjs",
   "module": "./dist/suminhan.js",
@@ -30,8 +30,6 @@
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "8.5.0",
-    "@suemor/eslint-config-react-ts": "^1.0.1",
-    "@suemor/prettier": "^1.0.1",
     "@testing-library/react": "^13.4.0",
     "@types/node": "^18.11.10",
     "@types/react": "^18.0.24",

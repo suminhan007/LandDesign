@@ -1,3 +1,3 @@
-export type { ButtonProps } from './Button/interface'
+export type { TagProps } from './Tag/interface'
 
-export { default as Button } from './Button'
+export { default as Tag } from './Tag'
