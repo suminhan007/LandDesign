@@ -1,2 +1,2 @@
-export { default as LandButton } from './LandButton';
-export type { LandButtonProps } from './LandButton';
+export type { TagProps } from './Tag/interface';
+export { default as Tag } from './Tag';

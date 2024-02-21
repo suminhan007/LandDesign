@@ -1,11 +1,11 @@
-import React from 'react'
-import { LandButton } from "../packages";
+import React, { useRef } from 'react'
+import {Tag} from "../packages";
 function App() {
-    return (
-        <div className="App">
-            <LandButton />
-        </div>
-    )
+  return (
+    <div className="App">
+     <Tag color='red'>我是标签</Tag>
+    </div>
+  )
 }
 
 export default App
