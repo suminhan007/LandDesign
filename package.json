@@ -1,6 +1,6 @@
 {
   "name": "land-design",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "dist/land-design.cjs.js",
   "module": "dist/land-design.esm.js",
@@ -37,6 +37,6 @@
     "vite": "^5.1.4"
   },
   "dependencies": {
-    "jsdom":"24.0.0"
+    "jsdom": "24.0.0"
   }
 }
