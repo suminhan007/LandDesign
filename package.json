@@ -1,94 +1,42 @@
 {
   "name": "land-design",
-  "author": "style'me",
-  "private": false,
-  "version": "0.0.8",
+  "version": "0.0.1",
   "type": "module",
-  "main": "./dist/land-design.umd.js",
-  "module": "./dist/land-design.es.js",
-  "typings": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/land-design.es.js",
-      "require": "./dist/land-design.umd.js"
-    }
+  "main": "dist/land-design.cjs.js",
+  "module": "dist/land-design.esm.js",
+  "types": "dist/land-design.cjs.d.ts",
+  "publishConfig": {
+    "access": "public"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:html": "vite build --config ./build/build.ts",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest",
-    "upload-server": "npx json-server  ./__mock_server__/db.json --middlewares node_modules/json-server-uploader/index.js"
+    "test": "vitest"
   },
-  "description": "land-design",
-  "keywords": [
-    "react",
-    "typescript",
-    "vite",
-    "react-ui",
-    "ui",
-    "components",
-    "licht",
-    "land-design",
-    "react18"
-  ],
-  "files": [
-    "dist/*"
-  ],
-  "license": "MIT",
-  "homepage": "https://react.codeym.com/",
-  "bugs": {
-    "url": "https://react.codeym.com/",
-    "email": "1046674804@qq.com"
-  },
-  "dependencies": {
-    "@rollup/plugin-typescript": "^8.3.4",
-    "@types/jest": "^29.2.2",
-    "@types/react-transition-group": "^4.4.5",
-    "@typescript-eslint/eslint-plugin": "^5.40.1",
-    "@typescript-eslint/parser": "^5.40.1",
-    "@vitejs/plugin-react": "^2.0.0",
-    "babel-eslint": "^10.1.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "classnames": "^2.3.1",
-    "eslint": "^8.26.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "events": "^3.3.0",
-    "jest": "^29.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0",
-    "react-transition-group": "^4.4.5",
-    "sass": "^1.54.1",
-    "stylelint": "^14.9.1",
-    "stylelint-config-prettier-scss": "^0.0.1",
-    "stylelint-config-standard": "^26.0.0",
-    "stylelint-config-standard-scss": "^5.0.0",
-    "stylelint-declaration-block-no-ignored-properties": "^2.5.0",
-    "vite": "^3.0.4"
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.10",
-    "@types/events": "^3.0.0",
-    "@types/lodash": "^4.14.190",
-    "@types/node": "^18.6.3",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "babel-loader": "^8.2.5",
-    "cross-env": "^7.0.3",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "json-server": "^0.17.1",
-    "json-server-uploader": "^1.0.3",
-    "tslib": "^2.4.0",
-    "typescript": "^4.8.4"
+    "@rollup/plugin-typescript": "^8.5.0",
+    "@testing-library/react": "^14.2.1",
+    "@types/node": "^18.11.10",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "clsx": "^2.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.71.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  },
+  "dependencies": {
+    "jsdom":"24.0.0"
   }
 }

@@ -1,39 +1,43 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import typescript from '@rollup/plugin-typescript';
-import { resolve } from 'path';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { readFileSync } from 'fs'
+import path from 'path'
+import typescript from '@rollup/plugin-typescript'
 
-const resolvePath = (str: string) => resolve(__dirname, str);
+const packageJson = JSON.parse(
+  readFileSync('./package.json', { encoding: 'utf-8' })
+)
+const globals = {
+  ...defineConfig(packageJson?.dependencies || {}),
+}
+
+function resolve(str: string) {
+  return path.resolve(__dirname, str)
+}
+
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@import "./src/styles/app.scss";', // 添加公共样式
-      },
-    },
-  },
+  plugins: [
+    react(),
+    typescript({
+      target: 'es5',
+      rootDir: resolve('packages/'),
+      declaration: true,
+      declarationDir: resolve('dist'),
+      exclude: resolve('node_modules/**'),
+      allowSyntheticDefaultImports: true,
+    }),
+  ],
   build: {
+    outDir: 'dist',
     lib: {
-      entry: resolvePath('packages/index.ts'),
+      entry: resolve('packages/index.tsx'),
       name: 'land-design',
-      fileName: (format) => `land-design.${format}.js`,
+      fileName: 'land-design',
+      formats: ['es', 'cjs',]
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
-      output: {
-        globals: {
-          react: 'react',
-          'react-dom': 'react-dom',
-        },
-      },
-      plugins: [
-        typescript({
-          tslib: resolve('typescript'),
-          // exclude:['packages/**/*index.ts'],
-          outDir: resolvePath('dist'),
-        }),
-      ],
+      external: ['react', 'react-dom', ...Object.keys(globals)],
     },
-  },
-});
+  }
+})
