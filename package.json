@@ -45,6 +45,7 @@
     "vitest": "^0.25.3"
   },
   "dependencies": {
-    "jsdom": "^20.0.3"
+    "jsdom": "^20.0.3",
+    "styled-components": "^6.1.8"
   }
 }
