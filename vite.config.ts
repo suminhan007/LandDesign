@@ -35,7 +35,7 @@ export default defineConfig({
       // 组件库源码的入口文件
       entry: resolve('packages/index.tsx'),
       // 组件库名称
-      name: 'demo-design',
+      name: 'land-design',
       // 文件名称, 打包结果举例: suminhan.cjs
       fileName: 'suminhan',
       // 打包格式

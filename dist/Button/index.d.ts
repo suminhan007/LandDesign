@@ -1,6 +1,8 @@
-/// <reference types="react" />
-import './style';
-import { ButtonProps } from './interface';
-declare const ButtonComponent: import("react").ForwardRefExoticComponent<ButtonProps & import("react").RefAttributes<unknown>>;
-export default ButtonComponent;
-export { ButtonProps };
+import { CSSProperties } from 'react';
+export type ButtonProps = {
+    text?: string;
+    style?: CSSProperties;
+    className?: string;
+};
+declare const Button: React.FC<ButtonProps>;
+export default Button;

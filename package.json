@@ -1,5 +1,5 @@
 {
-  "name": "@suminhan/demo-design",
+  "name": "@suminhan/land-design",
   "version": "0.0.25",
   "type": "module",
   "main": "./dist/suminhan.cjs",
@@ -9,8 +9,7 @@
     ".": {
       "require": "./dist/suminhan.cjs",
       "import": "./dist/suminhan.js"
-    },
-    "./style": "./dist/style.css"
+    }
   },
   "publishConfig": {
     "access": "public"

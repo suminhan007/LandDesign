@@ -1,29 +1,25 @@
-import clsx from 'clsx'
-import { forwardRef } from 'react'
-import './style'
-import { ButtonProps } from './interface'
+import { CSSProperties } from 'react'
 
-const Button: React.ForwardRefRenderFunction<HTMLDivElement, ButtonProps> = (
-  props,
-  ref,
-) => {
-  const { className, style, children, color, ...rest } = props
+export type ButtonProps = {
+  text?: string;
+  style?: CSSProperties;
+  className?: string;
+}
 
+const Button: React.FC<ButtonProps> = ({
+  text,
+  style,
+  className
+}) => {
   return (
     <div
-      ref={ref}
+      className={className}
       style={style}
-      {...rest}
-      className={clsx(className, 's-btn', `s-btn-${color}`)}
     >
-      {children}
+      {text}
+      Land Design Bingo!
     </div>
   )
 }
 
-const ButtonComponent = forwardRef<unknown, ButtonProps>(Button)
-
-ButtonComponent.displayName = 'Button'
-
-export default ButtonComponent
-export { ButtonProps }
+export default Button
