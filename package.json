@@ -2,9 +2,15 @@
   "name": "@suminhan/land-design",
   "version": "0.0.21",
   "type": "module",
-  "main": "dist/land-design.cjs.js",
-  "module": "dist/land-design.esm.js",
-  "types": "dist/land-design.cjs.d.ts",
+  "main": "./dist/land-design.cjs",
+  "module": "./dist/land-design.js",
+  "types": "./dist/land-design.cjs.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/land-design.cjs",
+      "import": "./dist/land-design.js"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -33,10 +39,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.71.1",
+    "tslib": "^2.6.2",
     "typescript": "^5.2.2",
     "vite": "^5.1.4"
   },
   "dependencies": {
-    "jsdom": "24.0.0"
+    "jsdom": "24.0.0",
+    "rollup": ">=2.14.0 <3.0.0",
+    "vitest": "^1.3.1"
   }
 }

@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { readFileSync } from 'fs'
@@ -39,5 +40,12 @@ export default defineConfig({
     rollupOptions: {
       external: ['react', 'react-dom', ...Object.keys(globals)],
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    coverage: {
+      reporter: ['text', 'json', 'html']
+    }
   }
 })
