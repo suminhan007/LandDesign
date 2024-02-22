@@ -1,6 +1,6 @@
 {
-  "name": "land-design",
-  "version": "0.0.2",
+  "name": "@suminhan/land-design",
+  "version": "0.0.20",
   "type": "module",
   "main": "dist/land-design.cjs.js",
   "module": "dist/land-design.esm.js",
