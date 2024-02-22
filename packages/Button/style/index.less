@@ -1,0 +1,12 @@
+@colors: red, orange, green, blue;
+
+.s-btn {
+  display: inline;
+  padding: 2px 10px;
+  each(@colors, {
+    &-@{value} {
+      background-color: @value;
+      color: #fff;
+    }
+  });
+}

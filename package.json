@@ -1,15 +1,16 @@
 {
-  "name": "@suminhan/land-design",
-  "version": "0.0.22",
+  "name": "@suminhan/demo-design",
+  "version": "0.0.24",
   "type": "module",
-  "main": "./dist/land-design.cjs",
-  "module": "./dist/land-design.js",
-  "types": "./dist/land-design.cjs.d.ts",
+  "main": "./dist/suminhan.cjs",
+  "module": "./dist/suminhan.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/land-design.cjs",
-      "import": "./dist/land-design.js"
-    }
+      "require": "./dist/suminhan.cjs",
+      "import": "./dist/suminhan.js"
+    },
+    "./style": "./dist/style.css"
   },
   "publishConfig": {
     "access": "public"
@@ -20,7 +21,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest"
   },
@@ -29,23 +29,23 @@
     "react-dom": ">=16"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.5.0",
-    "@testing-library/react": "^14.2.1",
+    "@rollup/plugin-typescript": "8.5.0",
+    "@suemor/eslint-config-react-ts": "^1.0.1",
+    "@suemor/prettier": "^1.0.1",
+    "@testing-library/react": "^13.4.0",
     "@types/node": "^18.11.10",
-    "@types/react": "^18.2.56",
-    "@types/react-dom": "^18.2.19",
-    "@vitejs/plugin-react": "^4.2.1",
-    "clsx": "^2.1.0",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@vitejs/plugin-react": "^2.2.0",
+    "clsx": "^1.2.1",
+    "less": "^4.1.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.71.1",
-    "tslib": "^2.6.2",
-    "typescript": "^5.2.2",
-    "vite": "^5.1.4"
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3",
+    "vitest": "^0.25.3"
   },
   "dependencies": {
-    "jsdom": "24.0.0",
-    "rollup": ">=2.14.0 <3.0.0",
-    "vitest": "^1.3.1"
+    "jsdom": "^20.0.3"
   }
 }

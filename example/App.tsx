@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
-import { Button } from '../packages'
+import {Tag} from "../packages";
 function App() {
   return (
     <div className="App">
-      <Button />
+     <Tag color='red'>我是标签</Tag>
     </div>
   )
 }
