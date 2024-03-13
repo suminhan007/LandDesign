@@ -4,6 +4,7 @@ import "./app.css"
 import Button from '../packages/Button'
 import Divider from '../packages/Divider'
 import Table from '../packages/Table'
+import Title from '../packages/Title'
 import { COMPONENTS_DATA } from './mock'
 
 function App() {
@@ -30,9 +31,10 @@ function App() {
         <StyledRightContent>
           {
             COMPONENTS_DATA.filter(itm => itm.id === activedId).map(item =>
-              <div style={{ width: '100%' }}>
-                <h1>{item.en}</h1>
-                <Divider margin={8} />
+              <div style={{ width: '100%',display:'flex',flexDirection:'column',gap:20 }}>
+                <Title title={item.en} type='first' sub="NEW"/>
+                <Divider />
+                <Title title={item.en} type='second' prefix='1.'/>
                 <Table titleData={[{ title: '属性', value: 'props' }, { title: '类型', value: 'type' }, { title: '描述', value: 'desc' }]} data={item.props} style={{ width: '100%' }} />
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(160px, 1fr))', gap: '24px' }}>
                   {/* {item.component} */}

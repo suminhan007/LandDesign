@@ -2,7 +2,11 @@ export const COMPONENTS_DATA = [
     {
         id: 1,
         en: 'Icon',
-        zh: '图标'
+        zh: '图标',
+        props: [
+            { name: 'size', type: "number", desc: '图标大小' },
+            { name: 'color', type: "string", desc: '图标颜色' },
+        ]
     },
     {
         id: 2,
@@ -22,5 +26,17 @@ export const COMPONENTS_DATA = [
         id: 3,
         en: 'Button',
         zh: '按钮',
+        props: [
+            { name: 'text', type: "string", desc: '按钮主要文案' },
+            { name: 'subText', type: 'string', desc: '按钮次要文案' },
+            { name: 'icon', type: 'element', desc: '按钮图标' },
+            { name: 'width', type: "string | number", desc: '按钮宽度' },
+            { name: 'height', type: 'string | number', desc: '按钮高度' },
+            { name: 'justify', type: "'center' | 'start' | 'end'", desc: '按钮文字对齐方式' },
+            { name: 'type', type: "'text' | 'background' | 'background-light' | 'border' | 'border-dashed' | 'line'", desc: '按钮风格' },
+            { name: 'status', type: "'default' | 'active' | 'loading' | 'disabled'", desc: '按钮状态' },
+            { name: 'pop', type: 'string | element', desc: '按钮气泡' },
+            { name: 'onClick', type: 'func', desc: '按钮点击事件' },
+        ]
     }
 ]

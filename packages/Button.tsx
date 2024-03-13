@@ -9,7 +9,7 @@ export type ButtonProps = {
   /* 按钮次要文案 */
   subText?: string;
   /* 按钮图标 */
-  icon?: React.ReactNode | string;
+  icon?: React.ReactNode;
   width?: string | number;
   height?: string | number;
   /* 按钮文字对齐方式 */
