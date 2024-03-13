@@ -1,14 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import "./app.css"
 import Button from '../packages/Button'
-import Divider, { DividerProps } from '../packages/Divider'
+import Divider from '../packages/Divider'
+import Table from '../packages/Table'
+import { COMPONENTS_DATA } from './mock'
 
-const ComponentsData = [
-  { id: 1, en: 'Icon', zh: '图标' },
-  { id: 2, en: 'Divider', zh: '分割线', props: [] },
-  { id: 3, en: 'Button', zh: '按钮' }
-]
 function App() {
   const [activedId, setActivedId] = useState<number>(1)
   return (
@@ -17,7 +14,7 @@ function App() {
       <StyleLayout>
         <StyledLeftNav>
           {
-            ComponentsData.map(item =>
+            COMPONENTS_DATA.map(item =>
               <Button
                 text={item.en}
                 subText={item.zh}
@@ -32,40 +29,13 @@ function App() {
         </StyledLeftNav>
         <StyledRightContent>
           {
-            ComponentsData.filter(itm => itm.id === activedId).map(item =>
+            COMPONENTS_DATA.filter(itm => itm.id === activedId).map(item =>
               <div style={{ width: '100%' }}>
                 <h1>{item.en}</h1>
                 <Divider margin={8} />
+                <Table titleData={[{ title: '属性', value: 'props' }, { title: '类型', value: 'type' }, { title: '描述', value: 'desc' }]} data={item.props} style={{ width: '100%' }} />
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(160px, 1fr))', gap: '24px' }}>
-                  <Button width='auto' text='text-default' type='text' />
-                  <Button width='auto' text='text-active' type='text' status='active' />
-                  <Button width='auto' text='text-loading' type='text' status='loading' />
-                  <Button width='auto' text='text-disabled' type='text' status='disabled' pop="请填写完成" />
-
-                  <Button width='auto' text='background-light-default' type='background-light' status='default' />
-                  <Button width='auto' text='background-light-active' type='background-light' status='active' />
-                  <Button width='auto' text='background-light-loading' type='background-light' status='loading' />
-                  <Button width='auto' text='background-light-disabled' type='background-light' status='disabled' />
-
-                  <Button width='auto' text='background-default' type='background' status='default' />
-                  <Button width='auto' text='background-active' type='background' status='active' />
-                  <Button width='auto' text='background-loading' type='background' status='loading' />
-                  <Button width='auto' text='background-disabled' type='background' status='disabled' />
-
-                  <Button width='auto' text='solid-default' type='border' status='default' />
-                  <Button width='auto' text='solid-active' type='border' status='active' />
-                  <Button width='auto' text='solid-loading' type='border' status='loading' />
-                  <Button width='auto' text='solid-disabled' type='border' status='disabled' />
-
-                  <Button width='auto' text='dashed-default' type='border-dashed' status='default' />
-                  <Button width='auto' text='dashed-active' type='border-dashed' status='active' />
-                  <Button width='auto' text='dashed-loading' type='border-dashed' status='loading' />
-                  <Button width='auto' text='dashed-disabled' type='border-dashed' status='disabled' />
-
-                  <Button width='auto' text='line-default' type='line' status='default' />
-                  <Button width='auto' text='line-active' type='line' status='active' />
-                  <Button width='auto' text='line-loading' type='line' status='loading' />
-                  <Button width='auto' text='line-disabled' type='line' status='disabled' />
+                  {/* {item.component} */}
                 </div>
               </div>
             )

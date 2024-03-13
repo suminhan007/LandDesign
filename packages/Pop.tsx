@@ -13,7 +13,7 @@ const Pop: React.FC<PopProps> = ({
     className
 }) => {
     return (
-        <StyledBtnPop>
+        <StyledBtnPop className={className} style={style}>
             {content}
         </StyledBtnPop>
     )
