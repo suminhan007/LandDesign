@@ -10,7 +10,7 @@ export type TableProps = {
 
 const Table: React.FC<TableProps> = ({
     titleData,
-    data=[],
+    data = [],
     style,
     className
 }) => {

@@ -2,14 +2,113 @@
     // 主题色
     --color-primary-1: rgb(22, 93, 255);
 
-    // 字体色
-    --color-text-1: #0D0D0D;
-    --color-text-2: #202020;
-    --color-text-3: #333;
-    --color-text-4: #555;
-    --color-text-5: #888;
-    --color-text-6: #999;
-    
-    // 通用色
+    // 中性色
+    --color-gray-1: #0D0D0D;
+    --color-gray-2: #202020;
+    --color-gray-3: #333;
+    --color-gray-4: #555;
+    --color-gray-5: #888;
+    --color-gray-6: #999;
+    --color-gray-7: #DDD;
+    --color-gray-8: #EAEAEA;
+    --color-gray-9: #F6F6F6;
+    --color-gray-10: #F9F9F9;
+    --color-gray-11: #FAFAFA;
     --color-white: #fff;
+
+    // 提示色
+    --color-red-1: #FFECE8;
+    --color-red-2: #FBCBC4;
+    --color-red-3: #F7A9A1;
+    --color-red-4: #F3867E;
+    --color-red-5: #EF625D;
+    --color-red-6: #EB3D3D;
+    --color-red-7: #C3262B;
+    --color-red-8: #9C141D;
+    --color-red-9: #740812;
+    --color-red-10: #4D000A;
+
+    --color-orangered-1: #FFF7E8;
+    --color-orangered-2: #FFE6C0;
+    --color-orangered-3: #FFD298;
+    --color-orangered-4: #FFBC70;
+    --color-orangered-5: #FFA448;
+    --color-orangered-6: #FF8920;
+    --color-orangered-7: #D26614;
+    --color-orangered-8: #A6490A;
+    --color-orangered-9: #792F04;
+    --color-orangered-10: #4D1900;
+
+    --color-orange-1: #FFF7E8;
+    --color-orange-2: #FFE4BA;
+    --color-orange-3: #FFCF8B;
+    --color-orange-4: #FFB65D;
+    --color-orange-5: #FF9A2E;
+    --color-orange-6: #FF7D00;
+    --color-orange-7: #D25F00;
+    --color-orange-8: #A64500;
+    --color-orange-9: #792E00;
+    --color-orange-10: #4D1B00;
+
+    --color-yellow-1: #FFFDE8;
+    --color-yellow-2: #FFF8CA;
+    --color-yellow-3: #FFF1AC;
+    --color-yellow-4: #FFE88E;
+    --color-yellow-5: #FFDE70;
+    --color-yellow-6: #FFD152;
+    --color-yellow-7: #D2A233;
+    --color-yellow-8: #A6771B;
+    --color-yellow-9: #79500A;
+    --color-yellow-10: #4D2E00;
+
+    --color-green-1: #E8FFEA;
+    --color-green-2: #BDF5C3;
+    --color-green-3: #95EBA1;
+    --color-green-4: #70E083;
+    --color-green-5: #4ED669;
+    --color-green-6: #2ECC52;
+    --color-green-7: #1DAC43;
+    --color-green-8: #108C35;
+    --color-green-9: #066C28;
+    --color-green-10: #004D1C;
+
+    --color-blue-1: #E8F4FF;
+    --color-blue-2: #C8E1FE;
+    --color-blue-3: #A7CCFC;
+    --color-blue-4: #88B6FB;
+    --color-blue-5: #689DF9;
+    --color-blue-6: #4983F8;
+    --color-blue-7: #2D5DCD;
+    --color-blue-8: #183DA2;
+    --color-blue-9: #092377;
+    --color-blue-10: #000F4D;
+
+    --color-arcoblue-1: #E8F3FF;
+    --color-arcoblue-2: #BEDAFF;
+    --color-arcoblue-3: #94BFFF;
+    --color-arcoblue-4: #6AA1FF;
+    --color-arcoblue-5: #4080FF;
+    --color-arcoblue-6: #165DFF;
+    --color-arcoblue-7: #0E42D2;
+    --color-arcoblue-8: #072CA6;
+    --color-arcoblue-9: #031A79;
+    --color-arcoblue-10: #000D4D;
+
+    --color-pink-1: #FFE8E9;
+    --color-pink-2: #FDC6CA;
+    --color-pink-3: #FBA3AE;
+    --color-pink-4: #FA8294;
+    --color-pink-5: #F8617C;
+    --color-pink-6: #F64066;
+    --color-pink-7: #CC2851;
+    --color-pink-8: #A1153D;
+    --color-pink-9: #77082B;
+    --color-pink-10: #4D001B;
+
+    //背景模糊
+    ---bg-blur: blur(10px);
+    ---bg-opacity: 0.9;
+
+    //投影
+    --boxshadow-small: 
 }
