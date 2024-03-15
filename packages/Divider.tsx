@@ -28,11 +28,11 @@ const Divider: React.FC<DividerProps> = ({
     content,
     align = 'center',
     style,
-    className
+    className = ''
 }) => {
     return (
         <div
-            className={className}
+            className={`land-divider ${className}`}
             style={{
                 display: 'flex',
                 alignItems: 'center',

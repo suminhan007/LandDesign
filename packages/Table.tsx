@@ -12,10 +12,10 @@ const Table: React.FC<TableProps> = ({
     titleData,
     data = [],
     style,
-    className
+    className = ''
 }) => {
     return (
-        <StyledTable className={className} style={style}>
+        <StyledTable className={`land-table ${className}`} style={style}>
             <thead>
                 <tr>
                     {titleData?.map((item1, index1) =>

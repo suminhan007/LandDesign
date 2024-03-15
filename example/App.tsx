@@ -1,49 +1,86 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import "./app.css"
-import Button from '../packages/Button'
-import Divider from '../packages/Divider'
-import Table from '../packages/Table'
-import Title from '../packages/Title'
-import { COMPONENTS_DATA } from './mock'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import "./app.css";
+import '../style/atomic.scss';
+import '../style/variable.scss';
+
+import Button from '../packages/Button';
+import Divider from '../packages/Divider';
+import Table from '../packages/Table';
+import Title from '../packages/Title';
+import Link from '../packages/Link';
+
+// 引入数据
+import { COMMON_COMPONENTS_DATA, LAYOUT_COMPONENTS_DATA } from './mock';
+import { IconLoading } from '../packages/Icon';
+const Nav_Data = [
+  { id: 1, data: COMMON_COMPONENTS_DATA, title: '通用型' },
+  { id: 2, data: LAYOUT_COMPONENTS_DATA, title: '布局型' },
+  { id: 3, data: LAYOUT_COMPONENTS_DATA, title: '文字型' }
+]
 
 function App() {
-  const [activedId, setActivedId] = useState<number>(1)
+  const [activedId, setActivedId] = useState<number>(1);
+  const loadComponents = (id: number) => {
+    switch (id) {
+      // Icon
+      case 1:
+        return <IconLoading />;
+      case 2:
+        return <>
+          <Divider direction='column' />
+        </>
+      case 3:
+        return <>
+          <Button theme='text' /> <Button theme='text' href='https://tacc-creative-ui.pages.woa.com/components/CreativeFilterHistory' />
+          <Button theme='text' status='primary' /> <Button theme='text' status='success' /> <Button theme='text' status='warning' /> <Button theme='text' status='danger' />
+        </>
+    }
+    return <></>
+  }
   return (
     <div>
       <StyledTopNav></StyledTopNav>
-      <StyleLayout>
-        <StyledLeftNav>
+      <div className='flex'>
+        <StyledLeftNav className='flex column gap-20 py-24 px-12'>
           {
-            COMPONENTS_DATA.map(item =>
-              <Button
-                text={item.en}
-                subText={item.zh}
-                width='100%'
-                justify='start'
-                type={activedId === item.id ? 'background' : 'text'}
-                status={activedId === item.id ? 'active' : 'default'}
-                onClick={() => setActivedId(item.id)}
-              />
+            Nav_Data.map(navItem =>
+              <div className='flex column gap-4'>
+                <Title title={`-- ${navItem.title}`} type='p' className='my-8' style={{ color: 'var(--color-primary-6)' }} />
+                {
+                  navItem.data?.map(navBtnItem =>
+                    <Button
+                      key={navBtnItem.id}
+                      text={navBtnItem.en}
+                      subText={navBtnItem.zh}
+                      width='100%'
+                      justify='start'
+                      theme={activedId === navBtnItem.id ? 'background-dark' : 'text'}
+                      onClick={() => setActivedId(navBtnItem.id)}
+                    />
+                  )
+                }
+              </div>
             )
           }
         </StyledLeftNav>
-        <StyledRightContent>
+        <StyledRightContent className='flex p-24'>
           {
-            COMPONENTS_DATA.filter(itm => itm.id === activedId).map(item =>
-              <div style={{ width: '100%',display:'flex',flexDirection:'column',gap:20 }}>
-                <Title title={item.en} type='first' sub="NEW"/>
+            COMMON_COMPONENTS_DATA.filter(itm => itm.id === activedId).map(item =>
+              <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 20 }}>
+                <Title title={item.en} type='h1' />
                 <Divider />
-                <Title title={item.en} type='second' prefix='1.'/>
+                <Title title='1. 属性概览' type='h2' />
                 <Table titleData={[{ title: '属性', value: 'props' }, { title: '类型', value: 'type' }, { title: '描述', value: 'desc' }]} data={item.props} style={{ width: '100%' }} />
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(160px, 1fr))', gap: '24px' }}>
-                  {/* {item.component} */}
+                <Title title='2. 组件预览' type='h2' />
+                <div className='width-100' style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(160px, 1fr))', gap: '24px' }}>
+                  {loadComponents?.(item.id)}
                 </div>
               </div>
             )
           }
         </StyledRightContent>
-      </StyleLayout>
+      </div>
     </div>
   )
 }
@@ -54,24 +91,15 @@ const StyledTopNav = styled.div`
   box-sizing: border-box;
 `
 
-const StyleLayout = styled.div`
-  display: flex;  
-`
-
 const StyledLeftNav = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 24px 12px;
     width: 180px;
     min-height: calc(100vh - 64px);
-    border-right: 1px solid #eee;
+    flex-shrink: 0;
+    border-right: 1px solid var(--color-border-1);
     box-sizing: border-box;
 `
 
 const StyledRightContent = styled.div`
-    display: flex;
-    padding: 24px;
     width: calc(100% - 48px);
     box-sizing: border-box;
 `
