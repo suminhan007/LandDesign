@@ -1,0 +1,23 @@
+import React, { CSSProperties } from 'react';
+import { PopProps } from './Pop';
+export type ButtonProps = {
+    text?: string;
+    subText?: string;
+    icon?: React.ReactNode;
+    width?: string | number;
+    height?: string | number;
+    justify?: 'center' | 'start' | 'end';
+    theme?: 'text' | 'background' | 'border' | 'line';
+    status?: 'default' | 'primary' | 'warning' | 'danger' | 'success';
+    disabled?: boolean;
+    loading?: boolean;
+    pop?: React.ReactNode | string;
+    PopProps?: PopProps;
+    href?: string;
+    target?: '_self' | '_blank' | '_top' | '_parent';
+    onClick?: (e: React.UIEvent) => void;
+    style?: CSSProperties;
+    className?: string;
+};
+declare const Button: React.FC<ButtonProps>;
+export default Button;

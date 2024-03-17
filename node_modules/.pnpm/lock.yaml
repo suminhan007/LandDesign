@@ -8,6 +8,9 @@ dependencies:
   jsdom:
     specifier: ^20.0.3
     version: 20.0.3
+  path:
+    specifier: ^0.12.7
+    version: 0.12.7
   sass:
     specifier: ^1.72.0
     version: 1.72.0
@@ -2394,6 +2397,10 @@ packages:
       wrappy: 1.0.2
     dev: true
 
+  /inherits@2.0.3:
+    resolution: {integrity: sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=}
+    dev: false
+
   /inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
     dev: true
@@ -3069,6 +3076,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /path@0.12.7:
+    resolution: {integrity: sha1-1NwqUGxM4hl+tIHr/NWzbAFAsQ8=}
+    dependencies:
+      process: 0.11.10
+      util: 0.10.4
+    dev: false
+
   /pathval@1.1.1:
     resolution: {integrity: sha512-Dp6zGqpTdETdR63lehJYPeIOqpiNBNtc7BpWSLrOje7UaIsE5aY92r/AunQA7rsXvet3lrJ3JnZX29UPTKXyKQ==}
     dev: true
@@ -3148,6 +3162,11 @@ packages:
       ansi-styles: 5.2.0
       react-is: 17.0.2
     dev: true
+
+  /process@0.11.10:
+    resolution: {integrity: sha1-czIwDoQBYb2j5podHZGn1LwW8YI=}
+    engines: {node: '>= 0.6.0'}
+    dev: false
 
   /prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -3738,6 +3757,12 @@ packages:
     dependencies:
       querystringify: 2.2.0
       requires-port: 1.0.0
+
+  /util@0.10.4:
+    resolution: {integrity: sha512-0Pm9hTQ3se5ll1XihRic3FDIku70C+iHUdT/W926rSgHV5QgXsYbKZN8MSC3tJtSkhuROzvsQjAaFENRXr+19A==}
+    dependencies:
+      inherits: 2.0.3
+    dev: false
 
   /vite@3.2.8(@types/node@18.19.24)(less@4.2.0)(sass@1.72.0):
     resolution: {integrity: sha512-EtQU16PLIJpAZol2cTLttNP1mX6L0SyI0pgQB1VOoWeQnMSvtiwovV3D6NcjN8CZQWWyESD2v5NGnpz5RvgOZA==}
