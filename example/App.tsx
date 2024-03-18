@@ -34,7 +34,7 @@ const Nav_Data = [
 ];
 
 function App() {
-  const [activedId, setActivedId] = useState<number>(103);
+  const [activedId, setActivedId] = useState<number>(203);
   const [activedPage, setActivedPage] = useState<number>(1);
   useEffect(() => {
     if (activedId > 700) {
@@ -59,7 +59,7 @@ function App() {
     <div>
       <StyledTopNav className="flex px-24">
         <Title
-          title="Land Design"
+          title=""
           style={{ color: "var(--color-primary-6)" }}
         />
       </StyledTopNav>
@@ -147,7 +147,8 @@ const StyledLeftNav = styled.div`
 `;
 
 const StyledRightContent = styled.div`
-  width: calc(100% - 48px);
+  flex: 1;
+  min-width: 784px;
   height: 100vh;
   padding-top: 88px;
   box-sizing: border-box;
