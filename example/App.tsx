@@ -56,7 +56,7 @@ function App() {
     }
   }, [activedId]);
   return (
-    <div>
+    <>
       <StyledTopNav className="flex px-24">
         <Title
           title=""
@@ -122,7 +122,7 @@ function App() {
               ))}
         </StyledRightContent>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -149,7 +149,9 @@ const StyledLeftNav = styled.div`
 const StyledRightContent = styled.div`
   flex: 1;
   min-width: 784px;
+  max-width: 960px;
   height: 100vh;
+  margin: 0 auto;
   padding-top: 88px;
   box-sizing: border-box;
 `;

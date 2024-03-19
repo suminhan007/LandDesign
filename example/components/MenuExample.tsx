@@ -18,6 +18,7 @@ export default function MenuExample() {
               { key: 5, title: "Navigation 5", clickType: ClickType.SELF },
             ]}
             actived={1}
+            border
           />
         </div>
         <Title title="角标" type="h3" />
@@ -96,6 +97,7 @@ export default function MenuExample() {
             ]}
             actived={3}
             direction="column"
+            style={{width: 132}}
           />
         </div>
         <Title title="导航选中风格" type="h3" />
