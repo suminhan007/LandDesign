@@ -6,7 +6,7 @@ import Header from "../../packages/Header";
 import Sider from "../../packages/Sider";
 import Content from "../../packages/Content";
 import Footer from "../../packages/Footer";
-import { IconRefresh } from "../../packages/Icon";
+import { ClickType } from "../../packages/Menu";
 
 export default function LayoutExample() {
   return (
@@ -15,7 +15,11 @@ export default function LayoutExample() {
         <Title title="基本布局" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
           <Layout className="border width-100" style={{ height: 600 }}>
-            <Header logo={<p>🌷🌷🌷</p>} name={<Title title="Web Site" type="h2" />} />
+            <Header logo={<p>🌷🌷🌷</p>} name={<Title title="Web Site" type="h2" />} navData={[
+              { key: 1, title: "设计", clickType: ClickType.SELF },
+              { key: 2, title: "组件", clickType: ClickType.SELF },
+              { key: 3, title: "文档", clickType: ClickType.SELF },
+            ]} actived={1} align="end" />
             <Layout>
               <Sider placement='left'><Flex bothCenter h="100%">SiderLeft</Flex></Sider>
               <Content style={{ minHeight: '464px' }}><Flex bothCenter h="100%">Content</Flex></Content>

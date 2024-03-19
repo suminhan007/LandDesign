@@ -1,64 +1,92 @@
 import React, { CSSProperties, useState } from "react";
 import styled from "styled-components";
 
-export enum LinkType {
+export enum ClickType {
+  /* 当前页面切换 */
   SELF = "self",
+  /* 外部跳转 */
   OTHERS = "others",
+  /* 不可点击项（仅作为下拉框导航项的整合，通过下拉框子项切换，鼠标悬浮样式为 default） */
+  SIMPLE = 'simple',
+  /* 禁用 */
+  DISABLED = 'disabled',
 }
 export type MenuItemType = {
   key: number;
   title?: string;
+  icon?: string | React.ReactNode;
   isNew?: string | boolean;
-  simple?: boolean;
   href?: string;
-  linkType: LinkType;
+  clickType: ClickType;
   dropData?: MenuItemType[];
 };
+
 export type MenuProps = {
+  actived?: number;
   data?: MenuItemType[];
+  direction?: 'row' | 'column';
+  itemStyle?: CSSProperties;
+  itemClassName?: string;
   style?: CSSProperties;
   className?: string;
 };
 
-const Menu: React.FC<MenuProps> = ({ data, style, className }) => {
-  const [actived, setActived] = useState<number>(0);
+const Menu: React.FC<MenuProps> = ({ actived, data, direction, itemStyle, itemClassName, style, className }) => {
+  const [newActived, setNewActived] = useState<number>(actived);
   const handleChangeTab = (item: MenuItemType) => {
-    item.linkType === LinkType.SELF && setActived(item.key);
+    item.clickType === ClickType.SELF && setNewActived(item.key);
   };
   return (
-    <StyledMenu className={className} style={style}>
+    <StyledMenu className={`land-menu ${className}`} style={style} direction={direction}>
       {data?.map((item) => (
-        <a
-          role="button"
-          key={item.key}
-          className={`land-nav-link ${item.simple ? "simple" : ""} ${
-            actived === item.key ? "actived" : ""
-          }`}
-          data-title={item.title}
-          onClick={() => handleChangeTab?.(item)}
-        >
-          {item.title}
-          {item.isNew && (
-            <i className="land-nav-new">
-              {typeof item.isNew === "boolean" ? "NEW" : item.isNew}
-            </i>
-          )}
-        </a>
+        <div className="land-nav-item">
+          <a
+            role="button"
+            key={item.key}
+            className={`land-nav-link ${item.clickType === ClickType.SIMPLE ? "simple" : ""} ${item.clickType === ClickType.DISABLED ? "disabled" : ""} ${newActived === item.key ? "actived" : ""
+              } ${itemClassName}`}
+            style={itemStyle}
+            data-title={item.title}
+            onClick={() => handleChangeTab?.(item)}
+          >
+            {typeof item.icon === 'string' ? <img src={item.icon} className="land-nav-icon" /> : item.icon}
+            {item.title}
+            {item.isNew && (
+              <i className="land-nav-new">
+                {typeof item.isNew === "boolean" ? "NEW" : item.isNew}
+              </i>
+            )}
+          </a>
+        </div>
       ))}
     </StyledMenu>
   );
 };
 
-const StyledMenu = styled.div`
+const StyledMenu = styled.div<{
+  direction?: string;
+}>`
   display: flex;
-  gap: var(--gap-12);
-  .land-nav-link {
+  flex-direction: ${props => props.direction};
+  gap: var(--gap-4);
+  height: ${props => props.direction === 'row' ? '100%' : 'fit-content'};
+  width: ${props => props.direction === 'column' ? '100%' : 'fit-content'};
+  .land-nav-item {
     position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .land-nav-link {
     padding: var(--padding-medium);
     border-radius: var(--radius-4);
-    color: var(--color-text-3);
+    color: transparent;
+    font-weight: 600;
     font-weight: 400;
     font-size: var(--font-content-large);
+    white-space: nowrap;
+    transition: background-color var(--transition-15) linear;
     cursor: pointer;
     &:hover {
       background-color: var(--color-bg-1);
@@ -67,15 +95,12 @@ const StyledMenu = styled.div`
         font-weight: 600;
       }
     }
-    &.simple {
-      cursor: default;
-    }
     &::before {
       content: attr(data-title);
-      display: flex;
       position: absolute;
       height: 100%;
       width: 100%;
+      color: var(--color-text-3);
     }
     &::after {
       content: "";
@@ -85,9 +110,10 @@ const StyledMenu = styled.div`
       bottom: 0;
       width: 12px;
       height: 2px;
-      transform: translateX(-50%);
+      transform: ${props => props.direction === 'row' ? `translateX(-50%)` : 'rotate(90deg)'};
       border-radius: 1px;
       background-color: var(--color-text-1);
+      transition: opacity var(--transition-15) linear;
       opacity: 0;
     }
     &.actived {
@@ -98,6 +124,18 @@ const StyledMenu = styled.div`
       &::after {
         opacity: 1;
       }
+    }
+    &.simple {
+      cursor: default;
+    }
+    &.disabled {
+      pointer-events: none;
+      opacity: var(--opacity-68);
+    }
+
+    .land-nav-icon {
+      width: 14px;
+      height: 14px;
     }
     .land-nav-new {
       position: absolute;

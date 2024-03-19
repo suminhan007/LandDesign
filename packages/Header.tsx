@@ -2,6 +2,7 @@ import React, { CSSProperties } from "react";
 import styled from "styled-components";
 import Divider from "./Divider";
 import Button from "./Button";
+import Menu, { MenuItemType } from "./Menu";
 
 export type HeaderProps = {
   /* Header 高度 */
@@ -19,21 +20,23 @@ export type HeaderProps = {
   /* logo 与网站名称之间的分割线 */
   divider?: boolean;
   /* 导航项数据 */
-  navData?: any;
+  navData?: MenuItemType[];
+  actived?: number;
+  align?: 'start' | 'center' | 'end';
   style?: CSSProperties;
   className?: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ h = '64px', fixed, filter = 0, borderBottom = true, logo, name, divider = true, navData = [], style, className }) => {
+const Header: React.FC<HeaderProps> = ({ h = '64px', fixed, filter = 0, borderBottom = true, logo, name, divider = true, navData = [], actived, align, style, className }) => {
   return <StyledHeader className={`land-header ${fixed ? 'fixed' : ''} ${className}`} style={style} height={h} filter={filter} borderBottom={borderBottom}>
     <div className="land-header-logo">
       {typeof logo === 'string' ? <img src={logo} /> : logo}
       {divider && <Divider direction="column" lang="24px" />}
       {typeof name === 'string' ? <img src={name} /> : name}
     </div>
-    <div className="land-header-nav">
-
-    </div>
+    <StyledHeaderNav className="land-header-nav" align={align}>
+      <Menu data={navData} actived={actived} />
+    </StyledHeaderNav>
     <div className="land-header-user">
       <Button text="登录" />
       <Button text="注册" type="background" status="primary" />
@@ -49,7 +52,8 @@ const StyledHeader = styled.header<{
 }>`
   display: flex;
   align-items: center;
-  padding: 12px 24px;
+  padding: 0 24px;
+  gap: var(--gap-20);
   width: 100%;
   height: ${props => props.height};
   border-bottom: ${props => props.borderBottom ? '1px solid var(--color-border-2)' : ''};
@@ -68,14 +72,20 @@ const StyledHeader = styled.header<{
     gap: var(--gap-12);
     height: 100%;
   }
-  .land-header-nav {
-    flex: 1;
-  }
   .land-header-user {
     display: flex;
     align-items: center;
     gap: var(--gap-12);
   }
 `;
+
+const StyledHeaderNav = styled.div<{
+  align?: string;
+}>`
+  display: flex;
+  flex: 1;
+  justify-content: ${props => props.align};
+  height: 100%;
+`
 
 export default Header;
