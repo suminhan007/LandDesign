@@ -1,6 +1,10 @@
 {
   "name": "@suminhan/land-design",
-  "version": "0.0.28",
+  "description": "React UI Components",
+  "author": {
+    "name": "suminhan"
+  },
+  "version": "0.0.29",
   "type": "module",
   "main": "./dist/suminhan.cjs",
   "module": "./dist/suminhan.js",
