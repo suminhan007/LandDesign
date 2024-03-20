@@ -1,6 +1,6 @@
 {
   "name": "@suminhan/land-design",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "type": "module",
   "main": "./dist/suminhan.cjs",
   "module": "./dist/suminhan.js",
