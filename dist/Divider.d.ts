@@ -1,12 +1,13 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties } from "react";
 export type DividerProps = {
-    direction?: 'row' | 'column';
+    direction?: "row" | "column";
     size?: number;
+    lang?: string;
     margin?: number;
-    type?: 'solid' | 'dashed';
+    type?: "solid" | "dashed";
     color?: string;
     content?: React.ReactNode | string;
-    align?: 'left' | 'center' | 'right';
+    align?: "left" | "center" | "right";
     style?: CSSProperties;
     className?: string;
 };

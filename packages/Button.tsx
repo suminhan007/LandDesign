@@ -47,7 +47,7 @@ const Button: React.FC<ButtonProps> = ({
   type = "border",
   status = "default",
   disabled,
-  loading,
+  // loading,
   pop,
   PopProps,
   href,
@@ -84,9 +84,11 @@ const Button: React.FC<ButtonProps> = ({
     <>
       {!href ? (
         <StyledButton
-          className={`land-button ${type} ${status} ${iconOnly ? "iconOnly" : ""
-            } ${disabled ? "disabled" : ""} ${pop ? "hover-pop" : ""
-            } ${className}`}
+          className={`land-button ${type} ${status} ${
+            iconOnly ? "iconOnly" : ""
+          } ${disabled ? "disabled" : ""} ${
+            pop ? "hover-pop" : ""
+          } ${className}`}
           style={style}
           width={width}
           height={height}

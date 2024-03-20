@@ -14,7 +14,8 @@ const Content: React.FC<ContentProps> = ({ children, style, className }) => {
   const footerElem = document.querySelector(".land-footer");
   useEffect(() => {
     if (!headerElem || !footerElem) return;
-    setMinHeight(headerElem.offsetHeight + headerElem.offsetHeight);
+    // setMinHeight(headerElem.offsetHeight + headerElem.offsetHeight);
+    setMinHeight(200)
 
   })
   return <StyledContent className={className} style={style} minHeight={minHeight}>{children}</StyledContent>;

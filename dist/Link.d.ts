@@ -1,7 +1,8 @@
 import React, { CSSProperties } from 'react';
 export type LinkProps = {
-    type?: 'primary' | 'success' | 'error' | 'wranning';
-    status?: 'default' | 'actived' | 'disabled';
+    status?: "default" | "primary" | "success" | "danger" | "warning";
+    disabled?: boolean;
+    actived?: boolean;
     pop?: React.ReactNode | string;
     children?: React.ReactNode | string;
     style?: CSSProperties;
