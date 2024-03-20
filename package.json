@@ -4,15 +4,15 @@
   "author": {
     "name": "suminhan"
   },
-  "version": "0.0.29",
+  "version": "0.0.30",
   "type": "module",
-  "main": "./dist/suminhan.cjs",
-  "module": "./dist/suminhan.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/suminhan.umd.js",
+  "module": "./dist/suminhan.es.js",
   "exports": {
     ".": {
-      "require": "./dist/suminhan.cjs",
-      "import": "./dist/suminhan.js"
+      "require": "./dist/suminhan.umd.js",
+      "import": "./dist/suminhan.es.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "publishConfig": {
