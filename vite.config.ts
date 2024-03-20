@@ -36,10 +36,7 @@ export default defineConfig({
       entry: resolve('packages/index.tsx'),
       // 组件库名称
       name: 'land-design',
-      // 文件名称, 打包结果举例: suminhan.cjs
-      fileName: 'suminhan',
-      // 打包格式
-      formats: ['es', 'cjs'],
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
       //排除不相关的依赖
