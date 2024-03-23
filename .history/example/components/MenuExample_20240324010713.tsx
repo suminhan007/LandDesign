@@ -77,8 +77,8 @@ export default function MenuExample() {
                 clickType: ClickType.SELF,
                 dropData: [
                   { key: 1, title: "option1", clickType: ClickType.SELF },
-                  { key: 2, title: "option2", clickType: ClickType.SELF },
-                  { key: 3, title: "option3", clickType: ClickType.SELF },
+                  { key: 2, title: "option1", clickType: ClickType.SELF },
+                  { key: 3, title: "option1", clickType: ClickType.SELF },
                 ],
               },
               {

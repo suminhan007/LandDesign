@@ -1,5 +1,3 @@
-import './style/variable.scss';
-import './style/atomic.scss';
 export type { ButtonProps } from './Button';
 export { default as LandButton } from './Button';
 export type { LinkProps } from "./Link";

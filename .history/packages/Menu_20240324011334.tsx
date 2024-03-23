@@ -47,7 +47,7 @@ const Menu: React.FC<MenuProps> = ({
   data,
   direction = "row",
   theme = "dot",
-  border = true,
+  border=true,
   itemStyle,
   itemClassName,
   style,
@@ -94,6 +94,13 @@ const Menu: React.FC<MenuProps> = ({
               </i>
             )}
           </a>
+          <div className="land-menu-drop">
+            {item.dropData?.map((item2) => (
+              <div key={item2.key} className="land-nav-link">
+                {item2.title}
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </StyledMenu>
@@ -237,6 +244,10 @@ const StyledMenu = styled.div<{
       box-sizing: border-box;
       transform: scale(0.65);
     }
+  }
+  .land-menu-drop {
+    position: absolute;
+    top: 100%;
   }
 `;
 

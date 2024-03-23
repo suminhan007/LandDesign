@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./app.css";
 import "../packages/style/atomic.scss";
-import "../packages/style/variable.scss";
+import "../style/variable.scss";
 
 import Button from "../packages/Button";
 import Divider from "../packages/Divider";

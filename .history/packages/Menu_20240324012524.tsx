@@ -94,6 +94,13 @@ const Menu: React.FC<MenuProps> = ({
               </i>
             )}
           </a>
+          <div className="land-nav-drop">
+            {item.dropData?.map((item2) => (
+              <div key={item2.key} className="land-nav-link">
+                {item2.title}
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </StyledMenu>

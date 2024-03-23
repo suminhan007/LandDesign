@@ -76,9 +76,7 @@ export default function MenuExample() {
                 title: "Navigation(cursor)",
                 clickType: ClickType.SELF,
                 dropData: [
-                  { key: 1, title: "option1", clickType: ClickType.SELF },
-                  { key: 2, title: "option2", clickType: ClickType.SELF },
-                  { key: 3, title: "option3", clickType: ClickType.SELF },
+                  { key: 1, title: "标题", clickType: ClickType.SELF },
                 ],
               },
               {

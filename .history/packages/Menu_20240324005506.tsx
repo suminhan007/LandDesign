@@ -47,7 +47,7 @@ const Menu: React.FC<MenuProps> = ({
   data,
   direction = "row",
   theme = "dot",
-  border = true,
+  border=true,
   itemStyle,
   itemClassName,
   style,
@@ -65,13 +65,11 @@ const Menu: React.FC<MenuProps> = ({
       border={border}
     >
       {data?.map((item) => (
-        <div
-          className={`land-nav-item ${
-            item.clickType === ClickType.SIMPLE ? "simple" : ""
-          } ${item.clickType === ClickType.DISABLED ? "disabled" : ""} ${
-            newActived === item.key ? "actived" : ""
-          } ${theme}`}
-        >
+        <div className={`land-nav-item ${
+          item.clickType === ClickType.SIMPLE ? "simple" : ""
+        } ${item.clickType === ClickType.DISABLED ? "disabled" : ""} ${
+          newActived === item.key ? "actived" : ""
+        } ${theme}`}>
           <a
             role="button"
             key={item.key}
@@ -84,9 +82,7 @@ const Menu: React.FC<MenuProps> = ({
             ) : (
               item.icon
             )}
-            <p className="land-nav-title" data-title={item.title}>
-              {item.title}
-            </p>
+            <p className="land-nav-title" data-title={item.title}>{item.title}</p>
             <span className="land-nav-sub-title">{item.subTitle}</span>
             {item.isNew && (
               <i className="land-nav-new">
@@ -94,6 +90,11 @@ const Menu: React.FC<MenuProps> = ({
               </i>
             )}
           </a>
+          <div className="Land-menu-drop">
+            {item.dropData.map(dropItem =>
+              
+            )}
+          </div>
         </div>
       ))}
     </StyledMenu>
@@ -109,15 +110,9 @@ const StyledMenu = styled.div<{
   gap: var(--gap-4);
   height: ${(props) => (props.direction === "row" ? "100%" : "")};
   width: ${(props) => (props.direction === "column" ? "100%" : "fit-content")};
-  border-bottom: ${(props) =>
-    props.border && props.direction === "row"
-      ? "var(--border-1) solid var(--color-border-1)"
-      : ""};
-  border-right: ${(props) =>
-    props.border && props.direction === "column"
-      ? "var(--border-1) solid var(--color-border-1)"
-      : ""};
-  .land-nav-item {
+ border-bottom: ${props => (props.border && props.direction === "row") ? 'var(--border-1) solid var(--color-border-1)' : ''};
+ border-right: ${props => (props.border && props.direction === "column") ? 'var(--border-1) solid var(--color-border-1)' : ''}; 
+ .land-nav-item {
     position: relative;
     height: ${(props) => (props.direction === "row" ? "100%" : "")};
     width: ${(props) => (props.direction === "column" ? "100%" : "")};
@@ -215,7 +210,7 @@ const StyledMenu = styled.div<{
         line-height: 40px;
       }
     }
-
+   
     .land-nav-icon {
       width: 14px;
       height: 14px;
