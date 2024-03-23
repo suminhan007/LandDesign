@@ -13,8 +13,8 @@ export { default as LandFlex } from "./Flex";
 export type { HeaderProps } from "./Header";
 export { default as LandHeader } from "./Header";
 
-export type { SiderProps } from "./Sider";
-export { default as LandSider } from "./Sider";
+export type { HeaderProps } from "./Header";
+export { default as LandHeader } from "./Header";
 
 export type { ContentProps } from "./Content";
 export { default as LandContent } from "./Content";
@@ -25,7 +25,7 @@ export { default as LandFooter } from "./Footer";
 export type { LayoutProps } from "./Layout";
 export { default as LandLayout } from "./Layout";
 
-export type { MenuProps, ClickType } from "./Menu";
+export type { MenuProps } from "./Menu";
 export { default as LandMenu } from "./Menu";
 
 export type { PopProps } from "./Pop";
