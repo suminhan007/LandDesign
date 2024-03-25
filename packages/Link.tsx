@@ -5,10 +5,16 @@ import Pop from './Pop';
 export type LinkProps = {
   /* 标识链接类型 */
   status?: "default" | "primary" | "success" | "danger" | "warning";
+  /* 是否禁用 */
   disabled?: boolean;
+  /* 是否已访问 */
   actived?: boolean;
+  /* 气泡 */
   pop?: React.ReactNode | string;
+  /* a 标签href */
+  href?: string;
   children?: React.ReactNode | string;
+  onClick?: () => void;
   style?: CSSProperties;
   className?: string;
 };
@@ -18,6 +24,8 @@ const Link: React.FC<LinkProps> = ({
   disabled,
   actived,
   pop,
+  href,
+  onClick,
   children,
   style,
   className = "",
@@ -40,11 +48,12 @@ const Link: React.FC<LinkProps> = ({
   };
   return (
     <StyledLink
-      className={`land-link ${actived ? "actived" : ""} ${
-        disabled ? "disabled hover-pop" : ""
-      } ${className}`}
+      className={`land-link ${actived ? "actived" : ""} ${disabled ? "disabled hover-pop" : ""
+        } ${className}`}
       style={style}
       color={getColor()}
+      href={href}
+      onClick={onClick}
     >
       {children}
       {pop && <Pop content={pop} />}
@@ -53,7 +62,7 @@ const Link: React.FC<LinkProps> = ({
 };
 
 const StyledLink = styled.a<{
-    color?: string;
+  color?: string;
 }>`
     position: relative;
     width: fit-content;

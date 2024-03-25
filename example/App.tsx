@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./app.css";
-import "../style/atomic.scss";
-import "../style/variable.scss";
+import "../packages/style/atomic.scss";
+import "../packages/style/variable.scss";
+import "../packages/style/reset.scss";
 
 import Button from "../packages/Button";
 import Divider from "../packages/Divider";
@@ -114,10 +115,30 @@ function App() {
                       { title: "属性", value: "props" },
                       { title: "类型", value: "type" },
                       { title: "描述", value: "desc" },
+                      { title: "可选", value: "need", antiDesc: '必须' },
                     ]}
                     data={item.props}
                     style={{ width: "100%" }}
                   />
+                  <Title title="3. Type" type="h2" className="my-16" />
+                  {
+                    item.types.map(type =>
+                      <>
+                        <Title title={type.name} type="h3" className="mt-16" />
+                        <Title title={type.desc} type="p" className="mt-8" />
+                        <Table
+                          className="width-100 mt-16"
+                          titleData={[
+                            { title: "属性", value: "props" },
+                            { title: "类型", value: "type" },
+                            { title: "描述", value: "desc" },
+                            { title: "可选", value: "need", antiDesc: '必须' },
+                          ]}
+                          data={type.data}
+                        />
+                      </>
+                    )
+                  }
                 </>
               ))}
         </StyledRightContent>

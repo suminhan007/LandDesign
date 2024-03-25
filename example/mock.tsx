@@ -7,6 +7,7 @@ import IconExample from "./components/IconExample";
 import LayoutExample from "./components/LayoutExample";
 import LinkExample from "./components/LinkExample";
 import MenuExample from "./components/MenuExample";
+import Link from "../packages/Link";
 
 export const COMMON_COMPONENTS_DATA = [
     {
@@ -15,10 +16,10 @@ export const COMMON_COMPONENTS_DATA = [
         zh: "图标",
         desc: "Land Design内置常规图标。",
         props: [
-            { name: "size", type: "number", desc: "图标大小" },
-            { name: "fill", type: "string", desc: "图标填充颜色" },
-            { name: "stroke", type: "string", desc: "图标描边颜色" },
-            { name: "strokeWidth", type: "number", desc: "图标填充颜色" },
+            { name: "size", type: "number", desc: "图标大小", optional: true },
+            { name: "fill", type: "string", desc: "图标填充颜色", optional: true },
+            { name: "stroke", type: "string", desc: "图标描边颜色", optional: true },
+            { name: "strokeWidth", type: "number", desc: "图标填充颜色", optional: true },
         ],
         example: <IconExample />,
     },
@@ -28,31 +29,34 @@ export const COMMON_COMPONENTS_DATA = [
         zh: "按钮",
         desc: "按钮是一种命令组件，可发起一个即时操作。",
         props: [
-            { name: "text", type: "string", desc: "按钮主要文案" },
-            { name: "subText", type: "string", desc: "按钮次要文案" },
-            { name: "icon", type: "element", desc: "按钮图标" },
-            { name: "width", type: "string | number", desc: "按钮宽度" },
-            { name: "height", type: "string | number", desc: "按钮高度" },
+            { name: "text", type: "string", desc: "按钮主要文案", optional: true },
+            { name: "subText", type: "string", desc: "按钮次要文案", optional: true },
+            { name: "icon", type: "element", desc: "按钮图标", optional: true },
+            { name: "width", type: "string | number", desc: "按钮宽度", optional: true },
+            { name: "height", type: "string | number", desc: "按钮高度", optional: true },
             {
                 name: "justify",
                 type: "'center' | 'start' | 'end'",
                 desc: "按钮文字对齐方式",
+                optional: true
             },
             {
                 name: "type",
                 type: "'text' | 'background' | 'border' | 'line'",
                 desc: "按钮风格",
+                optional: true
             },
             {
                 name: "status",
                 type: "'default' | 'primary' | 'warning' | 'danger' | 'success'",
                 desc: "按钮状态",
+                optional: true
             },
-            { name: "disabled", type: "boolean", desc: "按钮是否禁用" },
-            { name: "loading", type: "boolean", desc: "按钮是否加载中" },
-            { name: "pop", type: "string | element", desc: "按钮气泡" },
-            { name: "popProps", type: "popProps", desc: "Popover气泡相关属性" },
-            { name: "href", type: "string", desc: "跳转链接：按钮作为 a 标签" },
+            { name: "disabled", type: "boolean", desc: "按钮是否禁用", optional: true },
+            { name: "loading", type: "boolean", desc: "按钮是否加载中", optional: true },
+            { name: "pop", type: "string | element", desc: "按钮气泡", optional: true },
+            { name: "popProps", type: "popProps", desc: "Popover气泡相关属性", optional: true },
+            { name: "href", type: "string", desc: "跳转链接：按钮作为 a 标签", optional: true },
             {
                 name: "target",
                 type: "'_self' | '_blank' | '_top' | '_parent'",
@@ -72,11 +76,12 @@ export const COMMON_COMPONENTS_DATA = [
                 name: "status",
                 type: "'primary' | 'warning' | 'success' | 'error'",
                 desc: "链接类型",
+                optional: true,
             },
-            { name: "disabled", type: "boolean", desc: "链接是否禁用" },
-            { name: "actived", type: "boolean", desc: "链接是否已点击" },
-            { name: "pop", type: "element | string", desc: "链接提示气泡" },
-            { name: "children", type: "element", desc: "链接内容" },
+            { name: "disabled", type: "boolean", desc: "链接是否禁用", optional: true },
+            { name: "actived", type: "boolean", desc: "链接是否已点击", optional: true },
+            { name: "pop", type: "element | string", desc: "链接提示气泡", optional: true },
+            { name: "children", type: "element", desc: "链接内容", optional: true },
         ],
         example: <LinkExample />,
     },
@@ -95,20 +100,22 @@ export const LAYOUT_COMPONENTS_DATA = [
         zh: "分割线",
         desc: "",
         props: [
-            { name: "direction", type: "'row' | 'column'", desc: "分割线方向" },
-            { name: "size", type: "number", desc: "分割线粗细" },
-            { name: "margin", type: "number", desc: "分割线上下或左右边距" },
+            { name: "direction", type: "'row' | 'column'", desc: "分割线方向", optional: true },
+            { name: "size", type: "number", desc: "分割线粗细", optional: true },
+            { name: "margin", type: "number", desc: "分割线上下或左右边距", optional: true },
             {
                 name: "type",
                 type: "'solid' | 'dashed'",
                 desc: "分割线类型：实线或者虚线",
+                optional: true,
             },
-            { name: "color", type: "string", desc: "分割线颜色" },
-            { name: "content", type: "element | string", desc: "分割线包含的内容" },
+            { name: "color", type: "string", desc: "分割线颜色", optional: true },
+            { name: "content", type: "element | string", desc: "分割线包含的内容", optional: true },
             {
                 name: "align",
                 type: "'left' | 'center' | 'right'",
                 desc: "分割线包含内容时对齐方式",
+                optional: true,
             },
         ],
         example: <DividerExample />,
@@ -119,27 +126,30 @@ export const LAYOUT_COMPONENTS_DATA = [
         zh: "弹性布局",
         desc: "弹性布局",
         props: [
-            { name: "w", type: "string", desc: "盒子的宽度，默认为[100%]" },
-            { name: "h", type: "string", desc: "盒子的高度" },
-            { name: "column", type: "boolean", desc: "flex 主轴的方向是否垂直" },
-            { name: "wrap", type: "boolean", desc: "元素是否换行" },
+            { name: "w", type: "string", desc: "盒子的宽度，默认为[100%]", nedd: true },
+            { name: "h", type: "string", desc: "盒子的高度", nedd: true },
+            { name: "column", type: "boolean", desc: "flex 主轴的方向是否垂直", nedd: true },
+            { name: "wrap", type: "boolean", desc: "元素是否换行", nedd: true },
             {
                 name: "justify",
                 type: "'start' | 'center' | 'end'",
                 desc: "元素在主轴方向上的对齐方式",
+                optional: true,
             },
             {
                 name: "align",
                 type: "'start' | 'center' | 'end'",
                 desc: "元素在交叉轴方向上的对齐方式",
+                optional: true,
             },
-            { name: "gap", type: "string", desc: "元素之间的间隙" },
+            { name: "gap", type: "string", desc: "元素之间的间隙", optional: true },
             {
                 name: "bothCenter",
                 type: "boolean",
                 desc: "元素是否在主轴和交叉轴方向上都居中显示",
+                optional: true,
             },
-            { name: "children", type: "element", desc: "自定义元素" },
+            { name: "children", type: "element", desc: "自定义元素", optional: true },
         ],
         example: <FlexExample />,
     },
@@ -166,69 +176,89 @@ export const LAYOUT_COMPONENTS_DATA = [
 ];
 
 export const NAV_COMPONENTS_DATA = [
-  {
-    id: 201,
-    en: "Anchor",
-    zh: "锚点",
-    desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <AnchorExample />,
-  },
-  {
-    id: 202,
-    en: "Breadcrumb",
-    zh: "面包屑",
-    desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-  },
-  {
-    id: 203,
-    en: "Menu",
-    zh: "导航菜单",
-    desc: "锚点用于跳转至页面指定位置。",
-    props: [
-      { name: "data", type: "MenuItemType[]", desc: "导航数据" },
-      {
-        name: "actived",
-        type: "number",
-        desc: "当前选中的导航项对应的唯一key",
-      },
-      { name: "direction", type: "'row' | 'column'", desc: "导航排列方向" },
-      { name: "theme", type: "'dot | 'background | 'line'", desc: "导航主题" },
-      {
-        name: "itemStyle",
-        type: "CSSProperties",
-        desc: "一级导航选项对应的 style",
-      },
-      {
-        name: "itemClassName",
-        type: "string",
-        desc: "一级导航选项对应的 className ",
-      },
-    ],
-    example: <MenuExample />,
-  },
-  {
-    id: 204,
-    en: "Pagination",
-    zh: "分页",
-    desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-  },
-  {
-    id: 205,
-    en: "Steps",
-    zh: "步骤条",
-    desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-  },
-  {
-    id: 206,
-    en: "Dropdown",
-    zh: "下拉菜单",
-    desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-  },
+    {
+        id: 201,
+        en: "Anchor",
+        zh: "锚点",
+        desc: "锚点用于跳转至页面指定位置。",
+        props: [{ name: "name", type: "type", desc: "desc" }],
+        example: <AnchorExample />,
+    },
+    {
+        id: 202,
+        en: "Breadcrumb",
+        zh: "面包屑",
+        desc: "锚点用于跳转至页面指定位置。",
+        props: [{ name: "name", type: "type", desc: "desc" }],
+    },
+    {
+        id: 203,
+        en: "Menu",
+        zh: "导航菜单",
+        desc: "锚点用于跳转至页面指定位置。",
+        props: [
+            { name: "data", type: <><Link href="#MenuItemType">MenuItemType</Link> []</>, desc: "导航数据", optional: true },
+            {
+                name: "actived",
+                type: "number",
+                desc: "当前选中的导航项对应的唯一key",
+                optional: true,
+            },
+            { name: "direction", type: "'row' | 'column'", desc: "导航排列方向", optional: true },
+            { name: "theme", type: <><Link href="#ThemeType">ThemeType</Link> []</>, desc: "定制导航主题", optional: true },
+            { name: 'border', type: 'boollean', desc: '是否需要下边框', optional: true },
+            {
+                name: "itemStyle",
+                type: "CSSProperties",
+                desc: "一级导航选项对应的 style",
+                optional: true,
+            },
+            {
+                name: "itemClassName",
+                type: "string",
+                desc: "一级导航选项对应的 className ",
+                optional: true,
+            },
+        ],
+        example: <MenuExample />,
+        types: [
+            {
+                name: 'MenuItemType',
+                data: [
+                    { name: 'key', type: 'number', desc: '唯一标识', optional: false },
+                    { name: 'title', type: 'string', desc: '导航项副标题', optional: true },
+                    { name: 'subTitle', type: 'string', desc: '导航项主标题', optional: true },
+                    { name: 'icon', type: 'string | element', desc: '导航项前置图标', optional: true },
+                    { name: 'isNew', type: 'string | element | boolean', desc: '导航项右上角角标', optional: true },
+                    { name: 'href', type: 'string', desc: '导航项对应的链接', optional: true },
+                    { name: 'clickType', type: <Link href="#ClickType">ClickType</Link>, desc: '导航项点击跳转类型', optional: true },
+                    { name: 'dropData', type: <><Link href="#MenuItemType">MenuItemType</Link> []</>, desc: '导航项下拉框副导航数据', optional: true },
+                ],
+                desc: '定义导航项数据类型。'
+            }
+        ]
+    },
+    {
+        id: 204,
+        en: "Pagination",
+        zh: "分页",
+        desc: "锚点用于跳转至页面指定位置。",
+        props: [{ name: "name", type: "type", desc: "desc" }],
+    },
+    {
+        id: 205,
+        en: "Steps",
+        zh: "步骤条",
+        desc: "锚点用于跳转至页面指定位置。",
+        props: [{ name: "name", type: "type", desc: "desc" }],
+    },
+    {
+        id: 206,
+        en: "Dropdown",
+        zh: "下拉菜单",
+        desc: "锚点用于跳转至页面指定位置。",
+        props: [{ name: "name", type: "type", desc: "desc" }],
+    },
 ];
 
 export const INPUT_COMPONENTS_DATA = [

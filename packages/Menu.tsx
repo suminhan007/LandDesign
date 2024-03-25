@@ -11,12 +11,21 @@ export enum ClickType {
   /* 禁用 */
   DISABLED = 'disabled',
 }
+
+export type ThemeType = {
+  hoverColor?: string,
+  hoverBg?: string,
+  activeColor?: string,
+  activeBg?: string,
+  lineColor?: string,
+};
+
 export type MenuItemType = {
   key: number;
   title?: string;
   subTitle?: string;
   icon?: string | React.ReactNode;
-  isNew?: string | boolean;
+  isNew?: string | React.ReactNode | boolean;
   href?: string;
   clickType: ClickType;
   dropData?: MenuItemType[];
@@ -30,7 +39,7 @@ export type MenuProps = {
   /* 导航排列方向 */
   direction?: "row" | "column";
   /* 导航主题 */
-  theme?: "dot" | "background" | "line";
+  theme?: ThemeType;
   border?: boolean;
   /* 一级导航选项对应的 style */
   itemStyle?: CSSProperties;
@@ -46,8 +55,8 @@ const Menu: React.FC<MenuProps> = ({
   actived,
   data,
   direction = "row",
-  theme = "dot",
-  border=true,
+  theme = { hoverColor: 'var(--color-text-1)', hoverBg: 'var(--color-bg-1)', activeColor: 'var(--color-text-1)' },
+  border = true,
   itemStyle,
   itemClassName,
   style,
@@ -61,15 +70,14 @@ const Menu: React.FC<MenuProps> = ({
     <StyledMenu
       className={`land-menu ${className}`}
       style={style}
-      direction={direction}
+      column={direction === 'column'}
       border={border}
+      theme={theme}
     >
       {data?.map((item) => (
-        <div className={`land-nav-item ${
-          item.clickType === ClickType.SIMPLE ? "simple" : ""
-        } ${item.clickType === ClickType.DISABLED ? "disabled" : ""} ${
-          newActived === item.key ? "actived" : ""
-        } ${theme}`}>
+        <div className={`land-nav-item ${item.clickType === ClickType.SIMPLE ? "simple" : ""
+          } ${item.clickType === ClickType.DISABLED ? "disabled" : ""} ${newActived === item.key ? "actived" : ""
+          }`}>
           <a
             role="button"
             key={item.key}
@@ -97,20 +105,21 @@ const Menu: React.FC<MenuProps> = ({
 };
 
 const StyledMenu = styled.div<{
-  direction?: string;
+  column?: boolean;
   border?: boolean;
+  theme?: ThemeType;
 }>`
   display: flex;
-  flex-direction: ${(props) => props.direction};
+  flex-direction: ${(props) => props.column ? 'column' : 'row'};
   gap: var(--gap-4);
-  height: ${(props) => (props.direction === "row" ? "100%" : "")};
-  width: ${(props) => (props.direction === "column" ? "100%" : "fit-content")};
- border-bottom: ${props => (props.border && props.direction === "row") ? 'var(--border-1) solid var(--color-border-1)' : ''};
- border-right: ${props => (props.border && props.direction === "column") ? 'var(--border-1) solid var(--color-border-1)' : ''}; 
+  height: ${(props) => (!props.column ? "100%" : "")};
+  width: ${(props) => (props.column ? "100%" : "fit-content")};
+  border-bottom: ${props => (props.border && !props.column) ? 'var(--border-1) solid var(--color-border-1)' : ''};
+  border-right: ${props => (props.border && props.column) ? 'var(--border-1) solid var(--color-border-1)' : ''}; 
  .land-nav-item {
     position: relative;
-    height: ${(props) => (props.direction === "row" ? "100%" : "")};
-    width: ${(props) => (props.direction === "column" ? "100%" : "")};
+    height: ${(props) => (!props.column ? "100%" : "")};
+    width: ${(props) => (props.column ? "100%" : "")};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,54 +128,43 @@ const StyledMenu = styled.div<{
       content: "";
       display: block;
       position: absolute;
-      right: ${(props) => (props.direction === "row" ? "50%" : "-4px")};
-      bottom: ${(props) => (props.direction === "row" ? "0" : "50%")};
-      width: 12px;
-      height: 2px;
+      right: ${(props) => (!props.column ? "50%" : "0")};
+      bottom: ${(props) => (!props.column ? "0" : "50%")};
+      width: ${(props) => (!props.column ? '12px' : '2px')};
+      height: ${(props) => (!props.column ? '2px' : props.theme.activeBg ? '100%' : 'calc(100% - 16px)')};
       transform: ${(props) =>
-        props.direction === "row"
-          ? `translateX(50%)`
-          : "translateY(50%) rotate(90deg)"};
+    !props.column
+      ? `translateX(50%)`
+      : "translateY(50%)"};
       transform-origin: center center;
       border-radius: 1px;
-      background-color: var(--color-text-1);
+      background-color: ${props => props.theme.lineColor || 'var(--color-text-1)'};
       opacity: 0;
     }
     &:hover {
-      background-color: var(--color-bg-1);
+      color: ${props => props.theme.hoverColor};
+      background-color: ${props => props.theme.hoverBg};
       .land-nav-title::before {
-        color: var(--color-text-1);
+        color: ${props => props.theme.hoverColor};
         font-weight: 600;
+      }
+      svg path{
+        stroke-width: 4px;
       }
     }
     &.actived {
+      color: ${props => props.theme.hoverColor};
+      background-color: ${props => props.theme.activeBg};
       .land-nav-title::before {
-        color: var(--color-text-1);
+        color: ${props => props.theme.activeColor || 'var(--color-text-1)'};
         font-weight: 600;
       }
       &::after {
         opacity: 1;
         transition: opacity var(--transition-15) linear;
       }
-    }
-    &.background {
-      &.actived {
-        background-color: var(--color-bg-1);
-      }
-    }
-    &.line {
-      &:hover {
-        background-color: unset;
-      }
-      &.actived {
-        .land-nav-title::before {
-          color: var(--color-primary-6);
-        }
-        &::after {
-          background-color: var(--color-primary-6);
-          width: ${(props) =>
-            props.direction === "row" ? "calc(100% - 32px)" : "12px"};
-        }
+      svg path{
+        stroke-width: 4px;
       }
     }
     &.simple {
@@ -180,11 +178,16 @@ const StyledMenu = styled.div<{
   .land-nav-link {
     padding: var(--padding-medium);
     display: flex;
+    align-items: center;
     width: 100%;
     font-size: var(--font-content-large);
     white-space: nowrap;
     transition: background-color var(--transition-15) linear;
     cursor: pointer;
+    color: var(--color-text-3);
+    &:hover {
+      color: ${props => props.theme.hoverColor};
+    }
     .land-nav-title {
       position: relative;
       color: transparent;
@@ -206,9 +209,14 @@ const StyledMenu = styled.div<{
       }
     }
    
+    svg,
     .land-nav-icon {
-      width: 14px;
-      height: 14px;
+      width: 18px;
+      height: 18px;
+      margin-right: 4px;
+    }
+    svg path{
+      stroke-width: 3px;
     }
     .land-nav-sub-title {
       font-size: var(--font-content-small);

@@ -1,8 +1,8 @@
-import React, { CSSProperties } from 'react'
-import styled from 'styled-components'
+import React, { CSSProperties } from 'react';
+import styled from 'styled-components';
 
 export type TableProps = {
-    titleData?: { title: string | React.ReactNode, value: string }[];
+    titleData?: { title: string | React.ReactNode, value: string, antiDesc?: string }[];
     data?: any[]
     style?: CSSProperties;
     className?: string;
@@ -26,8 +26,10 @@ const Table: React.FC<TableProps> = ({
             <tbody>
                 {data.map(item2 =>
                     <tr>
-                        {Object.values(item2).map((item3: any) =>
-                            <td>{item3}</td>
+                        {Object.values(item2).map((item3: any, index: number) =>
+                            <>
+                                <td>{typeof item3 !== 'boolean' ? item3 : item3 ? titleData[index].title : titleData[index].antiDesc}</td>
+                            </>
                         )}
                     </tr>
                 )}
