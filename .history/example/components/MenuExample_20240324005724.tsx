@@ -1,7 +1,7 @@
 import React from "react";
 import Title from "../../packages/Title";
 import Menu, { ClickType } from "../../packages/Menu";
-import { IconHome } from "../../packages/Icon";
+import { IconAhead } from "../../packages/Icon";
 
 export default function MenuExample() {
   return (
@@ -76,10 +76,8 @@ export default function MenuExample() {
                 title: "Navigation(cursor)",
                 clickType: ClickType.SELF,
                 dropData: [
-                  { key: 1, title: "option1", clickType: ClickType.SELF },
-                  { key: 2, title: "option2", clickType: ClickType.SELF },
-                  { key: 3, title: "option3", clickType: ClickType.SELF },
-                ],
+                  {key: 1, title: '标题',}
+                ]
               },
               {
                 key: 2,
@@ -102,10 +100,10 @@ export default function MenuExample() {
             ]}
             actived={3}
             direction="column"
-            style={{ width: 132 }}
+            style={{width: 132}}
           />
         </div>
-        <Title title="定制导航样式" type="h3" />
+        <Title title="导航选中风格" type="h3" />
         <div className="flex column items-center gap-24 border p-32">
           <Menu
             data={[
@@ -121,8 +119,8 @@ export default function MenuExample() {
               { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
               { key: 3, title: "Navigation 3", clickType: ClickType.SELF },
             ]}
-            actived={1}
-            theme={{ hoverBg: 'var(--color-bg-1)', activeBg: 'var(--color-bg-1)' }}
+            actived={2}
+            theme="background"
           />
           <Menu
             data={[
@@ -130,20 +128,11 @@ export default function MenuExample() {
               { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
               { key: 3, title: "Navigation 3", clickType: ClickType.SELF },
             ]}
-            actived={1}
-            theme={{ activeColor: 'var(--color-primary-6)', lineColor: 'var(--color-primary-6)' }}
-          />
-          <Menu
-            data={[
-              { key: 1, title: "Navigation 1", clickType: ClickType.SELF },
-              { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
-              { key: 3, title: "Navigation 3", clickType: ClickType.SELF },
-            ]}
-            actived={1}
-            theme={{ activeColor: 'var(--color-primary-6)', activeBg: 'var(--color-primary-1)', lineColor: 'var(--color-primary-6)' }}
+            actived={3}
+            theme="line"
           />
         </div>
-        <div className="flex justify-center gap-32 border p-32">
+        <div className="flex justify-center gap-24 border p-32">
           <Menu
             data={[
               { key: 1, title: "Navigation 1", clickType: ClickType.SELF },
@@ -160,8 +149,8 @@ export default function MenuExample() {
               { key: 3, title: "Navigation 3", clickType: ClickType.SELF },
             ]}
             actived={2}
+            theme="background"
             direction="column"
-            theme={{ hoverBg: 'var(--color-bg-1)', activeBg: 'var(--color-bg-1)' }}
           />
           <Menu
             data={[
@@ -170,18 +159,8 @@ export default function MenuExample() {
               { key: 3, title: "Navigation 3", clickType: ClickType.SELF },
             ]}
             actived={3}
+            theme="line"
             direction="column"
-            theme={{ activeColor: 'var(--color-primary-6)', lineColor: 'var(--color-primary-6)' }}
-          />
-          <Menu
-            data={[
-              { key: 1, title: "Navigation 1", clickType: ClickType.SELF },
-              { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
-              { key: 3, title: "Navigation 3", clickType: ClickType.SELF },
-            ]}
-            actived={3}
-            direction="column"
-            theme={{ activeColor: 'var(--color-primary-6)', activeBg: 'var(--color-primary-1)', lineColor: 'var(--color-primary-6)' }}
           />
         </div>
         <Title title="带图标导航" type="h3" />
@@ -190,12 +169,12 @@ export default function MenuExample() {
             data={[
               {
                 key: 1,
-                title: "Home",
-                icon: <IconHome />,
+                title: "Title1",
+                icon: <IconAhead />,
                 clickType: ClickType.SELF,
               },
             ]}
-            actived={1}
+            actived={3}
           />
         </div>
       </div>

@@ -25,7 +25,7 @@ export { default as LandFooter } from "./Footer";
 export type { LayoutProps } from "./Layout";
 export { default as LandLayout } from "./Layout";
 
-export type { MenuProps, ClickType } from "./Menu";
+export type { MenuProps } from "./Menu";
 export { default as LandMenu } from "./Menu";
 
 export type { PopProps } from "./Pop";
