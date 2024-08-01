@@ -7,16 +7,9 @@ export type LayoutProps = {
   className?: string;
 };
 
-const Layout: React.FC<LayoutProps> = ({
-  children,
-  style,
-  className,
-}) => {
+const Layout: React.FC<LayoutProps> = ({ children, style, className }) => {
   return (
-    <StyledLayout
-      className={className}
-      style={style}
-    >
+    <StyledLayout className={className} style={style}>
       {children}
     </StyledLayout>
   );

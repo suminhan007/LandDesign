@@ -9,9 +9,9 @@ export type FlexProps = {
   /* 是否换行 */
   wrap?: boolean;
   /* 元素在主轴方向上的对齐方式 */
-  justify?: "start" | "center" | "end";
+  justify?: "start" | "center" | "end" | "space-between" | "space-around";
   /* 元素在交叉轴方向山的对齐方式 */
-  align?: "start" | "center" | "end";
+  align?: "start" | "center" | "end" | "baseline";
   /* 间隙 */
   gap?: string | number;
   bothCenter?: boolean;
@@ -40,7 +40,7 @@ const Flex: React.FC<FlexProps> = ({
       width={w}
       height={h}
       direction={column ? "column" : "row"}
-      gap={gap}
+      gap={typeof gap === 'number' ? `${gap}px` : gap}
       wrap={wrap}
       justify={bothCenter ? "center" : justify}
       align={bothCenter ? "center" : align}
@@ -54,7 +54,7 @@ const StyledFlex = styled.div<{
   width?: string;
   height?: string;
   direction?: string;
-  gap?: string | number;
+  gap?: string;
   wrap?: boolean;
   justify?: string;
   align?: string;

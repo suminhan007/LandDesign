@@ -4,8 +4,8 @@ export type FlexProps = {
     h?: string;
     column?: boolean;
     wrap?: boolean;
-    justify?: "start" | "center" | "end";
-    align?: "start" | "center" | "end";
+    justify?: "start" | "center" | "end" | "space-between" | "space-around";
+    align?: "start" | "center" | "end" | "baseline";
     gap?: string | number;
     bothCenter?: boolean;
     children?: React.ReactNode;

@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties } from "react";
 type IconProps = {
     fill?: string;
     stroke?: string;
@@ -6,12 +6,14 @@ type IconProps = {
     strokeWidth?: number;
     style?: CSSProperties;
     className?: string;
+    onClick?: () => void;
 };
 export declare const IconArrowLine: React.FC<IconProps>;
 export declare const IconArrowDouble: React.FC<IconProps>;
 export declare const IconArrow: React.FC<IconProps>;
 export declare const IconArrowTriangle: React.FC<IconProps>;
 export declare const IconArrowTo: React.FC<IconProps>;
+export declare const IconToggle: React.FC<IconProps>;
 export declare const IconCollapse: React.FC<IconProps>;
 export declare const IconCollection: React.FC<IconProps>;
 export declare const IconZoomOut: React.FC<IconProps>;
@@ -41,4 +43,16 @@ export declare const IconAttention: React.FC<IconProps>;
 export declare const IconQuestionStroke: React.FC<IconProps>;
 export declare const IconQuestionFill: React.FC<IconProps>;
 export declare const IconQuestion: React.FC<IconProps>;
+export declare const IconFile: React.FC<IconProps>;
+export declare const IconMore: React.FC<IconProps>;
+export declare const IconMoreLine: React.FC<IconProps>;
+export declare const IconAdd: React.FC<IconProps>;
+export declare const IconClear: React.FC<IconProps>;
+export declare const IconApplication: React.FC<IconProps>;
+export declare const IconUpload: React.FC<IconProps>;
+export declare const IconClose: React.FC<IconProps>;
+export declare const IconCloseCircle: React.FC<IconProps>;
+export declare const IconColorPicker: React.FC<IconProps>;
+export declare const IconCopy: React.FC<IconProps>;
+export declare const IconHome: React.FC<IconProps>;
 export {};

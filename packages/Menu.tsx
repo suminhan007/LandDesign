@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties } from "react";
 import styled from "styled-components";
 
 export enum ClickType {
@@ -21,26 +21,32 @@ export type ThemeType = {
 };
 
 export type MenuItemType = {
-  key: number;
+  key: number | string;
   title?: string;
   subTitle?: string;
   icon?: string | React.ReactNode;
   isNew?: string | React.ReactNode | boolean;
   href?: string;
-  clickType: ClickType;
+  clickType?: ClickType;
+  /** 下拉菜单是否展开 */
+  open?: boolean;
   dropData?: MenuItemType[];
 };
 
 export type MenuProps = {
   /* 当前选中项 */
-  actived?: number;
+  active?: number | string;
   /* 数据 */
   data?: MenuItemType[];
   /* 导航排列方向 */
   direction?: "row" | "column";
   /* 导航主题 */
   theme?: ThemeType;
+  /** 边框 */
   border?: boolean;
+  /** 切换导航项 */
+  onChange?: (item: MenuItemType) => void;
+  onDropChange?: (item: MenuItemType, parentItem: MenuItemType) => void;
   /* 一级导航选项对应的 style */
   itemStyle?: CSSProperties;
   /* 一级导航选项对应的 className */
@@ -49,57 +55,67 @@ export type MenuProps = {
   style?: CSSProperties;
   /* 导航 wrap 对应的 className */
   className?: string;
+  /** 二级菜单相关props */
+  dropProps?: MenuProps;
 };
 
 const Menu: React.FC<MenuProps> = ({
-  actived,
+  active,
   data,
   direction = "row",
   theme = { hoverColor: 'var(--color-text-1)', hoverBg: 'var(--color-bg-1)', activeColor: 'var(--color-text-1)' },
   border = true,
+  onChange,
+  onDropChange,
+  dropProps,
   itemStyle,
-  itemClassName,
+  itemClassName = '',
   style,
-  className,
+  className = '',
 }) => {
-  const [newActived, setNewActived] = useState<number>(actived);
-  const handleChangeTab = (item: MenuItemType) => {
-    item.clickType === ClickType.SELF && setNewActived(item.key);
-  };
   return (
     <StyledMenu
       className={`land-menu ${className}`}
       style={style}
       column={direction === 'column'}
       border={border}
-      theme={theme}
     >
       {data?.map((item) => (
-        <div className={`land-nav-item ${item.clickType === ClickType.SIMPLE ? "simple" : ""
-          } ${item.clickType === ClickType.DISABLED ? "disabled" : ""} ${newActived === item.key ? "actived" : ""
-          }`}>
-          <a
+        <div className={`land-menu-item ${item.clickType === ClickType.SIMPLE ? "simple" : ""
+          } ${item.clickType === ClickType.DISABLED ? "disabled" : ""}`}>
+          <StyleMenuLink
             role="button"
             key={item.key}
-            className={`land-nav-link ${itemClassName}`}
+            className={`land-menu-link ${active === item.key ? "active" : ""} ${itemClassName}`}
             style={itemStyle}
-            onClick={() => handleChangeTab?.(item)}
+            onClick={() => onChange?.(item)}
+            column={direction === 'column'}
+            theme={theme}
           >
             {typeof item.icon === "string" ? (
-              <img src={item.icon} className="land-nav-icon" />
+              <img src={item.icon} className="land-menu-icon" />
             ) : (
               item.icon
             )}
-            <p className="land-nav-title" data-title={item.title}>
+            <p className="land-menu-title" data-title={item.title}>
               {item.title}
             </p>
-            <span className="land-nav-sub-title">{item.subTitle}</span>
+            <span className="land-menu-sub-title">{item.subTitle}</span>
             {item.isNew && (
-              <i className="land-nav-new">
+              <i className="land-menu-new">
                 {typeof item.isNew === "boolean" ? "NEW" : item.isNew}
               </i>
             )}
-          </a>
+          </StyleMenuLink>
+          {item.dropData && <div className={`land-menu-drop-wrap ${item.open ? 'open' : ''}`}>
+            <div className="land-menu-drop">
+              <Menu
+                data={item.dropData}
+                onChange={dropItem => onDropChange?.(dropItem, item)}
+                {...dropProps}
+              />
+            </div>
+          </div>}
         </div>
       ))}
     </StyledMenu>
@@ -111,21 +127,84 @@ const StyledMenu = styled.div<{
   border?: boolean;
   theme?: ThemeType;
 }>`
-  display: flex;
-  flex-direction: ${(props) => props.column ? 'column' : 'row'};
-  gap: var(--gap-4);
-  height: ${(props) => (!props.column ? "100%" : "")};
-  width: ${(props) => (props.column ? "100%" : "fit-content")};
-  border-bottom: ${props => (props.border && !props.column) ? 'var(--border-1) solid var(--color-border-1)' : ''};
-  border-right: ${props => (props.border && props.column) ? 'var(--border-1) solid var(--color-border-1)' : ''}; 
- .land-nav-item {
+      display: flex;
+      flex-direction: ${(props) => props.column ? 'column' : 'row'};
+      gap: var(--gap-4);
+      height: ${(props) => (!props.column ? "100%" : "")};
+      width: ${(props) => (props.column ? "100%" : "fit-content")};
+      border-bottom: ${props => (props.border && !props.column) ? 'var(--border-1) solid var(--color-border-1)' : ''};
+      border-right: ${props => (props.border && props.column) ? 'var(--border-1) solid var(--color-border-1)' : ''};
+      box-sizing: border-box;
+      .land-menu-item {
+        position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      height: ${(props) => (!props.column ? "100%" : "")};
+      width: 100%;
+      border-radius: var(--radius-4);
+      transition: all var(--transition-15) linear;
+      &.simple {
+        cursor: default;
+    }
+      &.disabled {
+        pointer-events: none;
+      opacity: var(--opacity-68);
+    }
+    &:hover .land-menu-drop-wrap{
+      opacity: 1;
+      pointer-events: all;
+      transform: scaleY(1);
+    }
+  }
+    .land-menu-drop-wrap{
+      width: 100%;
+      .land-menu-drop{
+        padding: 8px 0px;
+      }
+      &.open{
+        .land-menu-link{
+          padding-left: 32px;
+        }
+      }
+      &:not(.open){
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding-top: 8px;
+        z-index: 1;
+        opacity: 0;
+        transform: scaleY(0.8);
+        transform-origin: top center;
+        pointer-events: none;
+        transition: all var(--transition-15) linear;
+      .land-menu-drop {
+        background-color: var(--color-bg-white);
+        border-radius: var(--radius-8);
+        box-shadow: var(--boxshadow-medium);
+      }
+    }
+  }
+  `;
+
+const StyleMenuLink = styled.a<{
+  column?: boolean;
+  theme?: ThemeType;
+}>`
     position: relative;
-    height: ${(props) => (!props.column ? "100%" : "")};
-    width: ${(props) => (props.column ? "100%" : "")};
+    padding: var(--padding-medium);
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-4);
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    font-size: var(--font-content-large);
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: background-color var(--transition-15) linear;
+    cursor: pointer;
+    color: var(--color-text-3);
     &::after {
       content: "";
       display: block;
@@ -143,10 +222,10 @@ const StyledMenu = styled.div<{
       background-color: ${props => props.theme.lineColor || 'var(--color-text-1)'};
       opacity: 0;
     }
-    &:hover {
-      color: ${props => props.theme.hoverColor};
-      background-color: ${props => props.theme.hoverBg};
-      .land-nav-title::before {
+      &:hover {
+        color: ${props => props.theme.hoverColor};
+        background-color: ${props => props.theme.hoverBg};
+      .land-menu-title::before {
         color: ${props => props.theme.hoverColor};
         font-weight: 600;
       }
@@ -154,46 +233,25 @@ const StyledMenu = styled.div<{
         stroke-width: 4px;
       }
     }
-    &.actived {
-      color: ${props => props.theme.hoverColor};
-      background-color: ${props => props.theme.activeBg};
-      .land-nav-title::before {
-        color: ${props => props.theme.activeColor || 'var(--color-text-1)'};
+      &.active {
+        color: ${props => props.theme.hoverColor};
+        background-color: ${props => props.theme.activeBg};
+        .land-menu-title::before {
+          color: ${props => props.theme.activeColor || 'var(--color-text-1)'};
+          font-weight: 600;
+        }
+        &::after {
+          opacity: 1;
+          transition: opacity var(--transition-15) linear;
+        }
+        svg path{
+          stroke-width: 4px;
+        }
+    }
+      .land-menu-title {
+        position: relative;
+        color: transparent;
         font-weight: 600;
-      }
-      &::after {
-        opacity: 1;
-        transition: opacity var(--transition-15) linear;
-      }
-      svg path{
-        stroke-width: 4px;
-      }
-    }
-    &.simple {
-      cursor: default;
-    }
-    &.disabled {
-      pointer-events: none;
-      opacity: var(--opacity-68);
-    }
-  }
-  .land-nav-link {
-    padding: var(--padding-medium);
-    display: flex;
-    align-items: center;
-    width: 100%;
-    font-size: var(--font-content-large);
-    white-space: nowrap;
-    transition: background-color var(--transition-15) linear;
-    cursor: pointer;
-    color: var(--color-text-3);
-    &:hover {
-      color: ${props => props.theme.hoverColor};
-    }
-    .land-nav-title {
-      position: relative;
-      color: transparent;
-      font-weight: 600;
       &::before {
         content: attr(data-title);
         position: absolute;
@@ -210,34 +268,33 @@ const StyledMenu = styled.div<{
         line-height: 40px;
       }
     }
-   
-    svg,
-    .land-nav-icon {
-      width: 18px;
+
+      svg,
+      .land-menu-icon {
+        width: 18px;
       height: 18px;
       margin-right: 4px;
     }
-    svg path{
-      stroke-width: 3px;
+      svg path{
+        stroke-width: 3px;
     }
-    .land-nav-sub-title {
-      font-size: var(--font-content-small);
-      opacity: var(--opacity-68);
+      .land-menu-sub-title {
+        font-size: var(--font-content-small);
+       opacity: var(--opacity-68);
     }
-    .land-nav-new {
-      position: absolute;
-      padding: var(--padding-small);
-      top: -12px;
-      right: -8px;
-      font-size: var(--font-content-small);
-      background-color: var(--color-link-1);
-      color: var(--color-link-6);
-      font-weight: 600;
-      border-radius: 3px;
-      box-sizing: border-box;
-      transform: scale(0.65);
-    }
-  }
-`;
+      .land-menu-new {
+        position: absolute;
+        padding: var(--padding-small);
+        top: -12px;
+        right: -8px;
+        font-size: var(--font-content-small);
+        background-color: var(--color-link-1);
+        color: var(--color-link-6);
+        font-weight: 600;
+        border-radius: 3px;
+        box-sizing: border-box;
+        transform: scale(0.65);
+      }
+  `
 
 export default Menu;

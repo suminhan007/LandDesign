@@ -3,14 +3,11 @@ declare enum PopType {
     BG = "background",
     BORDER = "border"
 }
-declare enum PopThemeType {
-    LIGHT = "light",
-    DARK = "dark"
-}
 export type PopProps = {
     type?: PopType;
-    theme?: PopThemeType;
+    theme?: "light" | "dark";
     content?: React.ReactNode | string;
+    placement?: "top" | "bottom" | "left" | "right";
     style?: CSSProperties;
     className?: string;
 };

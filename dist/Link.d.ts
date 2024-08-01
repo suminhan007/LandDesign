@@ -1,5 +1,7 @@
 import React, { CSSProperties } from 'react';
 export type LinkProps = {
+    href?: string;
+    target?: string;
     status?: "default" | "primary" | "success" | "danger" | "warning";
     disabled?: boolean;
     actived?: boolean;

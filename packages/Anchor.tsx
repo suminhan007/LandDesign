@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react";
 import styled from "styled-components";
 
-export type AnchorType = {
+export type AnchorItemType = {
   /* 唯一标识 */
   key?: number;
   /* 锚点链接 */
@@ -10,23 +10,26 @@ export type AnchorType = {
   target?: string;
   /* 锚点文字内容 */
   text?: string;
-  replace?: boolean;
+  style?: CSSProperties;
+  className?: string;
 }
 
 export type AnchorProps = {
   /* 是否固定 */
   fixed?: boolean;
   /* 锚点数据 */
-  anchorData?: AnchorType[];
+  anchorData?: AnchorItemType[];
   style?: CSSProperties;
   className?: string;
 };
 
 const LandAnchor: React.FC<AnchorProps> = ({ style, className }) => {
-  return <StyledAnchor className={className} style={style}></StyledAnchor>;
+  return <StyledAnchor className={className} style={style}>
+    <ol></ol>
+  </StyledAnchor>;
 };
 
-const StyledAnchor = styled.div<{
+const StyledAnchor = styled.nav<{
 
 }>`
 

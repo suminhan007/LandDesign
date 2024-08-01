@@ -41,7 +41,7 @@ export default function IconExample() {
   return (
     <div className='flex column gap-12'>
       <div className='flex column gap-8'>
-        <Title title='箭头类' type='h3'/>
+        <Title title='箭头类' type='h3' />
         <StyleIconGrid>
           <StyledIconItem>
             <IconArrowLine size={size} stroke={color} />
@@ -74,43 +74,43 @@ export default function IconExample() {
           <StyledIconItem>
             <IconCollection size={size} stroke={color} />
             IconCollection
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconZoomOut size={size} stroke={color} />
             IconZoomOut
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconZoomIn size={size} stroke={color} />
             IconZoomIn
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconLoop size={size} stroke={color} />
             IconLoop
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconDownload size={size} stroke={color} />
             IconDownload
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconOut size={size} stroke={color} />
             IconOut
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconReload size={size} stroke={color} />
             IconReload
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconUndo size={size} stroke={color} />
             IconUndo
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconSort size={size} stroke={color} />
             IconSort
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconBack size={size} stroke={color} />
             IconBack
-            </StyledIconItem>
+          </StyledIconItem>
           <StyledIconItem>
             <IconAhead size={size} stroke={color} />
             IconAhead
@@ -123,65 +123,65 @@ export default function IconExample() {
       </div>
 
       <div className='flex column gap-8'>
-        <Title title='提示类' type='h3'/>
+        <Title title='提示类' type='h3' />
         <StyleIconGrid>
           <StyledIconItem>
-            <IconCheckStroke size={size} stroke={color}/>
+            <IconCheckStroke size={size} stroke={color} />
             IconCheckStroke
           </StyledIconItem>
           <StyledIconItem>
-            <IconCheckFill size={size} fill={color}/>
+            <IconCheckFill size={size} fill={color} />
             IconCheckFill
           </StyledIconItem>
           <StyledIconItem>
-            <IconCheck size={size} fill={color}/>
+            <IconCheck size={size} fill={color} />
             IconCheck
           </StyledIconItem>
           <StyledIconItem>
-            <IconErrorStroke size={size} stroke={color}/>
+            <IconErrorStroke size={size} stroke={color} />
             IconErrorStroke
           </StyledIconItem>
           <StyledIconItem>
-            <IconErrorFill size={size} fill={color}/>
+            <IconErrorFill size={size} fill={color} />
             IconErrorFill
           </StyledIconItem>
           <StyledIconItem>
-            <IconError size={size} fill={color}/>
+            <IconError size={size} fill={color} />
             IconError
           </StyledIconItem>
           <StyledIconItem>
-            <IconInfoStroke size={size} stroke={color}/>
+            <IconInfoStroke size={size} stroke={color} />
             IconInfoStroke
           </StyledIconItem>
           <StyledIconItem>
-            <IconInfoFill size={size} fill={color}/>
+            <IconInfoFill size={size} fill={color} />
             IconInfoFill
           </StyledIconItem>
           <StyledIconItem>
-            <IconInfo size={size} fill={color}/>
+            <IconInfo size={size} fill={color} />
             IconInfo
           </StyledIconItem>
         </StyleIconGrid>
       </div>
 
       <div className='flex column gap-8'>
-        <Title title='交互类' type='h3'/>
+        <Title title='交互类' type='h3' />
         <StyleIconGrid>
-          
+
         </StyleIconGrid>
       </div>
 
       <div className='flex column gap-8'>
-        <Title title='编辑类' type='h3'/>
+        <Title title='编辑类' type='h3' />
         <StyleIconGrid>
-          
+
         </StyleIconGrid>
       </div>
 
       <div className='flex column gap-8'>
-        <Title title='文字类' type='h3'/>
+        <Title title='文字类' type='h3' />
         <StyleIconGrid>
-          
+
         </StyleIconGrid>
       </div>
     </div>

@@ -94,7 +94,7 @@ const Button: React.FC<ButtonProps> = ({
           color={buttonColorConfig}
           onClick={(e: React.UIEvent) => onClick?.(e)}
         >
-          {/* {loading ? <>load</> : icon} */}
+          {icon}
           {!iconOnly && (
             <div>
               <span>{text}</span>
@@ -107,7 +107,9 @@ const Button: React.FC<ButtonProps> = ({
         <StyleButtonLink
           href={href}
           target={target}
-          className={`land-button ${pop ? "hover-pop" : ""} ${className}`}
+          className={`land-button ${type} ${status} ${iconOnly ? "iconOnly" : ""
+            } ${disabled ? "disabled" : ""} ${pop ? "hover-pop" : ""
+            } ${className}`}
           style={style}
           width={width}
           height={height}
@@ -115,7 +117,7 @@ const Button: React.FC<ButtonProps> = ({
           color={buttonColorConfig}
           onClick={(e: React.UIEvent) => onClick?.(e)}
         >
-          {/* {loading ? <IconLoading /> : icon} */}
+          {icon}
           {!iconOnly && (
             <div>
               <span>{text}</span>
@@ -139,7 +141,7 @@ const StyledButton = styled.div<{
   display: flex;
   align-items: center;
   justify-content: ${(props) => props.justify};
-  gap: var(--gap-8);
+  gap: var(--gap-4);
   padding: ${(props) =>
     props.width && props.width !== "100%" ? "" : "var(--padding-medium)"};
   width: ${(props) => (props.width ? props.width : "fit-content")};
@@ -167,6 +169,7 @@ const StyledButton = styled.div<{
 
   &.text,
   &.border.default {
+    background-color: var(--color-bg-white);
     &:hover {
       background-color: var(--color-bg-1);
     }
@@ -188,10 +191,10 @@ const StyledButton = styled.div<{
       }
     }
     &:hover {
-      background-color: ${(props) => `${props.color}5)`};
+      background-color: ${(props) => `${props.color}7)`};
     }
     &:active {
-      background-color: ${(props) => `${props.color}7)`};
+      background-color: ${(props) => `${props.color}8)`};
     }
   }
 
@@ -230,8 +233,12 @@ const StyledButton = styled.div<{
     height: 36px;
   }
   &.disabled {
-    opacity: var(--opacity-68);
+    background-color: ${(props) => `${props.color}3)`};
     cursor: default;
+    &:hover,
+    &:active{
+      background-color: ${(props) => `${props.color}3)`};
+    }
   }
 `;
 

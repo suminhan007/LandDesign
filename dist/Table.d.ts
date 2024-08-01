@@ -3,6 +3,7 @@ export type TableProps = {
     titleData?: {
         title: string | React.ReactNode;
         value: string;
+        antiDesc?: string;
     }[];
     data?: any[];
     style?: CSSProperties;
