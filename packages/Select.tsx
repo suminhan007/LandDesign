@@ -1,7 +1,7 @@
 import React, { CSSProperties, useState } from "react";
 import styled from "styled-components";
-import { IconArrow } from "./Icon";
 import Title from "./Title";
+import Icon from "./Icon";
 
 type SelectItemType = {
   id: string | number;
@@ -46,17 +46,16 @@ const Select: React.FC<SelectProps> = ({
         onClick={() => setShow(!show)}
       >
         <p
-          className={`${
-            newSelected !== "0"
+          className={`${newSelected !== "0"
               ? "land-select-trigger"
               : "land-select-placeholder"
-          }`}
+            }`}
         >
           {newSelected === "0"
             ? placeholder
             : data?.filter((itm) => itm.id === newSelected)[0].value}
         </p>
-        <IconArrow />
+        <Icon name="arrow" />
       </StyleSelectInput>
       <StyleSelectResults
         className={`land-select-results ${show ? "show" : ""}`}
@@ -64,9 +63,8 @@ const Select: React.FC<SelectProps> = ({
         <StyleSelectDrop>
           {data?.map((item) => (
             <StyleSelectDropItem
-              className={`${newSelected === item.id ? "selected" : ""} ${
-                item.disabled ? "disabled" : ""
-              }`}
+              className={`${newSelected === item.id ? "selected" : ""} ${item.disabled ? "disabled" : ""
+                }`}
               key={item.id}
               onClick={() => {
                 setNewSelected(item.id);

@@ -37,12 +37,4 @@ export { default as LandTable } from "./Table";
 export type { TitleProps } from "./Title";
 export { default as Title } from "./Title";
 
-export {
-  IconArrow,
-  IconArrowLine,
-  IconArrowDouble,
-  IconArrowTriangle,
-  IconArrowTo,
-  IconAhead,
-  IconBack
-} from "./Icon";
+export { default as Icon } from "./Icon";

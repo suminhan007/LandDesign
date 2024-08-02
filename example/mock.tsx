@@ -10,11 +10,12 @@ import MenuExample from "./Components/MenuExample";
 import Link from "../packages/Link";
 import Button from "../packages/Button";
 import React from "react";
+import AffixContainerExample from "./Components/AffixContainerExample";
 
 
 export const COMMON_COMPONENTS_DATA = [
   {
-    id: 1,
+    id: 'icon',
     en: "Icon",
     zh: "图标",
     desc: "Land Design内置常规图标。",
@@ -28,7 +29,7 @@ export const COMMON_COMPONENTS_DATA = [
     demo: <></>,
   },
   {
-    id: 2,
+    id: 'button',
     en: "Button",
     zh: "按钮",
     desc: "按钮是一种命令组件，可发起一个即时操作。",
@@ -72,7 +73,7 @@ export const COMMON_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 3,
+    id: 'link',
     en: "Link",
     zh: "链接",
     desc: "",
@@ -85,14 +86,15 @@ export const COMMON_COMPONENTS_DATA = [
       },
       { name: "disabled", type: "boolean", desc: "链接是否禁用", optional: true },
       { name: "actived", type: "boolean", desc: "链接是否已点击", optional: true },
-      { name: "pop", type: "element | string", desc: "链接提示气泡", optional: true },
+      { name: "tip", type: "element | string", desc: "链接提示气泡", optional: true },
+      { name: "tipProps", type: <Link href="#MenuItemType">tipProps</Link>, desc: "链接提示气泡属性", optional: true },
       { name: "children", type: "element", desc: "链接内容", optional: true },
     ],
     example: <LinkExample />,
     demo: <></>
   },
   {
-    id: 4,
+    id: 'typography',
     en: "Typography",
     zh: "排版",
     desc: "",
@@ -101,7 +103,7 @@ export const COMMON_COMPONENTS_DATA = [
 
 export const LAYOUT_COMPONENTS_DATA = [
   {
-    id: 101,
+    id: 'divider',
     en: "Divider",
     zh: "分割线",
     desc: "",
@@ -128,7 +130,7 @@ export const LAYOUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 102,
+    id: 'flex',
     en: "Flex",
     zh: "弹性布局",
     desc: "弹性布局",
@@ -162,7 +164,7 @@ export const LAYOUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 103,
+    id: 'grid',
     en: "Grid",
     zh: "栅格",
     props: [{ name: "name", type: "type", desc: "desc" }],
@@ -170,7 +172,7 @@ export const LAYOUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 104,
+    id: 'layout',
     en: "Layout",
     zh: "布局",
     props: [{ name: "name", type: "type", desc: "desc" }],
@@ -178,7 +180,7 @@ export const LAYOUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 105,
+    id: 'space',
     en: "Space",
     zh: "间距",
     props: [{ name: "name", type: "type", desc: "desc" }],
@@ -189,8 +191,29 @@ export const LAYOUT_COMPONENTS_DATA = [
 
 export const NAV_COMPONENTS_DATA = [
   {
-    id: 201,
-    en: "Anchor",
+    id: '201',
+    en: "affix",
+    zh: "图钉",
+    desc: "图钉用于在容器内部指定位置展示内容",
+    props: [
+      { name: "placement", type: "'lt' | 'lb' | 'rt' | 'rb'", desc: "快捷设置图钉位置" },
+      { name: 'gap', type: 'number', desc: '快捷定位时图钉与四周的距离' },
+      { name: 'offsetData', type: '{ left?: number, right?: number, top?: number, bottom?: number }', desc: '基于 absolute 定位的自定义位置' },
+      { name: 'hover', type: 'boolean', desc: '鼠标悬浮时隐藏图钉' },
+      { name: 'hoverShow', type: 'boolean', desc: '鼠标悬浮时显示图钉' },
+      { name: 'innerStyle', type: 'CSSProperties', desc: '图钉元素对应的 style' },
+      { name: 'innerClassName', type: 'string', desc: '图钉元素对应的 className' },
+      { name: 'Style', type: 'CSSProperties', desc: '图钉定位容器对应的style' },
+      { name: 'className', type: 'string', desc: '图钉定位容器对应的className' },
+      { name: 'content', type: 'element', desc: '图钉元素' },
+      { name: 'children', type: 'element', desc: '图钉容器元素' },
+    ],
+    example: <AffixContainerExample />,
+    demo: <></>
+  },
+  {
+    id: 'anchor',
+    en: "anchor",
     zh: "锚点",
     desc: "锚点用于跳转至页面指定位置。",
     props: [{ name: "name", type: "type", desc: "desc" }],
@@ -198,7 +221,7 @@ export const NAV_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 202,
+    id: 'breadCrumb',
     en: "Breadcrumb",
     zh: "面包屑",
     desc: "锚点用于跳转至页面指定位置。",
@@ -207,14 +230,14 @@ export const NAV_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 203,
+    id: 'menu',
     en: "Menu",
     zh: "导航菜单",
     desc: "锚点用于跳转至页面指定位置。",
     props: [
       { name: "data", type: <><Link href="#MenuItemType">MenuItemType</Link> []</>, desc: "导航数据", optional: true },
       {
-        name: "actived",
+        name: "active",
         type: "number",
         desc: "当前选中的导航项对应的唯一key",
         optional: true,
@@ -255,7 +278,7 @@ export const NAV_COMPONENTS_DATA = [
     ]
   },
   {
-    id: 204,
+    id: 'pagination',
     en: "Pagination",
     zh: "分页",
     desc: "锚点用于跳转至页面指定位置。",
@@ -264,7 +287,7 @@ export const NAV_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 205,
+    id: 'step',
     en: "Steps",
     zh: "步骤条",
     desc: "锚点用于跳转至页面指定位置。",
@@ -273,7 +296,7 @@ export const NAV_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 206,
+    id: 'dropdown',
     en: "Dropdown",
     zh: "下拉菜单",
     desc: "锚点用于跳转至页面指定位置。",
@@ -285,7 +308,7 @@ export const NAV_COMPONENTS_DATA = [
 
 export const INPUT_COMPONENTS_DATA = [
   {
-    id: 301,
+    id: 'input',
     en: 'Input',
     zh: '输入框',
     desc: 'Land Design内置常规图标。',
@@ -296,7 +319,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 302,
+    id: 'select',
     en: 'Select',
     zh: '选择器',
     desc: 'Land Design内置常规图标。',
@@ -307,7 +330,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 303,
+    id: 'selectTree',
     en: 'SelectTree',
     zh: '层级选择器',
     desc: 'Land Design内置常规图标。',
@@ -318,7 +341,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 304,
+    id: 'radio',
     en: 'Radio',
     zh: '单选框',
     desc: 'Land Design内置常规图标。',
@@ -329,7 +352,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 305,
+    id: 'checkbox',
     en: 'Checkbox',
     zh: '多选框',
     desc: 'Land Design内置常规图标。',
@@ -340,7 +363,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 306,
+    id: 'colorPicker',
     en: 'ColorPicker',
     zh: '颜色选择器',
     desc: 'Land Design内置常规图标。',
@@ -351,7 +374,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 307,
+    id: 'datePicker',
     en: 'DatePicker',
     zh: '日期选择器',
     desc: 'Land Design内置常规图标。',
@@ -362,7 +385,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 308,
+    id: 'numberInput',
     en: 'NumberInput',
     zh: '数字输入框',
     desc: 'Land Design内置常规图标。',
@@ -373,7 +396,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 309,
+    id: 'switch',
     en: 'Switch',
     zh: '开关',
     desc: 'Land Design内置常规图标。',
@@ -384,7 +407,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 310,
+    id: 'slider',
     en: 'Slider',
     zh: '滑动输入条',
     desc: 'Land Design内置常规图标。',
@@ -395,7 +418,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 311,
+    id: 'rate',
     en: 'Rate',
     zh: '评分',
     desc: 'Land Design内置常规图标。',
@@ -406,7 +429,7 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 312,
+    id: 'upload',
     en: 'Upload',
     zh: '上传框',
     desc: 'Land Design内置常规图标。',
@@ -420,7 +443,7 @@ export const INPUT_COMPONENTS_DATA = [
 
 export const DISPLAY_COMPONENTS_DATA = [
   {
-    id: 401,
+    id: 'avatar',
     en: 'Avatar',
     zh: '头像',
     desc: 'Land Design内置常规图标。',
@@ -431,7 +454,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 402,
+    id: 'badge',
     en: 'Badge',
     zh: '徽标数',
     desc: 'Land Design内置常规图标。',
@@ -442,7 +465,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 403,
+    id: 'calendar',
     en: 'Calendar',
     zh: '日历',
     desc: 'Land Design内置常规图标。',
@@ -453,7 +476,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 404,
+    id: 'card',
     en: 'Card',
     zh: '卡片',
     desc: 'Land Design内置常规图标。',
@@ -464,7 +487,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 405,
+    id: 'carousel',
     en: 'Carousel',
     zh: '走马灯',
     desc: 'Land Design内置常规图标。',
@@ -475,7 +498,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 406,
+    id: 'collapse',
     en: 'Collapse',
     zh: '折叠面板',
     desc: 'Land Design内置常规图标。',
@@ -486,7 +509,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 407,
+    id: 'state',
     en: 'State',
     zh: '状态',
     desc: 'Land Design内置常规图标。',
@@ -497,7 +520,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 408,
+    id: 'image',
     en: 'Image',
     zh: '图片',
     desc: 'Land Design内置常规图标。',
@@ -508,7 +531,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 409,
+    id: 'video',
     en: 'Video',
     zh: '视频',
     desc: 'Land Design内置常规图标。',
@@ -519,7 +542,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 410,
+    id: 'audio',
     en: 'Audio',
     zh: '音频',
     desc: 'Land Design内置常规图标。',
@@ -530,7 +553,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 411,
+    id: 'list',
     en: 'List',
     zh: '列表',
     desc: 'Land Design内置常规图标。',
@@ -541,7 +564,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 412,
+    id: 'popOver',
     en: 'Popover',
     zh: '气泡',
     desc: 'Land Design内置常规图标。',
@@ -552,7 +575,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 413,
+    id: 'statistic',
     en: 'Statistic',
     zh: '数值统计',
     desc: 'Land Design内置常规图标。',
@@ -563,7 +586,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 414,
+    id: 'table',
     en: 'Table',
     zh: '表格',
     desc: 'Land Design内置常规图标。',
@@ -574,7 +597,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 415,
+    id: 'tag',
     en: 'Tag',
     zh: '标签',
     desc: 'Land Design内置常规图标。',
@@ -585,7 +608,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 416,
+    id: 'timeline',
     en: 'Timeline',
     zh: '时间轴',
     desc: 'Land Design内置常规图标。',
@@ -596,7 +619,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 417,
+    id: 'swiper',
     en: 'Swiper',
     zh: '轮播图',
     desc: 'Land Design内置常规图标。',
@@ -608,7 +631,7 @@ export const DISPLAY_COMPONENTS_DATA = [
 
 export const FEEDBACK_COMPONENTS_DATA = [
   {
-    id: 501,
+    id: 'alert',
     en: 'Alert',
     zh: '警告提示',
     desc: 'Land Design内置常规图标。',
@@ -619,7 +642,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 502,
+    id: 'message',
     en: 'Message',
     zh: '全局提示',
     desc: 'Land Design内置常规图标。',
@@ -630,7 +653,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 503,
+    id: 'dialog',
     en: 'Dialog',
     zh: '弹窗',
     desc: 'Land Design内置常规图标。',
@@ -641,7 +664,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 504,
+    id: 'drawer',
     en: 'Drawer',
     zh: '抽屉',
     desc: 'Land Design内置常规图标。',
@@ -652,7 +675,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 505,
+    id: 'popConfirm',
     en: 'PopConfirm',
     zh: '气泡提示框',
     desc: 'Land Design内置常规图标。',
@@ -663,7 +686,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 506,
+    id: 'progress',
     en: 'Progress',
     zh: '进度条',
     desc: 'Land Design内置常规图标。',
@@ -674,7 +697,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 507,
+    id: 'skeleton',
     en: 'Skeleton',
     zh: '骨架屏',
     desc: 'Land Design内置常规图标。',
@@ -685,7 +708,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 508,
+    id: 'loading',
     en: 'Loading',
     zh: '加载',
     desc: 'Land Design内置常规图标。',
@@ -696,8 +719,8 @@ export const FEEDBACK_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 509,
-    en: 'Warermark',
+    id: 'watermark',
+    en: 'Watermark',
     zh: '水印',
     desc: 'Land Design内置常规图标。',
     props: [
@@ -708,7 +731,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
 
 export const TEXT_COMPONENTS_DATA = [
   {
-    id: 601,
+    id: 'title',
     en: 'Title',
     zh: '标题',
     desc: '',
@@ -719,7 +742,7 @@ export const TEXT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 602,
+    id: 'textList',
     en: 'TextList',
     zh: '文字列表',
     desc: '',
@@ -730,7 +753,7 @@ export const TEXT_COMPONENTS_DATA = [
     demo: <></>
   },
   {
-    id: 603,
+    id: 'ellipsis',
     en: 'Ellipsis',
     zh: '缩略显示',
     desc: '',
@@ -744,7 +767,7 @@ export const TEXT_COMPONENTS_DATA = [
 
 export const OTHER_COMPONENTS_DATA = [
   {
-    id: 701,
+    id: 'icon',
     en: 'Icon',
     zh: '图标',
     desc: 'Land Design内置常规图标。',
@@ -764,42 +787,42 @@ export const COMPONENTS_DATA = [
     title: '组件概览',
   },
   {
-    id: 1,
+    id: 'icon',
     title: '通用型',
     data: COMMON_COMPONENTS_DATA,
   },
   {
-    id: 101,
+    id: 'divider',
     title: '布局型',
     data: LAYOUT_COMPONENTS_DATA,
   },
   {
-    id: 201,
+    id: 'affix',
     title: '导航型',
     data: NAV_COMPONENTS_DATA,
   },
   {
-    id: 301,
+    id: 'input',
     title: '数据输入型',
     data: INPUT_COMPONENTS_DATA,
   },
   {
-    id: 401,
+    id: 'avatar',
     title: '输入展示型',
     data: DISPLAY_COMPONENTS_DATA,
   },
   {
-    id: 501,
+    id: 'alert',
     title: '反馈型',
     data: FEEDBACK_COMPONENTS_DATA,
   },
   {
-    id: 601,
+    id: 'title',
     title: '文字型',
     data: TEXT_COMPONENTS_DATA,
   },
   {
-    id: 701,
+    id: 'icon',
     title: '其他',
     data: OTHER_COMPONENTS_DATA,
   }
@@ -814,3 +837,31 @@ export const COMPONENTS_OVERVIEW_DATA = [
     element: <Button />,
   }
 ];
+
+// 图标示例数据
+export const ICON_EXAMPLE_DATA = [
+  {
+    title: '箭头类',
+    data: [
+      'arrow-line', 'arrow', 'arrow-double', 'arrow-triangle', 'arrow-to', 'collapse', 'collection', 'zoom-out', 'zoom-in', 'loop', 'download', 'out', 'reload', 'undo', 'sort', 'back', 'ahead', 'refresh'
+    ]
+  },
+  {
+    title: '提示类',
+    data: [
+      'check-stroke', 'check-fill', 'check', 'error-stroke', 'error-fill', 'error', 'info-stroke', 'info-fill', 'info', 'attention-stroke', 'attention-fill', 'attention'
+    ]
+  },
+  {
+    title: '交互类',
+  },
+  {
+    title: '编辑类',
+    data: [
+      ''
+    ]
+  },
+  {
+    title: '文字类',
+  }
+]

@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react'
 import styled from 'styled-components'
-import Pop from './Pop';
+import Pop, { PopProps } from './Pop';
 
 export type LinkProps = {
   href?: string;
@@ -8,8 +8,9 @@ export type LinkProps = {
   /* 标识链接类型 */
   status?: "default" | "primary" | "success" | "danger" | "warning";
   disabled?: boolean;
-  actived?: boolean;
-  pop?: React.ReactNode | string;
+  active?: boolean;
+  tip?: React.ReactNode | string;
+  tipProps?: PopProps;
   children?: React.ReactNode | string;
   style?: CSSProperties;
   className?: string;
@@ -20,8 +21,9 @@ const Link: React.FC<LinkProps> = ({
   target = "_blank",
   status = "default",
   disabled,
-  actived,
-  pop,
+  active,
+  tip,
+  tipProps,
   children,
   style,
   className = "",
@@ -46,13 +48,13 @@ const Link: React.FC<LinkProps> = ({
     <StyledLink
       href={href}
       target={target}
-      className={`land-link ${actived ? "actived" : ""} ${disabled ? "disabled hover-pop" : ""
+      className={`land-link ${active ? "active" : ""} ${disabled ? "disabled hover-pop" : ""
         } ${className}`}
       style={style}
       color={getColor()}
     >
       {children}
-      {pop && <Pop content={pop} />}
+      {tip && <Pop content={tip} {...tipProps} />}
     </StyledLink>
   );
 };
@@ -85,7 +87,7 @@ const StyledLink = styled.a<{
         }
     }
     &:active,
-    &.actived {
+    &.active {
         color: ${props => `${props.color}8)`};
         &::before {
             background-color: ${props => `${props.color}8)`};

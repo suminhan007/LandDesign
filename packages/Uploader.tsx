@@ -1,6 +1,6 @@
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { IconUpload } from "./Icon";
+import Icon from "./Icon";
 
 type Props = {
   /**上传文件描述 */
@@ -73,7 +73,7 @@ const Uploader: React.FC<Props> = ({
       ) : (
         <>
           <div className="land-uploader-icon">
-            <IconUpload />
+            <Icon name="upload" />
           </div>
           {(desc || drag) && <div className="land-uploader-desc">{drag ? '释放即可上传' : desc}</div>}
         </>

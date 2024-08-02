@@ -1,5 +1,72 @@
 import { CSSProperties } from "react";
 
+type IconDefaultProps = {
+  name: string;
+} & IconProps;
+
+const Icon: React.FC<IconDefaultProps> = ({
+  name,
+  ...restProps
+}) => {
+  switch (name) {
+    case 'arrow-line': return <IconArrowLine {...restProps} />; break;
+    case 'arrow-double': return <IconArrowDouble {...restProps} />; break;
+    case 'arrow': return <IconArrow {...restProps} />; break;
+    case 'arrow-triangle': return <IconArrowTriangle {...restProps} />; break;
+    case 'arrow-to': return <IconArrowTo {...restProps} />; break;
+    case 'toggle': return <IconToggle {...restProps} />; break;
+    case 'collapse': return <IconCollapse {...restProps} />; break;
+    case 'collection': return <IconCollection {...restProps} />; break;
+    case 'zoom-out': return <IconZoomOut {...restProps} />; break;
+    case 'zoom-in': return <IconZoomIn {...restProps} />; break;
+    case 'loop': return <IconLoop {...restProps} />; break;
+    case 'download': return <IconDownload {...restProps} />; break;
+    case 'out': return <IconOut {...restProps} />; break;
+    case 'reload': return <IconReload {...restProps} />; break;
+    case 'undo': return <IconUndo {...restProps} />; break;
+    case 'sort': return <IconSort {...restProps} />; break;
+    case 'back': return <IconBack {...restProps} />; break;
+    case 'ahead': return <IconAhead {...restProps} />; break;
+    case 'drag': return <IconDrag {...restProps} />; break;
+    case 'refresh': return <IconRefresh {...restProps} />; break;
+    case 'check-stroke': return <IconCheckStroke {...restProps} />; break;
+    case 'check-fill': return <IconCheckFill {...restProps} />; break;
+    case 'check': return <IconCheck {...restProps} />; break;
+
+    case 'error-stroke': return <IconErrorStroke {...restProps} />; break;
+    case 'error-fill': return <IconErrorFill {...restProps} />; break;
+    case 'error': return <IconError {...restProps} />; break;
+
+    case 'info-stroke': return <IconInfoStroke {...restProps} />; break;
+    case 'info-fill': return <IconInfoFill {...restProps} />; break;
+    case 'info': return <IconInfo {...restProps} />; break;
+
+    case 'attention-stroke': return <IconAttentionStroke {...restProps} />; break;
+    case 'attention-fill': return <IconAttentionFill {...restProps} />; break;
+    case 'attention': return <IconAttention {...restProps} />; break;
+
+    case 'question-stroke': return <IconQuestionStroke {...restProps} />; break;
+    case 'question-fill': return <IconQuestionFill {...restProps} />; break;
+    case 'question': return <IconQuestion {...restProps} />; break;
+
+    case 'more': return <IconMore {...restProps} />; break;
+    case 'more-line': return <IconMoreLine {...restProps} />; break;
+    case 'file': return <IconFile {...restProps} />; break;
+    case 'add': return <IconAdd {...restProps} />; break;
+    case 'clear': return <IconClear {...restProps} />; break;
+    case 'upload': return <IconUpload {...restProps} />; break;
+    case 'application': return <IconApplication {...restProps} />; break;
+    case 'close': return <IconClose {...restProps} />; break;
+    case 'close-circle': return <IconCloseCircle {...restProps} />; break;
+    case 'color-picker': return <IconColorPicker {...restProps} />; break;
+    case 'copy': return <IconCopy {...restProps} />; break;
+    case 'home': return <IconHome {...restProps} />; break;
+
+    default:
+      break;
+  }
+}
+
 type IconProps = {
   fill?: string;
   stroke?: string;
@@ -11,7 +78,7 @@ type IconProps = {
 };
 
 // 方向类图标
-export const IconArrowLine: React.FC<IconProps> = ({
+const IconArrowLine: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -45,7 +112,7 @@ export const IconArrowLine: React.FC<IconProps> = ({
   );
 };
 
-export const IconArrowDouble: React.FC<IconProps> = ({
+const IconArrowDouble: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -79,7 +146,7 @@ export const IconArrowDouble: React.FC<IconProps> = ({
   );
 };
 
-export const IconArrow: React.FC<IconProps> = ({
+const IconArrow: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -106,7 +173,7 @@ export const IconArrow: React.FC<IconProps> = ({
   );
 };
 
-export const IconArrowTriangle: React.FC<IconProps> = ({
+const IconArrowTriangle: React.FC<IconProps> = ({
   fill = "currentcolor",
   stroke = "currentcolor",
   size = 16,
@@ -134,7 +201,7 @@ export const IconArrowTriangle: React.FC<IconProps> = ({
   );
 };
 
-export const IconArrowTo: React.FC<IconProps> = ({
+const IconArrowTo: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -175,7 +242,7 @@ export const IconArrowTo: React.FC<IconProps> = ({
   );
 };
 
-export const IconToggle: React.FC<IconProps> = ({
+const IconToggle: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -216,7 +283,7 @@ export const IconToggle: React.FC<IconProps> = ({
   );
 };
 
-export const IconCollapse: React.FC<IconProps> = ({
+const IconCollapse: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -250,7 +317,7 @@ export const IconCollapse: React.FC<IconProps> = ({
   );
 };
 
-export const IconCollection: React.FC<IconProps> = ({
+const IconCollection: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -291,7 +358,7 @@ export const IconCollection: React.FC<IconProps> = ({
   );
 };
 
-export const IconZoomOut: React.FC<IconProps> = ({
+const IconZoomOut: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -367,7 +434,7 @@ export const IconZoomOut: React.FC<IconProps> = ({
   );
 };
 
-export const IconZoomIn: React.FC<IconProps> = ({
+const IconZoomIn: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -443,7 +510,7 @@ export const IconZoomIn: React.FC<IconProps> = ({
   );
 };
 
-export const IconLoop: React.FC<IconProps> = ({
+const IconLoop: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -477,7 +544,7 @@ export const IconLoop: React.FC<IconProps> = ({
   );
 };
 
-export const IconDownload: React.FC<IconProps> = ({
+const IconDownload: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 3,
@@ -520,7 +587,7 @@ export const IconDownload: React.FC<IconProps> = ({
   );
 };
 
-export const IconOut: React.FC<IconProps> = ({
+const IconOut: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -561,7 +628,7 @@ export const IconOut: React.FC<IconProps> = ({
   );
 };
 
-export const IconReload: React.FC<IconProps> = ({
+const IconReload: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -595,7 +662,7 @@ export const IconReload: React.FC<IconProps> = ({
   );
 };
 
-export const IconUndo: React.FC<IconProps> = ({
+const IconUndo: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -629,7 +696,7 @@ export const IconUndo: React.FC<IconProps> = ({
   );
 };
 
-export const IconSort: React.FC<IconProps> = ({
+const IconSort: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -677,7 +744,7 @@ export const IconSort: React.FC<IconProps> = ({
   );
 };
 
-export const IconBack: React.FC<IconProps> = ({
+const IconBack: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -711,7 +778,7 @@ export const IconBack: React.FC<IconProps> = ({
   );
 };
 
-export const IconAhead: React.FC<IconProps> = ({
+const IconAhead: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -745,7 +812,7 @@ export const IconAhead: React.FC<IconProps> = ({
   );
 };
 
-export const IconDrag: React.FC<IconProps> = ({
+const IconDrag: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -779,7 +846,7 @@ export const IconDrag: React.FC<IconProps> = ({
   );
 };
 
-export const IconRefresh: React.FC<IconProps> = ({
+const IconRefresh: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -821,7 +888,7 @@ export const IconRefresh: React.FC<IconProps> = ({
 };
 
 //提示类
-export const IconCheckStroke: React.FC<IconProps> = ({
+const IconCheckStroke: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -855,7 +922,7 @@ export const IconCheckStroke: React.FC<IconProps> = ({
   );
 };
 
-export const IconCheckFill: React.FC<IconProps> = ({
+const IconCheckFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
@@ -880,7 +947,7 @@ export const IconCheckFill: React.FC<IconProps> = ({
   );
 };
 
-export const IconCheck: React.FC<IconProps> = ({
+const IconCheck: React.FC<IconProps> = ({
   fill = "currentcolor",
   stroke = "currentcolor",
   size = 16,
@@ -909,7 +976,7 @@ export const IconCheck: React.FC<IconProps> = ({
   );
 };
 
-export const IconErrorStroke: React.FC<IconProps> = ({
+const IconErrorStroke: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -950,7 +1017,7 @@ export const IconErrorStroke: React.FC<IconProps> = ({
   );
 };
 
-export const IconErrorFill: React.FC<IconProps> = ({
+const IconErrorFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
@@ -975,7 +1042,7 @@ export const IconErrorFill: React.FC<IconProps> = ({
   );
 };
 
-export const IconError: React.FC<IconProps> = ({
+const IconError: React.FC<IconProps> = ({
   fill = "currentcolor",
   stroke = "currentcolor",
   size = 16,
@@ -1004,7 +1071,7 @@ export const IconError: React.FC<IconProps> = ({
   );
 };
 
-export const IconInfoStroke: React.FC<IconProps> = ({
+const IconInfoStroke: React.FC<IconProps> = ({
   size = 16,
   stroke = "currentcolor",
   style,
@@ -1031,7 +1098,7 @@ export const IconInfoStroke: React.FC<IconProps> = ({
   );
 };
 
-export const IconInfoFill: React.FC<IconProps> = ({
+const IconInfoFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
@@ -1056,7 +1123,7 @@ export const IconInfoFill: React.FC<IconProps> = ({
   );
 };
 
-export const IconInfo: React.FC<IconProps> = ({
+const IconInfo: React.FC<IconProps> = ({
   fill = "currentcolor",
   stroke = "currentcolor",
   size = 16,
@@ -1089,7 +1156,7 @@ export const IconInfo: React.FC<IconProps> = ({
   );
 };
 
-export const IconAttentionStroke: React.FC<IconProps> = ({
+const IconAttentionStroke: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -1114,7 +1181,7 @@ export const IconAttentionStroke: React.FC<IconProps> = ({
   );
 };
 
-export const IconAttentionFill: React.FC<IconProps> = ({
+const IconAttentionFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
@@ -1139,7 +1206,7 @@ export const IconAttentionFill: React.FC<IconProps> = ({
   );
 };
 
-export const IconAttention: React.FC<IconProps> = ({
+const IconAttention: React.FC<IconProps> = ({
   fill = "currentcolor",
   stroke = "currentcolor",
   size = 16,
@@ -1172,7 +1239,7 @@ export const IconAttention: React.FC<IconProps> = ({
   );
 };
 
-export const IconQuestionStroke: React.FC<IconProps> = ({
+const IconQuestionStroke: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
@@ -1197,7 +1264,7 @@ export const IconQuestionStroke: React.FC<IconProps> = ({
   );
 };
 
-export const IconQuestionFill: React.FC<IconProps> = ({
+const IconQuestionFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
@@ -1222,7 +1289,7 @@ export const IconQuestionFill: React.FC<IconProps> = ({
   );
 };
 
-export const IconQuestion: React.FC<IconProps> = ({
+const IconQuestion: React.FC<IconProps> = ({
   fill = "currentcolor",
   stroke = "currentcolor",
   size = 16,
@@ -1255,7 +1322,7 @@ export const IconQuestion: React.FC<IconProps> = ({
   );
 };
 
-export const IconFile: React.FC<IconProps> = ({
+const IconFile: React.FC<IconProps> = ({
   size = 16,
   stroke = "currentcolor",
   strokeWidth = 4,
@@ -1287,7 +1354,7 @@ export const IconFile: React.FC<IconProps> = ({
   );
 };
 
-export const IconMore: React.FC<IconProps> = ({
+const IconMore: React.FC<IconProps> = ({
   size = 16,
   fill = "currentcolor",
   className = "IconMore",
@@ -1308,7 +1375,7 @@ export const IconMore: React.FC<IconProps> = ({
   );
 };
 
-export const IconMoreLine: React.FC<IconProps> = ({
+const IconMoreLine: React.FC<IconProps> = ({
   size = 16,
   stroke = "currentcolor",
   strokeWidth = 4,
@@ -1330,7 +1397,7 @@ export const IconMoreLine: React.FC<IconProps> = ({
   )
 }
 
-export const IconAdd: React.FC<IconProps> = ({
+const IconAdd: React.FC<IconProps> = ({
   size = 16,
   stroke = "currentcolor",
   strokeWidth,
@@ -1363,7 +1430,7 @@ export const IconAdd: React.FC<IconProps> = ({
   );
 };
 
-export const IconClear: React.FC<IconProps> = ({
+const IconClear: React.FC<IconProps> = ({
   size = 16,
   stroke = "currentcolor",
   strokeWidth = 2,
@@ -1399,7 +1466,7 @@ export const IconClear: React.FC<IconProps> = ({
 };
 
 // 应用
-export const IconApplication: React.FC<IconProps> = ({
+const IconApplication: React.FC<IconProps> = ({
   size = 20,
   fill = "currentcolor",
 }) => {
@@ -1452,7 +1519,7 @@ export const IconApplication: React.FC<IconProps> = ({
 };
 
 // 上传
-export const IconUpload: React.FC<IconProps> = ({
+const IconUpload: React.FC<IconProps> = ({
   size = 20,
   stroke = "currentcolor",
   strokeWidth = 3,
@@ -1492,7 +1559,7 @@ export const IconUpload: React.FC<IconProps> = ({
   );
 };
 
-export const IconClose: React.FC<IconProps> = ({
+const IconClose: React.FC<IconProps> = ({
   size = 20,
   stroke = "currentcolor",
   strokeWidth = 2,
@@ -1523,7 +1590,7 @@ export const IconClose: React.FC<IconProps> = ({
   );
 };
 
-export const IconCloseCircle: React.FC<IconProps> = ({
+const IconCloseCircle: React.FC<IconProps> = ({
   fill,
   stroke = "currentcolor",
   size = 20,
@@ -1562,7 +1629,7 @@ export const IconCloseCircle: React.FC<IconProps> = ({
   );
 };
 
-export const IconColorPicker: React.FC<IconProps> = ({
+const IconColorPicker: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 20,
 }) => {
@@ -1582,7 +1649,7 @@ export const IconColorPicker: React.FC<IconProps> = ({
   );
 };
 
-export const IconCopy: React.FC<IconProps> = ({
+const IconCopy: React.FC<IconProps> = ({
   fill,
   stroke = "currentcolor",
   size = 16,
@@ -1607,7 +1674,7 @@ export const IconCopy: React.FC<IconProps> = ({
   )
 }
 
-export const IconHome: React.FC<IconProps> = ({
+const IconHome: React.FC<IconProps> = ({
   stroke = "currentColor",
   size = 24,
   strokeWidth = 2,
@@ -1632,3 +1699,5 @@ export const IconHome: React.FC<IconProps> = ({
     </svg>
   )
 }
+
+export default Icon;

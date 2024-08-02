@@ -16,7 +16,7 @@ export default function LinkExample() {
         </div>
         <Title title="按钮禁用" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
-          <Link disabled pop="链接失效">
+          <Link disabled tip="链接失效">
             禁用链接
           </Link>
         </div>

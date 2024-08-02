@@ -147,9 +147,9 @@
     --opacity-1: 1;
 
     // 投影
-    --boxshadow-small: 0 0px 4px rgba(0, 0, 0, 0.1);
-    --boxshadow-medium: 0 0 10px rgba(0, 0, 0, 0.1);
-    --boxshadow-large: 0 0 20px rgba(0, 0, 0, 0.1);
+    --boxshadow-light: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --boxshadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --boxshadow-heavy: 0px 6px 15px 0px rgba(0, 0, 0, 0.08), 0px 10px 36px 0px rgba(0, 0, 0, 0.16);
 
     // 过渡
     --transition-15: 0.15s;

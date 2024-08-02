@@ -2,8 +2,8 @@ import React, { CSSProperties, useEffect, useState } from "react";
 import styled from "styled-components";
 import Divider from "./Divider";
 import Menu, { MenuItemType, MenuProps } from "./Menu";
-import { IconApplication, IconMoreLine } from "./Icon";
 import Button from "./Button";
+import Icon from "./Icon";
 
 export type HeaderProps = {
   /* Header 高度 */
@@ -72,7 +72,7 @@ const Header: React.FC<HeaderProps> = ({
             className="land-header-application"
             onClick={(e: React.UIEvent) => e.stopPropagation()}
           >
-            <IconApplication />
+            <Icon name="application" />
             <div className="land-application-drop">{applications}</div>
           </button>
         )}
@@ -87,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({
         <div className="land-header-btns">{rightComponent}</div>
       )}
       {/* 移动端展开按钮 */}
-      {menuProps && menuProps.data && menuProps.data?.length > 0 && <Button icon={<IconMoreLine />} type="text" onClick={() => setShowMobileNav(!showMobileNav)} />}
+      {menuProps && menuProps.data && menuProps.data?.length > 0 && <Button icon={<Icon name='more-line' />} type="text" onClick={() => setShowMobileNav(!showMobileNav)} />}
     </StyledHeader>
   );
 };

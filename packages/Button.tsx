@@ -21,8 +21,6 @@ export type ButtonProps = {
   status?: "default" | "primary" | "warning" | "danger" | "success";
   /* 是否禁用 */
   disabled?: boolean;
-  /* 是否记载中 */
-  loading?: boolean;
   /* 按钮气泡 */
   pop?: React.ReactNode | string;
   /* 气泡配置 */
@@ -47,7 +45,6 @@ const Button: React.FC<ButtonProps> = ({
   type = "border",
   status = "default",
   disabled,
-  // loading,
   pop,
   PopProps,
   href,

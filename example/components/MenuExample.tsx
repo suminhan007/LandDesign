@@ -1,7 +1,7 @@
 import React from "react";
 import Title from "../../packages/Title";
 import Menu, { ClickType } from "../../packages/Menu";
-import { IconHome } from "../../packages/Icon";
+import Icon from "../../packages/Icon";
 
 export default function MenuExample() {
   return (
@@ -191,7 +191,7 @@ export default function MenuExample() {
               {
                 key: 1,
                 title: "Home",
-                icon: <IconHome />,
+                icon: <Icon name='home' />,
                 clickType: ClickType.SELF,
               },
             ]}

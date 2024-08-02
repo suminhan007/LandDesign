@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IconCloseCircle } from "./Icon";
+import Icon from "./Icon";
 
 type HoverCardIconProps = {
   align?: "left" | "right";
@@ -22,7 +22,7 @@ const HoverCardIcon: React.FC<HoverCardIconProps> = ({
           left: align === "left" ? "0px" : "100%",
         }}
       >
-        <IconCloseCircle fill="var(--color-red-6)" />
+        <Icon name="close-circle" fill="var(--color-red-6)" />
       </div>
     </StyleHoverCardIcon>
   );

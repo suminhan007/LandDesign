@@ -11,8 +11,8 @@ import Input from "./Input";
 import tinycolor from "tinycolor2";
 import Flex from "./Flex";
 import Pop from "./Pop";
-import { IconCopy } from "./Icon";
 import Message from "./Message";
+import Icon from "./Icon";
 
 const COLOR_DATA = [
   [
@@ -229,7 +229,7 @@ const ColorPicker: React.FC<ColorProps> = ({
               >
                 {input}
                 {typeof input === "string" && (
-                  <IconCopy size={12} stroke="var(--color-text-5)" />
+                  <Icon name="copy" size={12} stroke="var(--color-text-5)" />
                 )}
               </div>
             ) : input ? (

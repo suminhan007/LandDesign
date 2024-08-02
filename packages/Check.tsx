@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { IconCheck, IconInfoStroke } from "./Icon";
 import Pop from "./Pop";
+import Icon from "./Icon";
 
 type CheckProps = {
   checked?: boolean;
@@ -23,13 +23,13 @@ const Check: React.FC<CheckProps> = ({
         }}
       >
         <StyleCheckCircle className={`${checked ? "checked" : ""}`}>
-          <IconCheck size={10} strokeWidth={0} fill="var(--color-bg-white)" />
+          <Icon name='check' size={10} strokeWidth={0} fill="var(--color-bg-white)" />
         </StyleCheckCircle>
         {text}
       </StyleCheckLabel>
       {pop && (
         <StyleCheckpop className="hover-pop">
-          <IconInfoStroke stroke="var(--color-text-4)" />
+          <Icon name='info-stroke' stroke="var(--color-text-4)" />
           <Pop
             content={pop}
             theme="dark"

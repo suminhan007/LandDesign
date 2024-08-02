@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import { IconCheck, IconInfoStroke } from "./Icon";
 import Pop from "./Pop";
+import Icon from "./Icon";
 
 type CheckItemType = {
   value: number,
@@ -29,13 +29,13 @@ const Ratio: React.FC<RatioProps> = ({
               }}
             >
               <StyleRatioCircle className={`${checked === item.value ? "checked" : ""}`}>
-                <IconCheck size={10} strokeWidth={0} fill="var(--color-bg-white)" />
+                <Icon name='check' size={10} strokeWidth={0} fill="var(--color-bg-white)" />
               </StyleRatioCircle>
               {item.label}
             </StyleRatioLabel>
             {item.pop && (
               <StyleRatiopop className="hover-pop">
-                <IconInfoStroke stroke="var(--color-text-4)" />
+                <Icon name="info-stroke" stroke="var(--color-text-4)" />
                 <Pop content={item.pop} theme="dark" style={{ maxWidth: "200px" }} />
               </StyleRatiopop>
             )}

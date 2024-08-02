@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react'
 import styled from 'styled-components'
-import { IconInfoStroke } from "./Icon";
 import Pop from "./Pop";
+import Icon from './Icon';
 
 export type TitleProps = {
   /* 标题内容 */
@@ -41,7 +41,7 @@ const Title: React.FC<TitleProps> = ({
       {type === "p" && <p>{title}</p>}
       {info && (
         <div className="land-title-info hover-pop">
-          <IconInfoStroke stroke="var(--color-text-4)" />
+          <Icon name='info-stroke' stroke="var(--color-text-4)" />
           <Pop content={info} style={{ maxWidth: "200px" }} />
         </div>
       )}

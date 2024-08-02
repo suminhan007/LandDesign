@@ -40,14 +40,14 @@ const Components: React.FC<Props> = ({
         dropProps={{
           active: dropActive,
           direction: 'column',
-          theme: { activeBg: 'var(--color-bg-1)', lineColor: 'transparent' }
         }}
         direction='column'
+        theme={{ activeBg: 'var(--color-bg-1)', lineColor: 'transparent' }}
         style={{ width: '240px', height: '100%' }}
         className='py-24 overflow-auto scrollbar-none'
       />
 
-      <div className="flex-1 p-24 height-100 overflow-auto" >
+      <div className="flex-1 p-24 height-100 overflow-auto border-box" >
         <StyledRightContent className="flex column width-100">
           {/* 组件索引 */}
           {active === 0 && <ComponentPreview onClick={item => setActive(item.id)} />}
@@ -69,25 +69,27 @@ const Components: React.FC<Props> = ({
                 data={curItem.props}
                 style={{ width: "100%" }}
               />}
-              <Title title="3. Type" type="h2" className="my-16" />
-              {
-                curItem.types?.map(type =>
-                  <>
-                    <Title title={type.name} type="h3" className="mt-16" />
-                    <Title title={type.desc} type="p" className="mt-8" />
-                    <Table
-                      className="width-100 mt-16"
-                      titleData={[
-                        { title: "属性", value: "props" },
-                        { title: "类型", value: "type" },
-                        { title: "描述", value: "desc" },
-                        { title: "可选", value: "need", antiDesc: '必须' },
-                      ]}
-                      data={type.data}
-                    />
-                  </>
-                )
-              }
+              {curItem.types?.length > 0 && <>
+                <Title title="3. Type" type="h2" className="my-16" />
+                {
+                  curItem.types?.map(type =>
+                    <>
+                      <Title title={type.name} type="h3" className="mt-16" />
+                      <Title title={type.desc} type="p" className="mt-8" />
+                      <Table
+                        className="width-100 mt-16"
+                        titleData={[
+                          { title: "属性", value: "props" },
+                          { title: "类型", value: "type" },
+                          { title: "描述", value: "desc" },
+                          { title: "可选", value: "need", antiDesc: '必须' },
+                        ]}
+                        data={type.data}
+                      />
+                    </>
+                  )
+                }
+              </>}
             </>
           }
         </StyledRightContent>
