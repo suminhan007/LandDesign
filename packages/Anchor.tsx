@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useRef } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 export type AnchorItemType = {
@@ -18,6 +18,8 @@ export type AnchorProps = {
   data?: AnchorItemType[];
   /* 基于固定的节点 */
   target?: boolean;
+  /** 尺寸 */
+  size?: number;
   style?: CSSProperties;
   className?: string;
 };
@@ -25,26 +27,45 @@ export type AnchorProps = {
 const LandAnchor: React.FC<AnchorProps> = ({
   data,
   target = document.body,
+  size,
   style,
   className,
 }) => {
   const anchorRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    // target.appendChild()
-  }, [target]);
-  return <StyledAnchor ref={anchorRef} className={className} style={style}>
-    <ol>
-      {data?.map(item => <li>
-        <a href={item.href} >{item.title}</a>
+  const [active, setActive] = useState<boolean>(false);
+  return <StyledAnchor ref={anchorRef} className={`land-anchor-wrap ${className}`} style={style}>
+    <ol className="land-anchor-list">
+      {data?.map(item => <li key={item.title} >
+        <a href={item.href} className={`land-anchor-link ${active ? 'active' : ''}`}>{item.title}</a>
       </li>)}
     </ol>
-  </StyledAnchor>;
+  </StyledAnchor >;
 };
 
 const StyledAnchor = styled.nav<{
 
 }>`
-
+  .land-anchor-list{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    list-style: none;
+  }
+  .land-anchor-link{
+    display: inline-block;
+    padding: var(--padding-medium);
+    width: 100%;
+    color: var(--color-text-2);
+    border-left: 1px solid var(--color-border-2);
+    transition: all var(--transition-15) linear;
+    &:hover{
+      background-color: var(--color-bg-1);
+    }
+    &.active {
+      color: var(--color-primary-6);
+      border-color: var(--color-primary-6);
+    }
+  }
 `;
 
 export default LandAnchor;

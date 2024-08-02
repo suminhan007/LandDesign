@@ -11,6 +11,8 @@ import Link from "../packages/Link";
 import Button from "../packages/Button";
 import React from "react";
 import AffixContainerExample from "./Components/AffixContainerExample";
+import BreadCrumbExample from "./Components/BreadCrumbExample";
+import PaginationExample from "./Components/PaginationExample";
 
 
 export const COMMON_COMPONENTS_DATA = [
@@ -93,12 +95,6 @@ export const COMMON_COMPONENTS_DATA = [
     example: <LinkExample />,
     demo: <></>
   },
-  {
-    id: 'typography',
-    en: "Typography",
-    zh: "排版",
-    desc: "",
-  },
 ];
 
 export const LAYOUT_COMPONENTS_DATA = [
@@ -167,7 +163,13 @@ export const LAYOUT_COMPONENTS_DATA = [
     id: 'grid',
     en: "Grid",
     zh: "栅格",
-    props: [{ name: "name", type: "type", desc: "desc" }],
+    props: [
+      { name: "type", type: "'column-fit' | 'column-fill' | 'row-fit' | 'row-fill' | 'column-repeat' | 'row-repeat' | 'default'", desc: "常见的几种 grid 布局" },
+      { name: 'autoSize', type: 'number', desc: '自动填充模式下的最小宽度/高度' },
+      { name: 'repeatNum', type: 'number', desc: '按行或按列重复时的重复数量' },
+      { name: 'gao', type: 'number | number[]', desc: '行列间隙' },
+      { name: "children", type: "element", desc: "自定义元素", optional: true },
+    ],
     example: <GridExample />,
     demo: <></>
   },
@@ -226,7 +228,7 @@ export const NAV_COMPONENTS_DATA = [
     zh: "面包屑",
     desc: "锚点用于跳转至页面指定位置。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <BreadCrumbExample />,
     demo: <></>
   },
   {
@@ -283,7 +285,7 @@ export const NAV_COMPONENTS_DATA = [
     zh: "分页",
     desc: "锚点用于跳转至页面指定位置。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <PaginationExample />,
     demo: <></>
   },
   {

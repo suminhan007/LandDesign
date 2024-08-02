@@ -40,6 +40,7 @@ const Components: React.FC<Props> = ({
         dropProps={{
           active: dropActive,
           direction: 'column',
+          border: false,
         }}
         direction='column'
         theme={{ activeBg: 'var(--color-bg-1)', lineColor: 'transparent' }}
@@ -64,7 +65,6 @@ const Components: React.FC<Props> = ({
                   { title: "属性", value: "props" },
                   { title: "类型", value: "type" },
                   { title: "描述", value: "desc" },
-                  { title: "可选", value: "need", antiDesc: '必须' },
                 ]}
                 data={curItem.props}
                 style={{ width: "100%" }}
@@ -82,7 +82,6 @@ const Components: React.FC<Props> = ({
                           { title: "属性", value: "props" },
                           { title: "类型", value: "type" },
                           { title: "描述", value: "desc" },
-                          { title: "可选", value: "need", antiDesc: '必须' },
                         ]}
                         data={type.data}
                       />

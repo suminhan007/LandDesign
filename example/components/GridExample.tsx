@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import Title from "../../packages/Title";
-import Grid from "../../packages/Row";
+import Grid, { gridType } from "../../packages/Grid";
 
 export default function GridExample() {
   return (
     <div className="flex column gap-24">
       <div className="flex column gap-12">
-        <Title title="方向" type="h3" />
-        <div className="flex justify-center gap-24 border p-32">
-          <Grid>
+        <Title title="类型" type="h3" />
+        <div className="flex justify-center gap-24 border p-32" style={{ height: '200px' }}>
+          <Grid className="width-100" type={gridType.ColumnFit} autoSize={60} style={{ gridTemplateColumns: 'repeat(2,1fr)' }}>
             <StyledCardLight></StyledCardLight>
             <StyledCardDark></StyledCardDark>
             <StyledCardLight></StyledCardLight>
-            <StyledCardDark></StyledCardDark>
           </Grid>
         </div>
         <Title title="对齐方式" type="h3" />
@@ -40,13 +39,9 @@ export default function GridExample() {
 }
 
 const StyledCardLight = styled.div`
-  width: 100px;
-  height: 60px;
   background-color: var(--color-primary-3);
 `;
 
 const StyledCardDark = styled.div`
-  width: 100px;
-  height: 60px;
   background-color: var(--color-primary-4);
 `;

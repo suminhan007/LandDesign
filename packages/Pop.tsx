@@ -9,7 +9,7 @@ enum PopType {
 export type PopProps = {
   type?: PopType;
   theme?: "light" | "dark";
-  content?: React.ReactNode | string;
+  content?: React.ReactNode;
   placement?: "top" | "bottom" | "left" | "right";
   style?: CSSProperties;
   className?: string;
@@ -98,7 +98,7 @@ const StyledBtnPop = styled.div`
   box-shadow: var(--boxshadow-light);
   pointer-events: none;
   transition: all 0.15s linear;
-  z-index: var(--zIndex-5);
+  z-index: 100;
   .land-pop-arrow {
     display: block;
     position: absolute;

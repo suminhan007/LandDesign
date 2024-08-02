@@ -11,8 +11,8 @@ export default function IconExample() {
   const [size, setSize] = useState<number>(32);
   const [stroke, setStroke] = useState<number>(2);
 
-  const handleIconCopyClick = (item?: string) => {
-
+  const handleIconCopyClick = (name?: string) => {
+    navigator.clipboard.writeText(`<Icon name='${name}' />`);
   };
   return (
     <div className='flex column gap-12'>
@@ -21,14 +21,13 @@ export default function IconExample() {
         <StyleIconGrid>
           {item1.data?.map(item2 => <StyledIconItem
             key={item2}
-            content={<div onClick={() => handleIconCopyClick?.()}><Icon name='copy' /></div>}
+            content={<div onClick={() => handleIconCopyClick?.(item2)}><Icon name='copy' /></div>}
             hoverShow
             innerClassName='pointer'
           >
             <Icon name={item2} size={size} stroke={color} />
             <StyledItemText className='transition-15'>{item2}</StyledItemText>
           </StyledIconItem>)}
-
         </StyleIconGrid>
       </div>)}
     </div>
