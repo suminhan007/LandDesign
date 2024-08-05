@@ -9,7 +9,7 @@ export default function PaginationExample() {
         <Title title="按钮类型" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
           <Pagination
-            total={36}
+            total={24}
             current={1}
             pageSize={5}
           />

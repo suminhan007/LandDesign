@@ -28,7 +28,7 @@ const Check: React.FC<CheckProps> = ({
         {text}
       </StyleCheckLabel>
       {pop && (
-        <StyleCheckpop className="hover-pop">
+        <StyleCheckPop className="hover-pop">
           <Icon name='info-stroke' stroke="var(--color-text-4)" />
           <Pop
             content={pop}
@@ -36,7 +36,7 @@ const Check: React.FC<CheckProps> = ({
             style={{ maxWidth: "200px" }}
             placement="right"
           />
-        </StyleCheckpop>
+        </StyleCheckPop>
       )}
     </StyleCheckWrap>
   );
@@ -47,6 +47,7 @@ const StyleCheckWrap = styled.div`
   align-items: center;
   gap: var(--gap-4);
 `;
+
 const StyleCheckLabel = styled.div`
   display: flex;
   align-items: center;
@@ -81,7 +82,7 @@ const StyleCheckCircle = styled.div`
   }
 `;
 
-const StyleCheckpop = styled.div`
+const StyleCheckPop = styled.div`
   position: relative;
   height: 16px;
   line-height: 16px;
