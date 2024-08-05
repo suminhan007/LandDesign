@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-type CheckedContainerProps = {
+export type CheckedContainerProps = {
   checked?: boolean;
   gap?: number;
   strokeWidth?: number;

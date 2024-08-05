@@ -5,7 +5,7 @@ type DropDownItemType = {
   id: string;
   laebl: string | React.ReactNode;
 };
-type DropDownProps = {
+export type DropdownProps = {
   dropData?: DropDownItemType[];
   toggle?: string | React.ReactNode;
   placement?: "left" | "right" | "center";
@@ -15,7 +15,7 @@ type DropDownProps = {
   dropClassName?: string;
   dropStyle?: CSSProperties;
 };
-const DropDown: React.FC<DropDownProps> = ({
+const DropDown: React.FC<DropdownProps> = ({
   dropData,
   toggle = "请选择",
   placement = "left",

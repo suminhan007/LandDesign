@@ -1,14 +1,14 @@
 import React, { CSSProperties, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 
-type Props = {
+export type MessageProps = {
   show?: boolean;
   type?: "success" | "fail" | "warn" | "default";
   text?: string | React.ReactNode;
   style?: CSSProperties;
   className?: string;
 };
-const Message: React.FC<Props> = ({
+const Message: React.FC<MessageProps> = ({
   show = false,
   type = "default",
   text = "咕噜咕噜～",
@@ -17,8 +17,8 @@ const Message: React.FC<Props> = ({
 }) => {
   const [newShow, setNewShow] = useState<boolean>(show);
   useEffect(() => {
-    setNewShow(show)
-  }, [show])
+    setNewShow(show);
+  }, [show]);
   useEffect(() => {
     if (newShow) {
       const timer = setTimeout(() => {
@@ -26,7 +26,7 @@ const Message: React.FC<Props> = ({
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [newShow])
+  }, [newShow]);
   const toastType = useMemo(() => {
     switch (type) {
       case "default":
@@ -35,8 +35,9 @@ const Message: React.FC<Props> = ({
   }, [type]);
   return (
     <StyleToastContainer
-      className={`StyleToastContainer fixed radius-6 px-12 py-4 fs-14 ${newShow ? "show" : "close"
-        } ${className}`}
+      className={`StyleToastContainer fixed radius-6 px-12 py-4 fs-14 ${
+        newShow ? "show" : "close"
+      } ${className}`}
       style={{
         color: toastType?.color,
         backgroundColor: toastType?.background,

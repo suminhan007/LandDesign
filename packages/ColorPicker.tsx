@@ -71,7 +71,7 @@ const COLOR_DATA = [
   ],
 ];
 
-type ColorProps = {
+export type ColorPickerProps = {
   /* 外部回传的 value 值 */
   value?: string;
   size?: string | number;
@@ -88,7 +88,7 @@ type ColorProps = {
   className?: string;
   style?: CSSProperties;
 };
-const ColorPicker: React.FC<ColorProps> = ({
+const ColorPicker: React.FC<ColorPickerProps> = ({
   value = "#ffffff",
   size = 48,
   showDrop = true,

@@ -2,7 +2,7 @@ import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
 
-type Props = {
+export type UploaderProps = {
   /**上传文件描述 */
   desc?: string;
   /**文件类型 */
@@ -16,16 +16,16 @@ type Props = {
   className?: string;
   innerClassName?: string;
 };
-const Uploader: React.FC<Props> = ({
+const Uploader: React.FC<UploaderProps> = ({
   desc,
   fileType,
   onUpload,
   children,
-  width = '100%',
-  height = '100%',
+  width = "100%",
+  height = "100%",
   style,
   className = "",
-  innerClassName = ""
+  innerClassName = "",
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [url, setUrl] = useState<string | ArrayBuffer | null>();
@@ -49,9 +49,12 @@ const Uploader: React.FC<Props> = ({
   const [drag, setDrag] = useState<boolean>(false);
   return (
     <StyleUploadForm
-      className={`${drag ? 'drag' : ''} ${className}`}
+      className={`${drag ? "drag" : ""} ${className}`}
       style={style}
-      onDragOver={(e: any) => { setDrag(true); e.preventDefault() }}
+      onDragOver={(e: any) => {
+        setDrag(true);
+        e.preventDefault();
+      }}
       onDrop={(e: any) => handleChange(e, e.dataTransfer.files[0])}
       onDragLeave={() => setDrag(false)}
       width={width}
@@ -75,7 +78,11 @@ const Uploader: React.FC<Props> = ({
           <div className="land-uploader-icon">
             <Icon name="upload" />
           </div>
-          {(desc || drag) && <div className="land-uploader-desc">{drag ? '释放即可上传' : desc}</div>}
+          {(desc || drag) && (
+            <div className="land-uploader-desc">
+              {drag ? "释放即可上传" : desc}
+            </div>
+          )}
         </>
       )}
     </StyleUploadForm>

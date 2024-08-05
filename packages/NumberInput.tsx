@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
 import Divider from "./Divider";
 
-export type TaccSelectProps = {
+export type NumberInputProps = {
   background?: boolean;
   value: string;
   percentage?: boolean;
@@ -11,7 +11,7 @@ export type TaccSelectProps = {
   [key: string]: any;
 };
 
-const TaccNumberInput: React.FC<TaccSelectProps> = ({
+const TaccNumberInput: React.FC<NumberInputProps> = ({
   // value,
   background,
   prefix,

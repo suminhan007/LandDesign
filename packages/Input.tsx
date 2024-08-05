@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react";
 import styled from "styled-components";
 
-type Props = {
+export type InputProps = {
   type?: string;
   value?: string | number;
   placeholder?: string;
@@ -15,7 +15,7 @@ type Props = {
   style?: CSSProperties;
   [key: string]: any;
 };
-const Input: React.FC<Props> = ({
+const Input: React.FC<InputProps> = ({
   type = "text",
   value,
   placeholder,

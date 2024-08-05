@@ -2,10 +2,10 @@ import React from 'react'
 import Flex from './Flex'
 import Button, { ButtonProps } from './Button'
 
-type CheckBarProps = {
+export type CheckBarProps = {
   checked?: number | number[];
   data?: ({ value: number } & ButtonProps)[];
-}
+};
 const CheckBar: React.FC<CheckBarProps> = ({
   checked,
   data

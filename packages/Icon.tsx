@@ -1,73 +1,6 @@
 import { CSSProperties } from "react";
 
-type IconDefaultProps = {
-  name: string;
-} & IconProps;
-
-const Icon: React.FC<IconDefaultProps> = ({
-  name,
-  ...restProps
-}) => {
-  switch (name) {
-    case 'arrow-line': return <IconArrowLine {...restProps} />; break;
-    case 'arrow-double': return <IconArrowDouble {...restProps} />; break;
-    case 'arrow': return <IconArrow {...restProps} />; break;
-    case 'arrow-triangle': return <IconArrowTriangle {...restProps} />; break;
-    case 'arrow-to': return <IconArrowTo {...restProps} />; break;
-    case 'toggle': return <IconToggle {...restProps} />; break;
-    case 'collapse': return <IconCollapse {...restProps} />; break;
-    case 'collection': return <IconCollection {...restProps} />; break;
-    case 'zoom-out': return <IconZoomOut {...restProps} />; break;
-    case 'zoom-in': return <IconZoomIn {...restProps} />; break;
-    case 'loop': return <IconLoop {...restProps} />; break;
-    case 'download': return <IconDownload {...restProps} />; break;
-    case 'out': return <IconOut {...restProps} />; break;
-    case 'reload': return <IconReload {...restProps} />; break;
-    case 'undo': return <IconUndo {...restProps} />; break;
-    case 'sort': return <IconSort {...restProps} />; break;
-    case 'back': return <IconBack {...restProps} />; break;
-    case 'ahead': return <IconAhead {...restProps} />; break;
-    case 'drag': return <IconDrag {...restProps} />; break;
-    case 'refresh': return <IconRefresh {...restProps} />; break;
-    case 'check-stroke': return <IconCheckStroke {...restProps} />; break;
-    case 'check-fill': return <IconCheckFill {...restProps} />; break;
-    case 'check': return <IconCheck {...restProps} />; break;
-
-    case 'error-stroke': return <IconErrorStroke {...restProps} />; break;
-    case 'error-fill': return <IconErrorFill {...restProps} />; break;
-    case 'error': return <IconError {...restProps} />; break;
-
-    case 'info-stroke': return <IconInfoStroke {...restProps} />; break;
-    case 'info-fill': return <IconInfoFill {...restProps} />; break;
-    case 'info': return <IconInfo {...restProps} />; break;
-
-    case 'attention-stroke': return <IconAttentionStroke {...restProps} />; break;
-    case 'attention-fill': return <IconAttentionFill {...restProps} />; break;
-    case 'attention': return <IconAttention {...restProps} />; break;
-
-    case 'question-stroke': return <IconQuestionStroke {...restProps} />; break;
-    case 'question-fill': return <IconQuestionFill {...restProps} />; break;
-    case 'question': return <IconQuestion {...restProps} />; break;
-
-    case 'more': return <IconMore {...restProps} />; break;
-    case 'more-line': return <IconMoreLine {...restProps} />; break;
-    case 'file': return <IconFile {...restProps} />; break;
-    case 'add': return <IconAdd {...restProps} />; break;
-    case 'clear': return <IconClear {...restProps} />; break;
-    case 'upload': return <IconUpload {...restProps} />; break;
-    case 'application': return <IconApplication {...restProps} />; break;
-    case 'close': return <IconClose {...restProps} />; break;
-    case 'close-circle': return <IconCloseCircle {...restProps} />; break;
-    case 'color-picker': return <IconColorPicker {...restProps} />; break;
-    case 'copy': return <IconCopy {...restProps} />; break;
-    case 'home': return <IconHome {...restProps} />; break;
-
-    default:
-      break;
-  }
-}
-
-type IconProps = {
+export type IconProps = {
   fill?: string;
   stroke?: string;
   size?: number;
@@ -549,7 +482,7 @@ const IconDownload: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 3,
   style,
-  className = '',
+  className = "",
   onClick,
 }) => {
   return (
@@ -1390,12 +1323,30 @@ const IconMoreLine: React.FC<IconProps> = ({
       className={className}
       style={style}
     >
-      <path d="M7.94971 11.9497H39.9497" stroke={stroke} stroke-width={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M7.94971 23.9497H39.9497" stroke={stroke} stroke-width={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M7.94971 35.9497H39.9497" stroke={stroke} stroke-width={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M7.94971 11.9497H39.9497"
+        stroke={stroke}
+        stroke-width={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.94971 23.9497H39.9497"
+        stroke={stroke}
+        stroke-width={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.94971 35.9497H39.9497"
+        stroke={stroke}
+        stroke-width={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
-  )
-}
+  );
+};
 
 const IconAdd: React.FC<IconProps> = ({
   size = 16,
@@ -1523,7 +1474,7 @@ const IconUpload: React.FC<IconProps> = ({
   size = 20,
   stroke = "currentcolor",
   strokeWidth = 3,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1654,7 +1605,7 @@ const IconCopy: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
-  className = "IconCopy"
+  className = "IconCopy",
 }) => {
   return (
     <svg
@@ -1664,15 +1615,25 @@ const IconCopy: React.FC<IconProps> = ({
       fill="none"
       className={className}
     >
-      <path d="M13 12.4316V7.8125C13 6.2592 14.2592 5 15.8125 5H40.1875C41.7408 5 43 6.2592 43 7.8125V32.1875C43 33.7408 41.7408 35 40.1875 35H35.5163" fill={fill ? fill : "none"}
+      <path
+        d="M13 12.4316V7.8125C13 6.2592 14.2592 5 15.8125 5H40.1875C41.7408 5 43 6.2592 43 7.8125V32.1875C43 33.7408 41.7408 35 40.1875 35H35.5163"
+        fill={fill ? fill : "none"}
         stroke={fill ? fill : stroke}
-        strokeWidth={strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M32.1875 13H7.8125C6.2592 13 5 14.2592 5 15.8125V40.1875C5 41.7408 6.2592 43 7.8125 43H32.1875C33.7408 43 35 41.7408 35 40.1875V15.8125C35 14.2592 33.7408 13 32.1875 13Z" fill={fill ? fill : "none"}
+        strokeWidth={strokeWidth}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M32.1875 13H7.8125C6.2592 13 5 14.2592 5 15.8125V40.1875C5 41.7408 6.2592 43 7.8125 43H32.1875C33.7408 43 35 41.7408 35 40.1875V15.8125C35 14.2592 33.7408 13 32.1875 13Z"
+        fill={fill ? fill : "none"}
         stroke={fill ? fill : stroke}
-        strokeWidth={strokeWidth} stroke-width="2" stroke-linejoin="round" />
+        strokeWidth={strokeWidth}
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
     </svg>
-  )
-}
+  );
+};
 
 const IconHome: React.FC<IconProps> = ({
   stroke = "currentColor",
@@ -1682,7 +1643,14 @@ const IconHome: React.FC<IconProps> = ({
   className,
 }) => {
   return (
-    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" style={style} className={className}>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      style={style}
+      className={className}
+    >
       <path
         d="M9 18V42H39V18L24 6L9 18Z"
         stroke={stroke}
@@ -1697,7 +1665,165 @@ const IconHome: React.FC<IconProps> = ({
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};
+
+export type IconDefaultProps = {
+  name: string;
+} & IconProps;
+
+const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
+  switch (name) {
+    case "arrow-line":
+      return <IconArrowLine {...restProps} />;
+      break;
+    case "arrow-double":
+      return <IconArrowDouble {...restProps} />;
+      break;
+    case "arrow":
+      return <IconArrow {...restProps} />;
+      break;
+    case "arrow-triangle":
+      return <IconArrowTriangle {...restProps} />;
+      break;
+    case "arrow-to":
+      return <IconArrowTo {...restProps} />;
+      break;
+    case "toggle":
+      return <IconToggle {...restProps} />;
+      break;
+    case "collapse":
+      return <IconCollapse {...restProps} />;
+      break;
+    case "collection":
+      return <IconCollection {...restProps} />;
+      break;
+    case "zoom-out":
+      return <IconZoomOut {...restProps} />;
+      break;
+    case "zoom-in":
+      return <IconZoomIn {...restProps} />;
+      break;
+    case "loop":
+      return <IconLoop {...restProps} />;
+      break;
+    case "download":
+      return <IconDownload {...restProps} />;
+      break;
+    case "out":
+      return <IconOut {...restProps} />;
+      break;
+    case "reload":
+      return <IconReload {...restProps} />;
+      break;
+    case "undo":
+      return <IconUndo {...restProps} />;
+      break;
+    case "sort":
+      return <IconSort {...restProps} />;
+      break;
+    case "back":
+      return <IconBack {...restProps} />;
+      break;
+    case "ahead":
+      return <IconAhead {...restProps} />;
+      break;
+    case "drag":
+      return <IconDrag {...restProps} />;
+      break;
+    case "refresh":
+      return <IconRefresh {...restProps} />;
+      break;
+    case "check-stroke":
+      return <IconCheckStroke {...restProps} />;
+      break;
+    case "check-fill":
+      return <IconCheckFill {...restProps} />;
+      break;
+    case "check":
+      return <IconCheck {...restProps} />;
+      break;
+
+    case "error-stroke":
+      return <IconErrorStroke {...restProps} />;
+      break;
+    case "error-fill":
+      return <IconErrorFill {...restProps} />;
+      break;
+    case "error":
+      return <IconError {...restProps} />;
+      break;
+
+    case "info-stroke":
+      return <IconInfoStroke {...restProps} />;
+      break;
+    case "info-fill":
+      return <IconInfoFill {...restProps} />;
+      break;
+    case "info":
+      return <IconInfo {...restProps} />;
+      break;
+
+    case "attention-stroke":
+      return <IconAttentionStroke {...restProps} />;
+      break;
+    case "attention-fill":
+      return <IconAttentionFill {...restProps} />;
+      break;
+    case "attention":
+      return <IconAttention {...restProps} />;
+      break;
+
+    case "question-stroke":
+      return <IconQuestionStroke {...restProps} />;
+      break;
+    case "question-fill":
+      return <IconQuestionFill {...restProps} />;
+      break;
+    case "question":
+      return <IconQuestion {...restProps} />;
+      break;
+
+    case "more":
+      return <IconMore {...restProps} />;
+      break;
+    case "more-line":
+      return <IconMoreLine {...restProps} />;
+      break;
+    case "file":
+      return <IconFile {...restProps} />;
+      break;
+    case "add":
+      return <IconAdd {...restProps} />;
+      break;
+    case "clear":
+      return <IconClear {...restProps} />;
+      break;
+    case "upload":
+      return <IconUpload {...restProps} />;
+      break;
+    case "application":
+      return <IconApplication {...restProps} />;
+      break;
+    case "close":
+      return <IconClose {...restProps} />;
+      break;
+    case "close-circle":
+      return <IconCloseCircle {...restProps} />;
+      break;
+    case "color-picker":
+      return <IconColorPicker {...restProps} />;
+      break;
+    case "copy":
+      return <IconCopy {...restProps} />;
+      break;
+    case "home":
+      return <IconHome {...restProps} />;
+      break;
+
+    default:
+      break;
+  }
+};
 
 export default Icon;

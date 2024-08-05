@@ -1,6 +1,6 @@
 import React, { CSSProperties, useEffect, useRef, useState } from 'react'
 
-type AutoMediaProps = {
+export type AutoMediaProps = {
   type?: "img" | "video";
   url?: string;
   className?: string;

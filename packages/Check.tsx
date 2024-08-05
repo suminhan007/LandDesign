@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Pop from "./Pop";
 import Icon from "./Icon";
 
-type CheckProps = {
+export type CheckProps = {
   checked?: boolean;
   text?: string;
   pop?: string;

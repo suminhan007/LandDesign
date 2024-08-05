@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-type LoadingProps = {
+export type LoadingProps = {
   size?: number;
   strokeSize?: number;
   color?: string;
-}
+};
 const Loading: React.FC<LoadingProps> = ({
   size = 18,
   strokeSize = 2,
@@ -18,30 +18,31 @@ const Loading: React.FC<LoadingProps> = ({
 }
 
 const StyledLoadingContainer = styled.div<{
-  size?: number;
-  strokeSize?: number;
-  color?: string;
+  size: number;
+  strokeSize: number;
+  color: string;
 }>`
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    height: ${props => `${props.size}px`};
-    width: ${props => `${props.size}px`};
-    -webkit-mask: ${props => `radial-gradient(
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: ${(props) => `${props.size}px`};
+  width: ${(props) => `${props.size}px`};
+  -webkit-mask: ${(props) => `radial-gradient(
       circle ${props.size / 2 - props.strokeSize}px,
       transparent 99%,
       #000 100%
     )`};
-    mask: ${props => `radial-gradient(
+  mask: ${(props) => `radial-gradient(
       circle ${props.size / 2 - props.strokeSize}px,
       transparent 99%,
       #000 100%
     )`};
-    background-image: ${props => `conic-gradient(transparent 25%, ${props.color})`};
-    animation: spin 0.9s linear infinite;
-    border-radius: 50%;
-    @keyframes spin {
+  background-image: ${(props) =>
+    `conic-gradient(transparent 25%, ${props.color})`};
+  animation: spin 0.9s linear infinite;
+  border-radius: 50%;
+  @keyframes spin {
     0% {
       transform: rotate(0deg);
     }
@@ -49,6 +50,6 @@ const StyledLoadingContainer = styled.div<{
       transform: rotate(360deg);
     }
   }
-`
+`;
 
 export default Loading;

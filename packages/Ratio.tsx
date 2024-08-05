@@ -8,7 +8,7 @@ type CheckItemType = {
   label: string,
   pop?: string
 }
-type RatioProps = {
+export type RatioProps = {
   checked?: number;
   data?: CheckItemType[];
   onChange?: (data: CheckItemType) => void;
