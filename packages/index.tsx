@@ -105,7 +105,7 @@ export type { TableProps } from "./Table";
 export { default as LandTable } from "./Table";
 
 export type { TitleProps } from "./Title";
-export { default as Title } from "./Title";
+export { default as LandTitle } from "./Title";
 
 export type { UploaderProps } from "./Uploader";
 export { default as LandUploader } from "./Uploader";

@@ -1,12 +1,13 @@
 {
   "name": "@suminhan/land-design",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "React UI Components",
   "author": {
     "name": "suminhan"
   },
   "type": "module",
   "main": "./dist/index.udm.js",
+  "style": "styles/index.scss",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
