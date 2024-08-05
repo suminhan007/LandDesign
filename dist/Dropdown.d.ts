@@ -1,17 +1,17 @@
 import React, { CSSProperties } from "react";
-type DropDownItemType = {
+type DropdownItemType = {
     id: string;
-    laebl: string | React.ReactNode;
+    label: string | React.ReactNode;
 };
-type DropDownProps = {
-    dropData?: DropDownItemType[];
+export type DropdownProps = {
+    dropData?: DropdownItemType[];
     toggle?: string | React.ReactNode;
     placement?: "left" | "right" | "center";
-    onChange?: (data: DropDownItemType) => void;
+    onChange?: (data: DropdownItemType) => void;
     toggleClassName?: string;
     toggleStyle?: CSSProperties;
     dropClassName?: string;
     dropStyle?: CSSProperties;
 };
-declare const DropDown: React.FC<DropDownProps>;
-export default DropDown;
+declare const Dropdown: React.FC<DropdownProps>;
+export default Dropdown;

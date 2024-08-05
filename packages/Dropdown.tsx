@@ -1,21 +1,21 @@
 import React, { CSSProperties, Fragment, useState } from "react";
 import styled from "styled-components";
 
-type DropDownItemType = {
+type DropdownItemType = {
   id: string;
-  laebl: string | React.ReactNode;
+  label: string | React.ReactNode;
 };
 export type DropdownProps = {
-  dropData?: DropDownItemType[];
+  dropData?: DropdownItemType[];
   toggle?: string | React.ReactNode;
   placement?: "left" | "right" | "center";
-  onChange?: (data: DropDownItemType) => void;
+  onChange?: (data: DropdownItemType) => void;
   toggleClassName?: string;
   toggleStyle?: CSSProperties;
   dropClassName?: string;
   dropStyle?: CSSProperties;
 };
-const DropDown: React.FC<DropdownProps> = ({
+const Dropdown: React.FC<DropdownProps> = ({
   dropData,
   toggle = "请选择",
   placement = "left",
@@ -28,38 +28,38 @@ const DropDown: React.FC<DropdownProps> = ({
   const [show, setShow] = useState<boolean>(false);
   return (
     <Fragment>
-      <StyleDropDownToggle
+      <StyleDropdownToggle
         className={`land-dropdown-toggle ${toggleClassName}`}
         style={toggleStyle}
         onClick={() => setShow(!show)}
       >
         {toggle}
-        <StyleDropDownResults
+        <StyleDropdownResults
           className={`${show ? "show" : ""}`}
           placement={placement}
         >
-          <StyleDropDownDrop
+          <StyleDropdownDrop
             className={`land-dropdown-results ${dropClassName}`}
             style={dropStyle}
           >
             {dropData?.map((item) => (
-              <StyleDropDownDropItem
+              <StyleDropdownDropItem
                 key={item.id}
                 onClick={() => {
                   onChange?.(item);
                 }}
               >
-                {item.laebl}
-              </StyleDropDownDropItem>
+                {item.label}
+              </StyleDropdownDropItem>
             ))}
-          </StyleDropDownDrop>
-        </StyleDropDownResults>
-      </StyleDropDownToggle>
+          </StyleDropdownDrop>
+        </StyleDropdownResults>
+      </StyleDropdownToggle>
     </Fragment>
   );
 };
 
-const StyleDropDownToggle = styled.div`
+const StyleDropdownToggle = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@ const StyleDropDownToggle = styled.div`
   cursor: pointer;
 `;
 
-const StyleDropDownResults = styled.div<{
+const StyleDropdownResults = styled.div<{
   placement: "left" | "right" | "center";
 }>`
   position: absolute;
@@ -90,13 +90,13 @@ const StyleDropDownResults = styled.div<{
   }
 `;
 
-const StyleDropDownDrop = styled.ul`
+const StyleDropdownDrop = styled.ul`
   padding: var(--padding-small);
   border: 1px solid var(--color-border-2);
   background-color: var(--color-bg-white);
   border-radius: var(--radius-6);
 `;
-const StyleDropDownDropItem = styled.li`
+const StyleDropdownDropItem = styled.li`
   border-radius: var(--radius-4);
   padding: var(--padding-medium);
   color: var(--color-text-2);
@@ -109,4 +109,4 @@ const StyleDropDownDropItem = styled.li`
     background-color: var(--color-bg-2);
   }
 `;
-export default DropDown;
+export default Dropdown;

@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react";
-type ColorProps = {
+export type ColorPickerProps = {
     value?: string;
     size?: string | number;
     showDrop?: boolean;
@@ -15,5 +15,5 @@ type ColorProps = {
     className?: string;
     style?: CSSProperties;
 };
-declare const ColorPicker: React.FC<ColorProps>;
+declare const ColorPicker: React.FC<ColorPickerProps>;
 export default ColorPicker;

@@ -1,14 +1,17 @@
 import React, { CSSProperties } from "react";
-export type AnchorType = {
-    key?: number;
+export type AnchorItemType = {
+    key?: number | string;
     href?: string;
-    target?: string;
-    text?: string;
-    replace?: boolean;
+    target?: '_self' | '_blank' | '_parent' | '_top';
+    title?: string;
+    style?: CSSProperties;
+    className?: string;
 };
 export type AnchorProps = {
-    fixed?: boolean;
-    anchorData?: AnchorType[];
+    data?: AnchorItemType[];
+    target?: boolean;
+    /** 尺寸 */
+    size?: number;
     style?: CSSProperties;
     className?: string;
 };

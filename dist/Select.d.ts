@@ -4,7 +4,7 @@ type SelectItemType = {
     value: string | number;
     disabled?: boolean;
 };
-type SelectProps = {
+export type SelectProps = {
     data?: SelectItemType[];
     placeholder?: string;
     selected?: string | number;

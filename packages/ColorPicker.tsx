@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import styled from "styled-components";
 import Input from "./Input";
-// @ts-ignore
 import tinycolor from "tinycolor2";
 import Flex from "./Flex";
 import Pop from "./Pop";

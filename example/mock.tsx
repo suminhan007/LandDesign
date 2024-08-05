@@ -13,6 +13,7 @@ import React from "react";
 import AffixContainerExample from "./Components/AffixContainerExample";
 import BreadCrumbExample from "./Components/BreadCrumbExample";
 import PaginationExample from "./Components/PaginationExample";
+import StepsExample from "./Components/StepsExample";
 
 
 export const COMMON_COMPONENTS_DATA = [
@@ -180,15 +181,7 @@ export const LAYOUT_COMPONENTS_DATA = [
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <LayoutExample />,
     demo: <></>
-  },
-  {
-    id: 'space',
-    en: "Space",
-    zh: "间距",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>
-  },
+  }
 ];
 
 export const NAV_COMPONENTS_DATA = [
@@ -235,7 +228,7 @@ export const NAV_COMPONENTS_DATA = [
     id: 'menu',
     en: "Menu",
     zh: "导航菜单",
-    desc: "锚点用于跳转至页面指定位置。",
+    desc: "导航菜单。",
     props: [
       { name: "data", type: <><Link href="#MenuItemType">MenuItemType</Link> []</>, desc: "导航数据", optional: true },
       {
@@ -283,8 +276,15 @@ export const NAV_COMPONENTS_DATA = [
     id: 'pagination',
     en: "Pagination",
     zh: "分页",
-    desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
+    desc: "分页。",
+    props: [
+      { name: "current", type: "number", desc: "当前页码" },
+      { name: "total", type: "number", desc: "总页数" },
+      { name: "pageSize", type: "number", desc: "每次加载的页数" },
+      { name: "showTotal", type: "boolean", desc: "是否显示总页数" },
+      { name: "showInput", type: "boolean", desc: "是否显示输入框" },
+      { name: "onChange", type: "(current:number) => void;", desc: "页码切换事件" },
+    ],
     example: <PaginationExample />,
     demo: <></>
   },
@@ -292,9 +292,15 @@ export const NAV_COMPONENTS_DATA = [
     id: 'step',
     en: "Steps",
     zh: "步骤条",
-    desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    desc: "步骤条。",
+    props: [
+      { name: "data", type: <Link href="#StepsItemType">StepsItemType</Link>, desc: "步骤条数据类型" },
+      { name: "current", type: "number | string", desc: "当前进度" },
+      { name: "useDivider", type: "boolean", desc: "是否显示分割线" },
+      { name: "dividerWidth", type: "string", desc: "分割线宽度" },
+      { name: "onClick", type: "(item: StepsItemType) => void;", desc: "步骤条点击事件" },
+    ],
+    example: <StepsExample />,
     demo: <></>
   },
   {
@@ -313,7 +319,7 @@ export const INPUT_COMPONENTS_DATA = [
     id: 'input',
     en: 'Input',
     zh: '输入框',
-    desc: 'Land Design内置常规图标。',
+    desc: '步骤条。',
     props: [
       { name: 'name', type: "type", desc: 'desc' },
     ],

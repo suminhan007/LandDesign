@@ -1,6 +1,13 @@
 import React, { CSSProperties } from "react";
+export type BreadCrumbItemType = {
+    key: number | string;
+    label: React.ReactNode;
+    tip?: string;
+    maxWidth?: number;
+};
 export type BreadCrumbProps = {
-    children?: React.ReactNode | string;
+    data?: BreadCrumbItemType[];
+    onChange?: (item: BreadCrumbItemType) => void;
     style?: CSSProperties;
     className?: string;
 };

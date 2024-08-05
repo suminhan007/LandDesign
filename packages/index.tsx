@@ -22,6 +22,9 @@ export { default as LandCheckBar } from "./CheckBar";
 export type { CheckedContainerProps } from "./CheckedContainer";
 export { default as LandCheckedContainer } from "./CheckedContainer";
 
+export type { ContentProps } from "./Content";
+export { default as LandContent } from "./Content";
+
 export type { ColorPickerProps } from "./ColorPicker";
 export { default as LandColorPicker } from "./ColorPicker";
 
@@ -88,6 +91,9 @@ export { default as LandSelectTree } from "./SelectTree";
 
 export type { SiderProps } from "./Sider";
 export { default as LandSider } from "./Sider";
+
+export type { SliderProps } from "./Slider";
+export { default as LandSlider } from "./Slider";
 
 export type { StepsProps } from "./Steps";
 export { default as LandSteps } from "./Steps";

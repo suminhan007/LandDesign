@@ -51,6 +51,7 @@ const Pagination: React.FC<PaginationProps> = ({
     <div onClick={() => {
       if (newCurrent > 1) {
         setNewCurrent(newCurrent - 1);
+        onChange?.(newCurrent - 1);
         getIsOut?.(newCurrent - 1) && (isStartPreOut ? setCurStart(2) : setCurStart(newCurrent - 1));
       }
     }}
@@ -83,6 +84,7 @@ const Pagination: React.FC<PaginationProps> = ({
     <div onClick={() => {
       if (newCurrent < total) {
         setNewCurrent(newCurrent + 1);
+        onChange?.(newCurrent + 1);
         getIsOut?.(newCurrent + 1) && (isStartNextOut ? setCurStart(total - pageSize) : setCurStart(newCurrent + 1));
       }
     }} className={`land-pagination-arrow-next ${newCurrent === total ? 'disabled' : ''}`}><Icon name="arrow" className="-rotate-90" strokeWidth={4} /></div>

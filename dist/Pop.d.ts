@@ -6,7 +6,7 @@ declare enum PopType {
 export type PopProps = {
     type?: PopType;
     theme?: "light" | "dark";
-    content?: React.ReactNode | string;
+    content?: React.ReactNode;
     placement?: "top" | "bottom" | "left" | "right";
     style?: CSSProperties;
     className?: string;

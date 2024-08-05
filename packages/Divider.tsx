@@ -28,7 +28,7 @@ const Divider: React.FC<DividerProps> = ({
   lang = "100%",
   margin = 0,
   type = "solid",
-  color = "var(--color-border-1)",
+  color = "var(--color-border-2)",
   content,
   align = "center",
   style,

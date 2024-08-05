@@ -1,11 +1,13 @@
 import React, { CSSProperties } from 'react';
+import { PopProps } from './Pop';
 export type LinkProps = {
     href?: string;
     target?: string;
     status?: "default" | "primary" | "success" | "danger" | "warning";
     disabled?: boolean;
-    actived?: boolean;
-    pop?: React.ReactNode | string;
+    active?: boolean;
+    tip?: React.ReactNode | string;
+    tipProps?: PopProps;
     children?: React.ReactNode | string;
     style?: CSSProperties;
     className?: string;

@@ -10,7 +10,6 @@ export type ButtonProps = {
     type?: "text" | "background" | "border" | "line";
     status?: "default" | "primary" | "warning" | "danger" | "success";
     disabled?: boolean;
-    loading?: boolean;
     pop?: React.ReactNode | string;
     PopProps?: PopProps;
     href?: string;
