@@ -62,7 +62,7 @@
 
     // 边框色(无交互)
     --color-border-1: #EFEFEF; // 常规
-    --color-border-2: #EAEAEA; // 重边框
+    --color-border-2: #EAEAEA; // 边框:hover
     --color-border-3: #DADADA; // 重边框
 
     // 边框粗细
@@ -73,8 +73,7 @@
     --color-bg-white: #FFF;
     --color-bg-1: #F9F9F9;
     --color-bg-2: #F6F6F6;
-    --color-bg-3: #FAFAFA;
-    --color-bg-4: #DADADA;
+    --color-bg-3: #F2F2F2;
 
     // 文字色
     --color-text-1: #0D0D0D;
@@ -131,7 +130,8 @@
 
     // 间距
     --padding-small: 4px;
-    --padding-medium: 8px 16px;
+    --padding-medium: 8px;
+    --padding-medium-xy: 8px 16px;
     --padding-large: 16px;
 
     // 背景模糊
@@ -150,15 +150,24 @@
     --opacity-1: 1;
 
     // 投影
-    --boxshadow-light: 0 2px 10px rgba(0, 0, 0, 0.05);
-    --boxshadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
-    --boxshadow-heavy: 0px 6px 15px 0px rgba(0, 0, 0, 0.08), 0px 10px 36px 0px rgba(0, 0, 0, 0.16);
+    --boxshadow-small: 0 0px 4px rgba(0, 0, 0, 0.1);
+    --boxshadow-medium: 0 0 10px rgba(0, 0, 0, 0.1);
+    --boxshadow-large: 0 0 20px rgba(0, 0, 0, 0.1);
 
     // 过渡
     --transition-15: 0.15s;
     --transition-2: 0.2s;
     --transition-3: 0.3s;
     --transition-8: 0.8s;
+
+    
+    // 层级
+    --zIndex-0: -1; 
+    --zIndex-1: 0;
+    --zIndex-2: 1;
+    --zIndex-3: 10;
+    --zIndex-4: 100; // 气泡
+    --zIndex-5: 1000; // 蒙层
 
     /****** 暗黑模式 ******/
 }

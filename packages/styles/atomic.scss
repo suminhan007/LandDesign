@@ -14,7 +14,7 @@
 .top-0 {
     top: 0;
 }
-.bototm-0 {
+.bottom-0 {
     bottom: 0;
 }
 .left-0 {
@@ -22,6 +22,9 @@
 }
 .right-0 {
     right: 0;
+}
+.none {
+    display: none;
 }
 
 //布局
@@ -33,6 +36,9 @@
 }
 .flex-1 {
     flex: 1;
+}
+.flex-2 {
+    flex: 2;
 }
 .items-center {
     align-items: center;
@@ -83,27 +89,24 @@
 .grid {
     display: grid;
 }
-.border-box{
-  box-sizing: border-box;
-}
 .overflow-hidden {
     overflow: hidden;
 }
 .overflow-auto {
     overflow: auto;
-    scrollbar-color: rgba(0,0,0,0.1);
     &::-webkit-scrollbar {
-        width: 0px;
+        width: 14px;
         height: 4px;
     }
     &::-webkit-scrollbar-thumb {
-        border: 7px solid transparent;
+        border: 4px solid transparent;
         background-clip: padding-box;
-        border-radius: 6px;
+        border-radius: 8px;
         background-color: rgba(0,0,0,0.1);
+        display: none;
     }
     &:hover::-webkit-scrollbar-thumb {
-        border-width: 4px;
+        display: block;
     }
 }
 .scrollbar-none {
@@ -111,9 +114,13 @@
         width: 0;
         display: none;
     }
+    scrollbar-width: 0;
 }
-.pointer {
+.cursor-pointer {
     cursor: pointer;
+}
+.cursor-default {
+    cursor: default;
 }
 
 //边距
@@ -255,6 +262,12 @@
 .pr-32 {
     padding-right: 32px;
 }
+.-mt-1 {
+    margin-top: -1px;
+}
+.-ml-1 {
+    margin-left: -1px;
+}
 .m-4 {
     margin: 4px;
 }
@@ -268,6 +281,9 @@
 }
 .mt-4 {
     margin-top: 4px;
+}
+.-mt-4 {
+    margin-top: -4px;
 }
 .mb-4 {
     margin-bottom: 4px;
@@ -291,6 +307,9 @@
 }
 .mt-8 {
     margin-top: 8px;
+}
+.-mt-8 {
+    margin-top: -8px;
 }
 .mb-8 {
     margin-bottom: 8px;
@@ -374,19 +393,47 @@
 .height-100 {
     height: 100%;
 }
+.width-100vw {
+    width: 100vw;
+}
+.height-100vh {
+    height: 100vh;
+}
+.ratio-1 {
+    aspect-ratio: 1;
+}
+.fit-content {
+    width: fit-content;
+}
 //圆角
 .border {
-    border: 1px solid #EDEFF2;
+    border: 1px solid var(--color-border-1);
 }
 .border-primary{
     border: 1px solid#0AA344;
 }
 .border-dash {
-    border: 1px dashed #EDEFF2;
+    border: 1px dashed var(--color-border-1);
 }
 .border-white {
-    border-color: white;
+    border-color: var(--color-bg-white);
 }
+.border-top{
+    border-right: 1px solid var(--color-border-1);
+}
+.border-left{
+    border-left: 1px solid var(--color-border-1);
+}
+.border-right{
+    border-right: 1px solid var(--color-border-1);
+}
+.border-bottom{
+    border-right: 1px solid var(--color-border-1);
+}
+.border-left{
+    border-right: 1px solid var(--color-border-1);
+}
+
 .border-2 {
     border-width: 2px;
 }
@@ -441,22 +488,28 @@
     font-weight: 600;
 }
 .color-gray-1 {
-    color: #202020;
+    color: var(--color-text-1);
 }
 .color-gray-2 {
-    color: #333;
+    color: var(--color-text-2);
 }
 .color-gray-3 {
-    color: #666;
+    color: var(--color-text-3);
 }
 .color-gray-4 {
-    color: #999;
+    color: var(--color-text-4);
 }
 .color-white {
-    color: white;
+    color: var(--color-bg-white);
 }
 .color-primary{
-    color: #808AFF;
+    color: var(--color-primary-6);
+}
+.text-center {
+    text-align: center;
+}
+.opacity-0 {
+    opacity: 0;
 }
 .ellipsis {
     text-overflow: ellipsis;
@@ -469,26 +522,13 @@
     background-color: white;
 }
 .bg-gray{
-    background-color: rgba(0,0,0,0.02);
+    background-color: var(--color-bg-1);
 }
 .bg-primary {
     background-color: #0AA344;
 }
-.bg-primary-lighter {
-    background-color: rgba(10, 163, 68, .4);
-}
-.hover-bg-gray {
-    &:hover {
-        background-color: rgba(0,0,0,0.02);
-    }
-}
-.hover-bg-grayer {
-    &:hover {
-        background-color: rgba(0,0,0,0.04);
-    }
-}
 
-//transform
+// transform
 .rotate-90 {
     transform: rotate(90deg);
 }
@@ -524,9 +564,20 @@
     &:hover{
         .land-pop{
             opacity: 1;
-            transform: translate(-50%,-10%);
+            transform: translate(-50%,-16px);
             pointer-events: all;
         }
     }
 }
 
+.bg-hover-gray {
+    background-color: var(--color-bg-1);
+    transition: background-color var(--transition-2) linear;
+    will-change: background-color;
+    &:hover {
+      background-color: var(--color-bg-1);
+    }
+    &:active {
+      background-color: var(--color-bg-3);
+    }
+}

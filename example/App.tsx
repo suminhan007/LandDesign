@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./app.css";
-import "../styles/atomic.scss";
-import "../styles/variable.scss";
-import "../styles/reset.scss";
+import "../packages/styles/atomic.scss";
+import "../packages/styles/variable.scss";
+import "../packages/styles/reset.scss";
 import Title from "../packages/Title";
 import Header from "../packages/Header";
 import { ClickType } from "../packages/Menu";
