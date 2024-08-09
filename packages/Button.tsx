@@ -31,6 +31,7 @@ export type ButtonProps = {
   target?: "_self" | "_blank" | "_top" | "_parent";
   /* 按钮点击事件 */
   onClick?: (e: React.UIEvent) => void;
+  children?: React.ReactNode;
   style?: CSSProperties;
   className?: string;
 };
@@ -50,6 +51,7 @@ const Button: React.FC<ButtonProps> = ({
   href,
   target = "_blank",
   onClick,
+  children,
   style,
   className = "",
 }) => {
@@ -91,6 +93,7 @@ const Button: React.FC<ButtonProps> = ({
           color={buttonColorConfig}
           onClick={(e: React.UIEvent) => onClick?.(e)}
         >
+          {children}
           {icon}
           {!iconOnly && (
             <div>
@@ -114,6 +117,7 @@ const Button: React.FC<ButtonProps> = ({
           color={buttonColorConfig}
           onClick={(e: React.UIEvent) => onClick?.(e)}
         >
+          {children}
           {icon}
           {!iconOnly && (
             <div>

@@ -15,20 +15,20 @@ import {
 import Flex from '../../packages/Flex';
 
 type Props = {
-  onClick?: (item: any) => void;
+  onClick?: (dropItem: any, item: any) => void;
 };
 const ComponentPreview: React.FC<Props> = ({
   onClick,
 }) => {
   const data = [
-    { id: 1, data: COMMON_COMPONENTS_DATA, title: "通用型" },
-    { id: 2, data: LAYOUT_COMPONENTS_DATA, title: "布局型" },
-    { id: 3, data: NAV_COMPONENTS_DATA, title: "导航型" },
-    { id: 4, data: INPUT_COMPONENTS_DATA, title: "数据输入型" },
-    { id: 5, data: DISPLAY_COMPONENTS_DATA, title: "输入展示型" },
-    { id: 6, data: FEEDBACK_COMPONENTS_DATA, title: "反馈型" },
-    { id: 7, data: TEXT_COMPONENTS_DATA, title: "文字型" },
-    { id: 8, data: OTHER_COMPONENTS_DATA, title: "其他" },
+    { id: 'icon', data: COMMON_COMPONENTS_DATA, title: "通用型" },
+    { id: 'divider', data: LAYOUT_COMPONENTS_DATA, title: "布局型" },
+    { id: 'affix', data: NAV_COMPONENTS_DATA, title: "导航型" },
+    { id: 'input', data: INPUT_COMPONENTS_DATA, title: "数据输入型" },
+    { id: 'avatar', data: DISPLAY_COMPONENTS_DATA, title: "输入展示型" },
+    { id: 'alert', data: FEEDBACK_COMPONENTS_DATA, title: "反馈型" },
+    { id: 'title', data: TEXT_COMPONENTS_DATA, title: "文字型" },
+    { id: 'icon', data: OTHER_COMPONENTS_DATA, title: "其他" },
   ];
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -39,8 +39,8 @@ const ComponentPreview: React.FC<Props> = ({
           <div className='color-gray-4' >{item.title}</div>
           <div className='grid gap-24 width-100' style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px,1fr))' }}>
             {item.data?.map(items =>
-              <div className='flex column gap-8 p-12 bg-gray hover:bg-gray radius-8 pointer' onClick={() => onClick?.(items)}>
-                {items.demo && <Flex bothCenter className='ratio-1'>{items.demo}</Flex>}
+              <div className='flex column gap-8 radius-8 pointer' onClick={() => onClick?.(items, item)}>
+                {items.demo && <Flex bothCenter className='p-12 ratio-1 bg-gray hover:bg-gray'>{items.demo}</Flex>}
                 <Flex align='center' gap={8}>
                   <Title title={items.en} type='h3' />
                   <Title title={items.zh} type='p' />

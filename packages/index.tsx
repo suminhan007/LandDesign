@@ -16,8 +16,8 @@ export { default as LandButton } from "./Button";
 export type { CheckProps } from "./Check";
 export { default as LandCheck } from "./Check";
 
-export type { CheckBarProps } from "./CheckBar";
-export { default as LandCheckBar } from "./CheckBar";
+export type { CheckBoxProps } from "./CheckBox";
+export { default as LandCheckBox } from "./CheckBox";
 
 export type { CheckedContainerProps } from "./CheckedContainer";
 export { default as LandCheckedContainer } from "./CheckedContainer";
@@ -45,12 +45,16 @@ export { default as LandFooter } from "./Footer";
 
 export type { GridProps } from "./Grid";
 export { default as LandGrid } from "./Grid";
+export { gridType } from './Grid';
 
 export type { HeaderProps } from "./Header";
 export { default as LandHeader } from "./Header";
 
 export type { InputProps } from "./Input";
 export { default as LandInput } from "./Input";
+
+export type { TagInputProps } from "./TagInput";
+export { default as LandTagInput } from "./TagInput";
 
 export type { LayoutProps } from "./Layout";
 export { default as LandLayout } from "./Layout";
@@ -80,8 +84,8 @@ export { default as LandPop } from "./Pop";
 export type { RateProps } from "./Rate";
 export { default as LandRate } from "./Rate";
 
-export type { RatioProps } from "./Ratio";
-export { default as LandRatio } from "./Ratio";
+export type { RadioProps } from "./Radio";
+export { default as LandRadio } from "./Radio";
 
 export type { SelectProps } from "./Select";
 export { default as LandSelect } from "./Select";

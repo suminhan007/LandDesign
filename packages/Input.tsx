@@ -1,50 +1,57 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useState } from "react";
 import styled from "styled-components";
+import Icon from "./Icon";
 
 export type InputProps = {
-  type?: string;
-  value?: string | number;
+  /** 输入值 */
+  value?: string;
+  /** 占位符 */
   placeholder?: string;
+  /** 前置内容 */
   prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+  /** 是否有搜索按钮 */
+  useSearch?: boolean;
   w?: number | string;
-  max?: number;
-  min?: number;
-  onChange?: (val: string | number) => void;
+  /** 允许输入的最大字符数 */
+  maxLength?: number;
+  onChange?: (val: string | number, e: any) => void;
+  onFocus?: (e: any) => void;
   className?: string;
   style?: CSSProperties;
   [key: string]: any;
 };
 const Input: React.FC<InputProps> = ({
-  type = "text",
   value,
-  placeholder,
+  placeholder = '请输入',
   prefix,
-  suffix,
+  useSearch = false,
   w,
-  min,
-  max,
+  maxLength,
   onChange,
+  onFocus,
   className,
   wrapStyle,
   ...restProps
 }) => {
+  const [newValue, setNewValue] = useState<string>(value);
   return (
     <StyleInputWrap
       className={`land-input ${className}`}
       style={{ width: typeof w === "number" ? `${w}px` : w, ...wrapStyle }}
     >
+      {useSearch && <Icon name="search" />}
       {prefix && <p className="input-prefix">{prefix}</p>}
       <input
         placeholder={placeholder}
-        type={type}
-        value={value}
-        min={min}
-        max={max}
-        onChange={(e) => onChange?.(e.target.value)}
+        type='text'
+        value={newValue}
+        max={maxLength}
+        onClick={(e) => e.stopPropagation()}
+        onFocus={(e: any) => { e.stopPropagation(); onFocus?.(e) }}
+        onChange={(e) => { e.stopPropagation(); onChange?.(e.target.value, e); }}
         {...restProps}
       />
-      {suffix}
+      {newValue && <Icon name="error-fill" fill="var(--color-bg-3)" onClick={() => setNewValue('')} />}
     </StyleInputWrap>
   );
 };

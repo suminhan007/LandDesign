@@ -106,7 +106,7 @@ const StyledHeader = styled.header<{
   padding: 0 24px;
   padding-left: ${(props) => (props.applications ? "0" : "")};
   gap: var(--gap-32);
-  width: 100vw;
+  width: 100%;
   height: ${(props) => props.height};
   border-bottom: ${(props) =>
     props.borderBottom ? "1px solid var(--color-border-2)" : ""};

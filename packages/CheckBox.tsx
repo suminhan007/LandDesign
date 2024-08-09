@@ -8,50 +8,51 @@ type CheckItemType = {
   label: string,
   pop?: string
 }
-export type RatioProps = {
-  checked?: number;
+export type CheckBoxProps = {
+  checked?: number[];
   data?: CheckItemType[];
   onChange?: (data: CheckItemType) => void;
 };
-const Ratio: React.FC<RatioProps> = ({
-  checked = 1,
+const CheckBox: React.FC<CheckBoxProps> = ({
+  checked = [1],
   data = [{ value: 1, label: '选项1' }, { value: 2, label: '选项2' }, { value: 3, label: '选项3' }],
   onChange,
 }) => {
   return (
-    <StyleRatioWrap>
+    <StyleCheckBoxWrap>
       {
         data?.map(item =>
           <Fragment>
-            <StyleRatioLabel
-              onClick={() => {
+            <StyleCheckBoxLabel
+              onClick={(e) => {
+                e.stopPropagation();
                 onChange?.(item);
               }}
             >
-              <StyleRatioCircle className={`${checked === item.value ? "checked" : ""}`}>
+              <StyleCheckBoxCircle className={`${checked.includes(item.value) ? "checked" : ""}`}>
                 <Icon name='check' size={10} strokeWidth={0} fill="var(--color-bg-white)" />
-              </StyleRatioCircle>
+              </StyleCheckBoxCircle>
               {item.label}
-            </StyleRatioLabel>
+            </StyleCheckBoxLabel>
             {item.pop && (
-              <StyleRatiopop className="hover-pop">
+              <StyleCheckBoxpop className="hover-pop">
                 <Icon name="info-stroke" stroke="var(--color-text-4)" />
                 <Pop content={item.pop} theme="dark" style={{ maxWidth: "200px" }} />
-              </StyleRatiopop>
+              </StyleCheckBoxpop>
             )}
           </Fragment>
         )
       }
-    </StyleRatioWrap>
+    </StyleCheckBoxWrap>
   );
 };
 
-const StyleRatioWrap = styled.div`
+const StyleCheckBoxWrap = styled.div`
   display: flex;
   align-items: center;
   gap: var(--gap-16);
 `;
-const StyleRatioLabel = styled.div`
+const StyleCheckBoxLabel = styled.div`
   display: flex;
   align-items: center;
   gap: var(--gap-8);
@@ -60,7 +61,7 @@ const StyleRatioLabel = styled.div`
   cursor: pointer;
 `;
 
-const StyleRatioCircle = styled.div`
+const StyleCheckBoxCircle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,8 +86,8 @@ const StyleRatioCircle = styled.div`
   }
 `;
 
-const StyleRatiopop = styled.div`
+const StyleCheckBoxpop = styled.div`
   position: relative;
   height: 16px;
 `;
-export default Ratio;
+export default CheckBox;

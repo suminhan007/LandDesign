@@ -25,7 +25,7 @@ export type AnchorProps = {
   className?: string;
 };
 
-const LandAnchor: React.FC<AnchorProps> = ({
+const Anchor: React.FC<AnchorProps> = ({
   data,
   target = document.body,
   size,
@@ -69,4 +69,4 @@ const StyledAnchor = styled.nav<{
   }
 `;
 
-export default LandAnchor;
+export default Anchor;
