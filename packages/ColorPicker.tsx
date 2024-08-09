@@ -14,71 +14,32 @@ import Message from "./Message";
 import Icon from "./Icon";
 
 const COLOR_DATA = [
-  [
-    { id: 1, color: "#e9e9e9" },
-    { id: 2, color: "#d9d9d9" },
-    { id: 3, color: "#c4c4c4" },
-    { id: 4, color: "#9d9d9d" },
-  ],
-  [
-    { id: 5, color: "#7b7b7b" },
-    { id: 6, color: "#5c5c5c" },
-    { id: 7, color: "#333333" },
-    { id: 8, color: "#262626" },
-  ],
-  [
-    { id: 9, color: "#efccbd" },
-    { id: 10, color: "#d39f9d" },
-    { id: 11, color: "#c4726d" },
-    { id: 12, color: "#ac3526" },
-  ],
-  [
-    { id: 13, color: "#f6e3bd" },
-    { id: 14, color: "#ebbd6f" },
-    { id: 15, color: "#df964a" },
-    { id: 16, color: "#c76336" },
-  ],
-  [
-    { id: 17, color: "#fbf2d4" },
-    { id: 18, color: "#f7e7ab" },
-    { id: 19, color: "#f4db86" },
-    { id: 20, color: "#ebbc58" },
-  ],
-  [
-    { id: 21, color: "#dee9d7" },
-    { id: 22, color: "#bdd992" },
-    { id: 23, color: "#9dbe56" },
-    { id: 24, color: "#758d3a" },
-  ],
-  [
-    { id: 25, color: "#e7f6fd" },
-    { id: 26, color: "#9dd9f8" },
-    { id: 27, color: "#81bde5" },
-    { id: 28, color: "#4f84eb" },
-  ],
-  [
-    { id: 29, color: "#cdc7ee" },
-    { id: 30, color: "#877cda" },
-    { id: 31, color: "#4249ac" },
-    { id: 32, color: "#313fa4" },
-  ],
-  [
-    { id: 33, color: "#f6e6fb" },
-    { id: 34, color: "#d69aeb" },
-    { id: 35, color: "#b253d3" },
-    { id: 36, color: "#8a31c4" },
-  ],
+  ["#e9e9e9", "#d9d9d9", "#c4c4c4", "#9d9d9d"],
+  ["#7b7b7b", "#5c5c5c", "#333333", "#262626"],
+  ["#efccbd", "#d39f9d", "#c4726d", "#ac3526"],
+  ["#f6e3bd", "#ebbd6f", "#df964a", "#c76336"],
+  ["#fbf2d4", "#f7e7ab", "#f4db86", "#ebbc58"],
+  ["#dee9d7", "#bdd992", "#9dbe56", "#758d3a"],
+  ["#e7f6fd", "#9dd9f8", "#81bde5", "#4f84eb"],
+  ["#cdc7ee", "#877cda", "#4249ac", "#313fa4"],
+  ["#f6e6fb", "#d69aeb", "#b253d3", "#8a31c4"],
 ];
 
 export type ColorPickerProps = {
   /* 外部回传的 value 值 */
   value?: string;
+  /** 尺寸 */
   size?: string | number;
-  showDrop?: boolean;
+  /** 是否可选颜色 */
+  useSelect?: boolean;
+  /** 是否展示默认颜色列表 */
   showList?: boolean;
+  defaultColorList?: (string[])[];
+  /** 是否可控制透明度 */
   showOpacity?: boolean;
+  /** 是否使用底部输入框 */
   input?: string | React.ReactNode | boolean;
-  pop?: string | React.ReactNode;
+  info?: React.ReactNode;
   active?: boolean;
   onChange?: (color: string) => void;
   onClick?: (color: string) => void;
@@ -90,11 +51,12 @@ export type ColorPickerProps = {
 const ColorPicker: React.FC<ColorPickerProps> = ({
   value = "#ffffff",
   size = 48,
-  showDrop = true,
+  useSelect = true,
   showList = false,
+  defaultColorList,
   showOpacity = true,
-  input = true,
-  pop,
+  input = false,
+  info,
   active = false,
   onChange,
   onClick,
@@ -190,7 +152,10 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   return (
     <StyledColorPicker
       className={`land-color-picker ${className}`}
-      style={style}
+      style={{
+        cursor: useSelect ? 'pointer' : 'default',
+        ...style
+      }}
       color={value}
       size={typeof size === "string" ? size : `${size}px`}
     >
@@ -219,7 +184,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
                     : getRgbaColor(currentColor, opacity),
               }}
             >
-              {pop && <Pop content={pop} theme="dark" />}
+              {info && <Pop content={info} theme="dark" />}
             </div>
             {typeof input !== "boolean" ? (
               <div
@@ -233,6 +198,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
               </div>
             ) : input ? (
               <Input
+                type="border"
                 prefix="#"
                 maxLength={6}
                 value={inputColor}
@@ -248,13 +214,9 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
                 }}
                 wrapStyle={{
                   height: 24,
+                  width: 'calc(100% + 16px)',
                   fontSize: "12px",
-                  border: "none",
-                  gap: 0,
-                  padding: 0,
-                }}
-                style={{
-                  fontSize: "10px",
+                  padding: '0px 6px',
                 }}
               />
             ) : (
@@ -263,7 +225,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
           </>
         )}
       </div>
-      {showDrop && (
+      {useSelect && (
         <StyledColorPanel
           className={`land-color-drop ${show ? "show" : ""}`}
           onClick={(e: React.UIEvent) => e.stopPropagation()}
@@ -291,8 +253,8 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
               }}
             ></div>
           </StyledColorGrid>
-          <Flex gap={8}>
-            <div
+          {/* <Flex gap={8}> */}
+          {/* <div
               className="radius-4 border"
               style={{
                 width: "40px",
@@ -303,36 +265,37 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
                     ? "transparent"
                     : getRgbaColor(currentColor, opacity),
               }}
-            ></div>
-            <Flex column gap={8}>
-              <StyledColorSlider
-                type="range"
-                max={360}
-                value={h}
-                step={1}
-                currentColor={currentColor}
-                onChange={(e: any) => setH(Number(e.target.value))}
-              />
-              {showOpacity && (
-                <StyledOpacityWrap>
-                  <StyledColorSlider
-                    type="range"
-                    step={1}
-                    max={100}
-                    value={opacity}
-                    className="opacity"
-                    currentColor={svColor}
-                    onChange={(e: any) => {
-                      setOpacity(e.target.value);
-                      onChange?.(getRgbaColor(currentColor, opacity));
-                    }}
-                  />
-                </StyledOpacityWrap>
-              )}
-            </Flex>
+            ></div> */}
+          <Flex column gap={8}>
+            <StyledColorSlider
+              type="range"
+              max={360}
+              value={h}
+              step={1}
+              currentColor={currentColor}
+              onChange={(e: any) => setH(Number(e.target.value))}
+            />
+            {showOpacity && (
+              <StyledOpacityWrap>
+                <StyledColorSlider
+                  type="range"
+                  step={1}
+                  max={100}
+                  value={opacity}
+                  className="opacity"
+                  currentColor={svColor}
+                  onChange={(e: any) => {
+                    setOpacity(e.target.value);
+                    onChange?.(getRgbaColor(currentColor, opacity));
+                  }}
+                />
+              </StyledOpacityWrap>
+            )}
           </Flex>
+          {/* </Flex> */}
           <div className="flex gap-8">
             <Input
+              type="background"
               className="flex-2"
               prefix="#"
               maxLength={6}
@@ -349,6 +312,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
             />
             {showOpacity && (
               <Input
+                type="background"
                 className="flex-1"
                 max={100}
                 min={0}
@@ -361,26 +325,28 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
             )}
           </div>
           {showList && (
-            <div className="width-100 flex" style={{ gap: 2 }}>
-              {COLOR_DATA?.map((list, idx) => (
-                <div className="flex column" key={idx} style={{ gap: 2 }}>
-                  {list.map((item) => (
-                    <StyleColorItem
+            <StyleDefaultColorList className="land-colorPicker-default-list" >
+              {(defaultColorList || COLOR_DATA)?.map((list, index) => (
+                <Flex column gap={4} style={{ width: '18px' }}>
+                  {
+                    list?.map(item => <div
+                      key={index}
+                      style={{
+                        backgroundColor: item
+                      }}
+                      className="land-colorPicker-default-item"
                       onClick={() => {
-                        const { h, s, v } = tinycolor(item.color).toHsv();
+                        const { h, s, v } = tinycolor(item).toHsv();
                         setS(s);
                         setH(h);
                         setV(v);
-                        onChange?.(getRgbaColor(item.color, opacity));
+                        onChange?.(getRgbaColor(item, opacity));
                       }}
-                      // @ts-ignore
-                      style={{ "--tacc-color-item-bgColor": item.color }}
-                      key={item.id}
-                    />
-                  ))}
-                </div>
+                    />)
+                  }
+                </Flex>
               ))}
-            </div>
+            </StyleDefaultColorList>
           )}
         </StyledColorPanel>
       )}
@@ -394,16 +360,17 @@ const StyledColorPicker = styled.div<{
 }>`
   position: relative;
   width: ${(props) => props.size};
-  cursor: pointer;
   .land-color-trigger {
     display: flex;
     flex-direction: column;
     gap: 4px;
     width: 100%;
     .land-color-label {
+      display: flex;
+      justify-content: center;
+      width: calc(100% + 16px);
       font-size: 12px;
       color: var(--color-text-3);
-      text-align: center;
       &.copy{
         .IconCopy{
           width: 0;
@@ -488,7 +455,7 @@ const StyledColorSlider = styled.input<{
   appearance: none;
   -webkit-appearance: none;
   margin: 0;
-  width: 132px;
+  width: 100%;
   height: 16px;
   border: 0px;
   outline: none;
@@ -520,7 +487,7 @@ const StyledColorSlider = styled.input<{
     border-radius: 4px;
     background: ${(props) => props.currentColor};
     border: 1px solid var(--color-border-1);
-    outline: 1px solid var(--color-border-3);
+    outline: 1px solid var(--color-border-2);
     &:hover {
       cursor: ew-resize;
     }
@@ -541,34 +508,32 @@ const StyledOpacityWrap = styled.div`
   background-size: 8px 8px;
 `;
 
-const StyleColorItem = styled.div`
-  border: var(--tacc-color-item-border, var(--spaui-input-border));
-  border-radius: var(--tacc-color-item-radius, 4px);
-  background-color: var(--tacc-color-item-bgColor, transparent);
-  width: 18px;
-  height: 18px;
-  transition: all 0.2s;
-  &:hover {
-    --tacc-color-item-border: 1px solid var(--od-gray-05);
-  }
-  &.active {
-    --tacc-color-item-border: 1px solid var(--od-blue-06);
-  }
-  cursor: pointer;
-  &.null {
-    position: relative;
-    background-color: transparent;
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      left: 10px;
-      top: -4px;
-      width: 2px;
-      height: 30px;
-      border-radius: 1px;
-      background-color: var(--od-red-06);
-      transform: rotate(-45deg);
+const StyleDefaultColorList = styled.div`
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+  .land-colorPicker-default-item{
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-4);
+    transition: all 0.2s;
+    cursor: pointer;
+    &.null {
+      position: relative;
+      background-color: transparent;
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: -4px;
+        width: 2px;
+        height: 30px;
+        border-radius: 1px;
+        background-color: var(--od-red-06);
+        transform: rotate(-45deg);
+      }
     }
   }
 `;

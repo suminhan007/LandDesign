@@ -74,7 +74,7 @@ const Select: React.FC<SelectProps> = ({
             : data?.filter((itm) => itm.value === newSelected)[0].label}
         </p>
         <Icon name="arrow" className="land-select-value-arrow" />
-        {info && <Pop content={info} />}
+        {info && <Pop content={info} theme="dark" />}
       </StyleSelectInput>
       <StyleSelectResults
         className={`land-select-results ${show ? "show" : ""}`}
@@ -94,10 +94,10 @@ const Select: React.FC<SelectProps> = ({
             >
               <div className="land-select-results-item-label">{item.label}</div>
               {item.info && <div className={`land-select-item-info ${item.info ? 'hover-pop' : ''}`}>
-                <Icon name="info-stroke" />
-                {item.info && <Pop content={item.info} placement="right" style={{ marginLeft: '12px' }} />}
+                <Icon name="info-stroke" size={12} />
+                {item.info && <Pop content={item.info} placement="right" theme="dark" style={{ marginLeft: '12px' }} />}
               </div>}
-              {item.tip && <Pop content={item.tip} placement="right" style={{ marginLeft: '8px' }} />}
+              {item.tip && <Pop content={item.tip} placement="right" theme="dark" style={{ marginLeft: '8px' }} />}
             </StyleSelectDropItem>
           ))}
         </StyleSelectDrop>
@@ -176,6 +176,7 @@ const StyleSelectDrop = styled.ul`
   border: 1px solid var(--color-border-2);
   background-color: var(--color-bg-white);
   border-radius: var(--radius-6);
+  box-shadow: var(--boxshadow-small);
 `;
 const StyleSelectDropItem = styled.li`
   position: relative;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Icon from "./Icon";
 
 export type InputProps = {
+  type?: 'border' | 'background';
   /** 输入值 */
   value?: string;
   /** 占位符 */
@@ -21,6 +22,7 @@ export type InputProps = {
   [key: string]: any;
 };
 const Input: React.FC<InputProps> = ({
+  type = 'border',
   value,
   placeholder = '请输入',
   prefix,
@@ -36,10 +38,10 @@ const Input: React.FC<InputProps> = ({
   const [newValue, setNewValue] = useState<string>(value);
   return (
     <StyleInputWrap
-      className={`land-input ${className}`}
+      className={`land-input ${type} ${className}`}
       style={{ width: typeof w === "number" ? `${w}px` : w, ...wrapStyle }}
     >
-      {useSearch && <Icon name="search" />}
+      {useSearch && <Icon name="search" stroke="var(--color-text-5)" />}
       {prefix && <p className="input-prefix">{prefix}</p>}
       <input
         placeholder={placeholder}
@@ -51,7 +53,7 @@ const Input: React.FC<InputProps> = ({
         onChange={(e) => { e.stopPropagation(); onChange?.(e.target.value, e); }}
         {...restProps}
       />
-      {newValue && <Icon name="error-fill" fill="var(--color-bg-3)" onClick={() => setNewValue('')} />}
+      {newValue && <Icon name="error-fill" className="land-input-clear-icon" fill="var(--color-text-5)" onClick={() => setNewValue('')} />}
     </StyleInputWrap>
   );
 };
@@ -61,8 +63,28 @@ const StyleInputWrap = styled.div`
   align-items: center;
   gap: var(--gap-4);
   padding: 0 12px;
-  border: var(--border-1) solid var(--color-border-3);
   border-radius: var(--radius-4);
+  transition: background-color var(--transition-15) linear;
+  box-sizing: border-box;
+  &.border{
+    border: var(--border-1) solid var(--color-border-2);
+    &:hover{
+    background-color: var(--color-bg-1);
+    }
+    &:active{
+      background-color: var(--color-bg-2);
+    }
+  }
+  &.background{
+    background-color: var(--color-bg-1);
+    &:hover{
+    background-color: var(--color-bg-2);
+    }
+    &:active{
+      background-color: var(--color-bg-3);
+    }
+  }
+  
   input {
     width: 100%;
     height: 34px;
@@ -85,6 +107,14 @@ const StyleInputWrap = styled.div`
     }
     &::selection {
       background-color: var(--color-primary-2);
+    }
+  }
+  .land-input-clear-icon{
+    width: 0px;
+  }
+  &:hover{
+    .land-input-clear-icon{
+      width: 16px;
     }
   }
 `;

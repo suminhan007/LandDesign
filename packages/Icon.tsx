@@ -291,6 +291,21 @@ const IconCollection: React.FC<IconProps> = ({
   );
 };
 
+const IconSearch: React.FC<IconProps> = ({
+  stroke = "currentcolor",
+  size = 20,
+  strokeWidth = 2,
+  style,
+  className,
+}) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={style}
+    className={className}>
+    <path d="M21 38C30.3888 38 38 30.3888 38 21C38 11.6112 30.3888 4 21 4C11.6112 4 4 11.6112 4 21C4 30.3888 11.6112 38 21 38Z" fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round" />
+    <path d="M33.2216 33.2217L41.7069 41.707" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+
+)
+
 const IconZoomOut: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
@@ -1820,7 +1835,8 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "home":
       return <IconHome {...restProps} />;
       break;
-
+    case 'search':
+      return <IconSearch {...restProps} />
     default:
       break;
   }

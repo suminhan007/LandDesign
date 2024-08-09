@@ -1,58 +1,73 @@
-import React, { Fragment } from "react";
+import React, { CSSProperties } from "react";
 import styled from "styled-components";
 import Pop from "./Pop";
 import Icon from "./Icon";
 
 type CheckItemType = {
-  value: number,
-  label: string,
-  pop?: string
+  value: number | string;
+  label: string;
+  info?: string;
+  disabled?: boolean;
 }
-export type CheckBoxProps = {
-  checked?: number[];
+export type CheckboxProps = {
+  checked?: (number | string)[];
   data?: CheckItemType[];
-  onChange?: (data: CheckItemType) => void;
+  onChange?: (item: CheckItemType) => void;
+  style?: CSSProperties;
+  className?: string;
 };
-const CheckBox: React.FC<CheckBoxProps> = ({
+const Checkbox: React.FC<CheckboxProps> = ({
   checked = [1],
   data = [{ value: 1, label: '选项1' }, { value: 2, label: '选项2' }, { value: 3, label: '选项3' }],
   onChange,
+  style,
+  className = ''
 }) => {
   return (
-    <StyleCheckBoxWrap>
+    <StyleCheckboxWrap className={`land-checkbox-wrap ${className}`} style={style}>
       {
         data?.map(item =>
-          <Fragment>
-            <StyleCheckBoxLabel
+          <StyledCheckboxItem key={item.value} className={`land-checkbox-item ${item.disabled ? 'disabled' : ''}`}>
+            <StyleCheckboxLabel
               onClick={(e) => {
                 e.stopPropagation();
                 onChange?.(item);
               }}
             >
-              <StyleCheckBoxCircle className={`${checked.includes(item.value) ? "checked" : ""}`}>
+              <StyleCheckboxCircle className={`${checked.includes(item.value) ? "checked" : ""}`}>
                 <Icon name='check' size={10} strokeWidth={0} fill="var(--color-bg-white)" />
-              </StyleCheckBoxCircle>
+              </StyleCheckboxCircle>
               {item.label}
-            </StyleCheckBoxLabel>
-            {item.pop && (
-              <StyleCheckBoxpop className="hover-pop">
-                <Icon name="info-stroke" stroke="var(--color-text-4)" />
-                <Pop content={item.pop} theme="dark" style={{ maxWidth: "200px" }} />
-              </StyleCheckBoxpop>
+            </StyleCheckboxLabel>
+            {item.info && (
+              <StyleCheckboxPop className="hover-pop">
+                <Icon name="info-stroke" size={12} stroke="var(--color-text-4)" />
+                <Pop content={item.info} theme="dark" style={{ maxWidth: "200px" }} />
+              </StyleCheckboxPop>
             )}
-          </Fragment>
+          </StyledCheckboxItem>
         )
       }
-    </StyleCheckBoxWrap>
+    </StyleCheckboxWrap>
   );
 };
 
-const StyleCheckBoxWrap = styled.div`
+const StyleCheckboxWrap = styled.div`
   display: flex;
   align-items: center;
   gap: var(--gap-16);
 `;
-const StyleCheckBoxLabel = styled.div`
+
+const StyledCheckboxItem = styled.div`
+   display: flex;
+  align-items: center;
+  gap: var(--gap-4); 
+  &.disabled{
+    opacity: var(--opacity-68);
+  }
+`
+
+const StyleCheckboxLabel = styled.div`
   display: flex;
   align-items: center;
   gap: var(--gap-8);
@@ -61,7 +76,7 @@ const StyleCheckBoxLabel = styled.div`
   cursor: pointer;
 `;
 
-const StyleCheckBoxCircle = styled.div`
+const StyleCheckboxCircle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,8 +101,9 @@ const StyleCheckBoxCircle = styled.div`
   }
 `;
 
-const StyleCheckBoxpop = styled.div`
+const StyleCheckboxPop = styled.div`
   position: relative;
-  height: 16px;
+  height: 12px;
+  line-height: 12px;
 `;
-export default CheckBox;
+export default Checkbox;

@@ -85,7 +85,11 @@ const Header: React.FC<HeaderProps> = ({
         align={align}
         showMobileNav={showMobileNav}
       >
-        {menuProps && <Menu border={false} {...menuProps} />}
+        {menuProps && <Menu border={false}
+          {...menuProps}
+          onChange={item => { menuProps.onChange?.(item); setShowMobileNav(false) }}
+          onDropChange={(dropItem, item) => { menuProps.onDropChange?.(dropItem, item); setShowMobileNav(false) }}
+        />}
       </StyledHeaderNav>
       {rightComponent && (
         <div className="land-header-btns">{rightComponent}</div>
@@ -193,21 +197,39 @@ const StyledHeaderNav = styled.div<{
   justify-content: ${(props) => props.align};
   height: 100%;
   @media screen and (max-width: 800px) {
-    position: relative;
+    position: fixed;
+    top: 64px;
+    right: 0px;
     flex: none;
-    width: 48px;
+    width: fit-content;
+    height: fit-content;
     .land-menu {
       flex-direction: column;
-      position: fixed;
-      top: 64px;
-      right: 0px;
       padding: 12px 4px;
       background: #fff;
       height: fit-content;
       border: 1px solid var(--color-border-1);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
       transition: opacity 0.2 linear;
       opacity: ${(props) => (props.showMobileNav ? "1" : "0")};
       pointer-events: ${(props) => (props.showMobileNav ? "all" : "none")};
+      .land-menu-link.active::after{
+        opacity: 0;
+      }
+      .land-menu-drop-wrap {
+        position: relative;
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: all;
+        .land-menu-drop, 
+        .land-menu-drop .land-menu{
+          border: none;
+          box-shadow: none;
+          padding: 0;
+          text-indent: 1em;
+        }
+      }
     }
   }
 `;

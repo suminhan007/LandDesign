@@ -30,7 +30,6 @@ import TagInput from "../packages/TagInput";
 import Select from '../packages/Select';
 import SelectTree from '../packages/SelectTree';
 import Radio from '../packages/Radio';
-import CheckBox from '../packages/CheckBox';
 import ColorPicker from '../packages/ColorPicker';
 import DatePicker from '../packages/DatePicker';
 import NumberInput from '../packages/NumberInput';
@@ -54,6 +53,11 @@ import TagInputExample from "./Components/TagInputExample";
 import SelectExample from "./Components/SelectExample";
 import SelectTreeExample from "./Components/SelectTreeExample";
 import ImageExample from "./components/ImageExample";
+import RadioExample from "./Components/RadioExample";
+import Checkbox from "../packages/Checkbox";
+import CheckboxExample from "./Components/CheckboxExample";
+import ColorPickerExample from "./Components/ColorPickerExample";
+import DatePickerExample from "./Components/DatePickerExample";
 
 
 export const COMMON_COMPONENTS_DATA = [
@@ -597,8 +601,26 @@ export const INPUT_COMPONENTS_DATA = [
     zh: '选择器',
     desc: 'Land Design内置常规图标。',
     props: [
-      { name: 'name', type: "type", desc: 'desc' },
+      { name: 'data', type: <Link href="#StepsItemType">SelectTreeItemType</Link>, desc: '数据' },
+      { name: 'placeholder', type: 'string', desc: '占位符' },
+      { name: 'selected', type: 'string | number', desc: '当前选中项' },
+      { name: 'width', type: 'number | string', desc: '宽度' },
+      { name: 'title', type: 'string', desc: '标题' },
+      { name: 'titleInfo', type: 'string', desc: '标题提示内容' },
+      { name: 'info', type: 'Element', desc: '选框提示内容' },
+      { name: 'disabled', type: 'boolean', desc: '是否整体禁用' },
+      { name: 'onChange', type: '(item: SelectTreeItemType) => void', desc: '选择事件' }
     ],
+    type: [{
+      name: 'SelectTreeItemType',
+      data: [
+        { name: 'value', type: 'string | number', desc: '唯一标识' },
+        { name: 'label', type: 'string | Element', desc: '选项值' },
+        { name: 'tip', type: 'Element', desc: '选项提示内容' },
+        { name: 'info', type: 'Element', desc: '选项图标类型提示' },
+        { name: 'disabled', type: 'boolean', desc: '是否禁用该选项' },
+      ]
+    }],
     example: <SelectExample />,
     demo: <Select />
   },
@@ -608,18 +630,52 @@ export const INPUT_COMPONENTS_DATA = [
     zh: '层级选择器',
     desc: 'Land Design内置常规图标。',
     props: [
-      { name: 'name', type: "type", desc: 'desc' },
+      { name: 'data', type: <Link href="#SelectTreeItemType">SelectTreeItemType</Link>, desc: '数据' },
+      { name: 'placeholder', type: 'string', desc: '占位符' },
+      { name: 'selected', type: 'string | number', desc: '当前选中项' },
+      { name: 'width', type: 'number | string', desc: '宽度' },
+      { name: 'title', type: 'string', desc: '标题' },
+      { name: 'titleInfo', type: 'string', desc: '标题提示内容' },
+      { name: 'info', type: 'Element', desc: '选框提示内容' },
+      { name: 'disabled', type: 'boolean', desc: '是否整体禁用' },
+      { name: 'onChange', type: '(item: SelectTreeItemType) => void', desc: '选择事件' }
     ],
+    type: [{
+      name: 'SelectTreeItemType',
+      data: [
+        { name: 'value', type: 'string | number', desc: '唯一标识' },
+        { name: 'label', type: 'string | Element', desc: '选项值' },
+        { name: 'tip', type: 'Element', desc: '选项提示内容' },
+        { name: 'info', type: 'Element', desc: '选项图标类型提示' },
+        { name: 'disabled', type: 'boolean', desc: '是否禁用该选项' },
+        { name: 'children', type: 'SelectTreeItemType[]', desc: '二级数据' }
+      ]
+    }],
     example: <SelectTreeExample />,
     demo: <SelectTree />
   },
   {
     id: "radio",
     en: "Radio",
-    zh: "单选框",
+    zh: "单选列表",
     desc: "Land Design内置常规图标。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    props: [
+      { name: "data", type: <Link href="#CheckItemType">CheckItemType</Link>, desc: "数据类型" },
+      { name: 'checked', type: 'number | string', desc: '当前选择项' },
+      { name: 'onChange', type: '(item: CheckItemType) => void;', desc: '选择事件' },
+    ],
+    type: [
+      {
+        name: 'CheckItemType',
+        data: [
+          { name: 'value', type: 'number | string', desc: '唯一标识' },
+          { name: 'label', type: 'string | Element', desc: '选项值' },
+          { name: 'info', type: 'Element', desc: '选项提示内容' },
+          { name: 'disabled', type: 'boolean', desc: '是否禁用该选项' },
+        ]
+      }
+    ],
+    example: <RadioExample />,
     demo: <Radio />
   },
   {
@@ -627,17 +683,43 @@ export const INPUT_COMPONENTS_DATA = [
     en: "Checkbox",
     zh: "多选框",
     desc: "Land Design内置常规图标。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <CheckBox />
+    props: [
+      { name: "data", type: <Link href="#CheckItemType">CheckItemType</Link>, desc: "数据类型" },
+      { name: 'checked', type: '(number | string)[]', desc: '当前选择列表' },
+      { name: 'onChange', type: '(item: CheckItemType) => void;', desc: '选择事件' }
+    ],
+    type: [
+      {
+        name: 'CheckItemType',
+        data: [
+          { name: 'value', type: 'number | string', desc: '唯一标识' },
+          { name: 'label', type: 'string | Element', desc: '选项值' },
+          { name: 'info', type: 'Element', desc: '选项提示内容' },
+          { name: 'disabled', type: 'boolean', desc: '是否禁用该选项' },
+        ]
+      }
+    ],
+    example: <CheckboxExample />,
+    demo: <Checkbox />
   },
   {
     id: "colorPicker",
     en: "ColorPicker",
     zh: "颜色选择器",
     desc: "Land Design内置常规图标。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    props: [
+      { name: "value", type: "string", desc: "外部回传的颜色值" },
+      { name: "size", type: "string | number", desc: "尺寸" },
+      { name: "useSelect", type: "boolean", desc: "是否可选颜色" },
+      { name: "showList", type: "boolean", desc: "是否展示默认颜色列表" },
+      { name: "defaultColorList", type: "string[][]", desc: "自定义默认颜色列表" },
+      { name: "showOpacity", type: "boolean", desc: "是否可控制透明度" },
+      { name: "input", type: "boolean", desc: "是否使用底部输入框" },
+      { name: "info", type: "Element", desc: "提示内容" },
+      { name: 'onChange', type: '(color: string) => void;', desc: '颜色选择事件' },
+      { name: 'onCardClick', type: '(color: string) => void;', desc: '点击颜色显示块' },
+    ],
+    example: <ColorPickerExample />,
     demo: <ColorPicker />
   },
   {
@@ -646,7 +728,7 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "日期选择器",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <DatePickerExample />,
     demo: <DatePicker />
   },
   {

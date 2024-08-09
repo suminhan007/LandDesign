@@ -1,28 +1,33 @@
-import React, { Fragment } from "react";
+import React, { CSSProperties } from "react";
 import styled from "styled-components";
 import Pop from "./Pop";
 import Icon from "./Icon";
 
 type CheckItemType = {
-  value: number,
-  label: string,
-  pop?: string
+  value: number | string;
+  label: string;
+  info?: string;
+  disabled?: boolean;
 }
 export type RadioProps = {
-  checked?: number;
+  checked?: number | string;
   data?: CheckItemType[];
-  onChange?: (data: CheckItemType) => void;
+  onChange?: (item: CheckItemType) => void;
+  style?: CSSProperties;
+  className?: string;
 };
 const Radio: React.FC<RadioProps> = ({
   checked = 1,
-  data = [{ value: 1, label: '选项1' }, { value: 2, label: '选项2' }, { value: 3, label: '选项3' }],
+  data = [],
   onChange,
+  style,
+  className = ''
 }) => {
   return (
-    <StyleRadioWrap>
+    <StyleRadioWrap className={`land-radio-wrap ${className}`} style={style}>
       {
         data?.map(item =>
-          <Fragment>
+          <StyledRadioItem key={item.value} className={`land-radio-item ${item.disabled ? 'disabled' : ''}`}>
             <StyleRadioLabel
               onClick={(e) => {
                 e.stopPropagation();
@@ -30,17 +35,17 @@ const Radio: React.FC<RadioProps> = ({
               }}
             >
               <StyleRadioCircle className={`${checked === item.value ? "checked" : ""}`}>
-                <Icon name='check' size={10} strokeWidth={0} fill="var(--color-bg-white)" />
+                <Icon name='check' size={10} strokeWidth={0} fill={checked === item.value ? 'var(--color-bg-white)' : 'inherit'} />
               </StyleRadioCircle>
               {item.label}
             </StyleRadioLabel>
-            {item.pop && (
-              <StyleRadiopop className="hover-pop">
-                <Icon name="info-stroke" stroke="var(--color-text-4)" />
-                <Pop content={item.pop} theme="dark" style={{ maxWidth: "200px" }} />
-              </StyleRadiopop>
+            {item.info && (
+              <StyleRadioPop className="hover-pop">
+                <Icon name="info-stroke" stroke="var(--color-text-4)" size={12} />
+                <Pop content={item.info} theme="dark" style={{ maxWidth: "200px" }} />
+              </StyleRadioPop>
             )}
-          </Fragment>
+          </StyledRadioItem>
         )
       }
     </StyleRadioWrap>
@@ -52,12 +57,22 @@ const StyleRadioWrap = styled.div`
   align-items: center;
   gap: var(--gap-16);
 `;
+
+const StyledRadioItem = styled.div`
+   display: flex;
+  align-items: center;
+  gap: var(--gap-4); 
+  &.disabled{
+    opacity: var(--opacity-68);
+  }
+`
 const StyleRadioLabel = styled.div`
   display: flex;
   align-items: center;
   gap: var(--gap-8);
   font-size: var(--font-content-medium);
   color: var(--color-text-2);
+  white-space: nowrap;
   cursor: pointer;
 `;
 
@@ -69,6 +84,7 @@ const StyleRadioCircle = styled.div`
   height: 16px;
   border-radius: var(--radius-8);
   border: 1px solid var(--color-border-3);
+  flex-shrink: 0;
   transition: all var(--transition-15) linear;
   cursor: pointer;
   &:hover {
@@ -86,8 +102,9 @@ const StyleRadioCircle = styled.div`
   }
 `;
 
-const StyleRadiopop = styled.div`
+const StyleRadioPop = styled.div`
   position: relative;
-  height: 16px;
+  height: 12px;
+  line-height: 12px;
 `;
 export default Radio;
