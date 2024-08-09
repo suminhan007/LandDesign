@@ -12,22 +12,30 @@ import Design from "./Design";
 function App() {
   const [page, setPage] = useState<number | string>(3);
   return (
-    <div className="flex column" style={{ height: '100vh' }}>
+    <div className="flex column" style={{ height: "100vh" }}>
       <Header
         borderBottom
-        name={<Title title='Component Demo Lib' />}
+        name={<Title title="Component Demo Lib" />}
         menuProps={{
           data: [
             // { key: 1, title: '使用指南', clickType: ClickType.SELF },
             // { key: 2, title: '设计语言', clickType: ClickType.SELF },
-            { key: 3, title: '组件', clickType: ClickType.SELF }
+            {
+              key: 3,
+              title: "组件",
+              clickType: ClickType.SELF,
+              dropData: [
+                { key: 1, title: "111" },
+                { key: 2, title: "222" },
+              ],
+            },
           ],
           active: page,
-          onChange: item => setPage(item.key),
+          onChange: (item) => setPage(item.key),
         }}
         align="end"
       />
-      <div className="flex-1 flex" style={{ height: '0' }}>
+      <div className="flex-1 flex" style={{ height: "0" }}>
         {page === 2 && <Design />}
         {page === 3 && <Components />}
       </div>

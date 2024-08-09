@@ -49,6 +49,9 @@ export { default as LandGrid } from "./Grid";
 export type { HeaderProps } from "./Header";
 export { default as LandHeader } from "./Header";
 
+export type { ImgProps } from "./Img";
+export { default as LandImg } from "./Img";
+
 export type { InputProps } from "./Input";
 export { default as LandInput } from "./Input";
 
