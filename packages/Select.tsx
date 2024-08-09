@@ -2,19 +2,35 @@ import React, { CSSProperties, useState } from "react";
 import styled from "styled-components";
 import Title from "./Title";
 import Icon from "./Icon";
+import Pop from "./Pop";
 
 type SelectItemType = {
-  id: string | number;
+  /** 唯一标识 */
   value: string | number;
+  label: React.ReactNode;
+  /** 选项提示内容*/
+  tip?: React.ReactNode;
+  /** 选项图标类型提示 */
+  info?: React.ReactNode;
   disabled?: boolean;
 };
 export type SelectProps = {
+  /** 数据 */
   data?: SelectItemType[];
+  /** 占位符 */
   placeholder?: string;
+  /** 当前选中项 */
   selected?: string | number;
+  /** 宽度 */
   width?: number | string;
+  /** 标题 */
   title?: string;
-  info?: string | React.ReactNode;
+  /** 标题提示内容 */
+  titleInfo?: React.ReactNode;
+  /** 选框提示内容 */
+  info?: React.ReactNode;
+  /** 是否禁用 */
+  disabled?: boolean;
   onChange?: (item: SelectItemType) => void;
   className?: string;
   style?: CSSProperties;
@@ -25,7 +41,9 @@ const Select: React.FC<SelectProps> = ({
   selected = "0",
   width = "100px",
   title,
+  titleInfo,
   info,
+  disabled,
   onChange,
   className = "",
   style,
@@ -40,22 +58,23 @@ const Select: React.FC<SelectProps> = ({
       }}
       className={className}
     >
-      {title && <Title title={title} type="p" info={info} />}
+      {title && <Title title={title} type="p" info={titleInfo} />}
       <StyleSelectInput
-        className={`${show ? "show" : ""}`}
-        onClick={() => setShow(!show)}
+        className={`hover-pop ${show ? "show" : ""} ${disabled ? 'disabled' : ''}`}
+        onClick={(e: React.UIEvent) => { if (disabled) return; e.stopPropagation(); setShow(!show); }}
       >
         <p
           className={`${newSelected !== "0"
-              ? "land-select-trigger"
-              : "land-select-placeholder"
+            ? "land-select-trigger"
+            : "land-select-placeholder"
             }`}
         >
           {newSelected === "0"
             ? placeholder
-            : data?.filter((itm) => itm.id === newSelected)[0].value}
+            : data?.filter((itm) => itm.value === newSelected)[0].label}
         </p>
-        <Icon name="arrow" />
+        <Icon name="arrow" className="land-select-value-arrow" />
+        {info && <Pop content={info} />}
       </StyleSelectInput>
       <StyleSelectResults
         className={`land-select-results ${show ? "show" : ""}`}
@@ -63,16 +82,22 @@ const Select: React.FC<SelectProps> = ({
         <StyleSelectDrop>
           {data?.map((item) => (
             <StyleSelectDropItem
-              className={`${newSelected === item.id ? "selected" : ""} ${item.disabled ? "disabled" : ""
+              className={`${item.tip ? 'hover-pop' : ''} ${newSelected === item.value ? "selected" : ""} ${item.disabled ? "disabled" : ""
                 }`}
-              key={item.id}
+              key={item.value}
               onClick={() => {
-                setNewSelected(item.id);
+                if (item.disabled) return;
+                setNewSelected(item.value);
                 onChange?.(item);
                 setShow(false);
               }}
             >
-              {item.value}
+              <div className="land-select-results-item-label">{item.label}</div>
+              {item.info && <div className={`land-select-item-info ${item.info ? 'hover-pop' : ''}`}>
+                <Icon name="info-stroke" />
+                {item.info && <Pop content={item.info} placement="right" style={{ marginLeft: '12px' }} />}
+              </div>}
+              {item.tip && <Pop content={item.tip} placement="right" style={{ marginLeft: '8px' }} />}
             </StyleSelectDropItem>
           ))}
         </StyleSelectDrop>
@@ -91,6 +116,7 @@ const StyleSelectWrap = styled.div`
   }
 `;
 const StyleSelectInput = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--gap-4);
@@ -101,6 +127,14 @@ const StyleSelectInput = styled.div`
   border: 1px solid var(--color-border-2);
   border-radius: var(--radius-6);
   cursor: pointer;
+  &.disabled{
+    opacity: var(--opacity-68);
+    background-color: var(--color-bg-3);
+    cursor: not-allowed;
+    .land-select-value-arrow{
+      opacity: var(--opacity-04);
+    }
+  }
   p {
     flex: 1;
     font-size: 14px;
@@ -144,10 +178,19 @@ const StyleSelectDrop = styled.ul`
   border-radius: var(--radius-6);
 `;
 const StyleSelectDropItem = styled.li`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-radius: var(--radius-4);
   padding: var(--padding-medium);
   color: var(--color-text-2);
   font-size: var(--font-content-medium);
+  .land-select-item-info{
+    height: 16px;
+    position: relative;
+    cursor: default;
+  }
   cursor: pointer;
   &:hover {
     background-color: var(--color-bg-1);
@@ -156,11 +199,14 @@ const StyleSelectDropItem = styled.li`
     background-color: var(--color-bg-2);
   }
   &.selected {
-    background-color: var(--color-bg-3);
+    background-color: var(--color-link-1);
   }
   &.disabled {
-    opacity: var(--opacity-04);
-    pointer-events: none;
+    .land-select-results-item-label,
+    .land-select-item-info svg{
+      opacity: var(--opacity-04);
+    }
+    cursor: not-allowed;
   }
 `;
 export default Select;

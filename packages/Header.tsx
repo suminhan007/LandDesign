@@ -55,8 +55,8 @@ const Header: React.FC<HeaderProps> = ({
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   useEffect(() => {
     window.onscroll = () => setShowMobileNav(false);
-    window.onresize = () => setShowMobileNav(false)
-  })
+    window.onresize = () => setShowMobileNav(false);
+  });
   return (
     <StyledHeader
       className={`land-header ${fixed ? "fixed" : ""} ${className}`}
@@ -80,14 +80,24 @@ const Header: React.FC<HeaderProps> = ({
         {divider && logo && name && <Divider direction="column" lang="24px" />}
         {typeof name === "string" ? <img src={name} /> : name}
       </div>
-      <StyledHeaderNav className="land-header-nav" align={align} showMobileNav={showMobileNav}>
+      <StyledHeaderNav
+        className="land-header-nav"
+        align={align}
+        showMobileNav={showMobileNav}
+      >
         {menuProps && <Menu border={false} {...menuProps} />}
       </StyledHeaderNav>
       {rightComponent && (
         <div className="land-header-btns">{rightComponent}</div>
       )}
       {/* 移动端展开按钮 */}
-      {menuProps && menuProps.data && menuProps.data?.length > 0 && <Button icon={<Icon name='more-line' />} type="text" onClick={() => setShowMobileNav(!showMobileNav)} />}
+      {menuProps && menuProps.data && menuProps.data?.length > 0 && (
+        <Button
+          icon={<Icon name="more-line" />}
+          type="text"
+          onClick={() => setShowMobileNav(!showMobileNav)}
+        />
+      )}
     </StyledHeader>
   );
 };
@@ -106,7 +116,7 @@ const StyledHeader = styled.header<{
   padding: 0 24px;
   padding-left: ${(props) => (props.applications ? "0" : "")};
   gap: var(--gap-32);
-  width: 100vw;
+  width: 100%;
   height: ${(props) => props.height};
   border-bottom: ${(props) =>
     props.borderBottom ? "1px solid var(--color-border-2)" : ""};
@@ -196,8 +206,8 @@ const StyledHeaderNav = styled.div<{
       height: fit-content;
       border: 1px solid var(--color-border-1);
       transition: opacity 0.2 linear;
-      opacity: ${props => props.showMobileNav ? '1' : '0'};
-      pointer-events: ${props => props.showMobileNav ? 'all' : 'none'};
+      opacity: ${(props) => (props.showMobileNav ? "1" : "0")};
+      pointer-events: ${(props) => (props.showMobileNav ? "all" : "none")};
     }
   }
 `;

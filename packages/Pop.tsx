@@ -77,7 +77,7 @@ const Pop: React.FC<PopProps> = ({
               : placement === "bottom"
                 ? "-50%"
                 : "-50%"
-            }) rotate(45deg)`,
+            }) rotate(${placement === 'top' ? '45' : placement === 'bottom' ? '-135' : placement === 'right' ? '135' : '-45'}deg)`,
         }}
       ></div>
     </StyledBtnPop>
@@ -92,10 +92,9 @@ const StyledBtnPop = styled.div`
   color: var(--color-text-3);
   border-radius: 6px;
   background-color: var(--color-bg-white);
-  box-shadow: var(--boxshadow-normal);
+  box-shadow: var(--boxshadow-small);
   border: var(--border-1) solid var(--color-border-1);
   opacity: 0;
-  box-shadow: var(--boxshadow-light);
   pointer-events: none;
   transition: all 0.15s linear;
   z-index: 100;

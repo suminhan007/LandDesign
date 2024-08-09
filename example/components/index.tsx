@@ -19,7 +19,7 @@ const Components: React.FC<Props> = ({
   const [dropActive, setDropActive] = useState<number | string>(0);
   const curItem = useMemo(() => {
     let item: any = { id: 1, en: 'Icon', zh: '图标' }
-    item = COMPONENTS_DATA.filter(itm1 => itm1.id === active)[0].data?.filter(itm2 => itm2.id === dropActive)[0];
+    item = COMPONENTS_DATA.filter(itm1 => itm1.id === active)[0]?.data?.filter(itm2 => itm2.id === dropActive)[0];
     return item;
   }, [active, dropActive]);
   return (
@@ -51,7 +51,10 @@ const Components: React.FC<Props> = ({
       <div className="flex-1 p-24 height-100 overflow-auto border-box" >
         <StyledRightContent className="flex column width-100">
           {/* 组件索引 */}
-          {active === 0 && <ComponentPreview onClick={item => setActive(item.id)} />}
+          {active === 0 && <ComponentPreview onClick={(dropItem, item) => {
+            setActive(item.id);
+            setDropActive(dropItem.id);
+          }} />}
           {active !== 0 &&
             <>
               <Title title={`${curItem.zh} ${curItem.en}`} type="h1" />

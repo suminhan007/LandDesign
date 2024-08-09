@@ -14,7 +14,47 @@ import AffixContainerExample from "./Components/AffixContainerExample";
 import BreadCrumbExample from "./Components/BreadCrumbExample";
 import PaginationExample from "./Components/PaginationExample";
 import StepsExample from "./Components/StepsExample";
-import ImgExample from "./components/ImgExample";
+import ImgExample from "./components/ImageExample";
+import Icon from "../packages/Icon";
+import Divider from "../packages/Divider";
+import Flex from "../packages/Flex";
+import Grid, { gridType } from "../packages/Grid";
+import AffixContainer from "../packages/AffixContainer";
+import Anchor from "../packages/Anchor";
+import BreadCrumb from "../packages/BreadCrumb";
+import Menu, { ClickType } from "../packages/Menu";
+import Pagination from "../packages/Pagination";
+import Steps from "../packages/Steps";
+import Input from "../packages/Input";
+import TagInput from "../packages/TagInput";
+import Select from '../packages/Select';
+import SelectTree from '../packages/SelectTree';
+import Radio from '../packages/Radio';
+import CheckBox from '../packages/CheckBox';
+import ColorPicker from '../packages/ColorPicker';
+import DatePicker from '../packages/DatePicker';
+import NumberInput from '../packages/NumberInput';
+import Switch from '../packages/Switch';
+import Slider from '../packages/Slider';
+import Uploader from '../packages/Uploader';
+import Rate from '../packages/Rate';
+
+import Table from "../packages/Table";
+
+import Title from '../packages/Title';
+import Loading from "../packages/Loading";
+import Pop from "../packages/Pop";
+import Layout from "../packages/Layout";
+import Header from "../packages/Header";
+import Sider from "../packages/Sider";
+import Content from "../packages/Content";
+import Footer from "../packages/Footer";
+import InputExample from "./Components/InputExample";
+import TagInputExample from "./Components/TagInputExample";
+import SelectExample from "./Components/SelectExample";
+import SelectTreeExample from "./Components/SelectTreeExample";
+import ImageExample from "./components/ImageExample";
+
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -34,7 +74,7 @@ export const COMMON_COMPONENTS_DATA = [
       },
     ],
     example: <IconExample />,
-    demo: <></>,
+    demo: <Icon name="check-fill" size={36} />,
   },
   {
     id: "button",
@@ -113,7 +153,7 @@ export const COMMON_COMPONENTS_DATA = [
       { name: "onClick", type: "func", desc: "按钮点击事件" },
     ],
     example: <ButtonExample />,
-    demo: <></>,
+    demo: <Button text="按钮"></Button>
   },
   {
     id: "link",
@@ -127,34 +167,14 @@ export const COMMON_COMPONENTS_DATA = [
         desc: "链接类型",
         optional: true,
       },
-      {
-        name: "disabled",
-        type: "boolean",
-        desc: "链接是否禁用",
-        optional: true,
-      },
-      {
-        name: "actived",
-        type: "boolean",
-        desc: "链接是否已点击",
-        optional: true,
-      },
-      {
-        name: "tip",
-        type: "element | string",
-        desc: "链接提示气泡",
-        optional: true,
-      },
-      {
-        name: "tipProps",
-        type: <Link href="#MenuItemType">tipProps</Link>,
-        desc: "链接提示气泡属性",
-        optional: true,
-      },
+      { name: "disabled", type: "boolean", desc: "链接是否禁用", optional: true },
+      { name: "active", type: "boolean", desc: "链接是否已点击", optional: true },
+      { name: "tip", type: "element | string", desc: "链接提示气泡", optional: true },
+      { name: "tipProps", type: <Link href="#MenuItemType">tipProps</Link>, desc: "链接提示气泡属性", optional: true },
       { name: "children", type: "element", desc: "链接内容", optional: true },
     ],
     example: <LinkExample />,
-    demo: <></>,
+    demo: <Link>链接</Link>
   },
 ];
 
@@ -199,7 +219,7 @@ export const LAYOUT_COMPONENTS_DATA = [
       },
     ],
     example: <DividerExample />,
-    demo: <></>,
+    demo: <Divider />
   },
   {
     id: "flex",
@@ -243,7 +263,9 @@ export const LAYOUT_COMPONENTS_DATA = [
       { name: "children", type: "element", desc: "自定义元素", optional: true },
     ],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Flex gap={8}>
+      {Array.from({ length: 3 }).map(() => <div className="bg-primary flex-1" style={{ height: '40px' }}></div>)}
+    </Flex>
   },
   {
     id: "grid",
@@ -265,7 +287,9 @@ export const LAYOUT_COMPONENTS_DATA = [
       { name: "children", type: "element", desc: "自定义元素", optional: true },
     ],
     example: <GridExample />,
-    demo: <></>,
+    demo: <Grid className="width-100" gap={8} type={gridType.ColumnRepeat} repeatNum={2}>
+      {Array.from({ length: 4 }).map(() => <div className="bg-primary" style={{ height: '40px' }}></div>)}
+    </Grid>
   },
   {
     id: "layout",
@@ -273,14 +297,22 @@ export const LAYOUT_COMPONENTS_DATA = [
     zh: "布局",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <LayoutExample />,
-    demo: <></>,
-  },
+    demo: <Layout className="border width-100 ratio-1">
+      <Header logo={<p>🌷🌷🌷</p>} name={<Title title="Web Site" type="h2" />} fixed filter={10} />
+      <Layout>
+        <Sider placement='left'><Flex bothCenter h="100%">SiderLeft</Flex></Sider>
+        <Content style={{ minHeight: '40px' }}><Flex bothCenter h="100%">Content</Flex></Content>
+        <Sider placement='right'><Flex bothCenter h="100%">SiderRight</Flex></Sider>
+      </Layout>
+      <Footer><Flex bothCenter>Footer</Flex></Footer>
+    </Layout>
+  }
 ];
 
 export const NAV_COMPONENTS_DATA = [
   {
-    id: "201",
-    en: "affix",
+    id: '201',
+    en: "affixContainer",
     zh: "图钉",
     desc: "图钉用于在容器内部指定位置展示内容",
     props: [
@@ -317,7 +349,7 @@ export const NAV_COMPONENTS_DATA = [
       { name: "children", type: "element", desc: "图钉容器元素" },
     ],
     example: <AffixContainerExample />,
-    demo: <></>,
+    demo: <AffixContainer className='ratio-1 border radius-8' style={{ width: '60%' }} content={<Button icon={<Icon name="copy" />} />} />
   },
   {
     id: "anchor",
@@ -326,7 +358,13 @@ export const NAV_COMPONENTS_DATA = [
     desc: "锚点用于跳转至页面指定位置。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <AnchorExample />,
-    demo: <></>,
+    demo: <Anchor
+      data={[
+        { key: '组件预览', href: '#组件预览', title: '组件预览' },
+        { key: 'API', href: '#API', title: 'API' },
+        { key: 'Type', href: '#Type', title: 'Type' },
+      ]}
+    />
   },
   {
     id: "breadCrumb",
@@ -335,7 +373,13 @@ export const NAV_COMPONENTS_DATA = [
     desc: "锚点用于跳转至页面指定位置。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <BreadCrumbExample />,
-    demo: <></>,
+    demo: <BreadCrumb
+      data={[
+        { key: 1, label: '页面1' },
+        { key: 2, label: '页面页面页面页面1-1', maxWidth: 100 },
+        { key: 3, label: '页面页面页面页面1-1-2' },
+      ]}
+    />
   },
   {
     id: "menu",
@@ -395,7 +439,13 @@ export const NAV_COMPONENTS_DATA = [
       },
     ],
     example: <MenuExample />,
-    demo: <></>,
+    demo: <Menu
+      data={[
+        { key: 1, title: "Navigation 1", clickType: ClickType.SELF },
+        { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
+      ]}
+      active={1}
+    />,
     types: [
       {
         name: "MenuItemType",
@@ -470,7 +520,11 @@ export const NAV_COMPONENTS_DATA = [
       },
     ],
     example: <PaginationExample />,
-    demo: <></>,
+    demo: <Pagination
+      total={4}
+      current={1}
+      pageSize={1}
+    />
   },
   {
     id: "step",
@@ -493,7 +547,15 @@ export const NAV_COMPONENTS_DATA = [
       },
     ],
     example: <StepsExample />,
-    demo: <></>,
+    demo: <Steps
+      data={[
+        { key: 1, title: '步骤1', desc: '描述文字' },
+        { key: 2, title: '步骤2', desc: '描述文字' },
+        { key: 3, title: '步骤3', desc: '描述文字' }
+      ]}
+      current={2}
+      finished={[1]}
+    />
   },
   {
     id: "dropdown",
@@ -508,31 +570,48 @@ export const NAV_COMPONENTS_DATA = [
 
 export const INPUT_COMPONENTS_DATA = [
   {
-    id: "input",
-    en: "Input",
-    zh: "输入框",
-    desc: "步骤条。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    id: 'input',
+    en: 'Input',
+    zh: '输入框',
+    desc: '步骤条。',
+    props: [
+      { name: 'name', type: "type", desc: 'desc' },
+    ],
+    example: <InputExample />,
+    demo: <Input />
   },
   {
-    id: "select",
-    en: "Select",
-    zh: "选择器",
-    desc: "Land Design内置常规图标。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    id: 'tagInput',
+    en: 'TagInput',
+    zh: '标签输入框',
+    desc: '标签输入框。',
+    props: [
+      { name: 'name', type: "type", desc: 'desc' },
+    ],
+    example: <TagInputExample />,
+    demo: <TagInput />
   },
   {
-    id: "selectTree",
-    en: "SelectTree",
-    zh: "层级选择器",
-    desc: "Land Design内置常规图标。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    id: 'select',
+    en: 'Select',
+    zh: '选择器',
+    desc: 'Land Design内置常规图标。',
+    props: [
+      { name: 'name', type: "type", desc: 'desc' },
+    ],
+    example: <SelectExample />,
+    demo: <Select />
+  },
+  {
+    id: 'selectTree',
+    en: 'SelectTree',
+    zh: '层级选择器',
+    desc: 'Land Design内置常规图标。',
+    props: [
+      { name: 'name', type: "type", desc: 'desc' },
+    ],
+    example: <SelectTreeExample />,
+    demo: <SelectTree />
   },
   {
     id: "radio",
@@ -541,7 +620,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Radio />
   },
   {
     id: "checkbox",
@@ -550,7 +629,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <CheckBox />
   },
   {
     id: "colorPicker",
@@ -559,7 +638,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <ColorPicker />
   },
   {
     id: "datePicker",
@@ -568,7 +647,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <DatePicker />
   },
   {
     id: "numberInput",
@@ -586,7 +665,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Switch />
   },
   {
     id: "slider",
@@ -595,7 +674,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Slider max={100} step={10} value={10} />
   },
   {
     id: "rate",
@@ -604,7 +683,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Rate />
   },
   {
     id: "upload",
@@ -613,9 +692,9 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
-  },
-];
+    demo: <Uploader />
+  }
+]
 
 export const DISPLAY_COMPONENTS_DATA = [
   {
@@ -687,7 +766,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "图片",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <ImageExample />,
     demo: <></>,
   },
   {
@@ -724,7 +803,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Button text="hover" className="hover-pop"><Pop content='我是气泡' theme="dark" /></Button>
   },
   {
     id: "statistic",
@@ -742,7 +821,17 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Table
+      className="width-100 mt-16"
+      titleData={[
+        { title: "时间", value: "time" },
+        { title: "地点", value: "location" },
+        { title: "花费", value: "cost" },
+      ]}
+      data={[{ title: "8.2", value: "北京", cost: '122元' },
+      { title: "8.3", value: "深圳", cost: '88元' },
+      ]}
+    />
   },
   {
     id: "tag",
@@ -842,7 +931,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Loading />
   },
   {
     id: "watermark",
@@ -861,7 +950,11 @@ export const TEXT_COMPONENTS_DATA = [
     desc: "",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Flex column gap={8} className="mx-auto" style={{ width: 'fit-content' }}>
+      <Title title='一级标题' />
+      <Title title='二级标题' type="h2" />
+      <Title title='三级标题' type="h3" />
+    </Flex>
   },
   {
     id: "textList",
@@ -884,18 +977,6 @@ export const TEXT_COMPONENTS_DATA = [
 ];
 
 export const OTHER_COMPONENTS_DATA = [
-  {
-    id: "img",
-    en: "Img",
-    zh: "图片",
-    desc: "Land Design内置常规图标。",
-    props: [
-      { name: "size", type: "number", desc: "图标大小" },
-      { name: "color", type: "string", desc: "图标颜色" },
-    ],
-    example: <ImgExample />,
-    demo: <></>,
-  },
 ];
 
 // 组件数据汇总
