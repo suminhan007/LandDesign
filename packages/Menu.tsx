@@ -86,17 +86,15 @@ const Menu: React.FC<MenuProps> = ({
     >
       {data?.map((item) => (
         <div
-          className={`land-menu-item ${
-            item.clickType === ClickType.SIMPLE ? "simple" : ""
-          } ${item.clickType === ClickType.DISABLED ? "disabled" : ""}`}
+          className={`land-menu-item ${item.clickType === ClickType.SIMPLE ? "simple" : ""
+            } ${item.clickType === ClickType.DISABLED ? "disabled" : ""}`}
           style={itemStyle}
         >
           <StyleMenuLink
             role="button"
             key={item.key}
-            className={`land-menu-link ${
-              active === item.key ? "active" : ""
-            } ${itemClassName}`}
+            className={`land-menu-link ${active === item.key ? "active" : ""
+              } ${itemClassName}`}
             onClick={() => onChange?.(item)}
             column={direction === "column"}
             theme={theme}
@@ -237,17 +235,17 @@ const StyleMenuLink = styled.a<{
     bottom: ${(props) => (!props.column ? "0" : "50%")};
     width: ${(props) => (!props.column ? "12px" : "2px")};
     height: ${(props) =>
-      !props.column
-        ? "2px"
-        : props.theme.activeBg
+    !props.column
+      ? "2px"
+      : props.theme.activeBg
         ? "100%"
         : "calc(100% - 16px)"};
     transform: ${(props) =>
-      !props.column ? `translateX(50%)` : "translateY(50%)"};
+    !props.column ? `translateX(50%)` : "translateY(50%)"};
     transform-origin: center center;
     border-radius: 1px;
     background-color: ${(props) =>
-      props.theme.lineColor || "var(--color-text-1)"};
+    props.theme.lineColor || "var(--color-text-1)"};
     opacity: 0;
   }
   &:hover {

@@ -1,20 +1,28 @@
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
 
 export type InputProps = {
   type?: 'border' | 'background';
   /** 输入值 */
-  value?: string;
+  value?: string | number;
+  /** 输入类型 */
+  inputType?: string;
   /** 占位符 */
   placeholder?: string;
   /** 前置内容 */
   prefix?: React.ReactNode;
   /** 是否有搜索按钮 */
   useSearch?: boolean;
-  w?: number | string;
+  width?: number | string;
   /** 允许输入的最大字符数 */
   maxLength?: number;
+  /** 是否显示字数 */
+  showNumber?: boolean;
+  /** 是否使用清除按钮 */
+  showClear?: boolean;
+  /** 是否禁用 */
+  disabled?: boolean;
   onChange?: (val: string | number, e: any) => void;
   onFocus?: (e: any) => void;
   className?: string;
@@ -24,28 +32,32 @@ export type InputProps = {
 const Input: React.FC<InputProps> = ({
   type = 'border',
   value,
+  inputType = 'text',
   placeholder = '请输入',
   prefix,
   useSearch = false,
-  w,
+  width,
   maxLength,
+  showClear = true,
+  disabled,
   onChange,
   onFocus,
   className,
   wrapStyle,
   ...restProps
 }) => {
-  const [newValue, setNewValue] = useState<string>(value);
+  const [newValue, setNewValue] = useState<string | number>(value);
+  useEffect(() => setNewValue(value), [value]);
   return (
     <StyleInputWrap
-      className={`land-input ${type} ${className}`}
-      style={{ width: typeof w === "number" ? `${w}px` : w, ...wrapStyle }}
+      className={`land-input ${disabled ? 'disabled' : ''} ${type} ${className}`}
+      style={{ width: typeof width === "number" ? `${width}px` : width, ...wrapStyle }}
     >
       {useSearch && <Icon name="search" stroke="var(--color-text-5)" />}
       {prefix && <p className="input-prefix">{prefix}</p>}
       <input
         placeholder={placeholder}
-        type='text'
+        type={inputType}
         value={newValue}
         max={maxLength}
         onClick={(e) => e.stopPropagation()}
@@ -53,41 +65,56 @@ const Input: React.FC<InputProps> = ({
         onChange={(e) => { e.stopPropagation(); onChange?.(e.target.value, e); }}
         {...restProps}
       />
-      {newValue && <Icon name="error-fill" className="land-input-clear-icon" fill="var(--color-text-5)" onClick={() => setNewValue('')} />}
+      {(Boolean(newValue) && showClear) && <Icon name="error-fill" className="land-input-clear-icon" fill="var(--color-text-5)" onClick={() => setNewValue('')} />}
     </StyleInputWrap>
   );
 };
+
 
 const StyleInputWrap = styled.div`
   display: flex;
   align-items: center;
   gap: var(--gap-4);
   padding: 0 12px;
+  height: 36px;
   border-radius: var(--radius-4);
   transition: background-color var(--transition-15) linear;
   box-sizing: border-box;
   &.border{
     border: var(--border-1) solid var(--color-border-2);
-    &:hover{
+    &:hover:not(.disabled){
     background-color: var(--color-bg-1);
     }
-    &:active{
+    &:active:not(.disabled){
       background-color: var(--color-bg-2);
     }
   }
   &.background{
     background-color: var(--color-bg-1);
-    &:hover{
+    &:hover:not(.disabled){
     background-color: var(--color-bg-2);
     }
-    &:active{
+    &:active:not(.disabled){
       background-color: var(--color-bg-3);
+    }
+  }
+  &.disabled{
+    opacity: var(--opacity-68);
+    background-color: var(--color-bg-1);
+    cursor: not-allowed;
+    pointer-events: none;
+    input{
+      opacity: var(--opacity-68);
+      cursor: not-allowed;
+      &::placeholder{
+        opacity: var(--opacity-68);
+      }
     }
   }
   
   input {
     width: 100%;
-    height: 34px;
+    height: 100%;
     background-color: transparent;
     appearance: none;
     -moz-appearance: none;
@@ -111,6 +138,7 @@ const StyleInputWrap = styled.div`
   }
   .land-input-clear-icon{
     width: 0px;
+    flex-shrink: 0;
   }
   &:hover{
     .land-input-clear-icon{

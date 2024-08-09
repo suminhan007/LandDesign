@@ -203,6 +203,7 @@ const StyledHeaderNav = styled.div<{
     flex: none;
     width: fit-content;
     height: fit-content;
+    pointer-events: ${(props) => (props.showMobileNav ? "all" : "none")};
     .land-menu {
       flex-direction: column;
       padding: 12px 4px;
@@ -213,7 +214,6 @@ const StyledHeaderNav = styled.div<{
       border-bottom-right-radius: 8px;
       transition: opacity 0.2 linear;
       opacity: ${(props) => (props.showMobileNav ? "1" : "0")};
-      pointer-events: ${(props) => (props.showMobileNav ? "all" : "none")};
       .land-menu-link.active::after{
         opacity: 0;
       }

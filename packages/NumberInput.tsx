@@ -1,90 +1,121 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import styled from 'styled-components';
-import Divider from "./Divider";
+import Divider from './Divider';
+import Icon from './Icon';
+import Input from './Input';
 
 export type NumberInputProps = {
-  background?: boolean;
-  value: string;
-  percentage?: boolean;
+  value?: number;
+  type?: 'border' | 'background';
+  step?: number;
+  min?: number;
+  max?: number;
+  suffix?: string;
+  disabled?: boolean;
   className?: string;
   style?: CSSProperties;
+  onChange?: (event: any, value: number) => void;
   [key: string]: any;
 };
 
-const TaccNumberInput: React.FC<NumberInputProps> = ({
-  // value,
-  background,
-  prefix,
+const NumberInput: React.FC<NumberInputProps> = ({
+  value,
+  type = 'border',
+  step = 1,
+  min = 0,
+  max = 100,
+  suffix,
+  disabled,
+  onChange,
   className,
   style,
-  // ...restProps
-}) => (
-  <StyledNumberInputWrap
-    className={`radius-6 ${
-      background ? "flex items-center background" : ""
-    } ${className}`}
-    style={style}
-  >
-    {prefix && (
-      <>
-        {prefix}
-        <Divider direction="column" margin={7} lang="16px" />
-      </>
-    )}
-    {/* <StyleNumberInput
-      buttonPosition="right"
-      min={0}
-      value={value}
-      {...restProps}
-    /> */}
-  </StyledNumberInputWrap>
-);
-
-const StyledNumberInputWrap = styled.div`
-  padding-right: 8px;
-  padding-left: 12px;
-  &:hover {
-        background-color: var(--od-gray-12);
-      }
-   &.background {
-      background-color: var(--od-gray-12);
-      &:hover {
-        background-color: var(--od-gray-09);
-      }
+  ...restProps
+}) => {
+  const [newValue, setNewValue] = useState<number>(value);
+  const handleValueChange = (e: any, val: number) => {
+    if (val < (min - step / 2) || val > (max + step / 2)) {
+      return;
+    } else {
+      setNewValue(val);
+      onChange?.(e, val);
     }
+  }
+  return (
+    <StyledNumberInputWrap
+      className='StyledNumberInputWrap'
+      style={style}
+      onClick={(e) => e.stopPropagation()}
+      suffix={suffix}
+    >
+      <Input
+        type={type}
+        inputType='number'
+        value={newValue}
+        disabled={disabled}
+        onChange={(value, e) => {
+          if (Number(value) > max || Number(value) < min) return;
+          setNewValue(Number(value));
+          onChange?.(e, Number(value));
+        }}
+        showClear={false}
+        style={{
+          paddingRight: '32px'
+        }}
+        {...restProps}
+      />
+      <div className='land-numberInput-arrow' style={{ borderLeft: type === 'border' ? '1px solid var(--color-border-2)' : '', background: 'inherit' }}>
+        <div className={`land-numberInput-add ${newValue === max ? 'disabled' : ''}`} onClick={(e: any) => handleValueChange?.(e, Number(newValue) + step)}><Icon name="arrow" /></div>
+        {type === 'border' && <Divider margin={0} lang='32px' />}
+        <div className={`land-numberInput-dec ${newValue === min ? 'disabled' : ''}`} onClick={(e: any) => handleValueChange?.(e, Number(newValue) - step)}><Icon name="arrow" /></div>
+      </div>
+    </StyledNumberInputWrap>
+  )
+};
+
+const StyledNumberInputWrap = styled.div<{
+  suffix?: string;
+}>`
+  position: relative;
+  input{
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      height: auto;
+      -webkit-appearance: none;
+    }
+  }
+  .land-numberInput-arrow{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 100%;
+    color: var(--color-text-4);
+    
+    .land-numberInput-add svg{
+      transform: rotate(180deg);
+    }
+    .land-numberInput-add,
+    .land-numberInput-dec{
+      height: 18px;
+      transition: color var(--transition-15) linear;
+      cursor: pointer;
+      &:hover:not(.disabled){
+      color: var(--color-text-2);
+    }
+    &.disabled{
+      cursor: not-allowed;
+    }
+    }
+  }
+  &::after{
+    content: ${props => props.suffix};
+    display: block;
+    position: absolute;
+  }
 `
 
-// const StyleNumberInput = styled.input`
-//   input,
-//   button {
-//     border: none;
-//     background-color: transparent;
-//     cursor: pointer;
-//   }
-//   input {
-//     max-width: 66px;
-//     padding-right: 26px;
-//     cursor: text;
-//     &:active,
-//     &:hover,
-//     &:focus,
-//     &:focus-within,
-//     &:focus:hover {
-//       border: none;
-//       background-color: transparent;
-//     }
-//   }
-//   button {
-//     width: 16px;
-//     &:hover {
-//       background-color: transparent;
-//       svg {
-//         color: var(--od-gray-01);
-//       }
-//     }
-//     &:active {
-//       background-color: transparent;
-//     }
-//   }
-// `;
-export default TaccNumberInput;
+export default NumberInput;

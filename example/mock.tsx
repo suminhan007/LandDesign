@@ -58,6 +58,7 @@ import Checkbox from "../packages/Checkbox";
 import CheckboxExample from "./Components/CheckboxExample";
 import ColorPickerExample from "./Components/ColorPickerExample";
 import DatePickerExample from "./Components/DatePickerExample";
+import NumberInputExample from "./Components/NumberInputExample";
 
 
 export const COMMON_COMPONENTS_DATA = [
@@ -737,8 +738,8 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "数字输入框",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <NumberInputExample />,
+    demo: <NumberInput />,
   },
   {
     id: "switch",
