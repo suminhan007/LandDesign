@@ -54,7 +54,7 @@ const Image: React.FC<ImageProps> = ({
       className="flex items-center justify-center bg-gray radius-6"
       style={{
         width: typeof width === "number" ? `${width}px` : width,
-        aspectRatio: `${ratio}`,
+        aspectRatio: imgLoading ? `${ratio}` : "auto",
       }}
     >
       {imgLoading &&

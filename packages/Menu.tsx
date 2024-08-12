@@ -235,17 +235,17 @@ const StyleMenuLink = styled.a<{
     bottom: ${(props) => (!props.column ? "0" : "50%")};
     width: ${(props) => (!props.column ? "12px" : "2px")};
     height: ${(props) =>
-    !props.column
-      ? "2px"
-      : props.theme.activeBg
+      !props.column
+        ? "2px"
+        : props.theme.activeBg
         ? "100%"
         : "calc(100% - 16px)"};
     transform: ${(props) =>
-    !props.column ? `translateX(50%)` : "translateY(50%)"};
+      !props.column ? `translateX(50%)` : "translateY(50%)"};
     transform-origin: center center;
     border-radius: 1px;
     background-color: ${(props) =>
-    props.theme.lineColor || "var(--color-text-1)"};
+      props.theme.lineColor || "var(--color-text-1)"};
     opacity: 0;
   }
   &:hover {
@@ -320,6 +320,9 @@ const StyleMenuLink = styled.a<{
     border-radius: 3px;
     box-sizing: border-box;
     transform: scale(0.65);
+  }
+  @media screen and (max-width: 800px) {
+    font-size: var(--font-content-medium);
   }
 `;
 
