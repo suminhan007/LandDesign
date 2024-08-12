@@ -1,11 +1,16 @@
 import React, { CSSProperties } from 'react';
 export type NumberInputProps = {
-    background?: boolean;
-    value: string;
-    percentage?: boolean;
+    value?: number;
+    type?: 'border' | 'background';
+    step?: number;
+    min?: number;
+    max?: number;
+    suffix?: string;
+    disabled?: boolean;
     className?: string;
     style?: CSSProperties;
+    onChange?: (event: any, value: number) => void;
     [key: string]: any;
 };
-declare const TaccNumberInput: React.FC<NumberInputProps>;
-export default TaccNumberInput;
+declare const NumberInput: React.FC<NumberInputProps>;
+export default NumberInput;

@@ -15,5 +15,5 @@ export type AnchorProps = {
     style?: CSSProperties;
     className?: string;
 };
-declare const LandAnchor: React.FC<AnchorProps>;
-export default LandAnchor;
+declare const Anchor: React.FC<AnchorProps>;
+export default Anchor;

@@ -44,13 +44,15 @@ const Slider: React.FC<SliderProps> = ({
     setWidth(width);
   }, []);
   return (
-    <div ref={sliderRef} className='flex items-center gap-8 width-100'>
+    <div ref={sliderRef} className="flex items-center gap-8 width-100">
       {/* 最小值前缀:为0%或options第一项 */}
       {prefix && <div className="fs-12 color-gray-3">{prefix}</div>}
       <StyledSliderContent
         useDivider={useDivider}
         step={100 / (max - min)}
-        className={`relative flex-1 p-2 radius-8 bg-gray hover:bg-gray transition-2s hover-pop ${className ? className : ''}`}
+        className={`relative flex-1 p-2 radius-8 bg-gray hover:bg-gray transition-2s hover-pop ${
+          className ? className : ""
+        }`}
         style={{ height: `${height}px` }}
       >
         {/* slider:为0或options第一项 */}
@@ -65,40 +67,60 @@ const Slider: React.FC<SliderProps> = ({
           }}
           // 选中部分样式
           style={{
-            background: (value < ((max - min) / 2) ? `linear-gradient(to right,var(--od-light-color) calc(100% - 2px), var(--od-light-color)  calc(100% - 2px)) 0 0 / ${((value - min) / (max - min)) * 100}% 100% no-repeat` : `linear-gradient(to right,var(--od-light-color) calc(100% - 2px), var(--od-light-color)  calc(100% - 2px)) 0 0 / ${((value - min) / (max - min)) * 100}% 100% no-repeat`),
+            background:
+              value < (max - min) / 2
+                ? `linear-gradient(to right,var(--color-primary-6) calc(100% - 2px), var(--color-primary-6)  calc(100% - 2px)) 0 0 / ${
+                    ((value - min) / (max - min)) * 100
+                  }% 100% no-repeat`
+                : `linear-gradient(to right,var(--color-primary-6) calc(100% - 2px), var(--color-primary-6)  calc(100% - 2px)) 0 0 / ${
+                    ((value - min) / (max - min)) * 100
+                  }% 100% no-repeat`,
           }}
-          className='width-100 radius-6 flex justify-center'
+          className="width-100 radius-6 flex justify-center"
         />
-        {usePop && <Pop content={popValue} style={{ transform: `translateX(${width * (value - ((max - min) / 2)) / (max - min)}}px)` }} />}
-      </StyledSliderContent >
+        {usePop && (
+          <Pop
+            content={popValue}
+            style={{
+              transform: `translateX(${
+                (width * (value - (max - min) / 2)) / (max - min)
+              }}px)`,
+            }}
+          />
+        )}
+      </StyledSliderContent>
       {/* 最大值后缀:为100%或options最后一项 */}
       {suffix && <div className="fs-12 color-gray-3">{suffix}</div>}
     </div>
-
   );
 };
-
 
 const StyledSliderContent = styled.div<{
   useDivider?: boolean;
   step?: number;
 }>`
   &::before {
-    content: '';
+    content: "";
     display: block;
     margin-top: 4px;
     width: 100%;
     height: calc(100% - 8px);
     border-radius: 8px;
-    background: ${props => props.useDivider ? `linear-gradient(to right,transparent calc(100% - 1px), var(--ms-gray-01)  calc(100% - 1px),var(--ms-gray-01) 100%) 0 0 / 100% 100%,
-          linear-gradient(to right,transparent calc(100% - 1px), var(--ms-border) calc(100% - 1px),var(--ms-border) 100%) 0 0 / ${props.step}% 100%,var(--ms-gray-01) 0 0 / 100% 100%` : 'transparent'};
+    background: ${(props) =>
+      props.useDivider
+        ? `linear-gradient(to right,transparent calc(100% - 1px), var(--bg-gray-1)  calc(100% - 1px),var(--bg-gray-1) 100%) 0 0 / 100% 100%,
+          linear-gradient(to right,transparent calc(100% - 1px), var(--border-3) calc(100% - 1px),var(--border-3) 100%) 0 0 / ${props.step}% 100%,var(--bg-gray-1) 0 0 / 100% 100%`
+        : "transparent"};
     transition: all 0.2s linear;
   }
-  &:hover::before{
-    background: ${props => props.useDivider ? `linear-gradient(to right,transparent calc(100% - 1px), var(--ms-gray-02)  calc(100% - 1px),var(--ms-gray-02) 100%) 0 0 / 100% 100%,
-          linear-gradient(to right,transparent calc(100% - 1px), var(--ms-border) calc(100% - 1px),var(--ms-border) 100%) 0 0 / ${props.step}% 100%,var(--ms-gray-02) 0 0 / 100% 100%` : ''};
+  &:hover::before {
+    background: ${(props) =>
+      props.useDivider
+        ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-gray-2)  calc(100% - 1px),var(--color-gray-2) 100%) 0 0 / 100% 100%,
+          linear-gradient(to right,transparent calc(100% - 1px), var(--border-3) calc(100% - 1px),var(--border-3) 100%) 0 0 / ${props.step}% 100%,var(--color-gray-2) 0 0 / 100% 100%`
+        : ""};
   }
-`
+`;
 
 const StyleInput = styled.input`
   position: absolute;
@@ -110,7 +132,7 @@ const StyleInput = styled.input`
   border: 0px;
   outline: none;
   object-fit: contain;
-  &[type=range]{
+  &[type="range"] {
     width: calc(100% - 4px);
   }
   &::-webkit-slider-runnable-track {
@@ -122,7 +144,7 @@ const StyleInput = styled.input`
     width: 16px;
     height: 100%;
     border-radius: 6px;
-    background: var(--od-light-color);
+    background: var(--color-bg-white);
     border: 1px solid rgba(73, 90, 122, 0.12);
     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.04);
     transition: border-color linear 0.2s;

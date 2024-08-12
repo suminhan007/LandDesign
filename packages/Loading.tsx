@@ -1,21 +1,30 @@
-import React from 'react'
-import styled from 'styled-components'
-
+import React, { CSSProperties } from "react";
+import styled from "styled-components";
 
 export type LoadingProps = {
   size?: number;
   strokeSize?: number;
   color?: string;
+  style?: CSSProperties;
+  className?: string;
 };
 const Loading: React.FC<LoadingProps> = ({
   size = 18,
   strokeSize = 2,
-  color = 'var(--color-text-1)'
+  color = "var(--color-text-1)",
+  style,
+  className = "",
 }) => {
   return (
-    <StyledLoadingContainer className="land-loading-container" size={size} strokeSize={strokeSize} color={color}></StyledLoadingContainer>
-  )
-}
+    <StyledLoadingContainer
+      className={`land-loading-container ${className}`}
+      style={style}
+      size={size}
+      strokeSize={strokeSize}
+      color={color}
+    ></StyledLoadingContainer>
+  );
+};
 
 const StyledLoadingContainer = styled.div<{
   size: number;

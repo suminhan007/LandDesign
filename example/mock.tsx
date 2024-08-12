@@ -59,7 +59,9 @@ import CheckboxExample from "./Components/CheckboxExample";
 import ColorPickerExample from "./Components/ColorPickerExample";
 import DatePickerExample from "./Components/DatePickerExample";
 import NumberInputExample from "./Components/NumberInputExample";
-
+import UploaderExample from "./components/UploadExample";
+import SwitchExample from "./components/SwitchExample";
+import SliderExample from "./components/SliderExample";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -158,7 +160,7 @@ export const COMMON_COMPONENTS_DATA = [
       { name: "onClick", type: "func", desc: "按钮点击事件" },
     ],
     example: <ButtonExample />,
-    demo: <Button text="按钮"></Button>
+    demo: <Button text="按钮"></Button>,
   },
   {
     id: "link",
@@ -172,14 +174,34 @@ export const COMMON_COMPONENTS_DATA = [
         desc: "链接类型",
         optional: true,
       },
-      { name: "disabled", type: "boolean", desc: "链接是否禁用", optional: true },
-      { name: "active", type: "boolean", desc: "链接是否已点击", optional: true },
-      { name: "tip", type: "element | string", desc: "链接提示气泡", optional: true },
-      { name: "tipProps", type: <Link href="#MenuItemType">tipProps</Link>, desc: "链接提示气泡属性", optional: true },
+      {
+        name: "disabled",
+        type: "boolean",
+        desc: "链接是否禁用",
+        optional: true,
+      },
+      {
+        name: "active",
+        type: "boolean",
+        desc: "链接是否已点击",
+        optional: true,
+      },
+      {
+        name: "tip",
+        type: "element | string",
+        desc: "链接提示气泡",
+        optional: true,
+      },
+      {
+        name: "tipProps",
+        type: <Link href="#MenuItemType">tipProps</Link>,
+        desc: "链接提示气泡属性",
+        optional: true,
+      },
       { name: "children", type: "element", desc: "链接内容", optional: true },
     ],
     example: <LinkExample />,
-    demo: <Link>链接</Link>
+    demo: <Link>链接</Link>,
   },
 ];
 
@@ -224,7 +246,7 @@ export const LAYOUT_COMPONENTS_DATA = [
       },
     ],
     example: <DividerExample />,
-    demo: <Divider />
+    demo: <Divider />,
   },
   {
     id: "flex",
@@ -268,9 +290,13 @@ export const LAYOUT_COMPONENTS_DATA = [
       { name: "children", type: "element", desc: "自定义元素", optional: true },
     ],
     example: <FlexExample />,
-    demo: <Flex gap={8}>
-      {Array.from({ length: 3 }).map(() => <div className="bg-primary flex-1" style={{ height: '40px' }}></div>)}
-    </Flex>
+    demo: (
+      <Flex gap={8}>
+        {Array.from({ length: 3 }).map(() => (
+          <div className="bg-primary flex-1" style={{ height: "40px" }}></div>
+        ))}
+      </Flex>
+    ),
   },
   {
     id: "grid",
@@ -292,9 +318,18 @@ export const LAYOUT_COMPONENTS_DATA = [
       { name: "children", type: "element", desc: "自定义元素", optional: true },
     ],
     example: <GridExample />,
-    demo: <Grid className="width-100" gap={8} type={gridType.ColumnRepeat} repeatNum={2}>
-      {Array.from({ length: 4 }).map(() => <div className="bg-primary" style={{ height: '40px' }}></div>)}
-    </Grid>
+    demo: (
+      <Grid
+        className="width-100"
+        gap={8}
+        type={gridType.ColumnRepeat}
+        repeatNum={2}
+      >
+        {Array.from({ length: 4 }).map(() => (
+          <div className="bg-primary" style={{ height: "40px" }}></div>
+        ))}
+      </Grid>
+    ),
   },
   {
     id: "layout",
@@ -302,21 +337,42 @@ export const LAYOUT_COMPONENTS_DATA = [
     zh: "布局",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <LayoutExample />,
-    demo: <Layout className="border width-100 ratio-1">
-      <Header logo={<p>🌷🌷🌷</p>} name={<Title title="Web Site" type="h2" />} fixed filter={10} />
-      <Layout>
-        <Sider placement='left'><Flex bothCenter h="100%">SiderLeft</Flex></Sider>
-        <Content style={{ minHeight: '40px' }}><Flex bothCenter h="100%">Content</Flex></Content>
-        <Sider placement='right'><Flex bothCenter h="100%">SiderRight</Flex></Sider>
+    demo: (
+      <Layout className="border width-100 ratio-1">
+        <Header
+          logo={<p>🌷🌷🌷</p>}
+          name={<Title title="Web Site" type="h2" />}
+          fixed
+          filter={10}
+        />
+        <Layout>
+          <Sider placement="left">
+            <Flex bothCenter h="100%">
+              SiderLeft
+            </Flex>
+          </Sider>
+          <Content style={{ minHeight: "40px" }}>
+            <Flex bothCenter h="100%">
+              Content
+            </Flex>
+          </Content>
+          <Sider placement="right">
+            <Flex bothCenter h="100%">
+              SiderRight
+            </Flex>
+          </Sider>
+        </Layout>
+        <Footer>
+          <Flex bothCenter>Footer</Flex>
+        </Footer>
       </Layout>
-      <Footer><Flex bothCenter>Footer</Flex></Footer>
-    </Layout>
-  }
+    ),
+  },
 ];
 
 export const NAV_COMPONENTS_DATA = [
   {
-    id: '201',
+    id: "201",
     en: "affixContainer",
     zh: "图钉",
     desc: "图钉用于在容器内部指定位置展示内容",
@@ -354,7 +410,13 @@ export const NAV_COMPONENTS_DATA = [
       { name: "children", type: "element", desc: "图钉容器元素" },
     ],
     example: <AffixContainerExample />,
-    demo: <AffixContainer className='ratio-1 border radius-8' style={{ width: '60%' }} content={<Button icon={<Icon name="copy" />} />} />
+    demo: (
+      <AffixContainer
+        className="ratio-1 border radius-8"
+        style={{ width: "60%" }}
+        content={<Button icon={<Icon name="copy" />} />}
+      />
+    ),
   },
   {
     id: "anchor",
@@ -363,13 +425,15 @@ export const NAV_COMPONENTS_DATA = [
     desc: "锚点用于跳转至页面指定位置。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <AnchorExample />,
-    demo: <Anchor
-      data={[
-        { key: '组件预览', href: '#组件预览', title: '组件预览' },
-        { key: 'API', href: '#API', title: 'API' },
-        { key: 'Type', href: '#Type', title: 'Type' },
-      ]}
-    />
+    demo: (
+      <Anchor
+        data={[
+          { key: "组件预览", href: "#组件预览", title: "组件预览" },
+          { key: "API", href: "#API", title: "API" },
+          { key: "Type", href: "#Type", title: "Type" },
+        ]}
+      />
+    ),
   },
   {
     id: "breadCrumb",
@@ -378,13 +442,15 @@ export const NAV_COMPONENTS_DATA = [
     desc: "锚点用于跳转至页面指定位置。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <BreadCrumbExample />,
-    demo: <BreadCrumb
-      data={[
-        { key: 1, label: '页面1' },
-        { key: 2, label: '页面页面页面页面1-1', maxWidth: 100 },
-        { key: 3, label: '页面页面页面页面1-1-2' },
-      ]}
-    />
+    demo: (
+      <BreadCrumb
+        data={[
+          { key: 1, label: "页面1" },
+          { key: 2, label: "页面页面页面页面1-1", maxWidth: 100 },
+          { key: 3, label: "页面页面页面页面1-1-2" },
+        ]}
+      />
+    ),
   },
   {
     id: "menu",
@@ -444,13 +510,15 @@ export const NAV_COMPONENTS_DATA = [
       },
     ],
     example: <MenuExample />,
-    demo: <Menu
-      data={[
-        { key: 1, title: "Navigation 1", clickType: ClickType.SELF },
-        { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
-      ]}
-      active={1}
-    />,
+    demo: (
+      <Menu
+        data={[
+          { key: 1, title: "Navigation 1", clickType: ClickType.SELF },
+          { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
+        ]}
+        active={1}
+      />
+    ),
     types: [
       {
         name: "MenuItemType",
@@ -525,11 +593,7 @@ export const NAV_COMPONENTS_DATA = [
       },
     ],
     example: <PaginationExample />,
-    demo: <Pagination
-      total={4}
-      current={1}
-      pageSize={1}
-    />
+    demo: <Pagination total={4} current={1} pageSize={1} />,
   },
   {
     id: "step",
@@ -552,15 +616,17 @@ export const NAV_COMPONENTS_DATA = [
       },
     ],
     example: <StepsExample />,
-    demo: <Steps
-      data={[
-        { key: 1, title: '步骤1', desc: '描述文字' },
-        { key: 2, title: '步骤2', desc: '描述文字' },
-        { key: 3, title: '步骤3', desc: '描述文字' }
-      ]}
-      current={2}
-      finished={[1]}
-    />
+    demo: (
+      <Steps
+        data={[
+          { key: 1, title: "步骤1", desc: "描述文字" },
+          { key: 2, title: "步骤2", desc: "描述文字" },
+          { key: 3, title: "步骤3", desc: "描述文字" },
+        ]}
+        current={2}
+        finished={[1]}
+      />
+    ),
   },
   {
     id: "dropdown",
@@ -575,85 +641,101 @@ export const NAV_COMPONENTS_DATA = [
 
 export const INPUT_COMPONENTS_DATA = [
   {
-    id: 'input',
-    en: 'Input',
-    zh: '输入框',
-    desc: '步骤条。',
-    props: [
-      { name: 'name', type: "type", desc: 'desc' },
-    ],
+    id: "input",
+    en: "Input",
+    zh: "输入框",
+    desc: "步骤条。",
+    props: [{ name: "name", type: "type", desc: "desc" }],
     example: <InputExample />,
-    demo: <Input />
+    demo: <Input />,
   },
   {
-    id: 'tagInput',
-    en: 'TagInput',
-    zh: '标签输入框',
-    desc: '标签输入框。',
-    props: [
-      { name: 'name', type: "type", desc: 'desc' },
-    ],
+    id: "tagInput",
+    en: "TagInput",
+    zh: "标签输入框",
+    desc: "标签输入框。",
+    props: [{ name: "name", type: "type", desc: "desc" }],
     example: <TagInputExample />,
-    demo: <TagInput />
+    demo: <TagInput />,
   },
   {
-    id: 'select',
-    en: 'Select',
-    zh: '选择器',
-    desc: 'Land Design内置常规图标。',
+    id: "select",
+    en: "Select",
+    zh: "选择器",
+    desc: "Land Design内置常规图标。",
     props: [
-      { name: 'data', type: <Link href="#StepsItemType">SelectTreeItemType</Link>, desc: '数据' },
-      { name: 'placeholder', type: 'string', desc: '占位符' },
-      { name: 'selected', type: 'string | number', desc: '当前选中项' },
-      { name: 'width', type: 'number | string', desc: '宽度' },
-      { name: 'title', type: 'string', desc: '标题' },
-      { name: 'titleInfo', type: 'string', desc: '标题提示内容' },
-      { name: 'info', type: 'Element', desc: '选框提示内容' },
-      { name: 'disabled', type: 'boolean', desc: '是否整体禁用' },
-      { name: 'onChange', type: '(item: SelectTreeItemType) => void', desc: '选择事件' }
+      {
+        name: "data",
+        type: <Link href="#StepsItemType">SelectTreeItemType</Link>,
+        desc: "数据",
+      },
+      { name: "placeholder", type: "string", desc: "占位符" },
+      { name: "selected", type: "string | number", desc: "当前选中项" },
+      { name: "width", type: "number | string", desc: "宽度" },
+      { name: "title", type: "string", desc: "标题" },
+      { name: "titleInfo", type: "string", desc: "标题提示内容" },
+      { name: "info", type: "Element", desc: "选框提示内容" },
+      { name: "disabled", type: "boolean", desc: "是否整体禁用" },
+      {
+        name: "onChange",
+        type: "(item: SelectTreeItemType) => void",
+        desc: "选择事件",
+      },
     ],
-    type: [{
-      name: 'SelectTreeItemType',
-      data: [
-        { name: 'value', type: 'string | number', desc: '唯一标识' },
-        { name: 'label', type: 'string | Element', desc: '选项值' },
-        { name: 'tip', type: 'Element', desc: '选项提示内容' },
-        { name: 'info', type: 'Element', desc: '选项图标类型提示' },
-        { name: 'disabled', type: 'boolean', desc: '是否禁用该选项' },
-      ]
-    }],
+    type: [
+      {
+        name: "SelectTreeItemType",
+        data: [
+          { name: "value", type: "string | number", desc: "唯一标识" },
+          { name: "label", type: "string | Element", desc: "选项值" },
+          { name: "tip", type: "Element", desc: "选项提示内容" },
+          { name: "info", type: "Element", desc: "选项图标类型提示" },
+          { name: "disabled", type: "boolean", desc: "是否禁用该选项" },
+        ],
+      },
+    ],
     example: <SelectExample />,
-    demo: <Select />
+    demo: <Select />,
   },
   {
-    id: 'selectTree',
-    en: 'SelectTree',
-    zh: '层级选择器',
-    desc: 'Land Design内置常规图标。',
+    id: "selectTree",
+    en: "SelectTree",
+    zh: "层级选择器",
+    desc: "Land Design内置常规图标。",
     props: [
-      { name: 'data', type: <Link href="#SelectTreeItemType">SelectTreeItemType</Link>, desc: '数据' },
-      { name: 'placeholder', type: 'string', desc: '占位符' },
-      { name: 'selected', type: 'string | number', desc: '当前选中项' },
-      { name: 'width', type: 'number | string', desc: '宽度' },
-      { name: 'title', type: 'string', desc: '标题' },
-      { name: 'titleInfo', type: 'string', desc: '标题提示内容' },
-      { name: 'info', type: 'Element', desc: '选框提示内容' },
-      { name: 'disabled', type: 'boolean', desc: '是否整体禁用' },
-      { name: 'onChange', type: '(item: SelectTreeItemType) => void', desc: '选择事件' }
+      {
+        name: "data",
+        type: <Link href="#SelectTreeItemType">SelectTreeItemType</Link>,
+        desc: "数据",
+      },
+      { name: "placeholder", type: "string", desc: "占位符" },
+      { name: "selected", type: "string | number", desc: "当前选中项" },
+      { name: "width", type: "number | string", desc: "宽度" },
+      { name: "title", type: "string", desc: "标题" },
+      { name: "titleInfo", type: "string", desc: "标题提示内容" },
+      { name: "info", type: "Element", desc: "选框提示内容" },
+      { name: "disabled", type: "boolean", desc: "是否整体禁用" },
+      {
+        name: "onChange",
+        type: "(item: SelectTreeItemType) => void",
+        desc: "选择事件",
+      },
     ],
-    type: [{
-      name: 'SelectTreeItemType',
-      data: [
-        { name: 'value', type: 'string | number', desc: '唯一标识' },
-        { name: 'label', type: 'string | Element', desc: '选项值' },
-        { name: 'tip', type: 'Element', desc: '选项提示内容' },
-        { name: 'info', type: 'Element', desc: '选项图标类型提示' },
-        { name: 'disabled', type: 'boolean', desc: '是否禁用该选项' },
-        { name: 'children', type: 'SelectTreeItemType[]', desc: '二级数据' }
-      ]
-    }],
+    type: [
+      {
+        name: "SelectTreeItemType",
+        data: [
+          { name: "value", type: "string | number", desc: "唯一标识" },
+          { name: "label", type: "string | Element", desc: "选项值" },
+          { name: "tip", type: "Element", desc: "选项提示内容" },
+          { name: "info", type: "Element", desc: "选项图标类型提示" },
+          { name: "disabled", type: "boolean", desc: "是否禁用该选项" },
+          { name: "children", type: "SelectTreeItemType[]", desc: "二级数据" },
+        ],
+      },
+    ],
     example: <SelectTreeExample />,
-    demo: <SelectTree />
+    demo: <SelectTree />,
   },
   {
     id: "radio",
@@ -661,23 +743,31 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "单选列表",
     desc: "Land Design内置常规图标。",
     props: [
-      { name: "data", type: <Link href="#CheckItemType">CheckItemType</Link>, desc: "数据类型" },
-      { name: 'checked', type: 'number | string', desc: '当前选择项' },
-      { name: 'onChange', type: '(item: CheckItemType) => void;', desc: '选择事件' },
+      {
+        name: "data",
+        type: <Link href="#CheckItemType">CheckItemType</Link>,
+        desc: "数据类型",
+      },
+      { name: "checked", type: "number | string", desc: "当前选择项" },
+      {
+        name: "onChange",
+        type: "(item: CheckItemType) => void;",
+        desc: "选择事件",
+      },
     ],
     type: [
       {
-        name: 'CheckItemType',
+        name: "CheckItemType",
         data: [
-          { name: 'value', type: 'number | string', desc: '唯一标识' },
-          { name: 'label', type: 'string | Element', desc: '选项值' },
-          { name: 'info', type: 'Element', desc: '选项提示内容' },
-          { name: 'disabled', type: 'boolean', desc: '是否禁用该选项' },
-        ]
-      }
+          { name: "value", type: "number | string", desc: "唯一标识" },
+          { name: "label", type: "string | Element", desc: "选项值" },
+          { name: "info", type: "Element", desc: "选项提示内容" },
+          { name: "disabled", type: "boolean", desc: "是否禁用该选项" },
+        ],
+      },
     ],
     example: <RadioExample />,
-    demo: <Radio />
+    demo: <Radio />,
   },
   {
     id: "checkbox",
@@ -685,23 +775,31 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "多选框",
     desc: "Land Design内置常规图标。",
     props: [
-      { name: "data", type: <Link href="#CheckItemType">CheckItemType</Link>, desc: "数据类型" },
-      { name: 'checked', type: '(number | string)[]', desc: '当前选择列表' },
-      { name: 'onChange', type: '(item: CheckItemType) => void;', desc: '选择事件' }
+      {
+        name: "data",
+        type: <Link href="#CheckItemType">CheckItemType</Link>,
+        desc: "数据类型",
+      },
+      { name: "checked", type: "(number | string)[]", desc: "当前选择列表" },
+      {
+        name: "onChange",
+        type: "(item: CheckItemType) => void;",
+        desc: "选择事件",
+      },
     ],
     type: [
       {
-        name: 'CheckItemType',
+        name: "CheckItemType",
         data: [
-          { name: 'value', type: 'number | string', desc: '唯一标识' },
-          { name: 'label', type: 'string | Element', desc: '选项值' },
-          { name: 'info', type: 'Element', desc: '选项提示内容' },
-          { name: 'disabled', type: 'boolean', desc: '是否禁用该选项' },
-        ]
-      }
+          { name: "value", type: "number | string", desc: "唯一标识" },
+          { name: "label", type: "string | Element", desc: "选项值" },
+          { name: "info", type: "Element", desc: "选项提示内容" },
+          { name: "disabled", type: "boolean", desc: "是否禁用该选项" },
+        ],
+      },
     ],
     example: <CheckboxExample />,
-    demo: <Checkbox />
+    demo: <Checkbox />,
   },
   {
     id: "colorPicker",
@@ -713,15 +811,27 @@ export const INPUT_COMPONENTS_DATA = [
       { name: "size", type: "string | number", desc: "尺寸" },
       { name: "useSelect", type: "boolean", desc: "是否可选颜色" },
       { name: "showList", type: "boolean", desc: "是否展示默认颜色列表" },
-      { name: "defaultColorList", type: "string[][]", desc: "自定义默认颜色列表" },
+      {
+        name: "defaultColorList",
+        type: "string[][]",
+        desc: "自定义默认颜色列表",
+      },
       { name: "showOpacity", type: "boolean", desc: "是否可控制透明度" },
       { name: "input", type: "boolean", desc: "是否使用底部输入框" },
       { name: "info", type: "Element", desc: "提示内容" },
-      { name: 'onChange', type: '(color: string) => void;', desc: '颜色选择事件' },
-      { name: 'onCardClick', type: '(color: string) => void;', desc: '点击颜色显示块' },
+      {
+        name: "onChange",
+        type: "(color: string) => void;",
+        desc: "颜色选择事件",
+      },
+      {
+        name: "onCardClick",
+        type: "(color: string) => void;",
+        desc: "点击颜色显示块",
+      },
     ],
     example: <ColorPickerExample />,
-    demo: <ColorPicker />
+    demo: <ColorPicker />,
   },
   {
     id: "datePicker",
@@ -730,7 +840,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <DatePickerExample />,
-    demo: <DatePicker />
+    demo: <DatePicker />,
   },
   {
     id: "numberInput",
@@ -747,8 +857,8 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "开关",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <Switch />
+    example: <SwitchExample />,
+    demo: <Switch />,
   },
   {
     id: "slider",
@@ -756,8 +866,8 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "滑动输入条",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <Slider max={100} step={10} value={10} />
+    example: <SliderExample />,
+    demo: <Slider max={100} step={10} value={10} />,
   },
   {
     id: "rate",
@@ -766,7 +876,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <Rate />
+    demo: <Rate />,
   },
   {
     id: "upload",
@@ -774,10 +884,10 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "上传框",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <Uploader />
-  }
-]
+    example: <UploaderExample />,
+    demo: <Uploader />,
+  },
+];
 
 export const DISPLAY_COMPONENTS_DATA = [
   {

@@ -41,7 +41,6 @@ const Image: React.FC<ImageProps> = ({
     if (!imageElement) return;
     if (imageElement.complete) {
       setImageLoading(false);
-      console.log("okk");
     }
     imageElement?.addEventListener("load", handleLoad);
     imageElement?.addEventListener("error", handleError);
@@ -52,11 +51,19 @@ const Image: React.FC<ImageProps> = ({
   }, []);
   return (
     <div
-      className="flex items-center justify-center bg-gray width-100 radius-6"
-      style={{ aspectRatio: `${ratio}` }}
+      className="flex items-center justify-center bg-gray radius-6"
+      style={{
+        width: typeof width === "number" ? `${width}px` : width,
+        aspectRatio: `${ratio}`,
+      }}
     >
       {imgLoading &&
-        (loadingComponent || <Loading color="var(--color-bg-3)" />)}
+        (loadingComponent || (
+          <Loading
+            color="var(--color-text-3)"
+            className="absolute position-center"
+          />
+        ))}
       {loadDefaultImage ? (
         errorUrl ? (
           <img

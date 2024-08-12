@@ -15,6 +15,7 @@ export type ButtonProps = {
     href?: string;
     target?: "_self" | "_blank" | "_top" | "_parent";
     onClick?: (e: React.UIEvent) => void;
+    children?: React.ReactNode;
     style?: CSSProperties;
     className?: string;
 };

@@ -51,7 +51,7 @@ export type { HeaderProps } from "./Header";
 export { default as LandHeader } from "./Header";
 
 export type { ImageProps } from "./Image";
-export { default as LandImg } from "./Image";
+export { default as LandImage } from "./Image";
 
 export type { InputProps } from "./Input";
 export { default as LandInput } from "./Input";
