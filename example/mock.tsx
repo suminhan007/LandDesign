@@ -62,6 +62,7 @@ import NumberInputExample from "./Components/NumberInputExample";
 import UploaderExample from "./components/UploadExample";
 import SwitchExample from "./components/SwitchExample";
 import SliderExample from "./components/SliderExample";
+import AutoMediaExample from "./Components/AutoMediaExample";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -1170,6 +1171,15 @@ export const TEXT_COMPONENTS_DATA = [
 ];
 
 export const OTHER_COMPONENTS_DATA = [
+  {
+    id: "auto-media",
+    en: "AutoMedia",
+    zh: "媒体自适应容器",
+    desc: "",
+    props: [{ name: "name", type: "type", desc: "desc" }],
+    example: <AutoMediaExample />,
+    demo: <></>,
+  }
 ];
 
 // 组件数据汇总
@@ -1214,7 +1224,7 @@ export const COMPONENTS_DATA = [
     data: TEXT_COMPONENTS_DATA,
   },
   {
-    id: "img",
+    id: "auto-media",
     title: "其他",
     data: OTHER_COMPONENTS_DATA,
   },
