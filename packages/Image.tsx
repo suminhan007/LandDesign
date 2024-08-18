@@ -1,46 +1,49 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, CSSProperties } from "react";
 import Loading from "./Loading";
 import Icon from "./Icon";
 
 export type ImageProps = {
+  /* 图片地址 */
   url?: string;
-  errorUrl?: string;
-  alt?: string;
-  ratio?: number;
-  width?: number | string;
-  loadingComponent?: React.ReactNode;
-  style?: CSSProperties;
+  /* 组件级 class */
   className?: string;
+  /* 图片 class */
+  imgClassName?: string;
+  /* 组件级 style */
+  style?: CSSProperties;
+  /* 图片 style */
+  imgStyle?: CSSProperties;
+  /* 比例 */
+  ratio?: number;
 };
+
 const Image: React.FC<ImageProps> = ({
   url,
-  errorUrl,
-  alt,
-  ratio = 1,
-  width = "100%",
-  loadingComponent,
+  className,
+  imgClassName,
+  imgStyle,
   style,
-  className = "",
+  ratio = 1 / 1,
 }) => {
-  const ImageRef = useRef<HTMLImageElement>(null);
-  const [imgLoading, setImageLoading] = useState<boolean>(true);
-  const [loadDefaultImage, setLoadDefaultImage] = useState<boolean>(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [imgLoading, setImgLoading] = useState<boolean>(true);
+  const [loadDefaultImg, setLoadDefaultImg] = useState<boolean>(false);
   const handleLoad = () => {
     setTimeout(() => {
-      setImageLoading(false);
+      setImgLoading(false);
     }, 300);
   };
   const handleError = () => {
-    setImageLoading(false);
-    setLoadDefaultImage(true);
+    setImgLoading(false);
+    setLoadDefaultImg(true);
   };
-
+  // 判断是否加载
   useEffect(() => {
-    const imageElement = ImageRef.current;
+    const imageElement = imgRef.current;
 
     if (!imageElement) return;
     if (imageElement.complete) {
-      setImageLoading(false);
+      setImgLoading(false);
     }
     imageElement?.addEventListener("load", handleLoad);
     imageElement?.addEventListener("error", handleError);
@@ -51,44 +54,27 @@ const Image: React.FC<ImageProps> = ({
   }, []);
   return (
     <div
-      className="flex items-center justify-center bg-gray radius-6"
+      className={`relative flex items-center justify-center ${imgLoading || loadDefaultImg ? "bg-gray radius-6 overflow-hidden" : ""
+        } ${className}`}
       style={{
-        width: typeof width === "number" ? `${width}px` : width,
-        aspectRatio: imgLoading ? `${ratio}` : "auto",
+        aspectRatio: imgLoading || loadDefaultImg ? `${ratio}` : "auto",
+        ...style,
       }}
     >
-      {imgLoading &&
-        (loadingComponent || (
-          <Loading
-            color="var(--color-text-3)"
-            className="absolute position-center"
-          />
-        ))}
-      {loadDefaultImage ? (
-        errorUrl ? (
-          <img
-            ref={ImageRef}
-            src={errorUrl}
-            alt={alt}
-            style={{
-              width: "100%",
-              ...style,
-            }}
-            className={className}
-          />
-        ) : (
-          <Icon name="error-fill" fill="var(--color-red-3)" size={32} />
-        )
+      {imgLoading && (
+        <Loading
+          color="var(--color-text-4)"
+          size={28}
+          style={{ position: "absolute", transform: "translate(-50%,-50%)" }}
+        />
+      )}
+      {loadDefaultImg ? (
+        <Icon name="error-fill" fill="var(--color-red-03)" />
       ) : (
         <img
-          ref={ImageRef}
           src={url}
-          alt={alt}
-          style={{
-            width: typeof width === "number" ? `${width}px` : width,
-            ...style,
-          }}
-          className={className}
+          className={imgClassName}
+          style={{ zIndex: "1", ...imgStyle }}
         />
       )}
     </div>

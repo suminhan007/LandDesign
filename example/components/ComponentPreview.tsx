@@ -40,7 +40,7 @@ const ComponentPreview: React.FC<Props> = ({
           <div className='grid gap-24 width-100' style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px,1fr))' }}>
             {item.data?.map(items =>
               <div className='flex column gap-8 radius-8 pointer' onClick={() => onClick?.(items, item)}>
-                {items.demo && <Flex bothCenter className='p-12 ratio-1 bg-gray hover:bg-gray'>{items.demo}</Flex>}
+                {items.demo && <div className='flex items-center justify-center p-12 bg-gray hover:bg-gray'>{items.demo}</div>}
                 <Flex align='center' gap={8}>
                   <Title title={items.en} type='h3' />
                   <Title title={items.zh} type='p' />

@@ -11,9 +11,9 @@ export type AutoMediaProps = {
 const AutoMedia: React.FC<AutoMediaProps> = ({
   type = "img",
   url,
-  className,
+  className = '',
   style,
-  wrapClassName,
+  wrapClassName = '',
   onChange,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -38,6 +38,8 @@ const AutoMedia: React.FC<AutoMediaProps> = ({
       });
     }
     onChange?.(size.w, size.h);
+    console.log(size);
+
   });
   const [ratio, setRatio] = useState<"h" | "v" | "s">("s");
   useEffect(() => {
@@ -45,6 +47,8 @@ const AutoMedia: React.FC<AutoMediaProps> = ({
     const callback: ResizeObserverCallback = (entries) => {
       entries.forEach((entry) => {
         const { width, height } = entry.contentRect;
+        console.log(width, height);
+
         if (width / height > size.ratio) {
           setRatio("h");
         } else if (width / height < size.ratio) {
@@ -61,7 +65,7 @@ const AutoMedia: React.FC<AutoMediaProps> = ({
   return (
     <div
       ref={wrapRef}
-      className={`flex items-center justify-center width-100 height-100 ${wrapClassName}`}
+      className={`land-auto-media flex items-center justify-center width-100 height-100 ${wrapClassName}`}
     >
       {type === "img" ? (
         <img
