@@ -23,6 +23,7 @@ export type ThemeType = {
 export type MenuItemType = {
   key: number | string;
   title?: string;
+  path?: string;
   subTitle?: string;
   icon?: string | React.ReactNode;
   isNew?: string | React.ReactNode | boolean;
