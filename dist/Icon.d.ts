@@ -8,6 +8,7 @@ export type IconProps = {
     className?: string;
     onClick?: () => void;
 };
+export declare const IconDec: React.FC<IconProps>;
 export type IconDefaultProps = {
     name: string;
 } & IconProps;

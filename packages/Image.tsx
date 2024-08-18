@@ -71,7 +71,7 @@ const Image: React.FC<ImageProps> = ({
             src={errorUrl}
             alt={alt}
             style={{
-              width: typeof width === "number" ? `${width}px` : width,
+              width: "100%",
               ...style,
             }}
             className={className}

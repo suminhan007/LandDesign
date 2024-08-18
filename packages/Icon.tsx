@@ -1396,6 +1396,30 @@ const IconAdd: React.FC<IconProps> = ({
   );
 };
 
+
+export const IconDec: React.FC<IconProps> = ({
+  size = 16,
+  stroke = "currentColor",
+  onClick,
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    onClick={onClick}
+  >
+    <path
+      d="M10.5 24L38.5 24"
+      stroke={stroke}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const IconClear: React.FC<IconProps> = ({
   size = 16,
   stroke = "currentcolor",
@@ -1811,6 +1835,9 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "add":
       return <IconAdd {...restProps} />;
       break;
+    case "dec":
+      return <IconDec {...restProps} />;
+      break;
     case "clear":
       return <IconClear {...restProps} />;
       break;
@@ -1835,8 +1862,8 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "home":
       return <IconHome {...restProps} />;
       break;
-    case 'search':
-      return <IconSearch {...restProps} />
+    case "search":
+      return <IconSearch {...restProps} />;
     default:
       break;
   }
