@@ -21,10 +21,10 @@ const Content: React.FC<ContentProps> = ({ children, style, className }) => {
 };
 
 const StyledContent = styled.main<{
-  minHeight?: number;
+  $minHeight?: number;
 }>`
   flex: 1;
-  min-height: ${props => `calc(100vh - ${props.minHeight}px)`};
+  min-height: ${(props) => `calc(100vh - ${props.$minHeight}px)`};
   background: var(--color-bg-white);
 `;
 

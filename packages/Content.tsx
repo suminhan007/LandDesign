@@ -15,24 +15,26 @@ const Content: React.FC<ContentProps> = ({ children, style, className }) => {
   useEffect(() => {
     let headerHeight: number;
     let footerHeight: number;
-    headerElem ? headerHeight = headerElem.getBoundingClientRect().height : headerHeight = 0;
-    footerElem ? footerHeight = footerElem.getBoundingClientRect().height : footerHeight = 0;
-    setMinHeight(
-      headerHeight + footerHeight
-    );
+    headerElem
+      ? (headerHeight = headerElem.getBoundingClientRect().height)
+      : (headerHeight = 0);
+    footerElem
+      ? (footerHeight = footerElem.getBoundingClientRect().height)
+      : (footerHeight = 0);
+    setMinHeight(headerHeight + footerHeight);
   });
   return (
-    <StyledContent className={className} style={style} minHeight={minHeight}>
+    <StyledContent className={className} style={style} $minHeight={minHeight}>
       {children}
     </StyledContent>
   );
 };
 
 const StyledContent = styled.main<{
-  minHeight?: number;
+  $minHeight?: number;
 }>`
   flex: 1;
-  min-height: ${(props) => `calc(100vh - ${props.minHeight}px)`};
+  min-height: ${(props) => `calc(100vh - ${props.$minHeight}px)`};
   background: var(--color-bg-white);
 `;
 
