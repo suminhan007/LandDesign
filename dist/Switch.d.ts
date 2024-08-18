@@ -4,6 +4,8 @@ export type SwitchProps = {
     checked?: boolean;
     label?: string;
     checkedLabel?: string;
+    icon?: React.ReactNode;
+    checkedIcon?: React.ReactNode;
     info?: React.ReactNode;
     popProps?: PopProps;
     onChange?: (checked: boolean) => void;

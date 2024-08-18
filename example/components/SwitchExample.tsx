@@ -1,6 +1,7 @@
 import React from "react";
 import Switch from "../../packages/Switch";
 import Title from "../../packages/Title";
+import Icon from "../../packages/Icon";
 
 export default function SwitchExample() {
   return (
@@ -17,6 +18,19 @@ export default function SwitchExample() {
         <Title title="包含提示内容" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
           <Switch label="是否开启" checkedLabel="是否开启" info="开启后..." />
+        </div>
+        <Title title="包含图标" type="h3" />
+        <div className="flex justify-center gap-24 border p-32">
+          <Switch
+            label="是否开启"
+            checkedLabel="是否开启"
+            icon={
+              <Icon name="light" size={12} stroke="var(--color-primary-6)" />
+            }
+            checkedIcon={
+              <Icon name="dark" size={12} fill="var(--color-primary-6)" />
+            }
+          />
         </div>
       </div>
     </div>

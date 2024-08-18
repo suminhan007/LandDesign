@@ -8,6 +8,8 @@ export type SwitchProps = {
   checked?: boolean;
   label?: string;
   checkedLabel?: string;
+  icon?: React.ReactNode;
+  checkedIcon?: React.ReactNode;
   info?: React.ReactNode;
   popProps?: PopProps;
   onChange?: (checked: boolean) => void;
@@ -19,6 +21,8 @@ const Switch: React.FC<SwitchProps> = ({
   checked,
   label,
   checkedLabel,
+  icon,
+  checkedIcon,
   info,
   popProps,
   onChange,
@@ -41,7 +45,9 @@ const Switch: React.FC<SwitchProps> = ({
         }}
       >
         <div className="land-switch-bar">
-          <div className="land-switch-indicator"></div>
+          <div className="land-switch-indicator">
+            {newChecked ? checkedIcon : icon}
+          </div>
         </div>
         {(label || checkedLabel) && (
           <div className="land-switch-label">
@@ -82,6 +88,9 @@ const StyledSwitchWrap = styled.div<{}>`
     }
   }
   .land-switch-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
     aspect-ratio: 1;
     background-color: var(--color-bg-white);

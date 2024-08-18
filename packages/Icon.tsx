@@ -1341,21 +1341,21 @@ const IconMoreLine: React.FC<IconProps> = ({
       <path
         d="M7.94971 11.9497H39.9497"
         stroke={stroke}
-        stroke-width={strokeWidth}
+        strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M7.94971 23.9497H39.9497"
         stroke={stroke}
-        stroke-width={strokeWidth}
+        strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M7.94971 35.9497H39.9497"
         stroke={stroke}
-        stroke-width={strokeWidth}
+        strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -1395,7 +1395,6 @@ const IconAdd: React.FC<IconProps> = ({
     </svg>
   );
 };
-
 
 export const IconDec: React.FC<IconProps> = ({
   size = 16,
@@ -1659,16 +1658,15 @@ const IconCopy: React.FC<IconProps> = ({
         fill={fill ? fill : "none"}
         stroke={fill ? fill : stroke}
         strokeWidth={strokeWidth}
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M32.1875 13H7.8125C6.2592 13 5 14.2592 5 15.8125V40.1875C5 41.7408 6.2592 43 7.8125 43H32.1875C33.7408 43 35 41.7408 35 40.1875V15.8125C35 14.2592 33.7408 13 32.1875 13Z"
         fill={fill ? fill : "none"}
         stroke={fill ? fill : stroke}
         strokeWidth={strokeWidth}
-        stroke-width="2"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -1693,7 +1691,7 @@ const IconHome: React.FC<IconProps> = ({
       <path
         d="M9 18V42H39V18L24 6L9 18Z"
         stroke={stroke}
-        stroke-width={strokeWidth}
+        strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -1706,6 +1704,116 @@ const IconHome: React.FC<IconProps> = ({
     </svg>
   );
 };
+
+const IconLight: React.FC<IconProps> = ({
+  stroke = "currentColor",
+  size = 24,
+  strokeWidth = 2,
+  fill = "currentColor",
+  style,
+  className = "",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={style}
+    className={className}
+  >
+    <path
+      d="M9.15039 9.15088L11.3778 11.3783"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3 24H6.15"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M9.15039 38.8495L11.3778 36.6221"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M38.8495 38.8495L36.6221 36.6221"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M44.9996 24H41.8496"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M38.8495 9.15088L36.6221 11.3783"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M24 3V6.15"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M24 36C30.6274 36 36 30.6274 36 24C36 17.3726 30.6274 12 24 12C17.3726 12 12 17.3726 12 24C12 30.6274 17.3726 36 24 36Z"
+      fill={fill ? fill : "none"}
+      stroke={fill ? fill : stroke}
+      strokeWidth={strokeWidth}
+      strokeLinejoin="round"
+    />
+    <path
+      d="M24 45.0001V41.8501"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const IconDark: React.FC<IconProps> = ({
+  stroke = "currentColor",
+  size = 24,
+  fill = "currentColor",
+  strokeWidth = 2,
+  style,
+  className = "",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={style}
+    className={className}
+  >
+    <path
+      d="M28.0527 4.41085C22.5828 5.83695 18.5455 10.8106 18.5455 16.7273C18.5455 23.7564 24.2436 29.4545 31.2727 29.4545C37.1894 29.4545 42.1631 25.4172 43.5891 19.9473C43.8585 21.256 44 22.6115 44 24C44 35.0457 35.0457 44 24 44C12.9543 44 4 35.0457 4 24C4 12.9543 12.9543 4 24 4C25.3885 4 26.744 4.14149 28.0527 4.41085Z"
+      fill={fill ? fill : "none"}
+      stroke={fill ? fill : stroke}
+      strokeWidth={strokeWidth}
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 export type IconDefaultProps = {
   name: string;
@@ -1826,7 +1934,7 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "more":
       return <IconMore {...restProps} />;
       break;
-    case "more-line":
+    case "moreLine":
       return <IconMoreLine {...restProps} />;
       break;
     case "file":
@@ -1864,6 +1972,12 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
       break;
     case "search":
       return <IconSearch {...restProps} />;
+    case "light":
+      return <IconLight {...restProps} />;
+      break;
+    case "dark":
+      return <IconDark {...restProps} />;
+      break;
     default:
       break;
   }
