@@ -1709,7 +1709,7 @@ const IconLight: React.FC<IconProps> = ({
   stroke = "currentColor",
   size = 24,
   strokeWidth = 2,
-  fill = "currentColor",
+  fill,
   style,
   className = "",
 }) => (
@@ -1791,7 +1791,7 @@ const IconLight: React.FC<IconProps> = ({
 const IconDark: React.FC<IconProps> = ({
   stroke = "currentColor",
   size = 24,
-  fill = "currentColor",
+  fill,
   strokeWidth = 2,
   style,
   className = "",
@@ -1934,7 +1934,7 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "more":
       return <IconMore {...restProps} />;
       break;
-    case "moreLine":
+    case "more-line":
       return <IconMoreLine {...restProps} />;
       break;
     case "file":
