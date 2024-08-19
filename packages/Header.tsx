@@ -128,7 +128,7 @@ const StyledHeader = styled.header<{
     props.filter ? "rgba(255, 255, 255, 0.8)" : "var(--color-bg-white)"};
   backdrop-filter: ${(props) => (props.filter ? "var(--blur-small)" : "")};
   box-sizing: border-box;
-  z-index: 1;
+  z-index: 1000;
   &.fixed {
     position: absolute;
     top: 0;
@@ -196,15 +196,15 @@ const StyledHeaderNav = styled.div<{
   flex: 1;
   justify-content: ${(props) => props.align};
   height: 100%;
-  .land-menu-item:hover .land-menu-drop-wrap{
+  .land-menu-item:hover .land-menu-drop-wrap {
     left: 50%;
-    transform: translateX(-50%) scale(1); 
+    transform: translateX(-50%) scale(1);
   }
-  .land-menu-drop-wrap{
+  .land-menu-drop-wrap {
     width: fit-content;
-    &:not(.open){
+    &:not(.open) {
       left: 50%;
-      transform: translateX(-50%); 
+      transform: translateX(-50%);
     }
   }
   @media screen and (max-width: 800px) {
@@ -215,6 +215,7 @@ const StyledHeaderNav = styled.div<{
     width: fit-content;
     height: fit-content;
     pointer-events: ${(props) => (props.showMobileNav ? "all" : "none")};
+    display: ${(props) => (props.showMobileNav ? "block" : "none")};
     .land-menu {
       flex-direction: column;
       padding: 12px 4px;
@@ -225,7 +226,7 @@ const StyledHeaderNav = styled.div<{
       border-bottom-right-radius: 8px;
       transition: opacity 0.2 linear;
       opacity: ${(props) => (props.showMobileNav ? "1" : "0")};
-      .land-menu-link.active::after{
+      .land-menu-link.active::after {
         opacity: 0;
       }
       .land-menu-drop-wrap {
@@ -233,8 +234,8 @@ const StyledHeaderNav = styled.div<{
         opacity: 1;
         transform: scale(1);
         pointer-events: all;
-        .land-menu-drop, 
-        .land-menu-drop .land-menu{
+        .land-menu-drop,
+        .land-menu-drop .land-menu {
           border: none;
           box-shadow: none;
           padding: 0;
