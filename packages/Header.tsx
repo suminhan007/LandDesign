@@ -196,6 +196,17 @@ const StyledHeaderNav = styled.div<{
   flex: 1;
   justify-content: ${(props) => props.align};
   height: 100%;
+  .land-menu-item:hover .land-menu-drop-wrap{
+    left: 50%;
+    transform: translateX(-50%) scale(1); 
+  }
+  .land-menu-drop-wrap{
+    width: fit-content;
+    &:not(.open){
+      left: 50%;
+      transform: translateX(-50%); 
+    }
+  }
   @media screen and (max-width: 800px) {
     position: fixed;
     top: 64px;
