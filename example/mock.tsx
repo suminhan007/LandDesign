@@ -63,6 +63,7 @@ import UploaderExample from "./components/UploadExample";
 import SwitchExample from "./components/SwitchExample";
 import SliderExample from "./components/SliderExample";
 import AutoMediaExample from "./Components/AutoMediaExample";
+import VideoExample from "./Components/VideoExample";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -415,7 +416,9 @@ export const NAV_COMPONENTS_DATA = [
       <AffixContainer
         className="ratio-1 border radius-8"
         style={{ width: "60%" }}
-        content={<Button icon={<Icon name="copy" />} />}
+        rtOption={{
+          content: <Button icon={<Icon name="copy" />} />
+        }}
       />
     ),
   },
@@ -969,7 +972,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "视频",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <VideoExample />,
     demo: <></>,
   },
   {
@@ -1245,7 +1248,7 @@ export const ICON_EXAMPLE_DATA = [
   {
     title: '箭头类',
     data: [
-      'arrow-line', 'arrow', 'arrow-double', 'arrow-triangle', 'arrow-to', 'collapse', 'collection', 'zoom-out', 'zoom-in', 'loop', 'download', 'out', 'reload', 'undo', 'sort', 'back', 'ahead', 'refresh'
+      'arrow-line', 'arrow', 'arrow-double', 'arrow-triangle', 'arrow-to', 'arrow-nav', 'collapse', 'collection', 'zoom-out', 'zoom-in', 'zoom-out-arrow', 'zoom-in-arrow', 'loop', 'download', 'out', 'reload', 'undo', 'sort', 'back', 'ahead', 'refresh'
     ]
   },
   {
@@ -1265,5 +1268,9 @@ export const ICON_EXAMPLE_DATA = [
   },
   {
     title: '文字类',
+  },
+  {
+    title: '媒体类',
+    data: ['video-pause', 'video-play', 'video-small-screen', 'video-full-width', 'video-contain-width']
   }
 ]

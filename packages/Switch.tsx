@@ -2,16 +2,24 @@ import React, { CSSProperties, useEffect, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
 import Pop, { PopProps } from "./Pop";
-import Flex from "./Flex";
 
 export type SwitchProps = {
+  /** 是否开启 */
   checked?: boolean;
+  /** 秒数文字 */
   label?: string;
+  /** 开启后的描述文字 */
   checkedLabel?: string;
+  /** 默认图标 */
   icon?: React.ReactNode;
+  /** 开启后的图标 */
   checkedIcon?: React.ReactNode;
+  /** 提示内容 */
   info?: React.ReactNode;
+  /** 提示内容属性 */
   popProps?: PopProps;
+  /** 暗黑模式 */
+  dark?: boolean;
   onChange?: (checked: boolean) => void;
   style?: CSSProperties;
   className?: string;
@@ -26,6 +34,7 @@ const Switch: React.FC<SwitchProps> = ({
   info,
   popProps,
   onChange,
+  dark,
   style,
   className = "",
 }) => {
@@ -33,11 +42,10 @@ const Switch: React.FC<SwitchProps> = ({
   useEffect(() => setNewChecked(checked), [checked]);
 
   return (
-    <Flex gap={8} align="center">
+    <div className="flex items-center gap-8">
       <StyledSwitchWrap
-        className={`land-switch-wrap ${
-          newChecked ? "checked" : ""
-        } ${className}`}
+        className={`land-switch-wrap ${dark ? 'dark' : ''} ${newChecked ? "checked" : ""
+          } ${className}`}
         style={style}
         onClick={() => {
           setNewChecked(!newChecked);
@@ -61,11 +69,13 @@ const Switch: React.FC<SwitchProps> = ({
           <Pop content={info} {...popProps} />
         </div>
       )}
-    </Flex>
+    </div>
   );
 };
 
-const StyledSwitchWrap = styled.div<{}>`
+const StyledSwitchWrap = styled.div<{
+  dark?: boolean;
+}>`
   display: flex;
   align-items: center;
   gap: var(--gap-8);
@@ -116,6 +126,20 @@ const StyledSwitchWrap = styled.div<{}>`
       transform: translateX(16px);
     }
   }
+  &.dark{
+    .land-switch-bar{
+      background-color: rgba(0,0,0,0.2);
+      &:hover {
+        background-color: rgba(0,0,0,0.2);
+      }
+    }
+    &.checked{
+      .land-switch-bar {
+      background-color: var(--color-primary-6);
+      transition-delay: 100ms;
+    }
+    }
+    }
 `;
 
 export default Switch;

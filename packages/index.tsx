@@ -1,4 +1,4 @@
-export type { AffixContainerProps } from "./AffixContainer";
+export type { AffixContainerProps, AffixContainerItemProps } from "./AffixContainer";
 export { default as LandAffixContainer } from "./AffixContainer";
 
 export type { AnchorProps } from "./Anchor";

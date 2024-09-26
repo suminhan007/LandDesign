@@ -20,6 +20,11 @@ export type SliderProps = {
   onChange?: (val: number) => void;
   /** 控件高度 */
   height?: number;
+  /** 滑块大小 */
+  thumbSize?: number;
+  /** 定制样式 */
+  defaultBg?: string;
+  activeBg?: string;
   className?: string;
 };
 const Slider: React.FC<SliderProps> = ({
@@ -34,6 +39,9 @@ const Slider: React.FC<SliderProps> = ({
   value = 0,
   height = 36,
   onChange,
+  thumbSize = 16,
+  defaultBg,
+  activeBg = 'var(--color-primary-6)',
   className,
 }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -50,13 +58,15 @@ const Slider: React.FC<SliderProps> = ({
       <StyledSliderContent
         useDivider={useDivider}
         step={100 / (max - min)}
-        className={`relative flex-1 p-2 radius-8 bg-gray hover:bg-gray transition-2s hover-pop ${
-          className ? className : ""
-        }`}
-        style={{ height: `${height}px` }}
+        className={`relative flex-1 p-2 radius-8 ${defaultBg ? '' : 'bg-gray hover:bg-gray'} transition-2s hover-pop ${className ? className : ""
+          }`}
+        style={{
+          height: `${height}px`,
+          backgroundColor: defaultBg,
+        }}
       >
         {/* slider:为0或options第一项 */}
-        <StyleInput
+        <StyleSliderInput
           type="range"
           value={value}
           min={0}
@@ -69,22 +79,21 @@ const Slider: React.FC<SliderProps> = ({
           style={{
             background:
               value < (max - min) / 2
-                ? `linear-gradient(to right,var(--color-primary-6) calc(100% - 2px), var(--color-primary-6)  calc(100% - 2px)) 0 0 / ${
-                    ((value - min) / (max - min)) * 100
-                  }% 100% no-repeat`
-                : `linear-gradient(to right,var(--color-primary-6) calc(100% - 2px), var(--color-primary-6)  calc(100% - 2px)) 0 0 / ${
-                    ((value - min) / (max - min)) * 100
-                  }% 100% no-repeat`,
+                ? `linear-gradient(to right,${activeBg} calc(100% - 2px), ${activeBg}  calc(100% - 2px)) 0 0 / ${((value - min) / (max - min)) * 100
+                }% 100% no-repeat`
+                : `linear-gradient(to right,${activeBg} calc(100% - 2px), ${activeBg}  calc(100% - 2px)) 0 0 / ${((value - min) / (max - min)) * 100
+                }% 100% no-repeat`,
           }}
           className="width-100 radius-6 flex justify-center"
+          height={height}
+          thumbSize={thumbSize}
         />
         {usePop && (
           <Pop
             content={popValue}
             style={{
-              transform: `translateX(${
-                (width * (value - (max - min) / 2)) / (max - min)
-              }}px)`,
+              transform: `translateX(${(width * (value - (max - min) / 2)) / (max - min)
+                }}px)`,
             }}
           />
         )}
@@ -107,25 +116,30 @@ const StyledSliderContent = styled.div<{
     height: calc(100% - 8px);
     border-radius: 8px;
     background: ${(props) =>
-      props.useDivider
-        ? `linear-gradient(to right,transparent calc(100% - 1px), var(--bg-gray-1)  calc(100% - 1px),var(--bg-gray-1) 100%) 0 0 / 100% 100%,
+    props.useDivider
+      ? `linear-gradient(to right,transparent calc(100% - 1px), var(--bg-gray-1)  calc(100% - 1px),var(--bg-gray-1) 100%) 0 0 / 100% 100%,
           linear-gradient(to right,transparent calc(100% - 1px), var(--border-3) calc(100% - 1px),var(--border-3) 100%) 0 0 / ${props.step}% 100%,var(--bg-gray-1) 0 0 / 100% 100%`
-        : "transparent"};
+      : "transparent"};
     transition: all 0.2s linear;
   }
   &:hover::before {
     background: ${(props) =>
-      props.useDivider
-        ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-gray-2)  calc(100% - 1px),var(--color-gray-2) 100%) 0 0 / 100% 100%,
+    props.useDivider
+      ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-gray-2)  calc(100% - 1px),var(--color-gray-2) 100%) 0 0 / 100% 100%,
           linear-gradient(to right,transparent calc(100% - 1px), var(--border-3) calc(100% - 1px),var(--border-3) 100%) 0 0 / ${props.step}% 100%,var(--color-gray-2) 0 0 / 100% 100%`
-        : ""};
+      : ""};
   }
 `;
 
-const StyleInput = styled.input`
+const StyleSliderInput = styled.input<{
+  height?: number;
+  thumbSize?: number;
+}>`
   position: absolute;
-  top: 2px;
-  height: calc(100% - 4px);
+  top: ${props => props.height > 8 ? '2px' : '0px'};
+  display: flex;
+  align-items: center;
+  height: ${props => props.height > 8 ? 'calc(100% - 4px)' : '100%'};
   appearance: none;
   -webkit-appearance: none;
   margin: 0;
@@ -133,7 +147,7 @@ const StyleInput = styled.input`
   outline: none;
   object-fit: contain;
   &[type="range"] {
-    width: calc(100% - 4px);
+    width: ${props => props.height > 8 ? 'calc(100% - 4px)' : '100%'};
   }
   &::-webkit-slider-runnable-track {
     height: 100%;
@@ -141,16 +155,15 @@ const StyleInput = styled.input`
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 16px;
-    height: 100%;
-    border-radius: 6px;
+    width: ${props => `${props.thumbSize}px`};
+    height: ${props => props.height > 8 ? '100%' : `${props.thumbSize}px`};
+    border-radius: ${props => props.height > 8 ? '6px' : '100%'};
     background: var(--color-bg-white);
-    border: 1px solid rgba(73, 90, 122, 0.12);
+    border: ${props => props.height > 8 ? '1px solid rgba(73, 90, 122, 0.12)' : 'none'};
     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.04);
     transition: border-color linear 0.2s;
     &:hover {
       border-color: rgba(69, 80, 102, 0.25);
-      cursor: ew-resize;
     }
   }
 `;

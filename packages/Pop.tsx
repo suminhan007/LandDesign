@@ -7,24 +7,34 @@ enum PopType {
 }
 
 export type PopProps = {
+  /** 是否直接显示 */
+  show?: boolean;
+  /** 样式 */
   type?: PopType;
+  /** 颜色模式 */
   theme?: "light" | "dark";
+  /** 气泡内容 */
   content?: React.ReactNode;
+  /** 气泡位置 */
   placement?: "top" | "bottom" | "left" | "right";
+  /** 是否隐藏气泡箭头 */
+  hideArrow?: boolean;
   style?: CSSProperties;
   className?: string;
 };
 
 const Pop: React.FC<PopProps> = ({
+  show,
   content,
   theme = "light",
   placement = "top",
+  hideArrow = false,
   style,
   className = "",
 }) => {
   return (
     <StyledBtnPop
-      className={`land-pop ${theme} ${className}`}
+      className={`land-pop ${show ? 'show' : ''} ${theme} ${className}`}
       style={{
         top:
           placement === "bottom"
@@ -53,9 +63,10 @@ const Pop: React.FC<PopProps> = ({
           })`,
         ...style,
       }}
+      hideArrow={hideArrow}
     >
       {content}
-      <div
+      {!hideArrow && <div
         className="land-pop-arrow"
         style={{
           left:
@@ -79,12 +90,14 @@ const Pop: React.FC<PopProps> = ({
                 : "-50%"
             }) rotate(${placement === 'top' ? '45' : placement === 'bottom' ? '-135' : placement === 'right' ? '135' : '-45'}deg)`,
         }}
-      ></div>
+      ></div>}
     </StyledBtnPop>
   );
 };
 
-const StyledBtnPop = styled.div`
+const StyledBtnPop = styled.div<{
+  hideArrow?: boolean;
+}>`
   position: absolute;
   padding: 8px 12px;
   width: max-content;
@@ -109,13 +122,17 @@ const StyledBtnPop = styled.div`
     background-color: var(--color-bg-white);
   }
   &.dark {
-    background-color: var(--color-text-2);
+    background-color: ${props => props.hideArrow ? 'rgba(0,0,0,0.68)' : 'var(--color-text-2)'};
     color: var(--color-text-light);
     border: 0;
     .land-pop-arrow {
       background-color: var(--color-text-2);
       border: 0;
     }
+  }
+  &.show{
+    opacity: 1;
+    pointer-events: auto;
   }
 `;
 

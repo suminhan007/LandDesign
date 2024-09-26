@@ -565,7 +565,7 @@
         .land-pop{
             opacity: 1;
             transform: translate(-50%,-16px);
-            pointer-events: all;
+            pointer-events: auto;
         }
     }
 }
