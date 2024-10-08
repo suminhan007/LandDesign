@@ -10,8 +10,9 @@ export type ButtonProps = {
   subText?: string;
   /* 按钮图标: 若仅指定 icon 而未指定文案，则渲染为按钮图标（宽高一致） */
   icon?: React.ReactNode;
-  /* 设置按钮宽度&高度：设置后 padding 将不起作用 */
+  /* 设置按钮宽度：设置后 padding 将不起作用 */
   width?: string;
+  /* 设置按钮高度：设置后 padding 将不起作用 */
   height?: string;
   /* 按钮文字对齐方式 */
   justify?: "center" | "start" | "end";
@@ -19,6 +20,8 @@ export type ButtonProps = {
   type?: "text" | "background" | "border" | "line";
   /* 按钮状态 */
   status?: "default" | "primary" | "warning" | "danger" | "success";
+  /** 按钮尺寸 */
+  size?: 'small' | 'default' | 'large';
   /* 是否禁用 */
   disabled?: boolean;
   /* 按钮气泡 */
@@ -45,6 +48,7 @@ const Button: React.FC<ButtonProps> = ({
   justify = "center",
   type = "border",
   status = "default",
+  size = 'default',
   disabled,
   pop,
   PopProps,
@@ -79,6 +83,22 @@ const Button: React.FC<ButtonProps> = ({
         return "";
     }
   }, [status]);
+
+  const btnHeight = useMemo(() => {
+    let h = '36px';
+    if (height) {
+      h = height;
+    } else {
+      switch (size) {
+        case 'small': h = '28px'; break;
+        case 'default': h = '36px'; break;
+        case 'large': h = '40px'; break;
+        default: h = '36px';
+          break;
+      }
+    }
+    return h;
+  }, [width, size]);
   return (
     <>
       {!href ? (
@@ -88,7 +108,7 @@ const Button: React.FC<ButtonProps> = ({
             } ${className}`}
           style={style}
           width={width}
-          height={height}
+          height={btnHeight}
           justify={justify}
           color={buttonColorConfig}
           onClick={(e: React.UIEvent) => onClick?.(e)}
@@ -230,8 +250,8 @@ const StyledButton = styled.div<{
 
   &.iconOnly {
     padding: 0;
-    width: 36px;
-    height: 36px;
+    width: ${props => props.height};
+    height: ${props => props.height};
   }
   &.disabled {
     background-color: ${(props) => `${props.color}3)`};

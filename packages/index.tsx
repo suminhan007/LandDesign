@@ -119,3 +119,8 @@ export { default as LandUploader } from "./Uploader";
 
 export { default as Icon } from "./Icon";
 export type { IconDefaultProps, IconProps } from "./Icon";
+
+// hooks
+export { default as useFormateTime } from './hooks/useFormateTime';
+export { default as useClickOutside } from './hooks/useClickOutside';
+export { default as useGetHighlightStr } from './hooks/useGetHighlightStr';

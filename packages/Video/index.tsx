@@ -8,6 +8,7 @@ import Loading from 'packages/Loading';
 import useClickOutside from 'packages/hooks/useClickOutside';
 import Pop from 'packages/Pop';
 import VideoSetting from './VideoSetting';
+import useFormateTime from 'packages/hooks/useFormateTime';
 
 type VideoProps = {
   /** 视频地址 */
@@ -277,23 +278,6 @@ const Video: React.FC<VideoProps> = ({
     };
   }, []);
 
-  const formateTime = (time?: number | string) => {
-    if (!time) return '00:00';
-    if (typeof time === 'string') return time;
-    // 如果传入数字
-    const h = Math.floor(time / 3600);
-    const m = Math.floor((time % 3600) / 60);
-    const s = Math.round(time % 60);
-
-    const hDisplay = h;
-    const mDisplay = (m > 0 && m < 10 && h > 0) ? "0" + m : m;
-    const sDisplay = (s < 10) ? "0" + s : s;
-    if (h > 0) {
-      return hDisplay + ":" + mDisplay + ":" + sDisplay;
-    }
-    return mDisplay + ":" + sDisplay;
-  };
-
   return (
     <StyledLandVideoContainer className={`land-video-wrap ${fullView ? 'fullView' : ''} ${className}`} style={{ aspectRatio: `${ratio}`, ...style }}>
       {error ? <Icon name='error-fill' /> : <video
@@ -344,7 +328,7 @@ const Video: React.FC<VideoProps> = ({
                   {useNextEpisode && <a className="land-video-controls-button next" role="button" href={nextEpisodeHref} title="下一个">
                     <Icon name='arrow-nav' size={20} strokeWidth={4} />
                   </a>}
-                  <div className="land-video-controls-time">{formateTime(currentTime)} / {formateTime(duration)}</div>
+                  <div className="land-video-controls-time">{useFormateTime(currentTime)} / {useFormateTime(duration)}</div>
                   <div className='land-video-controls-volume-container'>
                     <button className="land-video-controls-button volume" onClick={handleMuteChange}>
                       {muted ? <Icon name='volume-muted' size={20} strokeWidth={2} /> : <Icon name='volume' className={`${volume < 50 ? 'small' : ''}`} size={20} strokeWidth={2} />}

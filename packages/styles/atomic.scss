@@ -384,6 +384,12 @@
 .mb-40 {
     margin-bottom: 40px;
 }
+.border-box{
+  box-sizing: border-box;
+}
+.content-box{
+  box-sizing: content-box;
+}
 
 
 //大小
@@ -507,6 +513,9 @@
 }
 .text-center {
     text-align: center;
+}
+.no-wrap{
+  white-space: nowrap;
 }
 .opacity-0 {
     opacity: 0;

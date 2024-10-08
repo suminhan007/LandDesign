@@ -29,7 +29,7 @@ export default function VideoExample() {
       <div className="flex column gap-12">
         <Title title="基础视频" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
-          <Video src='https://asset.gdtimg.com/0bc35eaieaaabqac3d7lyztd32oeqluqbaqa.f0.mp4?dis_k=e91b096d31e564b3bf02b46ae94496d7&dis_t=1727244815' className="radius-8 overflow-hidden" />
+          <Video src='https://asset.gdtimg.com/0bc35eaieaaabqac3d7lyztd32oeqluqbaqa.f0.mp4?dis_k=e91b096d31e564b3bf02b46ae94496d7&dis_t=1727244815' videoClassName="radius-8" />
         </div>
         <Title title="显示视频帧" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
