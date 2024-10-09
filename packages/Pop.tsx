@@ -32,6 +32,7 @@ const Pop: React.FC<PopProps> = ({
   style,
   className = "",
 }) => {
+  if (!content) return;
   return (
     <StyledBtnPop
       className={`land-pop ${show ? 'show' : ''} ${theme} ${className}`}

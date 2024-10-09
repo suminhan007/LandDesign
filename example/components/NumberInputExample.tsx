@@ -23,7 +23,14 @@ export default function NumberInputExample() {
             value={0}
           />
         </div>
-        <Title title="设置单位后缀" type="h3" />
+        <Title title="设置内容前缀" type="h3" />
+        <div className="flex justify-center gap-24 border p-32">
+          <NumberInput
+            value={0}
+            prefix='总人数：'
+          />
+        </div>
+        <Title title="设置内容后缀" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
           <NumberInput
             value={0}

@@ -17,7 +17,11 @@ export default function SwitchExample() {
         </div>
         <Title title="包含提示内容" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
-          <Switch label="是否开启" checkedLabel="是否开启" info="开启后..." />
+          <Switch label="是否开启" checkedLabel="是否开启" iconInfo="开启后..." />
+        </div>
+        <Title title="禁用" type="h3" />
+        <div className="flex justify-center gap-24 border p-32">
+          <Switch label="是否开启" checkedLabel="是否开启" disabled info="禁用" />
         </div>
         <Title title="包含图标" type="h3" />
         <div className="flex justify-center gap-24 border p-32">

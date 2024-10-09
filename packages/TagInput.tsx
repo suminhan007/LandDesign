@@ -1,151 +1,152 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
+import Input, { InputProps } from "./Input";
 
 export type TagInputProps = {
-  /** 输入值 */
-  value?: string;
+  /** 初始标签 */
+  tagData?: string[];
   /** 占位符 */
   placeholder?: string;
   w?: number | string;
   /** 允许输入的最大标签数 */
   maxLength?: number;
-  onChange?: (val: string | number, e: any) => void;
+  /** 高亮文字数组 */
+  highlightStr?: string[];
+  /** 高亮内容样式 */
+  highlightStyle?: CSSProperties;
+  onChange?: (val: string[], e: any) => void;
+  onEnter?: (val: string[], e: any) => void;
   onFocus?: (e: any) => void;
+  onBlur?: (val: string[], e: any) => void;
+  /** 标签样式 */
+  tagStyle?: CSSProperties;
+  tagClassName?: string;
   className?: string;
   style?: CSSProperties;
-  [key: string]: any;
-};
+} & InputProps;
+
 const TagInput: React.FC<TagInputProps> = ({
-  value,
-  placeholder = '请输入',
+  tagData = [],
+  placeholder = '按下回车以输入标签',
   w = '100%',
-  maxLength,
+  maxLength = 5,
+  highlightStr = [],
+  highlightStyle = { background: 'var(--color-primary-2)', color: 'var(--color-primary-6)' },
   onChange,
+  onEnter,
   onFocus,
-  className,
+  onBlur,
+  tagStyle,
+  tagClassName = '',
+  className = '',
   wrapStyle,
   ...restProps
 }) => {
-  const [newValue, setNewValue] = useState<string>(value);
-  const [tags, setTags] = useState<string[]>([]);
-
-  const tagListRef = useRef<HTMLDivElement>(null);
-  const handleInputEnter = (e) => {
-    if (tags?.length === maxLength) return;
-    if (e.code === 'Enter' && newValue) {
-      if (tags.length === maxLength) return;
-      setTags([...tags, newValue]);
-      setNewValue('');
-    }
-  }
-  const [top, setTop] = useState<number>(0);
-  const [left, setLeft] = useState<number>(0);
+  const [newValue, setNewValue] = useState<string>('');
+  const [tags, setTags] = useState<string[]>(tagData);
+  const addTag = (val: string) => {
+    if (tags.length === maxLength || !val) return;
+    setTags([...tags, val]);
+    setNewValue('');
+  };
+  /** 监听键盘删除事件 */
   useEffect(() => {
-    if (tagListRef.current && tags && tags?.length > 0) {
-      const top = tagListRef.current.clientHeight;
-      const length = tags.length - 1;
-      const left = tagListRef.current.children[length].clientLeft + tagListRef.current.children[length].clientWidth + 16 * tags.length;
-      setTop(top);
-      setLeft(left);
+    const handleKeyDelete = (e: any) => {
+      if (e.code === 'Backspace' && tags?.length > 0 && !newValue) {
+        setTags(tags => tags.slice(0, -1));
+        console.log(e.code);
+      }
     }
-  }, [tags])
+    window.addEventListener('keydown', handleKeyDelete);
+    return () => window.removeEventListener('keydown', handleKeyDelete);
+  }, [newValue, tags]);
+
+  /** 编辑标签 */
+
   return (
     <StyleTagInputWrap
       className={`land-tagInput ${className}`}
       style={{ width: typeof w === "number" ? `${w}px` : w, ...wrapStyle }}
     >
-      <div ref={tagListRef} className="absolute top-0 left-0 flex flex-wrap gap-4 w-fit-content shrink-0" style={{ maxWidth: '100%' }}>
-        {tags?.map((item, index) => <StyledInputTag key={index}>{item}<Icon name="clear" onClick={() => setTags(tags.filter(itm => itm !== item))} /></StyledInputTag>)}
+      <div className="flex-1 flex flex-wrap gap-4 w-fit-content shrink-0">
+        {tags?.map((item, index) => <StyledInputTag
+          key={index}
+          className={`land-tagInput-tag ${tagClassName}`}
+          style={tagStyle}
+        >
+          {item}<Icon name="clear" onClick={() => setTags(tags.filter(itm => itm !== item))} />
+        </StyledInputTag>)}
+        <Input
+          type="transparent"
+          value={newValue}
+          placeholder={placeholder}
+          onEnter={(val, e) => { addTag?.(val); onEnter?.(tags, e); }}
+          onBlur={e => { addTag?.(newValue); onBlur?.(tags, e) }}
+          onChange={(val, e) => { setNewValue(val); onChange?.(tags, e) }}
+          className="flex-1"
+          wrapStyle={{ height: '28px', minWidth: '80px' }}
+          {...restProps}
+        />
       </div>
-      <textarea
-        placeholder={placeholder}
-        value={newValue}
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => handleInputEnter(e)}
-        onFocus={(e: any) => { e.stopPropagation(); onFocus?.(e) }}
-        onChange={(e) => { e.stopPropagation(); setNewValue(e.target.value); onChange?.(e.target.value, e); }}
-        style={{
-          paddingTop: top,
-          textIndent: left,
-        }}
-        {...restProps}
-      />
-      {newValue && <Icon name="clear" fill="var(--color-bg-3)" className='shrink-0' onClick={() => setNewValue('')} />}
-      <div className="land-tagInput-number"><span>{tags.length}</span> / {maxLength}</div>
+      <div className="land-tagInput-number">
+        {<Icon name="error-fill" className="land-input-clear-icon" fill="var(--color-text-5)"
+          onClick={() => {
+            setTags([])
+          }} />}
+        <div><span>{tags.length}</span>/{maxLength}</div>
+      </div>
     </StyleTagInputWrap>
   );
 };
 
 const StyleTagInputWrap = styled.div`
-        position: relative;
-        display: flex;
-        align-items: baseline;
-        gap: var(--gap-4);
-        padding: 0 4px;
-        height: fit-content;
-        border-radius: var(--radius-4);
-        background-color: var(--color-bg-2);
-        overflow: auto;
-        transition: background-color var(--transition-15) linear;
-        &::-webkit-scrollbar{
-          width: 0;
-          display: none;
-        }
-        &:focus-within,
-        &:hover{
-          background-color: var(--color-bg-3);
-        }
-        textarea {
-          flex: 1;
-          height: fit-content;
-          background-color: transparent;
-          appearance: none;
-          -moz-appearance: none;
-          border: none;
-          outline: none;
-          caret-color: var(--color-primary-6);
-          flex-shrink: 0;
-          overflow: auto;
-          resize: none;
-        &::-webkit-scrollbar{
-          width: 0;
-          display: none;
-        }
-        &:focus-within,
-        &:focus,
-        &:focus-visible,
-        &:active {
-          border: none;
-          box-shadow: none;
-          background-color: transparent;
+    position: relative;
+    display: flex;
+    align-items: end;
+    gap: var(--gap-4);
+    padding: 4px 12px;
+    height: fit-content;
+    border-radius: var(--radius-4);
+    background-color: var(--color-bg-2);
+    overflow: auto;
+    transition: background-color var(--transition-15) linear;
+    &::-webkit-scrollbar{
+      width: 0;
+      display: none;
     }
-        &::placeholder {
-          color: var(--color-text-5);
+    &:focus-within,
+    &:hover{
+      background-color: var(--color-bg-3);
     }
-        &::selection {
-          background-color: var(--color-primary-2);
-    }
+    
+
     .land-tagInput-number{
-      font-size: var(--font-content-small);
+      display: flex;
+      align-items: center;
+      gap: var(--gap-8);
+      height: 28px;
+      font-size: 14px;
       color: var(--color-text-5);
       span{
         color: var(--color-text-3);
-      }
     }
   }
-        `;
+`;
 
 const StyledInputTag = styled.div`
     display: flex;
     align-items: center;
-    gap: var(--gap-8);
-    padding: var(--padding-small);
+    gap: var(--gap-4);
+    padding: 0 8px;
+    height: 28px;
     background-color: var(--color-bg-white);
     border-radius: var(--radius-2);
     color: var(--color-text-2);
     font-size: var(--font-content-small);
     border: var(--border-1) solid var(--color-border-2);
+    box-sizing: border-box;
     cursor: pointer;
-        `
+`;
+
 export default TagInput;

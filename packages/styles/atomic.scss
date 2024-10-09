@@ -416,7 +416,10 @@
     border: 1px solid var(--color-border-1);
 }
 .border-primary{
-    border: 1px solid#0AA344;
+    border: 1px solid var(--color-primary-6);
+}
+.border-primary-light{
+  border: 1px solid var(--color-primary-1);
 }
 .border-dash {
     border: 1px dashed var(--color-border-1);

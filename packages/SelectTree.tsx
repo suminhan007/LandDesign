@@ -1,9 +1,10 @@
-import React, { CSSProperties, useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Title from "./Title";
 import Icon from "./Icon";
 import Pop from "./Pop";
 import Flex from "./Flex";
+import useClickOutside from "./hooks/useClickOutside";
 
 
 type dropProps = {
@@ -92,9 +93,16 @@ const SelectTree: React.FC<SelectTreeProps> = ({
   const [selectedValue, setSelectedValue] = useState<string | number>();
   useEffect(() => {
     if (!show) setShowSec(undefined);
-  }, [show])
+  }, [show]);
+
+  const selectTreeRef = useRef<HTMLDivElement>(null);
+  useClickOutside(selectTreeRef,
+    () => {
+      setShow(false);
+    });
   return (
     <StyleSelectTreeWrap
+      ref={selectTreeRef}
       style={{
         width: width ? 'fit-content' : typeof width === "number" ? `${width}px` : width,
         ...style,

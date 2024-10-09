@@ -19,7 +19,7 @@ export type ColorPickerProps = {
 };
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
-  value = "",
+  value = "var(--color-bg-1)",
   size,
   border = false,
   useSelect = true,
@@ -36,15 +36,15 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       style={
         size
           ? {
-              width: typeof size === "number" ? `${size}px` : size,
-              height: typeof size === "number" ? `${size}px` : size,
-              background: color,
-              ...style,
-            }
+            width: typeof size === "number" ? `${size}px` : size,
+            height: typeof size === "number" ? `${size}px` : size,
+            background: color,
+            ...style,
+          }
           : {
-              background: color,
-              ...style,
-            }
+            background: color,
+            ...style,
+          }
       }
       onClick={() => onClick?.(color)}
       border={border}

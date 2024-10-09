@@ -6,8 +6,11 @@ import Icon from "./Icon";
 type CheckItemType = {
   value: number | string;
   label: string;
-  info?: string;
+  /** 整个选项提示内容 */
+  info?: React.ReactNode;
   disabled?: boolean;
+  /** 图标提示内容 */
+  iconInfo?: React.ReactNode;
 }
 export type CheckboxProps = {
   checked?: (number | string)[];
@@ -27,22 +30,25 @@ const Checkbox: React.FC<CheckboxProps> = ({
     <StyleCheckboxWrap className={`land-checkbox-wrap ${className}`} style={style}>
       {
         data?.map(item =>
-          <StyledCheckboxItem key={item.value} className={`land-checkbox-item ${item.disabled ? 'disabled' : ''}`}>
+          <StyledCheckboxItem key={item.value} className={`land-checkbox-item ${item.info ? 'hover-pop' : ''} ${item.disabled ? 'disabled' : ''}`}>
+            <Pop content={item.info} theme="dark" style={{ maxWidth: "200px" }} />
             <StyleCheckboxLabel
               onClick={(e) => {
+                if (item.disabled) return;
                 e.stopPropagation();
                 onChange?.(item);
               }}
+              className="land-checkbox-label"
             >
               <StyleCheckboxCircle className={`${checked.includes(item.value) ? "checked" : ""}`}>
                 <Icon name='check' size={10} strokeWidth={0} fill="var(--color-bg-white)" />
               </StyleCheckboxCircle>
               {item.label}
             </StyleCheckboxLabel>
-            {item.info && (
+            {item.iconInfo && (
               <StyleCheckboxPop className="hover-pop">
                 <Icon name="info-stroke" size={12} stroke="var(--color-text-4)" />
-                <Pop content={item.info} theme="dark" style={{ maxWidth: "200px" }} />
+                <Pop content={item.iconInfo} theme="dark" style={{ maxWidth: "200px" }} />
               </StyleCheckboxPop>
             )}
           </StyledCheckboxItem>
@@ -59,11 +65,16 @@ const StyleCheckboxWrap = styled.div`
 `;
 
 const StyledCheckboxItem = styled.div`
+  position: relative;
    display: flex;
   align-items: center;
   gap: var(--gap-4); 
+  cursor: pointer;
   &.disabled{
-    opacity: var(--opacity-68);
+    .land-checkbox-label{
+      opacity: var(--opacity-04);
+    }
+    cursor: not-allowed;
   }
 `
 
@@ -73,7 +84,6 @@ const StyleCheckboxLabel = styled.div`
   gap: var(--gap-8);
   font-size: var(--font-content-medium);
   color: var(--color-text-2);
-  cursor: pointer;
 `;
 
 const StyleCheckboxCircle = styled.div`
@@ -85,7 +95,6 @@ const StyleCheckboxCircle = styled.div`
   border-radius: var(--radius-4);
   border: 1px solid var(--color-border-3);
   transition: all var(--transition-15) linear;
-  cursor: pointer;
   &:hover {
     background-color: var(--color-bg-1);
   }

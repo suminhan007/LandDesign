@@ -68,7 +68,6 @@ const NumberInput: React.FC<NumberInputProps> = ({
         prefix={prefix}
         suffix={suffix}
         onChange={(value, e) => handleNumberInputChange(value, e)}
-        showClear={false}
         wrapStyle={{
           paddingRight: '32px'
         }}

@@ -1,6 +1,5 @@
 import React from 'react'
 import Title from '../../packages/Title'
-import TagInput from '../../packages/TagInput'
 import Select from '../../packages/Select'
 
 export default function SelectExample() {
@@ -59,7 +58,7 @@ export default function SelectExample() {
           <Select data={[
             { value: 1, label: '选项1' },
             { value: 2, label: '选项2' },
-            { value: 3, label: '选项3', disabled: true, info: '99' }
+            { value: 3, label: '选项3', disabled: true, info: '此选项暂无法选择' }
           ]}
           />
         </div>

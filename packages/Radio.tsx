@@ -6,8 +6,11 @@ import Icon from "./Icon";
 type CheckItemType = {
   value: number | string;
   label: string;
-  info?: string;
+  /** 整个选项提示内容 */
+  info?: React.ReactNode;
   disabled?: boolean;
+  /** 图标提示内容 */
+  iconInfo?: React.ReactNode;
 }
 export type RadioProps = {
   checked?: number | string;
@@ -27,22 +30,25 @@ const Radio: React.FC<RadioProps> = ({
     <StyleRadioWrap className={`land-radio-wrap ${className}`} style={style}>
       {
         data?.map(item =>
-          <StyledRadioItem key={item.value} className={`land-radio-item ${item.disabled ? 'disabled' : ''}`}>
+          <StyledRadioItem key={item.value} className={`land-radio-item ${item.info ? 'hover-pop' : ''} ${item.disabled ? 'disabled' : ''}`}>
+            <Pop content={item.info} theme="dark" style={{ maxWidth: "200px" }} />
             <StyleRadioLabel
               onClick={(e) => {
+                if (item.disabled) return;
                 e.stopPropagation();
                 onChange?.(item);
               }}
+              className="land-radio-label"
             >
               <StyleRadioCircle className={`${checked === item.value ? "checked" : ""}`}>
                 <Icon name='check' size={10} strokeWidth={0} fill={checked === item.value ? 'var(--color-bg-white)' : 'inherit'} />
               </StyleRadioCircle>
               {item.label}
             </StyleRadioLabel>
-            {item.info && (
+            {item.iconInfo && (
               <StyleRadioPop className="hover-pop">
                 <Icon name="info-stroke" stroke="var(--color-text-4)" size={12} />
-                <Pop content={item.info} theme="dark" style={{ maxWidth: "200px" }} />
+                <Pop content={item.iconInfo} theme="dark" style={{ maxWidth: "200px" }} />
               </StyleRadioPop>
             )}
           </StyledRadioItem>
@@ -59,11 +65,16 @@ const StyleRadioWrap = styled.div`
 `;
 
 const StyledRadioItem = styled.div`
+  position: relative;
    display: flex;
   align-items: center;
   gap: var(--gap-4); 
+  cursor: pointer;
   &.disabled{
-    opacity: var(--opacity-68);
+    .land-radio-label{
+      opacity: var(--opacity-04);
+    }
+    cursor: not-allowed;
   }
 `
 const StyleRadioLabel = styled.div`
@@ -73,7 +84,6 @@ const StyleRadioLabel = styled.div`
   font-size: var(--font-content-medium);
   color: var(--color-text-2);
   white-space: nowrap;
-  cursor: pointer;
 `;
 
 const StyleRadioCircle = styled.div`
@@ -86,7 +96,6 @@ const StyleRadioCircle = styled.div`
   border: 1px solid var(--color-border-3);
   flex-shrink: 0;
   transition: all var(--transition-15) linear;
-  cursor: pointer;
   &:hover {
     background-color: var(--color-bg-1);
   }

@@ -14,12 +14,16 @@ export type SwitchProps = {
   icon?: React.ReactNode;
   /** 开启后的图标 */
   checkedIcon?: React.ReactNode;
-  /** 提示内容 */
+  /** 整体提示内容 */
   info?: React.ReactNode;
+  /** 图标提示内容 */
+  iconInfo?: React.ReactNode;
   /** 提示内容属性 */
   popProps?: PopProps;
   /** 暗黑模式 */
   dark?: boolean;
+  /** 禁用 */
+  disabled?: boolean;
   onChange?: (checked: boolean) => void;
   style?: CSSProperties;
   className?: string;
@@ -32,9 +36,11 @@ const Switch: React.FC<SwitchProps> = ({
   icon,
   checkedIcon,
   info,
+  iconInfo,
   popProps,
   onChange,
   dark,
+  disabled,
   style,
   className = "",
 }) => {
@@ -42,12 +48,14 @@ const Switch: React.FC<SwitchProps> = ({
   useEffect(() => setNewChecked(checked), [checked]);
 
   return (
-    <div className="flex items-center gap-8">
-      <StyledSwitchWrap
-        className={`land-switch-wrap ${dark ? 'dark' : ''} ${newChecked ? "checked" : ""
+    <StyledSwitchWrap className={`land-switch-wrap ${info ? 'hover-pop' : ''} ${disabled ? 'disabled' : ''}`}>
+      <Pop content={info} theme="dark" {...popProps} />
+      <StyledSwitchContent
+        className={`land-switch-content ${dark ? 'dark' : ''} ${newChecked ? "checked" : ""
           } ${className}`}
         style={style}
         onClick={() => {
+          if (disabled) return;
           setNewChecked(!newChecked);
           onChange?.(newChecked);
         }}
@@ -62,18 +70,32 @@ const Switch: React.FC<SwitchProps> = ({
             {newChecked ? checkedLabel : label}
           </div>
         )}
-      </StyledSwitchWrap>
-      {info && (
-        <div className="land-switch-label-info hover-pop">
+      </StyledSwitchContent>
+      {iconInfo && (
+        <div className="land-switch-label-iconInfo hover-pop">
           <Icon name="info-stroke" size={16} />
-          <Pop content={info} {...popProps} />
+          <Pop content={iconInfo} theme="dark"  {...popProps} />
         </div>
       )}
-    </div>
+    </StyledSwitchWrap>
   );
 };
 
-const StyledSwitchWrap = styled.div<{
+const StyledSwitchWrap = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  &.disabled{
+    .land-switch-content{
+      opacity: var(--opacity-04);
+      cursor: not-allowed;
+    }
+    cursor: not-allowed;
+  }
+`;
+
+const StyledSwitchContent = styled.div<{
   dark?: boolean;
 }>`
   display: flex;
@@ -112,7 +134,7 @@ const StyledSwitchWrap = styled.div<{
     font-size: var(--font-content-medium);
     color: var(--color-text-3);
   }
-  & + .land-switch-label-info {
+  & + .land-switch-label-iconInfo {
     position: relative;
     height: 16px;
     cursor: default;

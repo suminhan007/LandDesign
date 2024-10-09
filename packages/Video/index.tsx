@@ -299,7 +299,7 @@ const Video: React.FC<VideoProps> = ({
       <div className='absolute width-100 height-100 top-0 left-0' onClick={handlePlay}>
         <AffixContainer
           className='height-100'
-          bOption={{
+          bcOption={{
             content: <StyledLandVideoControlsContainer className={`land-video-controls-wrap ${showControls ? 'show' : ''}`}>
               {/* 进度条 */}
               <>

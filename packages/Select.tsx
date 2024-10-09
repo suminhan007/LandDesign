@@ -1,8 +1,9 @@
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useRef, useState } from "react";
 import styled from "styled-components";
 import Title from "./Title";
 import Icon from "./Icon";
 import Pop from "./Pop";
+import useClickOutside from "./hooks/useClickOutside";
 
 type SelectItemType = {
   /** 唯一标识 */
@@ -48,10 +49,16 @@ const Select: React.FC<SelectProps> = ({
   className = "",
   style,
 }) => {
+  const selectRef = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState<boolean>(false);
   const [newSelected, setNewSelected] = useState<string | number>(selected);
+  useClickOutside(selectRef,
+    () => {
+      setShow(false);
+    });
   return (
     <StyleSelectWrap
+      ref={selectRef}
       style={{
         width: typeof width === "number" ? `${width}px` : width,
         ...style,
@@ -126,6 +133,7 @@ const StyleSelectInput = styled.div`
   font-size: 14px;
   border: 1px solid var(--color-border-2);
   border-radius: var(--radius-6);
+  box-sizing: border-box;
   cursor: pointer;
   &.disabled{
     opacity: var(--opacity-68);
