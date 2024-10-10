@@ -67,6 +67,8 @@ import VideoExample from "./Components/VideoExample";
 import RateExample from "./components/RateExample";
 import AvatarExample from "./Components/AvatarExample";
 import Avatar from "../packages/Avatar";
+import BadgeExample from "./Components/BadgeExample";
+import Badge from '../packages/Badge';
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -912,8 +914,8 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "徽标数",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <BadgeExample />,
+    demo: <Badge />,
   },
   {
     id: "calendar",
