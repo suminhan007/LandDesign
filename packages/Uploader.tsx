@@ -22,7 +22,7 @@ const Uploader: React.FC<UploaderProps> = ({
   onUpload,
   children,
   width = "100%",
-  height = "100%",
+  height = "100px",
   style,
   className = "",
   innerClassName = "",
@@ -74,14 +74,11 @@ const Uploader: React.FC<UploaderProps> = ({
       ) : loading ? (
         <>上传中</>
       ) : (
-        <>
+        drag ? <div className="land-uploader-desc">释放即可上传</div> : <>
           <div className="land-uploader-icon">
             <Icon name="upload" />
           </div>
-          {(desc || drag) && (
-            <div className="land-uploader-desc">
-              {drag ? "释放即可上传" : desc}
-            </div>
+          {desc && (<div className="land-uploader-desc">{desc}</div>
           )}
         </>
       )}
@@ -118,7 +115,7 @@ const StyleUploadForm = styled.label<{
     color: var(--color-text-5);
   }
   .land-uploader-desc {
-    font-size: var(---font-content-large);
+    font-size: 14px;
     color: var(--color-text-5);
     transition: all var(--transition-15) linear;
   }

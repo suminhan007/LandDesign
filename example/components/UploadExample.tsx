@@ -10,6 +10,12 @@ export default function UploaderExample() {
         <div className="flex justify-center gap-24 border p-32">
           <Uploader />
         </div>
+        <Title title="设置描述信息" type="h3" />
+        <div className="flex justify-center gap-24 border p-32">
+          <Uploader
+            desc="点击或拖拽上传图片"
+          />
+        </div>
       </div>
     </div>
   );

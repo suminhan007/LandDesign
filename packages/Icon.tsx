@@ -2149,6 +2149,27 @@ const IconVideoFullWidth: React.FC<IconProps> = ({
 );
 
 
+const IconAvatar: React.FC<IconProps> = ({
+  stroke = "currentColor",
+  size = 24,
+  strokeWidth = 2,
+  style,
+  className = "",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={style}
+    className={`avatar ${className}`}
+  >
+    <circle cx="24" cy="12" r="8" fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M42 44C42 34.0589 33.9411 26 24 26C14.0589 26 6 34.0589 6 44" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 export type IconDefaultProps = {
   name: string;
 } & IconProps;
@@ -2339,7 +2360,7 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "video-small-screen": return <IconVideoSmallScreen {...restProps} />; break;
     case "video-full-width": return <IconVideoFullWidth {...restProps} />; break;
     case "video-contain-width": return <IconVideoFullWidth {...restProps} />; break;
-      IconVideoFullWidth
+    case 'avatar': return <IconAvatar {...restProps} />; break;
     default:
       break;
   }
