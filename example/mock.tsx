@@ -64,6 +64,7 @@ import SwitchExample from "./components/SwitchExample";
 import SliderExample from "./components/SliderExample";
 import AutoMediaExample from "./Components/AutoMediaExample";
 import VideoExample from "./Components/VideoExample";
+import RateExample from "./components/RateExample";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -417,7 +418,7 @@ export const NAV_COMPONENTS_DATA = [
         className="ratio-1 border radius-8"
         style={{ width: "60%" }}
         rtOption={{
-          content: <Button icon={<Icon name="copy" />} />
+          content: <Button icon={<Icon name="copy" />} />,
         }}
       />
     ),
@@ -879,7 +880,7 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "评分",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <RateExample />,
     demo: <Rate />,
   },
   {

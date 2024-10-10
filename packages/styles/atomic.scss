@@ -536,6 +536,9 @@
 .bg-gray{
     background-color: var(--color-bg-1);
 }
+.hover\:bg-gray:hover{
+    background-color: var(--color-bg-2);
+}
 .bg-primary {
     background-color: #0AA344;
 }

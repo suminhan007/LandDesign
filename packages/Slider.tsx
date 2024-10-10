@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
-import Pop from './Pop';
+import React, { useRef } from "react";
+import styled from "styled-components";
 
 export type SliderProps = {
   /** 是否需要背景分割线 */
   useDivider?: boolean;
   /** 是否需要前缀和后缀 */
-  prefix?: string;
-  suffix?: string;
-  /** 是否需要气泡 */
-  usePop?: boolean;
-  popValue?: string;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
   min?: number;
   max?: number;
   /** 调节步数 */
@@ -25,9 +21,7 @@ export type SliderProps = {
 const Slider: React.FC<SliderProps> = ({
   prefix,
   suffix,
-  useDivider = true,
-  usePop = false,
-  popValue,
+  useDivider = false,
   min = 0,
   max = 100,
   step = 1,
@@ -37,15 +31,15 @@ const Slider: React.FC<SliderProps> = ({
   className,
 }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState<number>(0);
-  useEffect(() => {
-    if (!sliderRef.current || !usePop) return;
-    const rect = sliderRef.current.getClientRects();
-    if (rect?.length) {
-      const { width } = rect[0];
-      setWidth(width);
-    }
-  }, [sliderRef, usePop]);
+  // const [width, setWidth] = useState<number>(0);
+  // useEffect(() => {
+  //   if (!sliderRef.current || !usePop) return;
+  //   const rect = sliderRef.current.getClientRects();
+  //   if (rect?.length) {
+  //     const { width } = rect[0];
+  //     setWidth(width);
+  //   }
+  // }, [sliderRef, usePop]);
   return (
     <div ref={sliderRef} className="flex items-center gap-8 width-100">
       {/* 最小值前缀:为0%或options第一项 */}
@@ -83,14 +77,6 @@ const Slider: React.FC<SliderProps> = ({
             height <= 16 ? "circle" : ""
           }`}
         />
-        <Pop
-          content={popValue}
-          style={{
-            transform: `translateX(${
-              (width * (value - (max - min) / 2)) / (max - min)
-            }px)`,
-          }}
-        />
       </StyledSliderContent>
       {/* 最大值后缀:为100%或options最后一项 */}
       {suffix && <div className="fs-12 color-gray-3">{suffix}</div>}
@@ -119,8 +105,8 @@ const StyledSliderContent = styled.div<{
   &:hover::before {
     background: ${(props) =>
       props.useDivider
-        ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-bg-3)  calc(100% - 1px),var(--color-bg-3) 100%) 0 0 / 100% 100%,
-          linear-gradient(to right,transparent calc(100% - 1px), var(--color-border-3) calc(100% - 1px),var(--color-border-3) 100%) 0 0 / ${props.step}% 100%,var(--color-bg-3) 0 0 / 100% 100%`
+        ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-bg-2)  calc(100% - 1px),var(--color-bg-2) 100%) 0 0 / 100% 100%,
+          linear-gradient(to right,transparent calc(100% - 1px), var(--color-border-3) calc(100% - 1px),var(--color-border-3) 100%) 0 0 / ${props.step}% 100%,var(--color-bg-2) 0 0 / 100% 100%`
         : ""};
   }
 `;
@@ -136,7 +122,7 @@ const StyleInput = styled.input`
   outline: none;
   object-fit: contain;
   &[type="range"] {
-    width: calc(100% - 4px);
+    width: 100% - 4px;
   }
   &::-webkit-slider-runnable-track {
     height: 100%;
@@ -144,7 +130,7 @@ const StyleInput = styled.input`
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 16px;
+    width: 18px;
     height: 100%;
     border-radius: 6px;
     background: var(--color-text-white);
