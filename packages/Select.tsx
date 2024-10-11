@@ -1,4 +1,4 @@
-import React, { CSSProperties, useRef, useState } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Title from "./Title";
 import Icon from "./Icon";
@@ -52,6 +52,7 @@ const Select: React.FC<SelectProps> = ({
   const selectRef = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState<boolean>(false);
   const [newSelected, setNewSelected] = useState<string | number>(selected);
+  useEffect(() => setNewSelected(selected), [selected]);
   useClickOutside(selectRef,
     () => {
       setShow(false);

@@ -15,8 +15,8 @@ type Props = {
 const Components: React.FC<Props> = ({
 
 }) => {
-  const [active, setActive] = useState<number | string>("input");
-  const [dropActive, setDropActive] = useState<number | string>("rate");
+  const [active, setActive] = useState<number | string>("avatar");
+  const [dropActive, setDropActive] = useState<number | string>("calendar");
   const curItem = useMemo(() => {
     let item: any = { id: 1, en: 'Icon', zh: '图标' }
     item = COMPONENTS_DATA.filter(itm1 => itm1.id === active)[0]?.data?.filter(itm2 => itm2.id === dropActive)[0];

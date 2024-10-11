@@ -169,13 +169,13 @@ const StyledButton = styled.div<{
   height: ${(props) => (props.height ? props.height : "fit-content")};
   color: ${(props) =>
     props.color ? `${props.color}6)` : "var(--color-text-2)"};
-  &:hover {
+  &:hover:not(.disabled) {
     color: ${(props) =>
-      props.color ? `${props.color}5)` : "var(--color-text-3)"};
+    props.color ? `${props.color}5)` : "var(--color-text-3)"};
   }
-  &:active {
+  &:active:not(.disabled) {
     color: ${(props) =>
-      props.color ? `${props.color}7)` : "var(--color-text-1)"};
+    props.color ? `${props.color}7)` : "var(--color-text-1)"};
   }
   font-size: var(--font-content-medium);
   border-radius: var(--radius-6);
@@ -191,30 +191,31 @@ const StyledButton = styled.div<{
   &.text,
   &.border.default {
     background-color: var(--color-bg-white);
-    &:hover {
+    &:hover:not(.disabled) {
       background-color: var(--color-bg-1);
     }
-    &:active {
+    &:active:not(.disabled) {
       background-color: var(--color-bg-2);
     }
   }
 
   &.background {
-    color: var(--color-text-2);
+    color: var(--color-text-white);
     background-color: ${(props) => `${props.color}6)`};
     &.default {
+      color: var(--color-text-2);
       background-color: var(--color-bg-2);
-      &:hover {
+      &:hover:not(.disabled) {
         background-color: var(--color-bg-3);
       }
-      &:active {
+      &:active:not(.disabled) {
         background-color: var(--color-bg-3);
       }
     }
-    &:hover {
+    &:hover:not(.disabled) {
       background-color: ${(props) => `${props.color}7)`};
     }
-    &:active {
+    &:active:not(.disabled) {
       background-color: ${(props) => `${props.color}8)`};
     }
   }
@@ -225,10 +226,10 @@ const StyledButton = styled.div<{
     &.default {
       border-color: var(--color-border-2);
     }
-    &:hover {
+    &:hover:not(.disabled) {
       background-color: ${(props) => `${props.color}1)`};
     }
-    &:active {
+    &:active:not(.disabled) {
       background-color: ${(props) => `${props.color}2)`};
     }
   }
@@ -240,10 +241,10 @@ const StyledButton = styled.div<{
     &.default {
       border-color: var(--color-text-2);
     }
-    &:hover {
+    &:hover:not(.disabled) {
       border-color: ${(props) => `${props.color}5)`};
     }
-    &:active {
+    &:active:not(.disabled) {
       border-color: ${(props) => `${props.color}7)`};
     }
   }
@@ -255,11 +256,9 @@ const StyledButton = styled.div<{
   }
   &.disabled {
     background-color: ${(props) => `${props.color}3)`};
-    cursor: default;
-    &:hover,
-    &:active {
-      background-color: ${(props) => `${props.color}3)`};
-    }
+    color: ${(props) =>
+    props.color ? `${props.color}4)` : "var(--color-text-5)"};
+    cursor: not-allowed;
   }
 `;
 
