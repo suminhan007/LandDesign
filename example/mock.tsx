@@ -71,6 +71,15 @@ import BadgeExample from "./Components/BadgeExample";
 import Badge from '../packages/Badge';
 import CalendarExample from "./Components/CalendarExample";
 import Calendar from "../packages/Calendar";
+import SwitchBarExample from "./components/SwitchBarExample";
+import SwitchBar from "../packages/SwitchBar";
+import PopExample from "./components/PopExample";
+import TitleExample from "./components/TitleExample";
+import Skeleton from "../packages/Skeleton";
+import SkeletonExample from "./components/SkeletonExample";
+import LoadingExample from "./components/LoadingExample";
+import Watermark from "../packages/Watermark";
+import WatermarkExample from "./components/WatermarkExample";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -813,6 +822,14 @@ export const INPUT_COMPONENTS_DATA = [
     demo: <Checkbox />,
   },
   {
+    id: "switchBar",
+    en: "SwitchBar",
+    zh: "模块切换",
+    desc: "Land Design内置常规图标。",
+    example: <SwitchBarExample />,
+    demo: <SwitchBar />,
+  },
+  {
     id: "colorPicker",
     en: "ColorPicker",
     zh: "颜色选择器",
@@ -1006,8 +1023,12 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "气泡",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <Button text="hover" className="hover-pop"><Pop content='我是气泡' theme="dark" /></Button>
+    example: <PopExample />,
+    demo: (
+      <Button text="hover" className="hover-pop">
+        <Pop content="我是气泡" theme="dark" />
+      </Button>
+    ),
   },
   {
     id: "statistic",
@@ -1025,17 +1046,20 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <FlexExample />,
-    demo: <Table
-      className="width-100 mt-16"
-      titleData={[
-        { title: "时间", value: "time" },
-        { title: "地点", value: "location" },
-        { title: "花费", value: "cost" },
-      ]}
-      data={[{ title: "8.2", value: "北京", cost: '122元' },
-      { title: "8.3", value: "深圳", cost: '88元' },
-      ]}
-    />
+    demo: (
+      <Table
+        className="width-100 mt-16"
+        titleData={[
+          { title: "时间", value: "time" },
+          { title: "地点", value: "location" },
+          { title: "花费", value: "cost" },
+        ]}
+        data={[
+          { title: "8.2", value: "北京", cost: "122元" },
+          { title: "8.3", value: "深圳", cost: "88元" },
+        ]}
+      />
+    ),
   },
   {
     id: "tag",
@@ -1125,8 +1149,8 @@ export const FEEDBACK_COMPONENTS_DATA = [
     zh: "骨架屏",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <SkeletonExample />,
+    demo: <Skeleton />,
   },
   {
     id: "loading",
@@ -1134,8 +1158,8 @@ export const FEEDBACK_COMPONENTS_DATA = [
     zh: "加载",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <Loading />
+    example: <LoadingExample />,
+    demo: <Loading />,
   },
   {
     id: "watermark",
@@ -1143,6 +1167,8 @@ export const FEEDBACK_COMPONENTS_DATA = [
     zh: "水印",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
+    example: <WatermarkExample />,
+    demo: <Watermark />,
   },
 ];
 
@@ -1153,12 +1179,14 @@ export const TEXT_COMPONENTS_DATA = [
     zh: "标题",
     desc: "",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <Flex column gap={8} className="mx-auto" style={{ width: 'fit-content' }}>
-      <Title title='一级标题' />
-      <Title title='二级标题' type="h2" />
-      <Title title='三级标题' type="h3" />
-    </Flex>
+    example: <TitleExample />,
+    demo: (
+      <Flex column gap={8} className="mx-auto" style={{ width: "fit-content" }}>
+        <Title title="一级标题" />
+        <Title title="二级标题" type="h2" />
+        <Title title="三级标题" type="h3" />
+      </Flex>
+    ),
   },
   {
     id: "textList",

@@ -5,8 +5,7 @@ import Title from '../../packages/Title';
 import AffixContainer from '../../packages/AffixContainer';
 import { ICON_EXAMPLE_DATA } from '../mock';
 import Icon from '../../packages/Icon';
-import Button from '../../packages/Button';
-import Pop from '../../packages/Pop';
+import Button from "../../packages/Button";
 import ColorPicker from '../../packages/ColorPicker';
 import NumberInput from '../../packages/NumberInput';
 
