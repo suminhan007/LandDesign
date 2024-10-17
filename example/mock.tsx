@@ -80,6 +80,8 @@ import SkeletonExample from "./components/SkeletonExample";
 import LoadingExample from "./components/LoadingExample";
 import Watermark from "../packages/Watermark";
 import WatermarkExample from "./components/WatermarkExample";
+import Collapse from "../packages/Collapse";
+import CollapseExample from "./components/CollapseExample";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -946,15 +948,6 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <Calendar />,
   },
   {
-    id: "card",
-    en: "Card",
-    zh: "卡片",
-    desc: "Land Design内置常规图标。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
-  },
-  {
     id: "carousel",
     en: "Carousel",
     zh: "走马灯",
@@ -969,8 +962,8 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "折叠面板",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <CollapseExample />,
+    demo: <Collapse />,
   },
   {
     id: "state",
