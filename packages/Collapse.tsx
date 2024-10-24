@@ -1,9 +1,9 @@
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
 
 type CollapseProps = {
-  data?: { title: string; details?: string | React.ReactNode }[];
+  data?: { title: string; details?: string | React.ReactNode, open?: boolean }[];
   hideIcon?: boolean;
   style?: CSSProperties;
   className?: string;
@@ -22,6 +22,7 @@ const Collapse: React.FC<CollapseProps> = ({
           title={i.title}
           content={i.details}
           hideIcon={hideIcon}
+          open={i.open}
         />
       ))}
     </StyledLandCollapse>
@@ -29,20 +30,31 @@ const Collapse: React.FC<CollapseProps> = ({
 };
 
 type Props = {
+  open?: boolean;
   title?: string;
   content?: string | React.ReactNode;
   hideIcon?: boolean;
 };
 
-const CollapseItem: React.FC<Props> = ({ title, hideIcon, content }) => {
-  const [open, setOpen] = useState<boolean>(false);
+const CollapseItem: React.FC<Props> = ({ open = false, title, hideIcon, content }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(open);
+  useEffect(() => setIsOpen(open), [open]);
+  const detailsRef = useRef<HTMLDivElement>(null);
+  const detailsHeightRef = useRef<HTMLDivElement>(null);
   return (
-    <div className={`land-collapse-item ${open ? "open" : ""}`}>
-      <div className="land-collapse-item-title" onClick={() => setOpen(!open)}>
+    <div className={`land-collapse-item ${isOpen ? "open" : ""}`}>
+      <div className="land-collapse-item-title" onClick={() => {
+        setIsOpen(!isOpen);
+        if (!isOpen && detailsRef.current && detailsHeightRef.current) {
+          detailsRef.current.style.height = `${detailsHeightRef.current.offsetHeight}px`
+        }
+      }}>
         {!hideIcon && <Icon name="arrow" strokeWidth={4} />}
         {title}
       </div>
-      <div className="land-collapse-item-details">{content}</div>
+      <div ref={detailsRef} className="land-collapse-item-details" style={{ height: isOpen ? 'auto' : '0px' }}>
+        <div ref={detailsHeightRef} className="land-collapse-item-details-content">{content}</div>
+      </div>
     </div>
   );
 };
@@ -54,6 +66,7 @@ const StyledLandCollapse = styled.div`
   width: 100%;
   .land-collapse-item {
     font-size: 14px;
+    transition: height 0.var(--transition-15) cubic-bezier(.38,0,.24,1);
     .land-collapse-item-title {
       display: flex;
       align-items: center;
@@ -65,9 +78,13 @@ const StyledLandCollapse = styled.div`
       }
     }
     .land-collapse-item-details {
-      height: 0px;
       color: var(--color-text-4);
       overflow: hidden;
+      transition: height var(--transition-15) linear;
+      .land-collapse-item-details-content{
+        height: fit-content;
+        padding: 12px 12px 0;
+      }
     }
     &.open {
       .land-collapse-item-title {
@@ -76,8 +93,8 @@ const StyledLandCollapse = styled.div`
         }
       }
       .land-collapse-item-details {
-        padding: 12px 0;
-        height: fit-content;
+        height: auto;
+        visibility: visible;
       }
     }
   }

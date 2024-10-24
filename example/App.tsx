@@ -8,6 +8,7 @@ import Header from "../packages/Header";
 import { ClickType } from "../packages/Menu";
 import Components from "./components";
 import Design from "./Design";
+import Animations from "./Animations";
 // import Switch from "../packages/Switch";
 
 function App() {
@@ -26,11 +27,8 @@ function App() {
               key: 3,
               title: "组件",
               clickType: ClickType.SELF,
-              dropData: [
-                { key: 1, title: "11111111" },
-                { key: 2, title: "222" },
-              ],
             },
+            { key: 4, title: '动画', clickType: ClickType.SELF },
           ],
           active: page,
           onChange: (item) => setPage(item.key),
@@ -41,6 +39,7 @@ function App() {
       <div className="flex-1 flex" style={{ height: "0" }}>
         {page === 2 && <Design />}
         {page === 3 && <Components />}
+        {page === 4 && <Animations />}
       </div>
     </div>
   );

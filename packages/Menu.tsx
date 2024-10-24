@@ -22,7 +22,7 @@ export type ThemeType = {
 
 export type MenuItemType = {
   key: number | string;
-  title?: string;
+  title: string;
   path?: string;
   subTitle?: string;
   icon?: string | React.ReactNode;
@@ -32,6 +32,7 @@ export type MenuItemType = {
   /** 下拉菜单是否展开 */
   open?: boolean;
   dropData?: MenuItemType[];
+  [key: string]: any;
 };
 
 export type MenuProps = {
@@ -236,17 +237,17 @@ const StyleMenuLink = styled.a<{
     bottom: ${(props) => (!props.column ? "0" : "50%")};
     width: ${(props) => (!props.column ? "12px" : "2px")};
     height: ${(props) =>
-      !props.column
-        ? "2px"
-        : props.theme.activeBg
+    !props.column
+      ? "2px"
+      : props.theme.activeBg
         ? "100%"
         : "calc(100% - 16px)"};
     transform: ${(props) =>
-      !props.column ? `translateX(50%)` : "translateY(50%)"};
+    !props.column ? `translateX(50%)` : "translateY(50%)"};
     transform-origin: center center;
     border-radius: 1px;
     background-color: ${(props) =>
-      props.theme.lineColor || "var(--color-text-1)"};
+    props.theme.lineColor || "var(--color-text-1)"};
     opacity: 0;
   }
   &:hover {

@@ -19,6 +19,7 @@ export default function CollapseExample() {
                 title: "折叠标题 2 (展开)",
                 details:
                   "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
+                open: true,
               },
               {
                 title: "折叠标题 3",

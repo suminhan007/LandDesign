@@ -9,7 +9,7 @@ import LinkExample from "./Components/LinkExample";
 import MenuExample from "./Components/MenuExample";
 import Link from "../packages/Link";
 import Button from "../packages/Button";
-import React from "react";
+import React, { Children } from "react";
 import AffixContainerExample from "./Components/AffixContainerExample";
 import BreadCrumbExample from "./Components/BreadCrumbExample";
 import PaginationExample from "./Components/PaginationExample";
@@ -1301,4 +1301,51 @@ export const ICON_EXAMPLE_DATA = [
     title: '媒体类',
     data: ['video-pause', 'video-play', 'video-small-screen', 'video-full-width', 'video-contain-width']
   }
+]
+
+export const ANIMATION_NAV_DATA = [
+  ...[
+    {
+      title: 'Attention Seekers',
+      children: ['bounce', 'flash', 'pulse', 'rubberBand', 'shakeX', 'shakeY', 'headShake', 'swing', 'tada', 'wobble', 'jello', 'heartBeat'],
+    },
+    {
+      title: 'Back Entrances',
+      children: ['backInDown', 'backInLeft', 'backInRight', 'backInUp'],
+    },
+    {
+      title: 'Back Exits',
+      children: ['backOutDown', 'backOutLeft', 'backOutRight', 'backOutUp'],
+    },
+    {
+      title: 'Bouncing Entrances',
+      children: ['bounceIn', 'bounceInDown', 'bounceInLeft', 'bounceInRight', 'bounceInUp'],
+    },
+    {
+      title: 'Bouncing Exits',
+      children: ['bounceOut', 'bounceOutDown', 'bounceOutLeft', 'bounceOutRight', 'bounceOutUp'],
+    },
+    {
+      title: 'Fading Entrances',
+      children: ['fadeIn', 'fadeInDown', 'fadeInDownBig', 'fadeInLeft', 'fadeInLeftBig', 'fadeInRight', 'fadeInRightBig', 'fadeInUp', 'fadeInUpBig', 'fadeInTopLeft', 'fadeInTopRight', 'fadeInBottomLeft', 'fadeInBottomRight',],
+    },
+    {
+      title: 'Fading Exits',
+      children: ['fadeOut', 'fadeOutDown', 'fadeOutDownBig', 'fadeOutLeft', 'fadeOutLeftBig', 'fadeOutRight', 'fadeOutRightBig', 'fadeOutUp', 'fadeOutUpBig', 'fadeOutTopLeft', 'fadeOutTopRight', 'fadeOutBottomLeft', 'fadeOutBottomRight'],
+    },
+    {
+      title: 'Flippers',
+      children: ['flip', 'flipInX', 'flipInY', 'flipOutX', 'flipOutY']
+    }
+  ].map((item, index) => ({
+    key: index + 1,
+    title: item.title,
+    open: true,
+    dropData: [
+      ...item.children.map((i, idx) => ({
+        key: `1-${idx + 1}`,
+        title: i,
+      })),
+    ]
+  }))
 ]
