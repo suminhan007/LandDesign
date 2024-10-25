@@ -88,6 +88,8 @@ import AlertExample from "./components/AlertExample";
 import Alert from "../packages/Alert";
 import AudioExample from "./components/AudioExample";
 import Audio from "../packages/Audio";
+import StatisticExample from "./Components/StatisticExample";
+import Statistic from "../packages/Statistic";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -1008,15 +1010,6 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <Audio />,
   },
   {
-    id: "list",
-    en: "List",
-    zh: "列表",
-    desc: "Land Design内置常规图标。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
-  },
-  {
     id: "popOver",
     en: "Popover",
     zh: "气泡",
@@ -1035,8 +1028,8 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "数值统计",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <StatisticExample />,
+    demo: <Statistic />,
   },
   {
     id: "table",
