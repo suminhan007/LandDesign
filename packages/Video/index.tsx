@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components';
 import Icon from '../Icon';
@@ -212,15 +213,6 @@ const Video: React.FC<VideoProps> = ({
     const video = videoRef.current;
     if (video.requestFullscreen) {
       video.requestFullscreen();
-    } else if (video.mozRequestFullScreen) {
-      // Firefox
-      video.mozRequestFullScreen();
-    } else if (video.webkitRequestFullscreen) {
-      // Chrome, Safari and Opera
-      video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) {
-      // IE/Edge
-      video.msRequestFullscreen();
     }
   };
 
@@ -294,9 +286,8 @@ const Video: React.FC<VideoProps> = ({
 
   return (
     <StyledLandVideoContainer
-      className={`land-video-wrap ${error ? "error" : ""} ${
-        fullView ? "fullView" : ""
-      } ${className}`}
+      className={`land-video-wrap ${error ? "error" : ""} ${fullView ? "fullView" : ""
+        } ${className}`}
       style={{ aspectRatio: ratio && error ? `${ratio}` : "auto", ...style }}
     >
       {error ? (
@@ -329,9 +320,8 @@ const Video: React.FC<VideoProps> = ({
             bcOption={{
               content: (
                 <StyledLandVideoControlsContainer
-                  className={`land-video-controls-wrap ${
-                    showControls ? "show" : ""
-                  }`}
+                  className={`land-video-controls-wrap ${showControls ? "show" : ""
+                    }`}
                 >
                   {/* 进度条 */}
                   <>
@@ -420,9 +410,8 @@ const Video: React.FC<VideoProps> = ({
                         </button>
                         <div
                           ref={volumeSliderRef}
-                          className={`land-video-volume-slider ${
-                            showVolumeSlider ? "show" : ""
-                          }`}
+                          className={`land-video-volume-slider ${showVolumeSlider ? "show" : ""
+                            }`}
                         >
                           <Slider
                             height={4}

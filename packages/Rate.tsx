@@ -10,7 +10,7 @@ export type RateProps = {
 
 const Rate: React.FC<RateProps> = ({
   step = 5,
-  desc,
+  // desc,
   style,
   className = "",
 }) => {
@@ -22,8 +22,8 @@ const Rate: React.FC<RateProps> = ({
             className="land-rate-character-left"
             role="radio"
             aria-checked="true"
-            aria-setsize={`${step}`}
-            aria-posinset="0.5"
+            aria-setsize={step}
+            aria-posinset={0.5}
           >
             <svg
               fill="none"
@@ -45,8 +45,8 @@ const Rate: React.FC<RateProps> = ({
             className="land-rate-character-right"
             role="radio"
             aria-checked="true"
-            aria-setsize={`${step}`}
-            aria-posinset="1"
+            aria-setsize={step}
+            aria-posinset={1}
           >
             <svg
               fill="none"

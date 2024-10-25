@@ -16,6 +16,9 @@ export type SliderProps = {
   onChange?: (val: number) => void;
   /** 控件高度 */
   height?: number;
+  thumbSize?: number;
+  defaultBg?: string;
+  activeBg?: string;
   className?: string;
 };
 const Slider: React.FC<SliderProps> = ({
@@ -28,6 +31,9 @@ const Slider: React.FC<SliderProps> = ({
   value = 0,
   height = 36,
   onChange,
+  // thumbSize,
+  // defaultBg,
+  // activeBg,
   className,
 }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -47,9 +53,8 @@ const Slider: React.FC<SliderProps> = ({
       <StyledSliderContent
         useDivider={useDivider}
         step={(100 * step) / (max - min)}
-        className={`relative flex-1 p-2 radius-8 bg-gray hover:bg-gray transition-2s ${
-          className ? className : ""
-        }`}
+        className={`relative flex-1 p-2 radius-8 bg-gray hover:bg-gray transition-2s ${className ? className : ""
+          }`}
         style={{ height: `${height}px` }}
       >
         {/* slider:为0或options第一项 */}
@@ -66,16 +71,13 @@ const Slider: React.FC<SliderProps> = ({
           style={{
             background:
               value < (max - min) / 2
-                ? `linear-gradient(to right,var(--color-primary-6) calc(100% - 2px), var(--color-primary-6)  calc(100% - 2px)) 0 0 / ${
-                    ((value - min) / (max - min)) * 100
-                  }% 100% no-repeat`
-                : `linear-gradient(to right,var(--color-primary-6) calc(100% - 2px), var(--color-primary-6)  calc(100% - 2px)) 0 0 / ${
-                    ((value - min) / (max - min)) * 100
-                  }% 100% no-repeat`,
+                ? `linear-gradient(to right,var(--color-primary-6) calc(100% - 2px), var(--color-primary-6)  calc(100% - 2px)) 0 0 / ${((value - min) / (max - min)) * 100
+                }% 100% no-repeat`
+                : `linear-gradient(to right,var(--color-primary-6) calc(100% - 2px), var(--color-primary-6)  calc(100% - 2px)) 0 0 / ${((value - min) / (max - min)) * 100
+                }% 100% no-repeat`,
           }}
-          className={`width-100 radius-6 flex justify-center ${
-            height <= 16 ? "circle" : ""
-          }`}
+          className={`width-100 radius-6 flex justify-center ${height <= 16 ? "circle" : ""
+            }`}
         />
       </StyledSliderContent>
       {/* 最大值后缀:为100%或options最后一项 */}
@@ -96,18 +98,18 @@ const StyledSliderContent = styled.div<{
     height: calc(100% - 8px);
     border-radius: 8px;
     background: ${(props) =>
-      props.useDivider
-        ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-bg-1)  calc(100% - 1px),var(--color-bg-1) 100%) 0 0 / 100% 100%,
+    props.useDivider
+      ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-bg-1)  calc(100% - 1px),var(--color-bg-1) 100%) 0 0 / 100% 100%,
           linear-gradient(to right,transparent calc(100% - 1px), var(--color-border-3) calc(100% - 1px),var(--color-border-3) 100%) 0 0 / ${props.step}% 100%,var(--color-bg-1) 0 0 / 100% 100%`
-        : "transparent"};
+      : "transparent"};
     transition: all 0.2s linear;
   }
   &:hover::before {
     background: ${(props) =>
-      props.useDivider
-        ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-bg-2)  calc(100% - 1px),var(--color-bg-2) 100%) 0 0 / 100% 100%,
+    props.useDivider
+      ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-bg-2)  calc(100% - 1px),var(--color-bg-2) 100%) 0 0 / 100% 100%,
           linear-gradient(to right,transparent calc(100% - 1px), var(--color-border-3) calc(100% - 1px),var(--color-border-3) 100%) 0 0 / ${props.step}% 100%,var(--color-bg-2) 0 0 / 100% 100%`
-        : ""};
+      : ""};
   }
 `;
 
