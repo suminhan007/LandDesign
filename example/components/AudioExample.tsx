@@ -1,14 +1,13 @@
 import React from "react";
 import Title from "../../packages/Title";
-import Image from "../../packages/Image";
+import Audio from "../../packages/Audio";
 
-export default function ImageExample() {
+export default function AudioExample() {
   return (
     <div className="flex column gap-24">
       <div className="flex column gap-12">
-        <Title title="按钮类型" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
-          <Image url="https://ingenueland.online/crochet-time/images/colorcard_default.jpeg" />
+          <Audio />
         </div>
       </div>
     </div>

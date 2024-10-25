@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState, CSSProperties } from "react";
-import Loading from "./Loading";
+import React, { useRef, useState, CSSProperties } from "react";
 import Icon from "./Icon";
+import styled from "styled-components";
 
 export type ImageProps = {
   /* 图片地址 */
@@ -23,62 +23,51 @@ const Image: React.FC<ImageProps> = ({
   imgClassName,
   imgStyle,
   style,
-  ratio = 1 / 1,
+  ratio,
 }) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const [imgLoading, setImgLoading] = useState<boolean>(true);
   const [loadDefaultImg, setLoadDefaultImg] = useState<boolean>(false);
-  const handleLoad = () => {
-    setTimeout(() => {
-      setImgLoading(false);
-    }, 300);
-  };
-  const handleError = () => {
-    setImgLoading(false);
-    setLoadDefaultImg(true);
-  };
-  // 判断是否加载
-  useEffect(() => {
-    const imageElement = imgRef.current;
 
-    if (!imageElement) return;
-    if (imageElement.complete) {
-      setImgLoading(false);
-    }
-    imageElement?.addEventListener("load", handleLoad);
-    imageElement?.addEventListener("error", handleError);
-    return () => {
-      imageElement?.removeEventListener("load", handleLoad);
-      imageElement?.removeEventListener("error", handleError);
-    };
-  }, []);
   return (
-    <div
-      className={`relative flex items-center justify-center ${imgLoading || loadDefaultImg ? "bg-gray radius-6 overflow-hidden" : ""
-        } ${className}`}
+    <StyledLandImage
+      className={`${
+        imgLoading ? "loading" : ""
+      } relative flex items-center justify-center ${
+        imgLoading || loadDefaultImg ? "bg-gray radius-6 overflow-hidden" : ""
+      } ${className}`}
       style={{
-        aspectRatio: imgLoading || loadDefaultImg ? `${ratio}` : "auto",
+        aspectRatio:
+          ratio && (imgLoading || loadDefaultImg) ? `${ratio}` : "auto",
         ...style,
       }}
     >
-      {imgLoading && (
-        <Loading
-          color="var(--color-text-4)"
-          size={28}
-          style={{ position: "absolute", transform: "translate(-50%,-50%)" }}
-        />
-      )}
-      {loadDefaultImg ? (
-        <Icon name="error-fill" fill="var(--color-red-03)" />
-      ) : (
-        <img
-          src={url}
-          className={imgClassName}
-          style={{ zIndex: "1", ...imgStyle }}
-        />
-      )}
-    </div>
+      {loadDefaultImg && <Icon name="error-fill" fill="var(--color-red-3)" />}
+      <img
+        ref={imgRef}
+        src={url}
+        className={`${
+          imgLoading ? "opacity-0" : "opacity-1"
+        } transition ${imgClassName}`}
+        style={{ zIndex: "1", maxWidth: "100%", ...imgStyle }}
+        onLoad={() => setImgLoading(false)}
+        onError={() => setLoadDefaultImg(true)}
+      />
+    </StyledLandImage>
   );
 };
-
+const StyledLandImage = styled.div`
+  &.loading {
+    background: linear-gradient(90deg, #f2f4f7 25%, #edeff2 37%, #f2f4f7 63%);
+    animation: skeleton-loading 1.4s ease infinite;
+    @keyframes skeleton-loading {
+      0% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0 50%;
+      }
+    }
+  }
+`;
 export default Image;

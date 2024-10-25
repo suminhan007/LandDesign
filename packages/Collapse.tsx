@@ -36,24 +36,32 @@ type Props = {
   hideIcon?: boolean;
 };
 
-const CollapseItem: React.FC<Props> = ({ open = false, title, hideIcon, content }) => {
+const CollapseItem: React.FC<Props> = ({
+  open = false,
+  title,
+  hideIcon,
+  content,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(open);
   useEffect(() => setIsOpen(open), [open]);
   const detailsRef = useRef<HTMLDivElement>(null);
-  const detailsHeightRef = useRef<HTMLDivElement>(null);
   return (
     <div className={`land-collapse-item ${isOpen ? "open" : ""}`}>
-      <div className="land-collapse-item-title" onClick={() => {
-        setIsOpen(!isOpen);
-        if (!isOpen && detailsRef.current && detailsHeightRef.current) {
-          detailsRef.current.style.height = `${detailsHeightRef.current.offsetHeight}px`
-        }
-      }}>
+      <div
+        className="land-collapse-item-title"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {!hideIcon && <Icon name="arrow" strokeWidth={4} />}
         {title}
       </div>
-      <div ref={detailsRef} className="land-collapse-item-details" style={{ height: isOpen ? 'auto' : '0px' }}>
-        <div ref={detailsHeightRef} className="land-collapse-item-details-content">{content}</div>
+      <div
+        ref={detailsRef}
+        className="land-collapse-item-details"
+        style={{
+          maxHeight: isOpen ? `${detailsRef.current?.scrollHeight}px` : "0px",
+        }}
+      >
+        <div className="land-collapse-item-details-content">{content}</div>
       </div>
     </div>
   );
@@ -66,7 +74,7 @@ const StyledLandCollapse = styled.div`
   width: 100%;
   .land-collapse-item {
     font-size: 14px;
-    transition: height 0.var(--transition-15) cubic-bezier(.38,0,.24,1);
+    transition: height 0var (--transition-15) cubic-bezier(0.38, 0, 0.24, 1);
     .land-collapse-item-title {
       display: flex;
       align-items: center;
@@ -80,9 +88,8 @@ const StyledLandCollapse = styled.div`
     .land-collapse-item-details {
       color: var(--color-text-4);
       overflow: hidden;
-      transition: height var(--transition-15) linear;
-      .land-collapse-item-details-content{
-        height: fit-content;
+      transition: max-height var(--transition-15) linear;
+      .land-collapse-item-details-content {
         padding: 12px 12px 0;
       }
     }
@@ -91,10 +98,6 @@ const StyledLandCollapse = styled.div`
         svg {
           transform: rotate(0deg);
         }
-      }
-      .land-collapse-item-details {
-        height: auto;
-        visibility: visible;
       }
     }
   }

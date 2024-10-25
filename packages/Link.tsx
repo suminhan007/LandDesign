@@ -12,6 +12,7 @@ export type LinkProps = {
   tip?: React.ReactNode | string;
   tipProps?: PopProps;
   children?: React.ReactNode | string;
+  onClick?: (e: any) => void;
   style?: CSSProperties;
   className?: string;
 };
@@ -25,6 +26,7 @@ const Link: React.FC<LinkProps> = ({
   tip,
   tipProps,
   children,
+  onClick,
   style,
   className = "",
 }) => {
@@ -48,10 +50,12 @@ const Link: React.FC<LinkProps> = ({
     <StyledLink
       href={href}
       target={target}
-      className={`land-link ${active ? "active" : ""} ${disabled ? "disabled hover-pop" : ""
-        } ${className}`}
+      className={`land-link ${active ? "active" : ""} ${
+        disabled ? "disabled hover-pop" : ""
+      } ${className}`}
       style={style}
       color={getColor()}
+      onClick={onClick}
     >
       {children}
       {tip && <Pop content={tip} {...tipProps} />}

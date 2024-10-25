@@ -9,6 +9,7 @@ import useClickOutside from 'packages/hooks/useClickOutside';
 import Pop from 'packages/Pop';
 import VideoSetting from './VideoSetting';
 import useFormateTime from 'packages/hooks/useFormateTime';
+import Alert from "packages/Alert";
 
 type VideoProps = {
   /** 视频地址 */
@@ -47,9 +48,9 @@ const Video: React.FC<VideoProps> = ({
   useKeyImg,
   onFullWidthChange,
   useKeyControls,
-  className = '',
+  className = "",
   style,
-  videoClassName = '',
+  videoClassName = "",
   videoStyle,
   showControls,
   usePrevEpisode,
@@ -78,7 +79,7 @@ const Video: React.FC<VideoProps> = ({
         setIsInitialLoad(true);
       }
     }
-  }
+  };
 
   /** 视频播放 & 暂停 */
   const handlePlay = useCallback(() => {
@@ -95,7 +96,7 @@ const Video: React.FC<VideoProps> = ({
   const [left, setLeft] = useState<number>(0);
   /** 展示关键帧图片 */
   const [showKeyImg, setShowKeyImg] = useState<boolean>(false);
-  const keyImgWidth = useMemo(() => ratio < 1 ? 100 : 200, [ratio]);
+  const keyImgWidth = useMemo(() => (ratio < 1 ? 100 : 200), [ratio]);
   const handleProgressMove = (_val, left, width) => {
     setShowKeyImg(true);
     console.log(left, width, keyImgWidth);
@@ -103,7 +104,7 @@ const Video: React.FC<VideoProps> = ({
     if (left < keyImgWidth / 2) {
       setLeft(0);
     } else {
-      if (left < (width - keyImgWidth / 2)) {
+      if (left < width - keyImgWidth / 2) {
         setLeft(left - keyImgWidth / 2);
       } else {
         setLeft(width - keyImgWidth);
@@ -112,9 +113,15 @@ const Video: React.FC<VideoProps> = ({
     if (!videoRef.current || !KeyImgPreviewCanvasRef.current) return;
     const video = videoRef.current;
     const previewCanvas = KeyImgPreviewCanvasRef.current;
-    const previewContext = previewCanvas.getContext('2d');
-    previewContext.drawImage(video, 0, 0, previewCanvas.width, previewCanvas.height);
-  }
+    const previewContext = previewCanvas.getContext("2d");
+    previewContext.drawImage(
+      video,
+      0,
+      0,
+      previewCanvas.width,
+      previewCanvas.height
+    );
+  };
 
   /** 音量控制 */
   const [volume, setVolume] = useState<number>(100);
@@ -189,9 +196,9 @@ const Video: React.FC<VideoProps> = ({
         await document.exitPictureInPicture();
       }
     } catch (error) {
-      console.error('Error with Picture-in-Picture:', error);
+      console.error("Error with Picture-in-Picture:", error);
     }
-  }
+  };
 
   /** 网页宽屏屏 */
   const [fullWidth, setFullWidth] = useState<boolean>(false);
@@ -205,14 +212,17 @@ const Video: React.FC<VideoProps> = ({
     const video = videoRef.current;
     if (video.requestFullscreen) {
       video.requestFullscreen();
-    } else if (video.mozRequestFullScreen) { // Firefox
+    } else if (video.mozRequestFullScreen) {
+      // Firefox
       video.mozRequestFullScreen();
-    } else if (video.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    } else if (video.webkitRequestFullscreen) {
+      // Chrome, Safari and Opera
       video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) { // IE/Edge
+    } else if (video.msRequestFullscreen) {
+      // IE/Edge
       video.msRequestFullscreen();
     }
-  }
+  };
 
   /** 监听键盘左右箭头、空格播放 */
   const [showBack, setShowBack] = useState<boolean>(false);
@@ -243,25 +253,29 @@ const Video: React.FC<VideoProps> = ({
     }
   }, [showCenterPlay]);
 
-
   useEffect(() => {
     if (!videoRef.current || !useKeyControls) return;
     const video = videoRef.current;
     const handleKeyDown = (event: any) => {
       event.preventDefault();
-      if (event.code === 'ArrowLeft' || event.key === 'ArrowLeft') {
+      if (event.code === "ArrowLeft" || event.key === "ArrowLeft") {
         if (video.paused) return;
         video.currentTime = Math.max(0, video.currentTime - forwardSecond);
         setCurrentTime(Math.max(0, video.currentTime - forwardSecond));
         setShowBack(true);
       }
-      if (event.code === 'ArrowRight' || event.key === 'ArrowRight') {
+      if (event.code === "ArrowRight" || event.key === "ArrowRight") {
         if (video.paused) return;
-        video.currentTime = Math.min(video.duration, video.currentTime + forwardSecond);
-        setCurrentTime(Math.min(video.duration, video.currentTime + forwardSecond));
+        video.currentTime = Math.min(
+          video.duration,
+          video.currentTime + forwardSecond
+        );
+        setCurrentTime(
+          Math.min(video.duration, video.currentTime + forwardSecond)
+        );
         setShowFront(true);
       }
-      if (event.code === 'Space' || event.key === 'Space') {
+      if (event.code === "Space" || event.key === "Space") {
         event.preventDefault();
         if (video.paused) {
           video.play();
@@ -271,275 +285,426 @@ const Video: React.FC<VideoProps> = ({
         setShowCenterPlay(true);
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
   return (
-    <StyledLandVideoContainer className={`land-video-wrap ${fullView ? 'fullView' : ''} ${className}`} style={{ aspectRatio: `${ratio}`, ...style }}>
-      {error ? <Icon name='error-fill' /> : <video
-        ref={videoRef}
-        src={src}
-        loop={loop}
-        onTimeUpdate={handleTimeUpdate}
-        onWaiting={() => setLoss(true)}
-        onCanPlay={() => setLoss(false)}
-        onError={() => setError(true)}
-        onLoadedMetadata={(e) => {
-          setRatio(e.target?.clientWidth / e.target?.clientHeight);
-          setDuration(e.target?.duration);
-        }}
-        style={videoStyle}
-        className={`land-video ${videoClassName}`}
-      />}
+    <StyledLandVideoContainer
+      className={`land-video-wrap ${error ? "error" : ""} ${
+        fullView ? "fullView" : ""
+      } ${className}`}
+      style={{ aspectRatio: ratio && error ? `${ratio}` : "auto", ...style }}
+    >
+      {error ? (
+        <Alert type="error" title="视频错误" direction="column" />
+      ) : (
+        <video
+          ref={videoRef}
+          src={src}
+          loop={loop}
+          onTimeUpdate={handleTimeUpdate}
+          onWaiting={() => setLoss(true)}
+          onCanPlay={() => setLoss(false)}
+          onError={() => setError(true)}
+          onLoadedMetadata={(e) => {
+            setRatio(e.target?.clientWidth / e.target?.clientHeight);
+            setDuration(e.target?.duration);
+          }}
+          style={videoStyle}
+          className={`land-video ${videoClassName}`}
+        />
+      )}
 
-      <div className='absolute width-100 height-100 top-0 left-0' onClick={handlePlay}>
-        <AffixContainer
-          className='height-100'
-          bcOption={{
-            content: <StyledLandVideoControlsContainer className={`land-video-controls-wrap ${showControls ? 'show' : ''}`}>
-              {/* 进度条 */}
-              <>
-                <VideoProgressBar
-                  curPercentage={currentTime / duration}
-                  bufferPercentage={buffered / duration}
-                  onClick={val => setCurrentTime(val * duration)}
-                  onMove={(val, left, width) => handleProgressMove?.(val, left, width)}
-                  onMouseLeave={() => setShowKeyImg(false)}
-                />
-                {(useKeyImg && showKeyImg) && <div className='land-video-controls-keyImg-container' style={{ transform: `translateX(${left}px)` }}>
-                  <canvas ref={KeyImgPreviewCanvasRef} width={keyImgWidth} height={keyImgWidth / ratio} />
-                </div>}
-              </>
-
-              {/* 控制按钮 */}
-              <div className='land-video-controls-container'>
-
-                <div className='land-video-controls-left'>
-                  {usePrevEpisode && <a className="land-video-controls-button prev" role="button" href={prevEpisodeHref} >
-                    <Icon name='arrow-nav' size={20} strokeWidth={4} />
-                  </a>}
-                  <button className="land-video-controls-button play" aria-keyshortcuts="k" data-title-no-tooltip="播放" aria-label="播放 键盘快捷键 (space)" title="播放 (space)" onClick={handlePlay}>
-                    {videoRef.current?.paused ? <Icon name='video-pause' size={32} /> : <Icon name='video-play' size={20} />}
-                  </button>
-                  {useNextEpisode && <a className="land-video-controls-button next" role="button" href={nextEpisodeHref} title="下一个">
-                    <Icon name='arrow-nav' size={20} strokeWidth={4} />
-                  </a>}
-                  <div className="land-video-controls-time">{useFormateTime(currentTime)} / {useFormateTime(duration)}</div>
-                  <div className='land-video-controls-volume-container'>
-                    <button className="land-video-controls-button volume" onClick={handleMuteChange}>
-                      {muted ? <Icon name='volume-muted' size={20} strokeWidth={2} /> : <Icon name='volume' className={`${volume < 50 ? 'small' : ''}`} size={20} strokeWidth={2} />}
-                    </button>
-                    <div ref={volumeSliderRef} className={`land-video-volume-slider ${showVolumeSlider ? 'show' : ''}`}>
-                      <Slider height={4} value={volume} max={100} step={1} onChange={val => handleVolumeChange(val)} defaultBg='rgba(255,255,255,0.68)' activeBg='rgba(255,255,255,1)' thumbSize={12} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className='land-video-controls-right'>
-                  <button className="land-video-controls-button setting hover-pop">
-                    <Icon name='setting' size={20} strokeWidth={4} />
-                    <div className='land-video-setting-panel'>
-                      <div className='land-video-setting-content'>
-                        <VideoSetting
-                          rateValue={rate}
-                          onRateChange={(val, item) => handleRateChange?.(val, item)}
-                          loop={loop}
-                          onLoopChange={() => setLoop(!loop)}
+      {!error && isInitialLoad && (
+        <div
+          className="absolute width-100 height-100 top-0 left-0"
+          onClick={handlePlay}
+        >
+          <AffixContainer
+            className="height-100"
+            bcOption={{
+              content: (
+                <StyledLandVideoControlsContainer
+                  className={`land-video-controls-wrap ${
+                    showControls ? "show" : ""
+                  }`}
+                >
+                  {/* 进度条 */}
+                  <>
+                    <VideoProgressBar
+                      curPercentage={currentTime / duration}
+                      bufferPercentage={buffered / duration}
+                      onClick={(val) => setCurrentTime(val * duration)}
+                      onMove={(val, left, width) =>
+                        handleProgressMove?.(val, left, width)
+                      }
+                      onMouseLeave={() => setShowKeyImg(false)}
+                    />
+                    {useKeyImg && showKeyImg && (
+                      <div
+                        className="land-video-controls-keyImg-container"
+                        style={{ transform: `translateX(${left}px)` }}
+                      >
+                        <canvas
+                          ref={KeyImgPreviewCanvasRef}
+                          width={keyImgWidth}
+                          height={keyImgWidth / ratio}
                         />
                       </div>
-                    </div>
-                  </button>
-                  <button className="land-video-controls-button small-screen hover-pop" onClick={handleSmallScreen} >
-                    <Icon name='video-small-screen' size={20} strokeWidth={4} />
-                    <Pop content='画中画模式' theme='dark' />
-                  </button>
-                  {onFullWidthChange && <button className="land-video-controls-button full-width hover-pop" onClick={() => { setFullWidth(!fullWidth); onFullWidthChange?.(!fullWidth) }} >
-                    <Icon name='video-full-width' size={20} strokeWidth={2} reverse={fullWidth} />
-                    <Pop content='宽屏模式' theme='dark' />
-                  </button>}
-                  <button className="land-video-controls-button full-view hover-pop" onClick={() => setFullView(!fullView)}>
-                    {fullView ? <Icon name='zoom-out' size={20} strokeWidth={4} /> : <Icon name='zoom-in' size={20} strokeWidth={4} />}
-                    <Pop content={fullView ? '退出网页全屏模式' : '网页全屏模式'} theme='dark' />
-                  </button>
-                  <button className="land-video-controls-button full-screen hover-pop" onClick={handleFullScreen}>
-                    <Icon name='zoom-in-arrow' size={20} strokeWidth={4} />
-                    <Pop content='全屏模式' theme='dark' />
-                  </button>
-                </div>
+                    )}
+                  </>
 
-              </div>
-            </StyledLandVideoControlsContainer>,
-            gap: 0,
-          }}
-          centerOption={{
-            content: (loss && !isInitialLoad) ? <Loading size={32} color='white' strokeSize={4} /> : <StyledVideoTagsContainer className='land-video-tags-container'>
-              {videoRef.current?.paused ? <Icon name='video-pause' size={32} /> : <Icon name='video-play' size={20} />}
-            </StyledVideoTagsContainer>,
-            style: { opacity: (showCenterPlay || loss || videoRef.current?.paused) ? 1 : 0, pointerEvents: 'none' }
-          }}
-          lcOption={{
-            content: <StyledVideoTagsContainer className='land-video-tags-container'>
-              <Icon name='arrow-double' className='back' size={28} />{forwardSecond}秒
-            </StyledVideoTagsContainer>,
-            style: { opacity: showBack ? 1 : 0 }
-          }}
-          rcOption={{
-            content: <StyledVideoTagsContainer className='land-video-tags-container'>
-              <Icon name='arrow-double' className='front' size={28} />{forwardSecond}秒
-            </StyledVideoTagsContainer>,
-            style: { opacity: showFront ? 1 : 0 }
-          }}
-        >
-        </AffixContainer>
-      </div>
+                  {/* 控制按钮 */}
+                  <div className="land-video-controls-container">
+                    <div className="land-video-controls-left">
+                      {usePrevEpisode && (
+                        <a
+                          className="land-video-controls-button prev"
+                          role="button"
+                          href={prevEpisodeHref}
+                        >
+                          <Icon name="arrow-nav" size={20} strokeWidth={4} />
+                        </a>
+                      )}
+                      <button
+                        className="land-video-controls-button play"
+                        aria-keyshortcuts="k"
+                        data-title-no-tooltip="播放"
+                        aria-label="播放 键盘快捷键 (space)"
+                        title="播放 (space)"
+                        onClick={handlePlay}
+                      >
+                        {videoRef.current?.paused ? (
+                          <Icon name="video-pause" size={32} />
+                        ) : (
+                          <Icon name="video-play" size={20} />
+                        )}
+                      </button>
+                      {useNextEpisode && (
+                        <a
+                          className="land-video-controls-button next"
+                          role="button"
+                          href={nextEpisodeHref}
+                          title="下一个"
+                        >
+                          <Icon name="arrow-nav" size={20} strokeWidth={4} />
+                        </a>
+                      )}
+                      <div className="land-video-controls-time">
+                        {useFormateTime(currentTime)} /{" "}
+                        {useFormateTime(duration)}
+                      </div>
+                      <div className="land-video-controls-volume-container">
+                        <button
+                          className="land-video-controls-button volume"
+                          onClick={handleMuteChange}
+                        >
+                          {muted ? (
+                            <Icon
+                              name="volume-muted"
+                              size={20}
+                              strokeWidth={2}
+                            />
+                          ) : (
+                            <Icon
+                              name="volume"
+                              className={`${volume < 50 ? "small" : ""}`}
+                              size={20}
+                              strokeWidth={2}
+                            />
+                          )}
+                        </button>
+                        <div
+                          ref={volumeSliderRef}
+                          className={`land-video-volume-slider ${
+                            showVolumeSlider ? "show" : ""
+                          }`}
+                        >
+                          <Slider
+                            height={4}
+                            value={volume}
+                            max={100}
+                            step={1}
+                            onChange={(val) => handleVolumeChange(val)}
+                            defaultBg="rgba(255,255,255,0.68)"
+                            activeBg="rgba(255,255,255,1)"
+                            thumbSize={12}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="land-video-controls-right">
+                      <button className="land-video-controls-button setting hover-pop">
+                        <Icon name="setting" size={20} strokeWidth={4} />
+                        <div className="land-video-setting-panel">
+                          <div className="land-video-setting-content">
+                            <VideoSetting
+                              rateValue={rate}
+                              onRateChange={(val, item) =>
+                                handleRateChange?.(val, item)
+                              }
+                              loop={loop}
+                              onLoopChange={() => setLoop(!loop)}
+                            />
+                          </div>
+                        </div>
+                      </button>
+                      <button
+                        className="land-video-controls-button small-screen hover-pop"
+                        onClick={handleSmallScreen}
+                      >
+                        <Icon
+                          name="video-small-screen"
+                          size={20}
+                          strokeWidth={4}
+                        />
+                        <Pop content="画中画模式" theme="dark" />
+                      </button>
+                      {onFullWidthChange && (
+                        <button
+                          className="land-video-controls-button full-width hover-pop"
+                          onClick={() => {
+                            setFullWidth(!fullWidth);
+                            onFullWidthChange?.(!fullWidth);
+                          }}
+                        >
+                          <Icon
+                            name="video-full-width"
+                            size={20}
+                            strokeWidth={2}
+                            reverse={fullWidth}
+                          />
+                          <Pop content="宽屏模式" theme="dark" />
+                        </button>
+                      )}
+                      <button
+                        className="land-video-controls-button full-view hover-pop"
+                        onClick={() => setFullView(!fullView)}
+                      >
+                        {fullView ? (
+                          <Icon name="zoom-out" size={20} strokeWidth={4} />
+                        ) : (
+                          <Icon name="zoom-in" size={20} strokeWidth={4} />
+                        )}
+                        <Pop
+                          content={
+                            fullView ? "退出网页全屏模式" : "网页全屏模式"
+                          }
+                          theme="dark"
+                        />
+                      </button>
+                      <button
+                        className="land-video-controls-button full-screen hover-pop"
+                        onClick={handleFullScreen}
+                      >
+                        <Icon name="zoom-in-arrow" size={20} strokeWidth={4} />
+                        <Pop content="全屏模式" theme="dark" />
+                      </button>
+                    </div>
+                  </div>
+                </StyledLandVideoControlsContainer>
+              ),
+              gap: 0,
+            }}
+            centerOption={{
+              content:
+                loss && !isInitialLoad ? (
+                  <Loading size={32} color="white" strokeSize={4} />
+                ) : (
+                  <StyledVideoTagsContainer className="land-video-tags-container">
+                    {videoRef.current?.paused ? (
+                      <Icon name="video-pause" size={32} />
+                    ) : (
+                      <Icon name="video-play" size={20} />
+                    )}
+                  </StyledVideoTagsContainer>
+                ),
+              style: {
+                opacity:
+                  showCenterPlay || loss || videoRef.current?.paused ? 1 : 0,
+                pointerEvents: "none",
+              },
+            }}
+            lcOption={{
+              content: (
+                <StyledVideoTagsContainer className="land-video-tags-container">
+                  <Icon name="arrow-double" className="back" size={28} />
+                  {forwardSecond}秒
+                </StyledVideoTagsContainer>
+              ),
+              style: { opacity: showBack ? 1 : 0 },
+            }}
+            rcOption={{
+              content: (
+                <StyledVideoTagsContainer className="land-video-tags-container">
+                  <Icon name="arrow-double" className="front" size={28} />
+                  {forwardSecond}秒
+                </StyledVideoTagsContainer>
+              ),
+              style: { opacity: showFront ? 1 : 0 },
+            }}
+          ></AffixContainer>
+        </div>
+      )}
     </StyledLandVideoContainer>
-  )
-}
+  );
+};
 
 const StyledLandVideoControlsContainer = styled.div`
-  &.land-video-controls-wrap{
+  &.land-video-controls-wrap {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 0.75rem 0.75rem;
     width: 100%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.20) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s linear;
-    &.show{
+    &.show {
       opacity: 1;
       pointer-events: auto;
     }
   }
-  .land-video-controls-container{
+  .land-video-controls-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
   }
   .land-video-controls-left,
-  .land-video-controls-right{
+  .land-video-controls-right {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .land-video-controls-button{
+  .land-video-controls-button {
     position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      width: 2rem;
-      height: 2rem;
-      border: none;
-      outline: none;
-      color: rgba(255,255,255,0.8);
-      background-color: transparent;
-      cursor: pointer;
-      transform-origin: center center;
-      transition: color 0.2s linear;
-      &:hover:not(.disabled){
-        color: rgba(255,255,255,1);
-      }
-      svg{
-        transition: transform 0.2s linear;
-      }
-      path{
-        transition: d 0.2s linear;
-      }
-      &.prev{
-        transform: rotate(180deg);
-      }
-      &.full-screen,
-      &.small-screen,
-      &.full-view,
-      &.full-width{
-        &:hover svg{
-          transform: scale(1.1);
-        }
-      }
-      &.setting{
-        &:hover svg{
-          transform: rotate(15deg);
-        }
-        .land-video-setting-panel{
-            position: absolute;
-            bottom: 100%;
-            padding-bottom: 24px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s linear;
-          .land-video-setting-content{
-            padding: 12px;
-            background-color:rgba(0,0,0,0.68);
-            border-radius: 8px;
-            
-          }
-        }
-        &:hover .land-video-setting-panel{
-          opacity: 1;
-          pointer-events: auto;
-        }
-      }
-      &.disabled{
-        color: rgba(255,255,255,0.36);
-        cursor: not-allowed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    cursor: pointer;
+    transform-origin: center center;
+    transition: color 0.2s linear;
+    &:hover:not(.disabled) {
+      color: rgba(255, 255, 255, 1);
+    }
+    svg {
+      transition: transform 0.2s linear;
+    }
+    path {
+      transition: d 0.2s linear;
+    }
+    &.prev {
+      transform: rotate(180deg);
+    }
+    &.full-screen,
+    &.small-screen,
+    &.full-view,
+    &.full-width {
+      &:hover svg {
+        transform: scale(1.1);
       }
     }
-    .land-video-controls-time{
-      font-size: 0.875rem;
-      white-space: nowrap;
-    }
-    .land-video-controls-volume-container{
-      position: relative;
-      display: flex;
-      align-items: center;
-      &:hover .land-video-volume-slider{
-       width: 60px;
+    &.setting {
+      &:hover svg {
+        transform: rotate(15deg);
+      }
+      .land-video-setting-panel {
+        position: absolute;
+        bottom: 100%;
+        padding-bottom: 24px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s linear;
+        .land-video-setting-content {
+          padding: 12px;
+          background-color: rgba(0, 0, 0, 0.68);
+          border-radius: 8px;
+        }
+      }
+      &:hover .land-video-setting-panel {
+        opacity: 1;
         pointer-events: auto;
       }
-      .land-video-volume-slider{
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        width: 0px;
-        height: 28px;
-        overflow: hidden;
-        pointer-events: none;
-        transition: width 0.2s linear;
-        &.show{
-          width: 60px;
-        }
-      }
-      .volume svg.small{
-          path:last-of-type{
-            opacity: 0;
-            transition: opacity 0.2s linear;
-          }
-        }
     }
-    .land-video-controls-keyImg-container{
-      position: absolute;
-      left: 0;
-      bottom: 100%;
-      canvas{
-        border-radius: 8px;
-        overflow: hidden;
+    &.disabled {
+      color: rgba(255, 255, 255, 0.36);
+      cursor: not-allowed;
+    }
+  }
+  .land-video-controls-time {
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+  .land-video-controls-volume-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    &:hover .land-video-volume-slider {
+      width: 60px;
+      pointer-events: auto;
+    }
+    .land-video-volume-slider {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 0px;
+      height: 28px;
+      overflow: hidden;
+      pointer-events: none;
+      transition: width 0.2s linear;
+      &.show {
+        width: 60px;
       }
     }
+    .volume svg.small {
+      path:last-of-type {
+        opacity: 0;
+        transition: opacity 0.2s linear;
+      }
+    }
+  }
+  .land-video-controls-keyImg-container {
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    canvas {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  }
 `;
 
 const StyledLandVideoContainer = styled.div`
-  &.land-video-wrap{
+  &.land-video-wrap {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    &.fullView{
+    &.error {
+      background-color: var(--color-bg-1);
+      border-radius: 12px;
+    }
+    &.fullView {
       position: fixed;
       top: 0;
       left: 0;
@@ -547,16 +712,16 @@ const StyledLandVideoContainer = styled.div`
       align-items: center;
       width: 100vw;
       height: 100vh;
-      background-color: rgba(0,0,0,1);
+      background-color: rgba(0, 0, 0, 1);
       z-index: var(--zIndex-5);
     }
   }
-  .land-video{
+  .land-video {
     max-width: 100%;
     max-height: 100%;
   }
-  &:hover{
-    ${StyledLandVideoControlsContainer}{
+  &:hover {
+    ${StyledLandVideoControlsContainer} {
       opacity: 1;
       pointer-events: auto;
     }

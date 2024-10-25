@@ -82,6 +82,12 @@ import Watermark from "../packages/Watermark";
 import WatermarkExample from "./components/WatermarkExample";
 import Collapse from "../packages/Collapse";
 import CollapseExample from "./components/CollapseExample";
+import StateExample from "./components/StateExample";
+import State from "../packages/State";
+import AlertExample from "./components/AlertExample";
+import Alert from "../packages/Alert";
+import AudioExample from "./components/AudioExample";
+import Audio from "../packages/Audio";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -971,8 +977,8 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "状态",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <StateExample />,
+    demo: <State type="empty" title="暂无内容" />,
   },
   {
     id: "image",
@@ -998,8 +1004,8 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "音频",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <AudioExample />,
+    demo: <Audio />,
   },
   {
     id: "list",
@@ -1088,8 +1094,8 @@ export const FEEDBACK_COMPONENTS_DATA = [
     zh: "警告提示",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <AlertExample />,
+    demo: <Alert type="success" title="提交成功！" />,
   },
   {
     id: "message",
