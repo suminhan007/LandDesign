@@ -207,12 +207,37 @@ const IconArrowNav: React.FC<IconProps> = ({
   </svg>
 );
 
+const IconIncrease: React.FC<IconProps> = ({
+  fill = "currentcolor",
+  stroke = "currentcolor",
+  size = 16,
+  strokeWidth = 2,
+  style,
+  className = "",
+}) => (
+  <svg
+    fill="none"
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    className={`increase ${className}`}
+    style={style}
+  >
+    <path
+      d="M15 12h4.5L12 2 4.5 12H9v10h6V12z"
+      fill={strokeWidth === 0 ? fill : "none"}
+      stroke={strokeWidth === 0 ? "none" : stroke}
+      strokeWidth={strokeWidth}
+    ></path>
+  </svg>
+);
+
 const IconToggle: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -253,7 +278,7 @@ const IconCollapse: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -287,7 +312,7 @@ const IconCollection: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -328,7 +353,7 @@ const IconSearch: React.FC<IconProps> = ({
   size = 20,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => (
   <svg
     width={size}
@@ -337,19 +362,31 @@ const IconSearch: React.FC<IconProps> = ({
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     style={style}
-    className={`search ${className}`}>
-    <path d="M21 38C30.3888 38 38 30.3888 38 21C38 11.6112 30.3888 4 21 4C11.6112 4 4 11.6112 4 21C4 30.3888 11.6112 38 21 38Z" fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round" />
-    <path d="M33.2216 33.2217L41.7069 41.707" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+    className={`search ${className}`}
+  >
+    <path
+      d="M21 38C30.3888 38 38 30.3888 38 21C38 11.6112 30.3888 4 21 4C11.6112 4 4 11.6112 4 21C4 30.3888 11.6112 38 21 38Z"
+      fill="none"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinejoin="round"
+    />
+    <path
+      d="M33.2216 33.2217L41.7069 41.707"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
-
-)
+);
 
 const IconZoomInArrow: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -425,7 +462,7 @@ const IconZoomOutArrow: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -501,7 +538,7 @@ const IconZoomIn: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => (
   <svg
     width={size}
@@ -511,25 +548,29 @@ const IconZoomIn: React.FC<IconProps> = ({
     style={style}
     className={`zoom-in ${className}`}
   >
-    <path d="M33 6H42V15"
+    <path
+      d="M33 6H42V15"
       stroke={stroke}
       strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M42 33V42H33"
+    <path
+      d="M42 33V42H33"
       stroke={stroke}
       strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M15 42H6V33"
+    <path
+      d="M15 42H6V33"
       stroke={stroke}
       strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M6 15V6H15"
+    <path
+      d="M6 15V6H15"
       stroke={stroke}
       strokeWidth={strokeWidth}
       strokeLinecap="round"
@@ -542,7 +583,7 @@ const IconZoomOut: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -553,25 +594,29 @@ const IconZoomOut: React.FC<IconProps> = ({
       style={style}
       className={`zoom-out ${className}`}
     >
-      <path d="M33 6V15H42"
+      <path
+        d="M33 6V15H42"
         stroke={stroke}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path d="M15 6V15H6"
+      <path
+        d="M15 6V15H6"
         stroke={stroke}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path d="M15 42V33H6"
+      <path
+        d="M15 42V33H6"
         stroke={stroke}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path d="M33 42V33H41.8995"
+      <path
+        d="M33 42V33H41.8995"
         stroke={stroke}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
@@ -586,7 +631,7 @@ const IconLoop: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -620,7 +665,7 @@ const IconDownload: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 3,
   style,
-  className = '',
+  className = "",
   onClick,
 }) => {
   return (
@@ -663,7 +708,7 @@ const IconOut: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -704,7 +749,7 @@ const IconReload: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -738,7 +783,7 @@ const IconUndo: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -772,7 +817,7 @@ const IconSort: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -820,7 +865,7 @@ const IconBack: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -854,7 +899,7 @@ const IconAhead: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -888,7 +933,7 @@ const IconDrag: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -922,7 +967,7 @@ const IconRefresh: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -964,7 +1009,7 @@ const IconCheckStroke: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -997,7 +1042,7 @@ const IconCheckFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1024,7 +1069,7 @@ const IconCheck: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1052,7 +1097,7 @@ const IconErrorStroke: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1092,7 +1137,7 @@ const IconErrorFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1119,7 +1164,7 @@ const IconError: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1146,7 +1191,7 @@ const IconInfoStroke: React.FC<IconProps> = ({
   size = 16,
   stroke = "currentcolor",
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1173,7 +1218,7 @@ const IconInfoFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1200,7 +1245,7 @@ const IconInfo: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1232,7 +1277,7 @@ const IconAttentionStroke: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1256,7 +1301,7 @@ const IconAttentionFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1283,7 +1328,7 @@ const IconAttention: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1315,7 +1360,7 @@ const IconQuestionStroke: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1339,7 +1384,7 @@ const IconQuestionFill: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 16,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1366,7 +1411,7 @@ const IconQuestion: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1397,7 +1442,7 @@ const IconFile: React.FC<IconProps> = ({
   size = 16,
   stroke = "currentcolor",
   strokeWidth = 4,
-  className = '',
+  className = "",
   style,
 }) => {
   return (
@@ -1522,7 +1567,7 @@ const IconAdd: React.FC<IconProps> = ({
 export const IconDec: React.FC<IconProps> = ({
   size = 16,
   stroke = "currentColor",
-  className = '',
+  className = "",
   onClick,
 }) => (
   <svg
@@ -1583,7 +1628,7 @@ const IconClear: React.FC<IconProps> = ({
 const IconApplication: React.FC<IconProps> = ({
   size = 20,
   fill = "currentcolor",
-  className = ''
+  className = "",
 }) => {
   return (
     <svg
@@ -1639,7 +1684,7 @@ const IconUpload: React.FC<IconProps> = ({
   size = 20,
   stroke = "currentcolor",
   strokeWidth = 3,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1679,7 +1724,7 @@ const IconClose: React.FC<IconProps> = ({
   size = 20,
   stroke = "currentcolor",
   strokeWidth = 2,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1713,7 +1758,7 @@ const IconCloseCircle: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 20,
   strokeWidth = 2,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1752,7 +1797,7 @@ const IconCloseCircle: React.FC<IconProps> = ({
 const IconColorPicker: React.FC<IconProps> = ({
   fill = "currentcolor",
   size = 20,
-  className = ''
+  className = "",
 }) => {
   return (
     <svg
@@ -1810,7 +1855,7 @@ const IconHome: React.FC<IconProps> = ({
   size = 24,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -1844,7 +1889,7 @@ const IconLight: React.FC<IconProps> = ({
   strokeWidth = 2,
   fill,
   style,
-  className = '',
+  className = "",
 }) => (
   <svg
     width={size}
@@ -1927,7 +1972,7 @@ const IconDark: React.FC<IconProps> = ({
   fill,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => (
   <svg
     width={size}
@@ -1954,7 +1999,7 @@ const IconSetting: React.FC<IconProps> = ({
   fill,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => (
   <svg
     width={size}
@@ -1965,17 +2010,20 @@ const IconSetting: React.FC<IconProps> = ({
     style={style}
     className={`setting ${className}`}
   >
-    <path d="M18.2838 43.1713C14.9327 42.1736 11.9498 40.3213 9.58787 37.867C10.469 36.8227 11 35.4734 11 34.0001C11 30.6864 8.31371 28.0001 5 28.0001C4.79955 28.0001 4.60139 28.01 4.40599 28.0292C4.13979 26.7277 4 25.3803 4 24.0001C4 21.9095 4.32077 19.8938 4.91579 17.9995C4.94381 17.9999 4.97188 18.0001 5 18.0001C8.31371 18.0001 11 15.3138 11 12.0001C11 11.0488 10.7786 10.1493 10.3846 9.35011C12.6975 7.1995 15.5205 5.59002 18.6521 4.72314C19.6444 6.66819 21.6667 8.00013 24 8.00013C26.3333 8.00013 28.3556 6.66819 29.3479 4.72314C32.4795 5.59002 35.3025 7.1995 37.6154 9.35011C37.2214 10.1493 37 11.0488 37 12.0001C37 15.3138 39.6863 18.0001 43 18.0001C43.0281 18.0001 43.0562 17.9999 43.0842 17.9995C43.6792 19.8938 44 21.9095 44 24.0001C44 25.3803 43.8602 26.7277 43.594 28.0292C43.3986 28.01 43.2005 28.0001 43 28.0001C39.6863 28.0001 37 30.6864 37 34.0001C37 35.4734 37.531 36.8227 38.4121 37.867C36.0502 40.3213 33.0673 42.1736 29.7162 43.1713C28.9428 40.752 26.676 39.0001 24 39.0001C21.324 39.0001 19.0572 40.752 18.2838 43.1713Z"
+    <path
+      d="M18.2838 43.1713C14.9327 42.1736 11.9498 40.3213 9.58787 37.867C10.469 36.8227 11 35.4734 11 34.0001C11 30.6864 8.31371 28.0001 5 28.0001C4.79955 28.0001 4.60139 28.01 4.40599 28.0292C4.13979 26.7277 4 25.3803 4 24.0001C4 21.9095 4.32077 19.8938 4.91579 17.9995C4.94381 17.9999 4.97188 18.0001 5 18.0001C8.31371 18.0001 11 15.3138 11 12.0001C11 11.0488 10.7786 10.1493 10.3846 9.35011C12.6975 7.1995 15.5205 5.59002 18.6521 4.72314C19.6444 6.66819 21.6667 8.00013 24 8.00013C26.3333 8.00013 28.3556 6.66819 29.3479 4.72314C32.4795 5.59002 35.3025 7.1995 37.6154 9.35011C37.2214 10.1493 37 11.0488 37 12.0001C37 15.3138 39.6863 18.0001 43 18.0001C43.0281 18.0001 43.0562 17.9999 43.0842 17.9995C43.6792 19.8938 44 21.9095 44 24.0001C44 25.3803 43.8602 26.7277 43.594 28.0292C43.3986 28.01 43.2005 28.0001 43 28.0001C39.6863 28.0001 37 30.6864 37 34.0001C37 35.4734 37.531 36.8227 38.4121 37.867C36.0502 40.3213 33.0673 42.1736 29.7162 43.1713C28.9428 40.752 26.676 39.0001 24 39.0001C21.324 39.0001 19.0572 40.752 18.2838 43.1713Z"
       fill={fill ? fill : "none"}
       stroke={fill ? fill : stroke}
       strokeWidth={strokeWidth}
       strokeLinejoin="round"
     />
-    <path d="M24 31C27.866 31 31 27.866 31 24C31 20.134 27.866 17 24 17C20.134 17 17 20.134 17 24C17 27.866 20.134 31 24 31Z"
+    <path
+      d="M24 31C27.866 31 31 27.866 31 24C31 20.134 27.866 17 24 17C20.134 17 17 20.134 17 24C17 27.866 20.134 31 24 31Z"
       fill={fill ? fill : "none"}
       stroke={fill ? fill : stroke}
       strokeWidth={strokeWidth}
-      strokeLinejoin="round" />
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -1983,7 +2031,7 @@ const IconVideoPlay: React.FC<IconProps> = ({
   size = 24,
   fill = "currentColor",
   style,
-  className = '',
+  className = "",
 }) => (
   <svg
     width={size}
@@ -2045,14 +2093,28 @@ const IconVolume: React.FC<IconProps> = ({
     className={`volume ${className}`}
     onClick={onClick}
   >
-    <path d="M12 3V21L5.89925 16.4195H3C2.44771 16.4195 2 15.9718 2 15.4195V8.5054C2 7.9531 2.44771 7.5054 3 7.5054H5.89925L12 3Z"
-      fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round"
+    <path
+      d="M12 3V21L5.89925 16.4195H3C2.44771 16.4195 2 15.9718 2 15.4195V8.5054C2 7.9531 2.44771 7.5054 3 7.5054H5.89925L12 3Z"
+      fill="none"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinejoin="round"
     />
-    <path d="M16 7.5C16.3116 7.77825 16.5941 8.08985 16.8421 8.4294C17.5694 9.4252 18 10.6611 18 12C18 13.3273 17.5768 14.5534 16.8609 15.5447C16.6084 15.8943 16.3196 16.2147 16 16.5"
-      fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round" strokeLinecap="round"
+    <path
+      d="M16 7.5C16.3116 7.77825 16.5941 8.08985 16.8421 8.4294C17.5694 9.4252 18 10.6611 18 12C18 13.3273 17.5768 14.5534 16.8609 15.5447C16.6084 15.8943 16.3196 16.2147 16 16.5"
+      fill="none"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinejoin="round"
+      strokeLinecap="round"
     />
-    <path d="M17.1172 20.5931C20.041 18.8479 21.9992 15.6527 21.9992 12.0002C21.9992 8.40447 20.1014 5.25197 17.2527 3.48975"
-      fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round" strokeLinecap="round"
+    <path
+      d="M17.1172 20.5931C20.041 18.8479 21.9992 15.6527 21.9992 12.0002C21.9992 8.40447 20.1014 5.25197 17.2527 3.48975"
+      fill="none"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinejoin="round"
+      strokeLinecap="round"
     />
   </svg>
 );
@@ -2066,15 +2128,38 @@ const IconVolumeMuted: React.FC<IconProps> = ({
   className = "",
   onClick,
 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" onClick={onClick} style={style} className={`volume-muted ${className}`}>
-    <path d="M12 3V21L5.89925 16.4195H3C2.44771 16.4195 2 15.9718 2 15.4195V8.5054C2 7.9531 2.44771 7.5054 3 7.5054H5.89925L12 3Z"
-      fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round"
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    onClick={onClick}
+    style={style}
+    className={`volume-muted ${className}`}
+  >
+    <path
+      d="M12 3V21L5.89925 16.4195H3C2.44771 16.4195 2 15.9718 2 15.4195V8.5054C2 7.9531 2.44771 7.5054 3 7.5054H5.89925L12 3Z"
+      fill="none"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinejoin="round"
     />
-    <path d="M20.3674 10.1431L16.1248 14.3857"
-      fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round" strokeLinecap="round"
+    <path
+      d="M20.3674 10.1431L16.1248 14.3857"
+      fill="none"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinejoin="round"
+      strokeLinecap="round"
     />
-    <path d="M16.1248 10.1431L20.3674 14.3857"
-      fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round" strokeLinecap="round"
+    <path
+      d="M16.1248 10.1431L20.3674 14.3857"
+      fill="none"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinejoin="round"
+      strokeLinecap="round"
     />
   </svg>
 );
@@ -2096,13 +2181,15 @@ const IconVideoSmallScreen: React.FC<IconProps> = ({
     style={style}
     className={`video-small-screen ${className}`}
   >
-    <path d="M16 40H6C4.89543 40 4 39.1046 4 38V10C4 8.89543 4.89543 8 6 8H42C43.1046 8 44 8.89543 44 10V16"
+    <path
+      d="M16 40H6C4.89543 40 4 39.1046 4 38V10C4 8.89543 4.89543 8 6 8H42C43.1046 8 44 8.89543 44 10V16"
       fill={fill ? fill : "none"}
       stroke={fill ? fill : stroke}
       strokeWidth={strokeWidth}
       strokeLinejoin="round"
     />
-    <path d="M42 24H26C24.8954 24 24 24.8954 24 26V38C24 39.1046 24.8954 40 26 40H42C43.1046 40 44 39.1046 44 38V26C44 24.8954 43.1046 24 42 24Z"
+    <path
+      d="M42 24H26C24.8954 24 24 24.8954 24 26V38C24 39.1046 24.8954 40 26 40H42C43.1046 40 44 39.1046 44 38V26C44 24.8954 43.1046 24 42 24Z"
       fill={fill ? fill : "none"}
       stroke={fill ? fill : stroke}
       strokeWidth={strokeWidth}
@@ -2118,7 +2205,7 @@ const IconVideoFullWidth: React.FC<IconProps> = ({
   strokeWidth = 2,
   style,
   className = "",
-  reverse
+  reverse,
 }) => (
   <svg
     width={size}
@@ -2129,17 +2216,34 @@ const IconVideoFullWidth: React.FC<IconProps> = ({
     style={style}
     className={`video-full-width ${className}`}
   >
-    <path d={reverse ? "M18.5459 15.364L15.3639 12.182L18.5459 9.00005" : "M15.1816 9L18.3636 12.182L15.1816 15.364"}
+    <path
+      d={
+        reverse
+          ? "M18.5459 15.364L15.3639 12.182L18.5459 9.00005"
+          : "M15.1816 9L18.3636 12.182L15.1816 15.364"
+      }
       fill={fill ? fill : "none"}
       stroke={fill ? fill : stroke}
       strokeWidth={strokeWidth}
-      strokeLinejoin="round" />
-    <path d={reverse ? "M5.18164 9.00024L8.36362 12.1822L5.18164 15.3642" : "M8.18164 15.364L4.99966 12.182L8.18164 9.00005"}
+      strokeLinejoin="round"
+    />
+    <path
+      d={
+        reverse
+          ? "M5.18164 9.00024L8.36362 12.1822L5.18164 15.3642"
+          : "M8.18164 15.364L4.99966 12.182L8.18164 9.00005"
+      }
       fill={fill ? fill : "none"}
       stroke={fill ? fill : stroke}
       strokeWidth={strokeWidth}
-      strokeLinejoin="round" />
-    <rect x={strokeWidth / 2} y="4.5" width={24 - strokeWidth} height="16" rx="2"
+      strokeLinejoin="round"
+    />
+    <rect
+      x={strokeWidth / 2}
+      y="4.5"
+      width={24 - strokeWidth}
+      height="16"
+      rx="2"
       fill={fill ? fill : "none"}
       stroke={fill ? fill : stroke}
       strokeWidth={strokeWidth}
@@ -2147,7 +2251,6 @@ const IconVideoFullWidth: React.FC<IconProps> = ({
     />
   </svg>
 );
-
 
 const IconAvatar: React.FC<IconProps> = ({
   stroke = "currentColor",
@@ -2165,8 +2268,23 @@ const IconAvatar: React.FC<IconProps> = ({
     style={style}
     className={`avatar ${className}`}
   >
-    <circle cx="24" cy="12" r="8" fill="none" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M42 44C42 34.0589 33.9411 26 24 26C14.0589 26 6 34.0589 6 44" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+    <circle
+      cx="24"
+      cy="12"
+      r="8"
+      fill="none"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M42 44C42 34.0589 33.9411 26 24 26C14.0589 26 6 34.0589 6 44"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -2193,6 +2311,9 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
       break;
     case "arrow-nav":
       return <IconArrowNav {...restProps} />;
+      break;
+    case "arrow-increase":
+      <IconIncrease {...restProps} />;
       break;
     case "toggle":
       return <IconToggle {...restProps} />;
@@ -2357,10 +2478,18 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "volume-muted":
       return <IconVolumeMuted {...restProps} />;
       break;
-    case "video-small-screen": return <IconVideoSmallScreen {...restProps} />; break;
-    case "video-full-width": return <IconVideoFullWidth {...restProps} />; break;
-    case "video-contain-width": return <IconVideoFullWidth {...restProps} />; break;
-    case 'avatar': return <IconAvatar {...restProps} />; break;
+    case "video-small-screen":
+      return <IconVideoSmallScreen {...restProps} />;
+      break;
+    case "video-full-width":
+      return <IconVideoFullWidth {...restProps} />;
+      break;
+    case "video-contain-width":
+      return <IconVideoFullWidth {...restProps} />;
+      break;
+    case "avatar":
+      return <IconAvatar {...restProps} />;
+      break;
     default:
       break;
   }

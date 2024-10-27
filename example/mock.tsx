@@ -1273,34 +1273,70 @@ export const COMPONENTS_OVERVIEW_DATA = [
 // 图标示例数据
 export const ICON_EXAMPLE_DATA = [
   {
-    title: '箭头类',
+    title: "箭头类",
     data: [
-      'arrow-line', 'arrow', 'arrow-double', 'arrow-triangle', 'arrow-to', 'arrow-nav', 'collapse', 'collection', 'zoom-out', 'zoom-in', 'zoom-out-arrow', 'zoom-in-arrow', 'loop', 'download', 'out', 'reload', 'undo', 'sort', 'back', 'ahead', 'refresh'
-    ]
+      "arrow-line",
+      "arrow",
+      "arrow-double",
+      "arrow-triangle",
+      "arrow-to",
+      "arrow-nav",
+      "arrow-increase",
+      "collapse",
+      "collection",
+      "zoom-out",
+      "zoom-in",
+      "zoom-out-arrow",
+      "zoom-in-arrow",
+      "loop",
+      "download",
+      "out",
+      "reload",
+      "undo",
+      "sort",
+      "back",
+      "ahead",
+      "refresh",
+    ],
   },
   {
-    title: '提示类',
+    title: "提示类",
     data: [
-      'check-stroke', 'check-fill', 'check', 'error-stroke', 'error-fill', 'error', 'info-stroke', 'info-fill', 'info', 'attention-stroke', 'attention-fill', 'attention'
-    ]
+      "check-stroke",
+      "check-fill",
+      "check",
+      "error-stroke",
+      "error-fill",
+      "error",
+      "info-stroke",
+      "info-fill",
+      "info",
+      "attention-stroke",
+      "attention-fill",
+      "attention",
+    ],
   },
   {
-    title: '交互类',
+    title: "交互类",
   },
   {
-    title: '编辑类',
+    title: "编辑类",
+    data: [""],
+  },
+  {
+    title: "文字类",
+  },
+  {
+    title: "媒体类",
     data: [
-      ''
-    ]
+      "video-pause",
+      "video-play",
+      "video-small-screen",
+      "video-full-width",
+      "video-contain-width",
+    ],
   },
-  {
-    title: '文字类',
-  },
-  {
-    title: '媒体类',
-    data: ['video-pause', 'video-play', 'video-small-screen', 'video-full-width', 'video-contain-width']
-  }
-]
+];
 
 export const ANIMATION_NAV_DATA = [
   ...[
