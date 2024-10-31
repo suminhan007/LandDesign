@@ -90,6 +90,9 @@ import AudioExample from "./components/AudioExample";
 import Audio from "../packages/Audio";
 import StatisticExample from "./Components/StatisticExample";
 import Statistic from "../packages/Statistic";
+import TableExample from "./components/TableExample";
+import TagExample from "./components/TagExample";
+import TimelineExample from "./components/TimelineExample";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -1037,7 +1040,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "表格",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <TableExample />,
     demo: (
       <Table
         className="width-100 mt-16"
@@ -1059,7 +1062,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "标签",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <TagExample />,
     demo: <></>,
   },
   {
@@ -1068,7 +1071,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     zh: "时间轴",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <TimelineExample />,
     demo: <></>,
   },
   {
@@ -1209,7 +1212,7 @@ export const OTHER_COMPONENTS_DATA = [
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <AutoMediaExample />,
     demo: <></>,
-  }
+  },
 ];
 
 // 组件数据汇总
@@ -1263,11 +1266,11 @@ export const COMPONENTS_DATA = [
 export const COMPONENTS_OVERVIEW_DATA = [
   {
     id: 1,
-    en: 'Button',
-    zh: '按钮',
-    desc: 'Land Design内置常规图标。',
+    en: "Button",
+    zh: "按钮",
+    desc: "Land Design内置常规图标。",
     element: <Button />,
-  }
+  },
 ];
 
 // 图标示例数据
@@ -1297,6 +1300,7 @@ export const ICON_EXAMPLE_DATA = [
       "back",
       "ahead",
       "refresh",
+      "close",
     ],
   },
   {
