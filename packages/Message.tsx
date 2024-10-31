@@ -15,18 +15,17 @@ const Message: React.FC<MessageProps> = ({
   style,
   className = "",
 }) => {
-  const [newShow, setNewShow] = useState<boolean>(show);
+  const [newShow, setNewShow] = useState<boolean>(false);
   useEffect(() => {
     setNewShow(show);
   }, [show]);
   useEffect(() => {
-    if (newShow) {
-      const timer = setTimeout(() => {
-        setNewShow(false);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [newShow]);
+    setNewShow(true);
+    const timer = setTimeout(() => {
+      setNewShow(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [show]);
   const toastType = useMemo(() => {
     switch (type) {
       case "default":
@@ -35,7 +34,7 @@ const Message: React.FC<MessageProps> = ({
   }, [type]);
   return (
     <StyleToastContainer
-      className={`StyleToastContainer fixed radius-6 px-12 py-4 fs-14 ${
+      className={`StyleToastContainer ${
         newShow ? "show" : "close"
       } ${className}`}
       style={{
@@ -50,6 +49,10 @@ const Message: React.FC<MessageProps> = ({
 };
 
 const StyleToastContainer = styled.div`
+  position: fixed;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 14px;
   z-index: var(--zIndex-5);
   left: 50%;
   transform: translateX(-50%);

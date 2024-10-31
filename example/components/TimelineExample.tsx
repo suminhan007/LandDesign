@@ -22,11 +22,38 @@ export default function TimelineExample() {
         </div>
         <Title title="自定义时间轴节点" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
-          <Timeline data={mockData?.map((i, idx) => Object.assign(i, { icon: <Icon name='single-number' value={idx + 1} /> }))} />
-          <Timeline data={[
-            { title: '事件一', subTitle: '2024-2-1', icon: <p>🌄</p> },
-            { title: '事件二', subTitle: '2024-3-1', desc: '事件二的描述内容', icon: <p>☀️</p> },
-            { title: '事件三', subTitle: '2024-5-1', icon: <p>🌆</p> }]} />
+          <Timeline
+            data={[
+              {
+                title: "事件一",
+                subTitle: "2024-2-1",
+                icon: <Icon name="single-number" value={1} />,
+              },
+              {
+                title: "事件二",
+                subTitle: "2024-3-1",
+                desc: "事件二的描述内容",
+                icon: <Icon name="single-number" value={2} />,
+              },
+              {
+                title: "事件三",
+                subTitle: "2024-5-1",
+                icon: <Icon name="single-number" value={3} />,
+              },
+            ]}
+          />
+          <Timeline
+            data={[
+              { title: "事件一", subTitle: "2024-2-1", icon: <p>🌄</p> },
+              {
+                title: "事件二",
+                subTitle: "2024-3-1",
+                desc: "事件二的描述内容",
+                icon: <p>☀️</p>,
+              },
+              { title: "事件三", subTitle: "2024-5-1", icon: <p>🌆</p> },
+            ]}
+          />
         </div>
       </div>
     </div>

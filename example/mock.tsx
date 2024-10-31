@@ -93,6 +93,7 @@ import Statistic from "../packages/Statistic";
 import TableExample from "./components/TableExample";
 import TagExample from "./components/TagExample";
 import TimelineExample from "./components/TimelineExample";
+import MessageExample from "./components/MessageExample";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -1099,7 +1100,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     zh: "全局提示",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <MessageExample />,
     demo: <></>,
   },
   {
