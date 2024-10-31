@@ -2373,6 +2373,23 @@ const IconTag: React.FC<IconProps> = ({
     />
   </svg>
 );
+
+const IconSingleNumber: React.FC<IconProps> = ({
+  stroke = "currentColor",
+  size = 24,
+  fill = 'var(--color-text-1)',
+  strokeWidth,
+  value,
+  style,
+  className = "",
+}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={style} className={`single-number ${className}`}>
+    <circle cx="12" cy="12" r={12} fill={strokeWidth ? 'none' : fill} stroke={strokeWidth ? stroke : 'none'} strokeWidth={strokeWidth} />
+    <text x='9' y='16' fontSize={12} fill={strokeWidth ? stroke : 'white'}>{value}</text>
+  </svg>
+
+);
+
 export type IconDefaultProps = {
   name: string;
 } & IconProps;
@@ -2581,6 +2598,7 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "tag":
       return <IconTag {...restProps} />;
       break;
+    case 'single-number': return <IconSingleNumber {...restProps} />; break;
     default:
       break;
   }
