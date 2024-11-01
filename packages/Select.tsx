@@ -88,7 +88,7 @@ const Select: React.FC<SelectProps> = ({
         className={`land-select-results ${show ? "show" : ""}`}
       >
         <StyleSelectDrop>
-          {data?.map((item) => (
+          {data ? data?.map((item) => (
             <StyleSelectDropItem
               className={`${item.tip ? 'hover-pop' : ''} ${newSelected === item.value ? "selected" : ""} ${item.disabled ? "disabled" : ""
                 }`}
@@ -107,7 +107,7 @@ const Select: React.FC<SelectProps> = ({
               </div>}
               {item.tip && <Pop content={item.tip} placement="right" theme="dark" style={{ marginLeft: '8px' }} />}
             </StyleSelectDropItem>
-          ))}
+          )) : <span className="land-select-drop-empty">暂无内容</span>}
         </StyleSelectDrop>
       </StyleSelectResults>
     </StyleSelectWrap>
@@ -186,6 +186,11 @@ const StyleSelectDrop = styled.ul`
   background-color: var(--color-bg-white);
   border-radius: var(--radius-6);
   box-shadow: var(--boxshadow-small);
+  .land-select-drop-empty{
+    padding: 8px 12px;
+    font-size: 14px;
+    color: var(--color-text-4);
+  }
 `;
 const StyleSelectDropItem = styled.li`
   position: relative;

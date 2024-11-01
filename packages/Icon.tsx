@@ -1725,6 +1725,7 @@ const IconClose: React.FC<IconProps> = ({
   stroke = "currentcolor",
   strokeWidth = 2,
   className = "",
+  onClick,
 }) => {
   return (
     <svg
@@ -1734,6 +1735,7 @@ const IconClose: React.FC<IconProps> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`close ${className}`}
+      onClick={onClick}
     >
       <path
         d="M14 14L34 34"
@@ -1759,6 +1761,7 @@ const IconCloseCircle: React.FC<IconProps> = ({
   size = 20,
   strokeWidth = 2,
   className = "",
+  onClick,
 }) => {
   return (
     <svg
@@ -1768,6 +1771,7 @@ const IconCloseCircle: React.FC<IconProps> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`close-circle ${className}`}
+      onClick={onClick}
     >
       <path
         d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z"

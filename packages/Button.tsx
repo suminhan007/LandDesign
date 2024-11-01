@@ -164,7 +164,7 @@ const StyledButton = styled.div<{
   justify-content: ${(props) => props.justify};
   gap: var(--gap-4);
   padding: ${(props) =>
-    props.width && props.width !== "100%" ? "" : "var(--padding-medium)"};
+    props.width && props.width !== "100%" ? "" : "0 18px"};
   width: ${(props) => (props.width ? props.width : "fit-content")};
   height: ${(props) => (props.height ? props.height : "fit-content")};
   color: ${(props) =>

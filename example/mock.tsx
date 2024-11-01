@@ -94,6 +94,14 @@ import TableExample from "./components/TableExample";
 import TagExample from "./components/TagExample";
 import TimelineExample from "./components/TimelineExample";
 import MessageExample from "./components/MessageExample";
+import DialogExample from "./Components/DialogExample";
+import Dialog from "../packages/Dialog";
+import DrawerExample from "./Components/DrawerExample";
+import PopConfirmExample from "./Components/PopConfirmExample";
+import ProgressExample from "./Components/ProgressExample";
+import Progress from "../packages/Progress";
+import EllipsisExample from "./Components/EllipsisExample";
+import Ellipsis from "../packages/Ellipsis";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -1011,7 +1019,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <AudioExample />,
-    demo: <Audio />,
+    demo: <Audio url="" />,
   },
   {
     id: "popOver",
@@ -1109,8 +1117,8 @@ export const FEEDBACK_COMPONENTS_DATA = [
     zh: "弹窗",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <DialogExample />,
+    demo: <Dialog />,
   },
   {
     id: "drawer",
@@ -1118,7 +1126,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     zh: "抽屉",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <DrawerExample />,
     demo: <></>,
   },
   {
@@ -1127,7 +1135,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     zh: "气泡提示框",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
+    example: <PopConfirmExample />,
     demo: <></>,
   },
   {
@@ -1136,8 +1144,8 @@ export const FEEDBACK_COMPONENTS_DATA = [
     zh: "进度条",
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <ProgressExample />,
+    demo: <Progress value={0.8} />,
   },
   {
     id: "skeleton",
@@ -1185,22 +1193,13 @@ export const TEXT_COMPONENTS_DATA = [
     ),
   },
   {
-    id: "textList",
-    en: "TextList",
-    zh: "文字列表",
-    desc: "",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
-  },
-  {
     id: "ellipsis",
     en: "Ellipsis",
     zh: "缩略显示",
     desc: "",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
+    example: <EllipsisExample />,
+    demo: <Ellipsis text='这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字'></Ellipsis>,
   },
 ];
 

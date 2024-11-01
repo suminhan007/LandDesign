@@ -16,7 +16,7 @@ const Components: React.FC<Props> = ({
 
 }) => {
   const [active, setActive] = useState<number | string>("alert");
-  const [dropActive, setDropActive] = useState<number | string>("message");
+  const [dropActive, setDropActive] = useState<number | string>("drawer");
   const curItem = useMemo(() => {
     let item: any = { id: 1, en: 'Icon', zh: '图标' }
     item = COMPONENTS_DATA.filter(itm1 => itm1.id === active)[0]?.data?.filter(itm2 => itm2.id === dropActive)[0];
