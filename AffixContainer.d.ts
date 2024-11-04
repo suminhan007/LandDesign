@@ -7,7 +7,7 @@ export type AffixOffsetType = {
 };
 export type AffixContainerProps = {
     /** 快捷设置图钉位置 */
-    placement?: 'lt' | 'lb' | 'rt' | 'rb';
+    placement?: "lt" | "lb" | "rt" | "rb";
     /** 快捷定位时图钉与四周的距离 */
     gap?: number;
     /** 自定义位置 */
@@ -23,6 +23,7 @@ export type AffixContainerProps = {
     /** 图钉内容 */
     content?: React.ReactNode;
     children?: React.ReactNode;
+    zIndex?: number;
     [key: string]: any;
 };
 declare const AffixContainer: React.FC<AffixContainerProps>;
