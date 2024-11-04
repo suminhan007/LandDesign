@@ -1,6 +1,6 @@
 import React, { useRef, useState, CSSProperties } from "react";
-import Icon from "./Icon";
 import styled from "styled-components";
+import State from "./State";
 
 export type ImageProps = {
   /* 图片地址 */
@@ -31,24 +31,21 @@ const Image: React.FC<ImageProps> = ({
 
   return (
     <StyledLandImage
-      className={`${
-        imgLoading ? "loading" : ""
-      } relative flex items-center justify-center ${
-        imgLoading || loadDefaultImg ? "bg-gray radius-6 overflow-hidden" : ""
-      } ${className}`}
+      className={`${imgLoading ? "loading" : ""
+        } relative flex items-center justify-center ${imgLoading || loadDefaultImg ? "bg-gray radius-6 overflow-hidden" : ""
+        } ${className}`}
       style={{
         aspectRatio:
           ratio && (imgLoading || loadDefaultImg) ? `${ratio}` : "auto",
         ...style,
       }}
     >
-      {loadDefaultImg && <Icon name="error-fill" fill="var(--color-red-3)" />}
+      {loadDefaultImg && <State type="offline" title='加载失败' />}
       <img
         ref={imgRef}
         src={url}
-        className={`${
-          imgLoading ? "opacity-0" : "opacity-1"
-        } transition ${imgClassName}`}
+        className={`${imgLoading ? "opacity-0" : "opacity-1"
+          } transition ${imgClassName}`}
         style={{ zIndex: "1", maxWidth: "100%", ...imgStyle }}
         onLoad={() => setImgLoading(false)}
         onError={() => setLoadDefaultImg(true)}

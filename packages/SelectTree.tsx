@@ -112,7 +112,7 @@ const SelectTree: React.FC<SelectTreeProps> = ({
       {title && <Title title={title} type="p" info={titleInfo} />}
       <StyleSelectTreeInput
         className={`hover-pop ${show ? "show" : ""} ${disabled ? 'disabled' : ''}`}
-        onClick={(e: React.UIEvent) => { if (disabled) return; e.stopPropagation(); setShow(!show); }}
+        onClick={(e: React.UIEvent) => { e.stopPropagation(); if (disabled) return; e.stopPropagation(); setShow(!show); }}
       >
         <p
           className={`${newSelectedTree !== "0"
@@ -136,7 +136,8 @@ const SelectTree: React.FC<SelectTreeProps> = ({
               className={`${item.tip ? 'hover-pop' : ''} ${resultValue === item.label ? "selected" : ""} ${(showSec === item.value || item.children?.filter(itm => itm.value === selectedValue).length > 0) ? 'open' : ''} ${item.disabled ? "disabled" : ""
                 }`}
               key={item.value}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 if (item.disabled) return;
                 if (item.children?.length > 0) {
                   setShowSec(item.value)

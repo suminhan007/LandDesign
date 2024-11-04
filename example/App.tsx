@@ -12,7 +12,7 @@ import Animations from "./Animations";
 // import Switch from "../packages/Switch";
 
 function App() {
-  const [page, setPage] = useState<number | string>(3);
+  const [page, setPage] = useState<number | string>(2);
   // const [dark, setDark] = useState<boolean>(false);
   return (
     <div className="flex column" style={{ height: "100vh" }}>

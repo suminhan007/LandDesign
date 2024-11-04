@@ -100,7 +100,7 @@ const Components: React.FC<Props> = ({
   )
 };
 
-const StyledRightContent = styled.div`
+export const StyledRightContent = styled.div`
   max-width: 960px;
   margin: 0 auto;
   box-sizing: border-box;

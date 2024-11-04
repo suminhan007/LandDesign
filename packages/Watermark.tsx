@@ -37,6 +37,7 @@ const StyledLandWatermark = styled.div`
     transform: rotate(-45deg);
     color: var(--color-border-3);
     font-size: 12px;
+    white-space: nowrap;
   }
 `;
 

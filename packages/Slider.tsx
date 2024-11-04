@@ -67,6 +67,7 @@ const Slider: React.FC<SliderProps> = ({
           onChange={(e) => {
             onChange?.(Number(e.target.value));
           }}
+          onClick={e => e.stopPropagation()}
           // 选中部分样式
           style={{
             background:
