@@ -31,27 +31,46 @@ const ComponentPreview: React.FC<Props> = ({
     { id: 'icon', data: OTHER_COMPONENTS_DATA, title: "其他" },
   ];
   return (
-    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 20 }}>
-      <Title title='组件索引' />
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        gap: 20,
+      }}
+    >
+      <Title title="组件索引" />
       <Divider />
-      {data?.map(item =>
-        <Flex column gap={12}>
-          <div className='color-gray-4' >{item.title}</div>
-          <div className='grid gap-24 width-100' style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px,1fr))' }}>
-            {item.data?.map(items =>
-              <div className='flex column gap-8 radius-8 pointer' onClick={() => onClick?.(items, item)}>
-                {items.demo && <div className='flex items-center justify-center p-12 bg-gray hover:bg-gray'>{items.demo}</div>}
-                <Flex align='center' gap={8}>
-                  <Title title={items.en} type='h3' />
-                  <Title title={items.zh} type='p' />
+      {data?.map((item) => (
+        <Flex column gap={24}>
+          <div className="color-gray-2 fw-500 fs-20">{item.title}</div>
+          <div
+            className="grid gap-24 width-100"
+            style={{
+              gridTemplateColumns: "repeat(auto-fill, minmax(240px,1fr))",
+            }}
+          >
+            {item.data?.map((items) => (
+              <div
+                className="flex column gap-8 radius-8 pointer"
+                onClick={() => onClick?.(items, item)}
+              >
+                {items.demo && (
+                  <div className="relative flex items-center justify-center p-12 bg-gray hover:bg-gray ratio-1">
+                    {items.demo}
+                  </div>
+                )}
+                <Flex align="center" gap={8}>
+                  <Title title={items.en} type="h3" />
+                  <Title title={items.zh} type="p" />
                 </Flex>
               </div>
-            )}
+            ))}
           </div>
         </Flex>
-      )}
+      ))}
     </div>
-  )
+  );
 };
 
 export default ComponentPreview;
