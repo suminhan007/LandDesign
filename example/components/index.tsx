@@ -11,8 +11,8 @@ import Menu from "../../packages/Menu";
 type Props = {};
 
 const Components: React.FC<Props> = ({}) => {
-  const [active, setActive] = useState<number | string>(0);
-  const [dropActive, setDropActive] = useState<number | string>("drawer");
+  const [active, setActive] = useState<number | string>("avatar");
+  const [dropActive, setDropActive] = useState<number | string>("audio");
   const curItem = useMemo(() => {
     let item: any = { id: 1, en: "Icon", zh: "图标" };
     item = COMPONENTS_DATA.filter(

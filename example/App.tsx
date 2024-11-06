@@ -11,7 +11,7 @@ import Design from "./Design";
 import Animations from "./Animations";
 
 function App() {
-  const [page, setPage] = useState<number | string>(2);
+  const [page, setPage] = useState<number | string>(3);
   // const [dark, setDark] = useState<boolean>(false);
   return (
     <div className="flex column" style={{ height: "100vh" }}>

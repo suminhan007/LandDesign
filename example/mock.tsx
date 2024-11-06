@@ -337,8 +337,12 @@ export const LAYOUT_COMPONENTS_DATA = [
     example: <FlexExample />,
     demo: (
       <Flex gap={8}>
-        {Array.from({ length: 3 }).map(() => (
-          <div className="bg-primary flex-1" style={{ height: "40px" }}></div>
+        {Array.from({ length: 3 }).map((_i, index) => (
+          <div
+            key={index}
+            className="bg-primary flex-1"
+            style={{ height: "40px" }}
+          ></div>
         ))}
       </Flex>
     ),
@@ -370,8 +374,12 @@ export const LAYOUT_COMPONENTS_DATA = [
         type={gridType.ColumnRepeat}
         repeatNum={2}
       >
-        {Array.from({ length: 4 }).map(() => (
-          <div className="bg-primary" style={{ height: "40px" }}></div>
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div
+            key={index}
+            className="bg-primary"
+            style={{ height: "40px" }}
+          ></div>
         ))}
       </Grid>
     ),

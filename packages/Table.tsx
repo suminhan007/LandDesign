@@ -18,22 +18,22 @@ const Table: React.FC<TableProps> = ({
     <StyledTable className={`land-table ${className}`} style={style}>
       <thead>
         <tr>
-          {titleData?.map((item1, index1) =>
+          {titleData?.map((item1, index1) => (
             <th key={index1}>{item1.title}</th>
-          )}
+          ))}
         </tr>
       </thead>
       <tbody>
-        {data.map(item2 =>
-          <tr>
-            {Object.values(item2).map((item3: any) =>
-              <td>{item3}</td>
-            )}
+        {data.map((item2, index2) => (
+          <tr key={index2}>
+            {Object.values(item2).map((item3: any, index3) => (
+              <td key={index3}>{item3}</td>
+            ))}
           </tr>
-        )}
+        ))}
       </tbody>
     </StyledTable>
-  )
+  );
 }
 
 const StyledTable = styled.table`
