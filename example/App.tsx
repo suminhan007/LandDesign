@@ -9,7 +9,6 @@ import { ClickType } from "../packages/Menu";
 import Components from "./components";
 import Design from "./Design";
 import Animations from "./Animations";
-// import Switch from "../packages/Switch";
 
 function App() {
   const [page, setPage] = useState<number | string>(3);

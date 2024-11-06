@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import Icon from '../Icon';
 import Slider from '../Slider';
 import VideoProgressBar from './VideoProgressBar';
-import AffixContainer from 'packages/AffixContainer';
-import Loading from 'packages/Loading';
-import useClickOutside from 'packages/hooks/useClickOutside';
-import Pop from 'packages/Pop';
-import VideoSetting from './VideoSetting';
-import useFormateTime from 'packages/hooks/useFormateTime';
-import Alert from "packages/Alert";
+import AffixContainer from "../AffixContainer";
+import Loading from "../Loading";
+import useClickOutside from "../hooks/useClickOutside";
+import Pop from "../Pop";
+import VideoSetting from "./VideoSetting";
+import useFormateTime from "../hooks/useFormateTime";
+import Alert from "../Alert";
 
 type VideoProps = {
   /** 视频地址 */

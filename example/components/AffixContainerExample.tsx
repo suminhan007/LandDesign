@@ -1,7 +1,6 @@
 import React from 'react'
 import Title from '../../packages/Title'
-import AffixContainer from '../../packages/AffixContainer'
-import Icon from '../../packages/Icon'
+import AffixContainer from "../../packages/AffixContainer";
 
 export default function AffixContainerExample() {
   return (

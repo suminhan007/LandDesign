@@ -95,8 +95,16 @@ const Calendar: React.FC<CalendarProps> = ({
     });
   };
 
+  const yearGap = useMemo(
+    () =>
+      minYear > 0 && maxYear > 0 && maxYear > minYear ? maxYear - minYear : 0,
+    [minYear, maxYear]
+  );
   /** 月份切换禁用 */
-  const monthPrevDisabled = useMemo(() => yearGap === 0 && month <= 0, [month]);
+  const monthPrevDisabled = useMemo(
+    () => yearGap === 0 && month <= 0,
+    [month, yearGap]
+  );
   const monthNextDisabled = useMemo(
     () => yearGap === 0 && month >= 11,
     [month]
@@ -188,11 +196,6 @@ const Calendar: React.FC<CalendarProps> = ({
     { zh: "六", en: "Sa" },
   ];
 
-  const yearGap = useMemo(
-    () =>
-      minYear > 0 && maxYear > 0 && maxYear > minYear ? maxYear - minYear : 0,
-    [minYear, maxYear]
-  );
   const years = [
     ...Array.from({ length: maxYear - minYear }).map((_i, idx) => ({
       value: minYear + idx,
