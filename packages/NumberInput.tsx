@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Divider from './Divider';
 import Icon from './Icon';
@@ -41,6 +41,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
   ...restProps
 }) => {
   const [newValue, setNewValue] = useState<number>(value);
+  useEffect(() => value !== undefined && setNewValue(value), [value]);
   const handleValueChange = (val: number, e: any) => {
     if (val < (min - step / 2) || val > (max + step / 2)) {
       return;

@@ -49,7 +49,7 @@ const CollapseItem: React.FC<Props> = ({
     <div className={`land-collapse-item ${isOpen ? "open" : ""}`}>
       <div
         className="land-collapse-item-title"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e) => { e.stopPropagation(); setIsOpen(!isOpen) }}
       >
         {!hideIcon && <Icon name="arrow" strokeWidth={4} />}
         {title}
@@ -74,7 +74,7 @@ const StyledLandCollapse = styled.div`
   width: 100%;
   .land-collapse-item {
     font-size: 14px;
-    transition: height 0var (--transition-15) cubic-bezier(0.38, 0, 0.24, 1);
+    transition: height var(--transition-15) cubic-bezier(0.38, 0, 0.24, 1);
     .land-collapse-item-title {
       display: flex;
       align-items: center;

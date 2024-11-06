@@ -9,7 +9,7 @@ import LinkExample from "./Components/LinkExample";
 import MenuExample from "./Components/MenuExample";
 import Link from "../packages/Link";
 import Button from "../packages/Button";
-import React, { Children } from "react";
+import React, { Children, useState } from "react";
 import AffixContainerExample from "./Components/AffixContainerExample";
 import BreadCrumbExample from "./Components/BreadCrumbExample";
 import PaginationExample from "./Components/PaginationExample";
@@ -102,6 +102,11 @@ import ProgressExample from "./Components/ProgressExample";
 import Progress from "../packages/Progress";
 import EllipsisExample from "./Components/EllipsisExample";
 import Ellipsis from "../packages/Ellipsis";
+import Image from "../packages/Image";
+import Video from "../packages/Video";
+import Tag from "../packages/Tag";
+import Timeline from "../packages/Timeline";
+import Message from "../packages/Message";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -559,6 +564,7 @@ export const NAV_COMPONENTS_DATA = [
           { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
         ]}
         active={1}
+        style={{ height: '64px' }}
       />
     ),
     types: [
@@ -689,7 +695,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "步骤条。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <InputExample />,
-    demo: <Input />,
+    demo: <Input value="" />,
   },
   {
     id: "tagInput",
@@ -777,7 +783,18 @@ export const INPUT_COMPONENTS_DATA = [
       },
     ],
     example: <SelectTreeExample />,
-    demo: <SelectTree />,
+    demo: <SelectTree data={[
+      { value: 'all', label: '全部' },
+      {
+        value: 'shenzhen',
+        label: '深圳市',
+        children: [
+          { value: 'nanshan', label: '南山区', },
+          { value: 'futian', label: '福田区' },
+          { value: 'baoan', label: '宝安区' },
+        ]
+      }
+    ]} />,
   },
   {
     id: "radio",
@@ -809,7 +826,7 @@ export const INPUT_COMPONENTS_DATA = [
       },
     ],
     example: <RadioExample />,
-    demo: <Radio />,
+    demo: <Radio data={[{ value: 1, label: '选项1' }, { value: 2, label: '选项2' }, { value: 3, label: '选项3' }]} />,
   },
   {
     id: "checkbox",
@@ -841,7 +858,7 @@ export const INPUT_COMPONENTS_DATA = [
       },
     ],
     example: <CheckboxExample />,
-    demo: <Checkbox />,
+    demo: <Checkbox data={[{ value: 1, label: '选项1' }, { value: 2, label: '选项2' }, { value: 3, label: '选项3' }]} />,
   },
   {
     id: "switchBar",
@@ -849,7 +866,14 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "模块切换",
     desc: "Land Design内置常规图标。",
     example: <SwitchBarExample />,
-    demo: <SwitchBar />,
+    demo: <SwitchBar value={1}
+      data={[
+        { value: 1, label: "模块1" },
+        { value: 2, label: "模块2" },
+        { value: 3, label: "模块3" },
+      ]}
+      width="300px"
+    />,
   },
   {
     id: "colorPicker",
@@ -881,7 +905,7 @@ export const INPUT_COMPONENTS_DATA = [
       },
     ],
     example: <ColorPickerExample />,
-    demo: <ColorPicker />,
+    demo: <ColorPicker value='var(--color-primary-6)' size={32} />,
   },
   {
     id: "datePicker",
@@ -899,7 +923,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <NumberInputExample />,
-    demo: <NumberInput />,
+    demo: <NumberInput value={2} />,
   },
   {
     id: "switch",
@@ -908,7 +932,7 @@ export const INPUT_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <SwitchExample />,
-    demo: <Switch />,
+    demo: <Switch label="是否开启" checkedLabel="是否开启" />,
   },
   {
     id: "slider",
@@ -983,7 +1007,25 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <CollapseExample />,
-    demo: <Collapse />,
+    demo: <Collapse data={[
+      {
+        title: "折叠标题 1",
+        details:
+          "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
+      },
+      {
+        title: "折叠标题 2 (展开)",
+        details:
+          "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
+        open: true,
+      },
+      {
+        title: "折叠标题 3",
+        details:
+          "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
+      },
+    ]}
+      style={{ width: "300px" }} />,
   },
   {
     id: "state",
@@ -1001,7 +1043,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <ImageExample />,
-    demo: <></>,
+    demo: <Image url="https://ingenueland.online/crochet-time/images/colorcard_default.jpeg" />,
   },
   {
     id: "video",
@@ -1010,7 +1052,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <VideoExample />,
-    demo: <></>,
+    demo: <Video src='https://asset.gdtimg.com/0bc35eaieaaabqac3d7lyztd32oeqluqbaqa.f0.mp4?dis_k=e91b096d31e564b3bf02b46ae94496d7&dis_t=1727244815' videoClassName="radius-8" />,
   },
   {
     id: "audio",
@@ -1041,7 +1083,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <StatisticExample />,
-    demo: <Statistic />,
+    demo: <Statistic value={10} unit="亿+" />,
   },
   {
     id: "table",
@@ -1072,7 +1114,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <TagExample />,
-    demo: <></>,
+    demo: <Tag icon={<Icon name="tag" size={20} />}>带图标标签</Tag>,
   },
   {
     id: "timeline",
@@ -1081,7 +1123,11 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <TimelineExample />,
-    demo: <></>,
+    demo: <Timeline data={[
+      { title: '事件一', subTitle: '2024-2-1' },
+      { title: '事件二', subTitle: '2024-3-1', desc: '事件二的描述内容' },
+      { title: '事件三', subTitle: '2024-5-1' }
+    ]} />,
   },
   {
     id: "swiper",
@@ -1109,7 +1155,9 @@ export const FEEDBACK_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <MessageExample />,
-    demo: <></>,
+    demo: <>
+      <Button >全局提示（success）</Button>
+      <Message type="success" text="全局提示（success）" show={true} /></>,
   },
   {
     id: "dialog",
@@ -1172,7 +1220,7 @@ export const FEEDBACK_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <WatermarkExample />,
-    demo: <Watermark />,
+    demo: <Watermark content="Land Design" />,
   },
 ];
 

@@ -93,7 +93,8 @@ const Select: React.FC<SelectProps> = ({
               className={`${item.tip ? 'hover-pop' : ''} ${newSelected === item.value ? "selected" : ""} ${item.disabled ? "disabled" : ""
                 }`}
               key={item.value}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 if (item.disabled) return;
                 setNewSelected(item.value);
                 onChange?.(item);
