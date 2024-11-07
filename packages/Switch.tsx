@@ -48,13 +48,19 @@ const Switch: React.FC<SwitchProps> = ({
   useEffect(() => setNewChecked(checked), [checked]);
 
   return (
-    <StyledSwitchWrap className={`land-switch-wrap ${info ? 'hover-pop' : ''} ${disabled ? 'disabled' : ''}`}>
+    <StyledSwitchWrap
+      className={`land-switch-wrap ${info ? "hover-pop" : ""} ${
+        disabled ? "disabled" : ""
+      }`}
+    >
       <Pop content={info} theme="dark" {...popProps} />
       <StyledSwitchContent
-        className={`land-switch-content ${dark ? 'dark' : ''} ${newChecked ? "checked" : ""
-          } ${className}`}
+        className={`land-switch-content ${dark ? "dark" : ""} ${
+          newChecked ? "checked" : ""
+        } ${className}`}
         style={style}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           if (disabled) return;
           setNewChecked(!newChecked);
           onChange?.(newChecked);
@@ -74,7 +80,7 @@ const Switch: React.FC<SwitchProps> = ({
       {iconInfo && (
         <div className="land-switch-label-iconInfo hover-pop">
           <Icon name="info-stroke" size={16} />
-          <Pop content={iconInfo} theme="dark"  {...popProps} />
+          <Pop content={iconInfo} theme="dark" {...popProps} />
         </div>
       )}
     </StyledSwitchWrap>

@@ -277,10 +277,10 @@ const Video: React.FC<VideoProps> = ({
         setShowCenterPlay(true);
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
+    document.body.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      document.body.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 

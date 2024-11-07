@@ -58,8 +58,8 @@ const TagInput: React.FC<TagInputProps> = ({
         console.log(e.code);
       }
     }
-    window.addEventListener('keydown', handleKeyDelete);
-    return () => window.removeEventListener('keydown', handleKeyDelete);
+    document.body.addEventListener("keydown", handleKeyDelete);
+    return () => document.body.removeEventListener("keydown", handleKeyDelete);
   }, [newValue, tags]);
 
   /** 编辑标签 */

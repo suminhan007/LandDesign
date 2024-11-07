@@ -100,7 +100,10 @@ const Menu: React.FC<MenuProps> = ({
             className={`land-menu-link ${
               active === item.key ? "active" : ""
             } ${itemClassName}`}
-            onClick={() => onChange?.(item)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onChange?.(item);
+            }}
             column={direction === "column"}
             theme={theme}
           >

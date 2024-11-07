@@ -28,11 +28,11 @@ const Ellipsis: React.FC<EllipsisProps> = ({
     const observer = new MutationObserver(checkWidth);
     observer.observe(document, { childList: true, subtree: true });
 
-    window.addEventListener('resize', checkWidth);
+    document.body.addEventListener("resize", checkWidth);
 
     return () => {
       observer.disconnect();
-      window.removeEventListener('resize', checkWidth);
+      document.body.removeEventListener("resize", checkWidth);
     };
   }, [text]);
   return <StyledLandEllipsis className={`${ellipsis ? 'hover-pop' : ''} `} line={line}>

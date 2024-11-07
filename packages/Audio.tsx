@@ -1,123 +1,167 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
 
 type AudioProps = {
   url: string;
   iconSize?: number;
+  /** 波形排列方向 */
+  direction?: "row" | "column";
+  /** 显示波形 */
+  showWave?: boolean;
+  style?: CSSProperties;
+  className?: string;
 };
-const Audio: React.FC<AudioProps> = ({ url, iconSize = 24 }) => {
+const Audio: React.FC<AudioProps> = ({
+  url,
+  iconSize = 24,
+  direction = "row",
+  showWave,
+  style,
+  className = "",
+}) => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const waveCanvasRef = useRef<HTMLCanvasElement>(null);
   const [play, setPlay] = useState<boolean>(false);
   useEffect(() => {
-    if (play) {
-      audioRef.current.play();
+    if (!audioRef.current && !waveAudioRef.current) return;
+    const audio = audioRef.current || waveAudioRef.current;
+    if (audio.paused) {
+      audio.play();
     } else {
-      audioRef.current.pause();
+      audio.pause();
     }
-  }, [play, url]);
+  }, [play]);
 
-  const [filteredData, setFilteredData] = useState([]);
-  const samples = 1000;
-  const audioContextRef = useRef(new window.AudioContext());
-
+  const waveCanvasRef = useRef<HTMLCanvasElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const waveAudioRef = useRef<HTMLAudioElement>(null);
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(url);
-      const arrayBuffer = await response.arrayBuffer();
-      const audioBuffer = await audioContextRef.current.decodeAudioData(
-        arrayBuffer
-      );
-      drawWaveform(audioBuffer);
-    };
-
-    fetchData();
-  }, [url]);
-
-  const drawWaveform = (buffer) => {
-    const rawData = buffer.getChannelData(0); // We use only the first channel
-    const blockSize = Math.floor(rawData.length / samples); // Number of samples in each subdivision
-    const data = [];
-    for (let i = 0; i < samples; i++) {
-      let blockStart = blockSize * i; // the location of the first sample in the block
-      let sum = 0;
-      for (let j = 0; j < blockSize; j++) {
-        sum = sum + Math.abs(rawData[blockStart + j]); // find the sum of all the samples in the block
-      }
-      data.push(sum / blockSize); // divide the sum by the block size to get the average
-    }
-    setFilteredData(data);
-  };
-
-  const draw = () => {
+    if (!inputRef.current || !waveAudioRef.current || !waveCanvasRef.current)
+      return;
     const canvas = waveCanvasRef.current;
     const ctx = canvas.getContext("2d");
-    const width = canvas.width;
-    const height = canvas.height;
-    const barWidth = width / samples;
-    const currentTime = audioRef.current.currentTime;
-    const duration = audioRef.current.duration;
-    const playedSamples = Math.floor((currentTime / duration) * samples);
+    const audio = waveAudioRef.current;
+    const audioContext = new window.AudioContext();
 
-    ctx.clearRect(0, 0, width, height);
-
-    filteredData.forEach((value, index) => {
-      const x = index * barWidth;
-      const y = value * height;
-      ctx.fillStyle = index < playedSamples ? "#0000FF" : "#CCCCCC"; // Blue for played, gray for unplayed
-      ctx.fillRect(x, height - y, barWidth, y);
+    let filteredData = [];
+    let samples = 1000;
+    inputRef.current.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const arrayBuffer = e.target.result;
+          audioContext.decodeAudioData(arrayBuffer, (buffer) => {
+            drawWaveform(buffer);
+            const audioUrl = URL.createObjectURL(file);
+            audio.src = audioUrl;
+          });
+        };
+        reader.readAsArrayBuffer(file);
+      }
     });
-  };
 
-  useEffect(() => {
-    const audio = audioRef.current;
+    function drawWaveform(buffer) {
+      const rawData = buffer.getChannelData(0); // We use only the first channel
+      samples = 1000; // Number of samples we want to have in our final data
+      const blockSize = Math.floor(rawData.length / samples); // Number of samples in each subdivision
+      filteredData = [];
+      for (let i = 0; i < samples; i++) {
+        let blockStart = blockSize * i; // the location of the first sample in the block
+        let sum = 0;
+        for (let j = 0; j < blockSize; j++) {
+          sum = sum + Math.abs(rawData[blockStart + j]); // find the sum of all the samples in the block
+        }
+        filteredData.push(sum / blockSize); // divide the sum by the block size to get the average
+      }
+      draw();
+    }
+
+    function draw() {
+      const width = canvas.width;
+      const height = canvas.height;
+      const barWidth = width / samples;
+      const currentTime = audio.currentTime;
+      const duration = audio.duration;
+      const playedSamples = Math.floor((currentTime / duration) * samples);
+
+      ctx.clearRect(0, 0, width, height);
+
+      filteredData.forEach((value, index) => {
+        const x = index * barWidth;
+        const y = value * height;
+        ctx.fillStyle =
+          index < playedSamples
+            ? "var(--color-primary-6)"
+            : "var(--color-border-3)";
+        ctx.fillRect(x, height - y, barWidth, y);
+      });
+    }
+
     audio.addEventListener("timeupdate", draw);
 
-    return () => {
-      audio.removeEventListener("timeupdate", draw);
-    };
-  }, [filteredData]);
+    canvas.addEventListener("click", (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const clickPosition = x / canvas.width;
+      const newTime = clickPosition * audio.duration;
+      audio.currentTime = newTime;
+    });
+  }, [play]);
 
-  const handleCanvasClick = (event) => {
-    const canvas = waveCanvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const clickPosition = x / canvas.width;
-    const newTime = clickPosition * audioRef.current.duration;
-    audioRef.current.currentTime = newTime;
-  };
   return (
-    <StyledLandAudio onClick={() => setPlay(!play)} iconSize={iconSize}>
-      <audio ref={audioRef} src={url} autoPlay />
-      <div className="land-audio-play-icon">
+    <StyledLandAudio
+      iconSize={iconSize}
+      direction={direction}
+      className={className}
+      style={style}
+    >
+      <div
+        className="land-audio-play-icon"
+        onClick={(e) => {
+          e.stopPropagation();
+          setPlay(!play);
+        }}
+      >
         {play ? (
-          <AudioAnimation size={iconSize / 1.8} />
+          showWave ? (
+            <Icon
+              name="video-play"
+              size={iconSize / 1.8}
+              fill="var(--color-primary-6)"
+            />
+          ) : (
+            <AudioAnimation size={iconSize / 1.8} />
+          )
         ) : (
           <Icon name="video-pause" size={24} fill="var(--color-primary-6)" />
         )}
       </div>
-      <canvas
-        ref={waveCanvasRef}
-        width={800}
-        height={200}
-        onClick={handleCanvasClick}
-        className="border"
-      />
+      {showWave ? (
+        <>
+          <input type="file" accept="audio/*" ref={inputRef} />
+          {/* <div className="land-audio-curTime">{curTime}</div> */}
+          <canvas ref={waveCanvasRef} className="land-audio-waveform" />
+          <audio ref={waveAudioRef} />
+        </>
+      ) : (
+        <audio src={url} ref={audioRef} />
+      )}
     </StyledLandAudio>
   );
 };
 
 const StyledLandAudio = styled.div<{
   iconSize?: number;
+  direction?: "row" | "column";
 }>`
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: ${(props) => props.direction};
+  align-items: flex-end;
   justify-content: center;
+  gap: 8px;
   width: 100%;
-  height: 100%;
   min-width: ${(props) => `${props.iconSize}px`};
   min-height: ${(props) => `${props.iconSize}px`};
   .land-audio-play-icon {
@@ -127,10 +171,29 @@ const StyledLandAudio = styled.div<{
     width: 24px;
     height: 24px;
   }
-  audio {
-    position: absolute;
-    top: 0px;
-    left: 0px;
+  .land-audio-curTime {
+    font-size: 12px;
+    color: var(--color-text-4);
+  }
+  .land-audio-waveform {
+    flex: 1;
+    .hover {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 10;
+      pointer-events: none;
+      height: 100%;
+      width: 0;
+      mix-blend-mode: overlay;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .waveform:hover .hover {
+      opacity: 1;
+    }
   }
 `;
 
@@ -164,7 +227,7 @@ const StyleTemplateSoundCardAnimation = styled.div`
   .audioBar {
     width: 2px;
     transition: background-color 0.3s ease;
-    transform-origin: bottom;
+    transform-origin: center;
   }
 
   .audioBar:nth-child(1) {

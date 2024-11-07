@@ -2,26 +2,39 @@ import React, { CSSProperties } from "react";
 import styled from "styled-components";
 
 export type DatePickerProps = {
-  type?: 'border' | 'background';
+  type?: "border" | "background";
   disabled?: boolean;
+  onChange?: (e: any) => void;
   style?: CSSProperties;
   className?: string;
   [key: string]: any;
 };
 
 const DatePicker: React.FC<DatePickerProps> = ({
-  type = 'border',
+  type = "border",
   disabled,
+  onChange,
   style,
-  className = '',
+  className = "",
   ...restProps
 }) => {
-  return <StyledDatePicker className={`land-datePicker-wrap ${disabled ? 'disabled' : ''} ${type} ${className}`} style={style}>
-    <input
-      type="date"
-      {...restProps}
-    />
-  </StyledDatePicker>;
+  return (
+    <StyledDatePicker
+      className={`land-datePicker-wrap ${
+        disabled ? "disabled" : ""
+      } ${type} ${className}`}
+      style={style}
+    >
+      <input
+        type="date"
+        onChange={(e) => {
+          e.stopPropagation();
+          onChange?.(e);
+        }}
+        {...restProps}
+      />
+    </StyledDatePicker>
+  );
 };
 
 const StyledDatePicker = styled.a<{

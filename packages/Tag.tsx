@@ -9,6 +9,7 @@ type TagProps = {
   color?: string;
   border?: string;
   background?: string;
+  onDelete?: (e: any) => void;
   style?: CSSProperties;
   className?: string;
 };
@@ -19,6 +20,7 @@ const Tag: React.FC<TagProps> = ({
   color = "var(--color-text-2)",
   border,
   background = "var(--color-bg-3)",
+  onDelete,
   style,
   className,
 }) => {
@@ -29,7 +31,15 @@ const Tag: React.FC<TagProps> = ({
     >
       {icon}
       {children}
-      {canDelete && <Icon name="close" />}
+      {canDelete && (
+        <Icon
+          name="close"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete?.(e);
+          }}
+        />
+      )}
     </StyledLandTag>
   );
 };

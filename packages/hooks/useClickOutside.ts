@@ -13,12 +13,12 @@ const useClickOutside = (ref, callback) => {
         callbackRef.current(event);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+    document.body.addEventListener('mousedown', handleClickOutside);
+    document.body.addEventListener('touchstart', handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.body.removeEventListener('mousedown', handleClickOutside);
+      document.body.removeEventListener('touchstart', handleClickOutside);
     };
   }, [ref]);
 };

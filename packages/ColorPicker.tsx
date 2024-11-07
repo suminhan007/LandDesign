@@ -36,23 +36,29 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       style={
         size
           ? {
-            width: typeof size === "number" ? `${size}px` : size,
-            height: typeof size === "number" ? `${size}px` : size,
-            background: color,
-            ...style,
-          }
+              width: typeof size === "number" ? `${size}px` : size,
+              height: typeof size === "number" ? `${size}px` : size,
+              background: color,
+              ...style,
+            }
           : {
-            background: color,
-            ...style,
-          }
+              background: color,
+              ...style,
+            }
       }
-      onClick={() => onClick?.(color)}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.(color);
+      }}
       border={border}
     >
       {useSelect && (
         <input
           type="color"
-          onChange={(e: any) => onChange?.(e.target.value, e)}
+          onChange={(e: any) => {
+            e.stopPropagation();
+            onChange?.(e.target.value, e);
+          }}
         />
       )}
     </StyledColorPickerWrap>

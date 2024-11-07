@@ -175,7 +175,8 @@ const Calendar: React.FC<CalendarProps> = ({
         className={`land-calendar-item day ${
           year === curYear && month === curMonth && curDay === i ? "active" : ""
         } ${selected == i ? "selected" : ""}`}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           setSelected(i);
           onDayChange?.(i, month, year);
         }}
