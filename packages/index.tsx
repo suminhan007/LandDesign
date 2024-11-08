@@ -16,8 +16,8 @@ export { default as LandButton } from "./Button";
 export type { CheckProps } from "./Check";
 export { default as LandCheck } from "./Check";
 
-export type { CheckboxProps } from "./Checkbox";
-export { default as LandCheckBox } from "./Checkbox";
+export type { CheckboxProps } from "./CheckBox";
+export { default as LandCheckBox } from "./CheckBox";
 
 export type { CheckedContainerProps } from "./CheckedContainer";
 export { default as LandCheckedContainer } from "./CheckedContainer";

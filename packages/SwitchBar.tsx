@@ -72,7 +72,10 @@ function SwitchBar<T>({
                 : "color-gray-3"
             }`}
             width="auto"
-            onClick={() => !item.disabled && onChange?.(item.value, item)}
+            onClick={(e) => {
+              e.stopPropagation();
+              !item.disabled && onChange?.(item.value, item);
+            }}
           >
             {item.label}
             {item.showIcon && (

@@ -86,18 +86,24 @@ const Menu: React.FC<MenuProps> = ({
       column={direction === "column"}
       border={border}
     >
-      {data?.map((item) => (
+      {data?.map((item, index) => (
         <div
-          className={`land-menu-item ${item.clickType === ClickType.SIMPLE ? "simple" : ""
-            } ${item.clickType === ClickType.DISABLED ? "disabled" : ""}`}
+          key={item.key ?? index}
+          className={`land-menu-item ${
+            item.clickType === ClickType.SIMPLE ? "simple" : ""
+          } ${item.clickType === ClickType.DISABLED ? "disabled" : ""}`}
           style={itemStyle}
         >
           <StyleMenuLink
             role="button"
             key={item.key}
-            className={`land-menu-link ${active === item.key ? "active" : ""
-              } ${itemClassName}`}
-            onClick={() => onChange?.(item)}
+            className={`land-menu-link ${
+              active === item.key ? "active" : ""
+            } ${itemClassName}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onChange?.(item);
+            }}
             column={direction === "column"}
             theme={theme}
           >

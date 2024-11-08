@@ -46,51 +46,128 @@ const Pagination: React.FC<PaginationProps> = ({
   const isStartPreOut = curStart <= pageSize * 2;
   const isStartNextOut = total - curStart < pageSize * 2;
 
-  return <StyledPagination className={className} style={style}>
-    {showTotal && <div className="land-pagination-total">共{total}页</div>}
-    <div onClick={() => {
-      if (newCurrent > 1) {
-        setNewCurrent(newCurrent - 1);
-        onChange?.(newCurrent - 1);
-        getIsOut?.(newCurrent - 1) && (isStartPreOut ? setCurStart(2) : setCurStart(newCurrent - 1));
-      }
-    }}
-      className={`land-pagination-arrow-prev ${newCurrent === 1 ? 'disabled' : ''}`}>
-      <Icon name="arrow" className="rotate-90" strokeWidth={4} />
-    </div>
-    <div className="land-pagination-page">
-      {/* 第一页 */}
+  return (
+    <StyledPagination className={className} style={style}>
+      {showTotal && <div className="land-pagination-total">共{total}页</div>}
       <div
-        className={`land-pagination-num-item ${newCurrent === (1) ? 'active' : ''}`}
-        onClick={() => { setNewCurrent(1); onChange?.(1) }}
-      >1</div>
-      {pageData[0]?.id > 2 && <div onClick={() => !isStartPreOut ? setCurStart(curStart - pageSize) : setCurStart(2)} className="land-pagination-arrow-double-prev"><Icon name="more" size={16} /><Icon name="arrow-double" className="arrow rotate-90" size={24} /></div>}
-      {/* 中间页 */}
-      {pageData?.map(item => <div
-        key={item.id}
-        className={`land-pagination-num-item ${newCurrent === (item.id) ? 'active' : ''}`}
-        onClick={() => { setNewCurrent(item.id); onChange?.(item.id) }}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (newCurrent > 1) {
+            setNewCurrent(newCurrent - 1);
+            onChange?.(newCurrent - 1);
+            getIsOut?.(newCurrent - 1) &&
+              (isStartPreOut ? setCurStart(2) : setCurStart(newCurrent - 1));
+          }
+        }}
+        className={`land-pagination-arrow-prev ${
+          newCurrent === 1 ? "disabled" : ""
+        }`}
       >
-        {item.id}
+        <Icon name="arrow" className="rotate-90" strokeWidth={4} />
       </div>
-      )}
-      {pageData[pageData?.length - 1]?.id < total - 1 && <div onClick={() => !isStartNextOut ? setCurStart(curStart + pageSize) : setCurStart(total - pageSize)} className="land-pagination-arrow-double-next"><Icon name="more" size={16} /><Icon name="arrow-double" className="arrow -rotate-90" size={24} /></div>}
-      {/* 最后一页 */}
+      <div className="land-pagination-page">
+        {/* 第一页 */}
+        <div
+          className={`land-pagination-num-item ${
+            newCurrent === 1 ? "active" : ""
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
+            setNewCurrent(1);
+            onChange?.(1);
+          }}
+        >
+          1
+        </div>
+        {pageData[0]?.id > 2 && (
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              !isStartPreOut
+                ? setCurStart(curStart - pageSize)
+                : setCurStart(2);
+            }}
+            className="land-pagination-arrow-double-prev"
+          >
+            <Icon name="more" size={16} />
+            <Icon name="arrow-double" className="arrow rotate-90" size={24} />
+          </div>
+        )}
+        {/* 中间页 */}
+        {pageData?.map((item) => (
+          <div
+            key={item.id}
+            className={`land-pagination-num-item ${
+              newCurrent === item.id ? "active" : ""
+            }`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setNewCurrent(item.id);
+              onChange?.(item.id);
+            }}
+          >
+            {item.id}
+          </div>
+        ))}
+        {pageData[pageData?.length - 1]?.id < total - 1 && (
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              !isStartNextOut
+                ? setCurStart(curStart + pageSize)
+                : setCurStart(total - pageSize);
+            }}
+            className="land-pagination-arrow-double-next"
+          >
+            <Icon name="more" size={16} />
+            <Icon name="arrow-double" className="arrow -rotate-90" size={24} />
+          </div>
+        )}
+        {/* 最后一页 */}
+        <div
+          className={`land-pagination-num-item ${
+            newCurrent === total ? "active" : ""
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
+            setNewCurrent(total);
+            onChange?.(total);
+          }}
+        >
+          {total}
+        </div>
+      </div>
       <div
-        className={`land-pagination-num-item ${newCurrent === (total) ? 'active' : ''}`}
-        onClick={() => { setNewCurrent(total); onChange?.(total) }}
-      >{total}</div>
-    </div>
-    <div onClick={() => {
-      if (newCurrent < total) {
-        setNewCurrent(newCurrent + 1);
-        onChange?.(newCurrent + 1);
-        getIsOut?.(newCurrent + 1) && (isStartNextOut ? setCurStart(total - pageSize) : setCurStart(newCurrent + 1));
-      }
-    }} className={`land-pagination-arrow-next ${newCurrent === total ? 'disabled' : ''}`}><Icon name="arrow" className="-rotate-90" strokeWidth={4} /></div>
-    {/* 自定义页码 */}
-    {showInput && <div className="land-pagination-input">跳转至<Input onChange={val => setNewCurrent(Number(val))} style={{ height: '24px', width: '24px' }} /> / {total} 页</div>}
-  </StyledPagination>;
+        onClick={(e) => {
+          e.stopPropagation();
+          if (newCurrent < total) {
+            setNewCurrent(newCurrent + 1);
+            onChange?.(newCurrent + 1);
+            getIsOut?.(newCurrent + 1) &&
+              (isStartNextOut
+                ? setCurStart(total - pageSize)
+                : setCurStart(newCurrent + 1));
+          }
+        }}
+        className={`land-pagination-arrow-next ${
+          newCurrent === total ? "disabled" : ""
+        }`}
+      >
+        <Icon name="arrow" className="-rotate-90" strokeWidth={4} />
+      </div>
+      {/* 自定义页码 */}
+      {showInput && (
+        <div className="land-pagination-input">
+          跳转至
+          <Input
+            onChange={(val) => setNewCurrent(Number(val))}
+            style={{ height: "24px", width: "24px" }}
+          />{" "}
+          / {total} 页
+        </div>
+      )}
+    </StyledPagination>
+  );
 };
 
 const StyledPagination = styled.div<{

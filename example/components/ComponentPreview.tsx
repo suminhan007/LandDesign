@@ -53,7 +53,10 @@ const ComponentPreview: React.FC<Props> = ({
             {item.data?.map((items) => (
               <div
                 className="flex column gap-8 radius-8 pointer"
-                onClick={() => onClick?.(items, item)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onClick?.(items, item);
+                }}
               >
                 {items.demo && (
                   <div className="relative flex items-center justify-center p-12 bg-gray hover:bg-gray ratio-1">

@@ -336,8 +336,12 @@ export const LAYOUT_COMPONENTS_DATA = [
     example: <FlexExample />,
     demo: (
       <Flex gap={8}>
-        {Array.from({ length: 3 }).map(() => (
-          <div className="bg-primary flex-1" style={{ height: "40px" }}></div>
+        {Array.from({ length: 3 }).map((_i, index) => (
+          <div
+            key={index}
+            className="bg-primary flex-1"
+            style={{ height: "40px" }}
+          ></div>
         ))}
       </Flex>
     ),
@@ -369,8 +373,12 @@ export const LAYOUT_COMPONENTS_DATA = [
         type={gridType.ColumnRepeat}
         repeatNum={2}
       >
-        {Array.from({ length: 4 }).map(() => (
-          <div className="bg-primary" style={{ height: "40px" }}></div>
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div
+            key={index}
+            className="bg-primary"
+            style={{ height: "40px" }}
+          ></div>
         ))}
       </Grid>
     ),
@@ -459,7 +467,8 @@ export const NAV_COMPONENTS_DATA = [
         className="ratio-1 border radius-8"
         style={{ width: "60%" }}
         rtOption={{
-          content: <Button icon={<Icon name="copy" />} />,
+          content: <Button type="background" icon={<Icon name="copy" />} />,
+          custom: true,
         }}
       />
     ),
@@ -563,7 +572,7 @@ export const NAV_COMPONENTS_DATA = [
           { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
         ]}
         active={1}
-        style={{ height: '64px' }}
+        style={{ height: "64px" }}
       />
     ),
     types: [
@@ -782,18 +791,22 @@ export const INPUT_COMPONENTS_DATA = [
       },
     ],
     example: <SelectTreeExample />,
-    demo: <SelectTree data={[
-      { value: 'all', label: '全部' },
-      {
-        value: 'shenzhen',
-        label: '深圳市',
-        children: [
-          { value: 'nanshan', label: '南山区', },
-          { value: 'futian', label: '福田区' },
-          { value: 'baoan', label: '宝安区' },
-        ]
-      }
-    ]} />,
+    demo: (
+      <SelectTree
+        data={[
+          { value: "all", label: "全部" },
+          {
+            value: "shenzhen",
+            label: "深圳市",
+            children: [
+              { value: "nanshan", label: "南山区" },
+              { value: "futian", label: "福田区" },
+              { value: "baoan", label: "宝安区" },
+            ],
+          },
+        ]}
+      />
+    ),
   },
   {
     id: "radio",
@@ -825,7 +838,15 @@ export const INPUT_COMPONENTS_DATA = [
       },
     ],
     example: <RadioExample />,
-    demo: <Radio data={[{ value: 1, label: '选项1' }, { value: 2, label: '选项2' }, { value: 3, label: '选项3' }]} />,
+    demo: (
+      <Radio
+        data={[
+          { value: 1, label: "选项1" },
+          { value: 2, label: "选项2" },
+          { value: 3, label: "选项3" },
+        ]}
+      />
+    ),
   },
   {
     id: "checkbox",
@@ -857,7 +878,15 @@ export const INPUT_COMPONENTS_DATA = [
       },
     ],
     example: <CheckboxExample />,
-    demo: <Checkbox data={[{ value: 1, label: '选项1' }, { value: 2, label: '选项2' }, { value: 3, label: '选项3' }]} />,
+    demo: (
+      <Checkbox
+        data={[
+          { value: 1, label: "选项1" },
+          { value: 2, label: "选项2" },
+          { value: 3, label: "选项3" },
+        ]}
+      />
+    ),
   },
   {
     id: "switchBar",
@@ -865,14 +894,17 @@ export const INPUT_COMPONENTS_DATA = [
     zh: "模块切换",
     desc: "Land Design内置常规图标。",
     example: <SwitchBarExample />,
-    demo: <SwitchBar value={1}
-      data={[
-        { value: 1, label: "模块1" },
-        { value: 2, label: "模块2" },
-        { value: 3, label: "模块3" },
-      ]}
-      width="300px"
-    />,
+    demo: (
+      <SwitchBar
+        value={1}
+        data={[
+          { value: 1, label: "模块1" },
+          { value: 2, label: "模块2" },
+          { value: 3, label: "模块3" },
+        ]}
+        width="300px"
+      />
+    ),
   },
   {
     id: "colorPicker",
@@ -904,7 +936,7 @@ export const INPUT_COMPONENTS_DATA = [
       },
     ],
     example: <ColorPickerExample />,
-    demo: <ColorPicker value='var(--color-primary-6)' size={32} />,
+    demo: <ColorPicker value="var(--color-primary-6)" size={32} />,
   },
   {
     id: "datePicker",
@@ -1006,25 +1038,29 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <CollapseExample />,
-    demo: <Collapse data={[
-      {
-        title: "折叠标题 1",
-        details:
-          "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
-      },
-      {
-        title: "折叠标题 2 (展开)",
-        details:
-          "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
-        open: true,
-      },
-      {
-        title: "折叠标题 3",
-        details:
-          "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
-      },
-    ]}
-      style={{ width: "300px" }} />,
+    demo: (
+      <Collapse
+        data={[
+          {
+            title: "折叠标题 1",
+            details:
+              "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
+          },
+          {
+            title: "折叠标题 2 (展开)",
+            details:
+              "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
+            open: true,
+          },
+          {
+            title: "折叠标题 3",
+            details:
+              "这部分是每个折叠面板折叠或展开的内容这部分是每个折叠面板折叠或展开的内容",
+          },
+        ]}
+        style={{ width: "300px" }}
+      />
+    ),
   },
   {
     id: "state",
@@ -1042,7 +1078,9 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <ImageExample />,
-    demo: <Image url="https://ingenueland.online/crochet-time/images/colorcard_default.jpeg" />,
+    demo: (
+      <Image url="https://ingenueland.online/crochet-time/images/colorcard_default.jpeg" />
+    ),
   },
   {
     id: "video",
@@ -1051,7 +1089,12 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <VideoExample />,
-    demo: <Video src='https://asset.gdtimg.com/0bc35eaieaaabqac3d7lyztd32oeqluqbaqa.f0.mp4?dis_k=e91b096d31e564b3bf02b46ae94496d7&dis_t=1727244815' videoClassName="radius-8" />,
+    demo: (
+      <Video
+        src="https://asset.gdtimg.com/0bc35eaieaaabqac3d7lyztd32oeqluqbaqa.f0.mp4?dis_k=e91b096d31e564b3bf02b46ae94496d7&dis_t=1727244815"
+        videoClassName="radius-8"
+      />
+    ),
   },
   {
     id: "audio",
@@ -1060,7 +1103,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <AudioExample />,
-    demo: <Audio url="" />,
+    demo: <Audio url="https://suminhan.cn/land-design/dapxiang.mp3" />,
   },
   {
     id: "popOver",
@@ -1122,11 +1165,15 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <TimelineExample />,
-    demo: <Timeline data={[
-      { title: '事件一', subTitle: '2024-2-1' },
-      { title: '事件二', subTitle: '2024-3-1', desc: '事件二的描述内容' },
-      { title: '事件三', subTitle: '2024-5-1' }
-    ]} />,
+    demo: (
+      <Timeline
+        data={[
+          { title: "事件一", subTitle: "2024-2-1" },
+          { title: "事件二", subTitle: "2024-3-1", desc: "事件二的描述内容" },
+          { title: "事件三", subTitle: "2024-5-1" },
+        ]}
+      />
+    ),
   },
   {
     id: "swiper",

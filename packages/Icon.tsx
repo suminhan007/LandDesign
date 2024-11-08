@@ -7,7 +7,7 @@ export type IconProps = {
   strokeWidth?: number;
   style?: CSSProperties;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: any) => void;
   [key: string]: any;
 };
 
@@ -17,7 +17,7 @@ const IconArrowLine: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -51,7 +51,7 @@ const IconArrowDouble: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -85,7 +85,7 @@ const IconArrow: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -113,7 +113,7 @@ const IconArrowTriangle: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -140,7 +140,7 @@ const IconArrowTo: React.FC<IconProps> = ({
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => {
   return (
     <svg
@@ -176,13 +176,12 @@ const IconArrowTo: React.FC<IconProps> = ({
   );
 };
 
-
 const IconArrowNav: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 16,
   strokeWidth = 2,
   style,
-  className = '',
+  className = "",
 }) => (
   <svg
     width={size}
@@ -192,13 +191,15 @@ const IconArrowNav: React.FC<IconProps> = ({
     style={style}
     className={`arrow-nav ${className}`}
   >
-    <path d="M14 12L26 24L14 36"
+    <path
+      d="M14 12L26 24L14 36"
       stroke={stroke}
       strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M34 12V36"
+    <path
+      d="M34 12V36"
       stroke={stroke}
       strokeWidth={strokeWidth}
       strokeLinecap="round"
@@ -2298,6 +2299,7 @@ const IconDelete: React.FC<IconProps> = ({
   strokeWidth = 2,
   style,
   className = "",
+  onClick,
 }) => (
   <svg
     width={size}
@@ -2307,6 +2309,7 @@ const IconDelete: React.FC<IconProps> = ({
     xmlns="http://www.w3.org/2000/svg"
     style={style}
     className={`delete ${className}`}
+    onClick={(e) => onClick?.(e)}
   >
     <path
       d="M9 10V44H39V10H9Z"
