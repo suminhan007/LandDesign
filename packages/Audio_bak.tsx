@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
@@ -9,6 +10,7 @@ type AudioProps = {
   direction?: "row" | "column";
   /** 显示波形 */
   showWave?: boolean;
+  removeMin?: boolean;
   style?: CSSProperties;
   className?: string;
 };
@@ -17,6 +19,7 @@ const Audio: React.FC<AudioProps> = ({
   iconSize = 24,
   direction = "row",
   showWave,
+  removeMin,
   style,
   className = "",
 }) => {
@@ -39,12 +42,15 @@ const Audio: React.FC<AudioProps> = ({
     if (!inputRef.current || !waveAudioRef.current || !waveCanvasRef.current)
       return;
     const canvas = waveCanvasRef.current;
+    const width = canvas.width;
     const ctx = canvas.getContext("2d");
     const audio = waveAudioRef.current;
     const audioContext = new window.AudioContext();
 
     let filteredData = [];
-    let samples = 1000;
+    let barWidth = 2;
+    let barGap = 2;
+    let samples = Math.floor((width + barGap) / (barGap + barWidth));
     inputRef.current.addEventListener("change", (event) => {
       const file = event.target.files[0];
       if (file) {
@@ -63,7 +69,6 @@ const Audio: React.FC<AudioProps> = ({
 
     function drawWaveform(buffer) {
       const rawData = buffer.getChannelData(0); // We use only the first channel
-      samples = 1000; // Number of samples we want to have in our final data
       const blockSize = Math.floor(rawData.length / samples); // Number of samples in each subdivision
       filteredData = [];
       for (let i = 0; i < samples; i++) {
@@ -72,28 +77,56 @@ const Audio: React.FC<AudioProps> = ({
         for (let j = 0; j < blockSize; j++) {
           sum = sum + Math.abs(rawData[blockStart + j]); // find the sum of all the samples in the block
         }
-        filteredData.push(sum / blockSize); // divide the sum by the block size to get the average
+        const value = sum / blockSize;
+        if (!Number.isNaN(value)) {
+          filteredData.push(value);
+        }
       }
       draw();
     }
 
+    function mapToNewRange(arr, min, max) {
+      // 映射函数
+      const mapValue = (value, oldMin, oldMax, newMin, newMax) => {
+        return (
+          ((value - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin
+        );
+      };
+
+      // 将原数组中的每个元素映射到新的范围内
+      const newArr = arr.map((value) => mapValue(value, min, max, 0, 1));
+
+      return newArr;
+    }
+
     function draw() {
+      let newData = filteredData;
+      if (removeMin) {
+        const min = Math.min(...filteredData);
+        const max = Math.max(...filteredData);
+        const newMin = Math.min(...filteredData.filter((i) => i !== min));
+        newData = mapToNewRange(
+          filteredData.filter((i) => i !== min),
+          newMin,
+          max
+        );
+      } else {
+        const max = Math.max(...filteredData);
+        newData = mapToNewRange(filteredData, 0, max);
+      }
+
       const width = canvas.width;
       const height = canvas.height;
-      const barWidth = width / samples;
       const currentTime = audio.currentTime;
       const duration = audio.duration;
       const playedSamples = Math.floor((currentTime / duration) * samples);
-
       ctx.clearRect(0, 0, width, height);
 
-      filteredData.forEach((value, index) => {
-        const x = index * barWidth;
+      newData.forEach((value, index) => {
+        const x = index * barWidth + index * barGap;
         const y = value * height;
-        ctx.fillStyle =
-          index < playedSamples
-            ? "var(--color-primary-6)"
-            : "var(--color-border-3)";
+
+        ctx.fillStyle = index < playedSamples ? "#FF0000" : "#999";
         ctx.fillRect(x, height - y, barWidth, y);
       });
     }
@@ -140,8 +173,11 @@ const Audio: React.FC<AudioProps> = ({
       {showWave ? (
         <>
           <input type="file" accept="audio/*" ref={inputRef} />
-          {/* <div className="land-audio-curTime">{curTime}</div> */}
-          <canvas ref={waveCanvasRef} className="land-audio-waveform" />
+          <canvas
+            ref={waveCanvasRef}
+            className="land-audio-waveform"
+            height={24}
+          />
           <audio ref={waveAudioRef} />
         </>
       ) : (
