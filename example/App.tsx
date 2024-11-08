@@ -6,13 +6,13 @@ import "../packages/styles/reset.scss";
 import Title from "../packages/Title";
 import Header from "../packages/Header";
 import { ClickType } from "../packages/Menu";
-import Components from "./components";
+import Components from "./Components";
 import Design from "./Design";
 import Animations from "./Animations";
 // import Switch from "../packages/Switch";
 
 function App() {
-  const [page, setPage] = useState<number | string>(2);
+  const [page, setPage] = useState<number | string>(3);
   // const [dark, setDark] = useState<boolean>(false);
   return (
     <div className="flex column" style={{ height: "100vh" }}>

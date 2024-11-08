@@ -11,19 +11,68 @@ const Audio: React.FC<AudioProps> = ({ url, iconSize = 24 }) => {
   const [play, setPlay] = useState<boolean>(false);
   useEffect(() => {
     if (play) {
-      audioRef.current.src = url;
+      audioRef.current.play();
     } else {
-      audioRef.current.src = "";
+      audioRef.current.pause();
     }
-  }, [play, url]);
+  }, [play]);
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const audioContext = new (window.AudioContext || window.AudioContext)();
+    const request = new XMLHttpRequest();
+
+    request.open('GET', url, true);
+    request.responseType = 'arraybuffer';
+
+    request.onload = () => {
+      audioContext.decodeAudioData(request.response, (buffer) => {
+        drawWaveform(buffer);
+      });
+    };
+
+    request.send();
+
+    const drawWaveform = (buffer) => {
+      const rawData = buffer.getChannelData(0);
+      console.log('rawData', rawData);
+      const samples = 1000; // Number of samples we want to have in our final data
+      const blockSize = Math.floor(rawData.length / samples); // Number of samples in each subdivision
+      const filteredData = [];
+      for (let i = 0; i < samples; i++) {
+        let blockStart = blockSize * i; // the location of the first sample in the block
+        let sum = 0;
+        for (let j = 0; j < blockSize; j++) {
+          sum = sum + Math.abs(rawData[blockStart + j]); // find the sum of all the samples in the block
+        }
+        filteredData.push(sum / blockSize); // divide the sum by the block size to get the average
+      }
+
+      const width = canvas.width;
+      const height = canvas.height;
+      const barWidth = width / samples;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = '#000000';
+
+      filteredData.forEach((value, index) => {
+        const x = index * barWidth;
+        const y = value * height;
+        ctx.fillRect(x, height - y, barWidth, y);
+      });
+    };
+  }, [url]);
   return (
     <StyledLandAudio onClick={() => setPlay(!play)} iconSize={iconSize}>
-      <audio ref={audioRef} />
+      <audio ref={audioRef} src={url} />
       {play ? (
         <AudioAnimation size={iconSize / 1.8} />
       ) : (
-        <Icon name="video-pause" size={24} fill="var(--color-primary-6)" />
+        <Icon name="video-pause" size={24} fill="var(--color-text-2)" />
       )}
+      <canvas ref={canvasRef} width="800" height="200"></canvas>
     </StyledLandAudio>
   );
 };
@@ -33,6 +82,7 @@ const StyledLandAudio = styled.div<{
 }>`
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -51,7 +101,7 @@ type AudioAnimationProps = {
   size?: number;
 };
 const AudioAnimation: React.FC<AudioAnimationProps> = ({
-  color = "var(--color-primary-6)",
+  color = "var(--color-text-2)",
   size = 12,
 }) => (
   <StyleTemplateSoundCardAnimation
