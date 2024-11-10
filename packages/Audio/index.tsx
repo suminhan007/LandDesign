@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import AudioButton from "./AudioButton";
-import AudioWave from "./AudioWave";
+import AudioAnimationIcon from "./AudioAnimationIcon";
 import { CommonProps } from "packages/types";
 import { useEffect, useRef, useState } from "react";
 
@@ -14,14 +14,8 @@ type AudioProps = {
 
 const Audio: React.FC<AudioProps> & {
   AudioButton: typeof AudioButton;
-  AudioWave: typeof AudioWave;
-} = ({
-  audioUrl,
-  direction = "row",
-  showWave = false,
-  style,
-  className = "",
-}) => {
+  AudioAnimationIcon: typeof AudioAnimationIcon;
+} = ({ audioUrl, direction = "row", style, className = "" }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [play, setPlay] = useState<boolean>(false);
   useEffect(() => {
@@ -42,11 +36,7 @@ const Audio: React.FC<AudioProps> & {
           setPlay(!play);
         }}
       />
-      {showWave ? (
-        <AudioWave audioUrl={audioUrl} />
-      ) : (
-        <audio ref={audioRef} src={audioUrl} />
-      )}
+      <audio ref={audioRef} src={audioUrl} />
     </StyledLandAudio>
   );
 };
@@ -64,6 +54,6 @@ const StyledLandAudio = styled.div<{
 `;
 
 Audio.AudioButton = AudioButton;
-Audio.AudioWave = AudioWave;
+Audio.AudioAnimationIcon = AudioAnimationIcon;
 
 export default Audio;

@@ -11,7 +11,7 @@ import NumberInput from '../../packages/NumberInput';
 
 export default function IconExample() {
   const [color, setColor] = useState<string>('var(--color-text-2)');
-  const [size, setSize] = useState<number>(32);
+  const [size, setSize] = useState<number>(24);
   const [stroke, setStroke] = useState<number>(2);
 
   const handleIconCopyClick = (name?: string) => {
