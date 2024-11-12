@@ -151,7 +151,67 @@ import {
   IconZoomOutArrow,
   IconZoomOutBtn,
 } from "./Operate";
-import { IconLayer } from "./Style";
+import {
+  IconAlignBottom,
+  IconAlignBottomCenter,
+  IconAlignBottomLeft,
+  IconAlignBottomRight,
+  IconAlignHorizontalBottom,
+  IconAlignHorizontalCenter,
+  IconAlignHorizontalTop,
+  IconAlignHorizontally,
+  IconAlignLeft,
+  IconAlignLeftBottom,
+  IconAlignLeftCenter,
+  IconAlignLeftTop,
+  IconAlignRight,
+  IconAlignRightBottom,
+  IconAlignRightCenter,
+  IconAlignRightTop,
+  IconAlignTop,
+  IconAlignTopCenter,
+  IconAlignTopLeft,
+  IconAlignTopRight,
+  IconAlignVerticalCenter,
+  IconAlignVerticalLeft,
+  IconAlignVerticalRight,
+  IconAlignVertically,
+  IconAlphabetList,
+  IconCheckList,
+  IconCheckboxList,
+  IconDeleteStrike,
+  IconDropShadowDown,
+  IconDropShadowLeft,
+  IconDropShadowRight,
+  IconDropShadowUp,
+  IconFlipHorizontally,
+  IconFlipVertically,
+  IconFontSize,
+  IconIndentLeft,
+  IconIndentRight,
+  IconInnerShadowDown,
+  IconInnerShadowLeft,
+  IconInnerShadowRight,
+  IconInnerShadowUp,
+  IconLayer,
+  IconLineHeight,
+  IconLineWidth,
+  IconMask,
+  IconNumberList,
+  IconRadioList,
+  IconTail,
+  IconTextAlignCenter,
+  IconTextAlignJustify,
+  IconTextAlignLeft,
+  IconTextAlignMiddle,
+  IconTextAlignRight,
+  IconTextBold,
+  IconTextItalic,
+  IconTextUnderline,
+  IconTitleH1,
+  IconTitleH2,
+  IconTitleH3,
+} from "./Style";
 import {
   IconArrow,
   IconArrowDouble,
@@ -627,7 +687,187 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "camera":
       return <IconCamera {...restProps} />;
       break;
-
+    //样式
+    case "align-bottom":
+      return <IconAlignBottom {...restProps} />;
+      break;
+    case "align-top":
+      return <IconAlignTop {...restProps} />;
+      break;
+    case "align-left":
+      return <IconAlignLeft {...restProps} />;
+      break;
+    case "align-right":
+      return <IconAlignRight {...restProps} />;
+      break;
+    case "align-horizontally":
+      return <IconAlignHorizontally {...restProps} />;
+      break;
+    case "align-vertically":
+      return <IconAlignVertically {...restProps} />;
+      break;
+    case "text-align-left":
+      return <IconTextAlignLeft {...restProps} />;
+      break;
+    case "text-align-right":
+      return <IconTextAlignRight {...restProps} />;
+      break;
+    case "text-align-center":
+      return <IconTextAlignCenter {...restProps} />;
+      break;
+    case "text-align-justify":
+      return <IconTextAlignJustify {...restProps} />;
+      break;
+    case "text-align-middle":
+      return <IconTextAlignMiddle {...restProps} />;
+      break;
+    case "align-bottom-center":
+      return <IconAlignBottomCenter {...restProps} />;
+      break;
+    case "align-bottom-left":
+      return <IconAlignBottomLeft {...restProps} />;
+      break;
+    case "align-bottom-right":
+      return <IconAlignBottomRight {...restProps} />;
+      break;
+    case "align-horizontally-bottom":
+      return <IconAlignHorizontalBottom {...restProps} />;
+      break;
+    case "align-horizontally-center":
+      return <IconAlignHorizontalCenter {...restProps} />;
+      break;
+    case "align-horizontally-top":
+      return <IconAlignHorizontalTop {...restProps} />;
+      break;
+    case "align-left-bottom":
+      return <IconAlignLeftBottom {...restProps} />;
+      break;
+    case "align-left-center":
+      return <IconAlignLeftCenter {...restProps} />;
+      break;
+    case "align-left-top":
+      return <IconAlignLeftTop {...restProps} />;
+      break;
+    case "align-right-bottom":
+      return <IconAlignRightBottom {...restProps} />;
+      break;
+    case "align-right-center":
+      return <IconAlignRightCenter {...restProps} />;
+      break;
+    case "align-right-top":
+      return <IconAlignRightTop {...restProps} />;
+      break;
+    case "align-top-center":
+      return <IconAlignTopCenter {...restProps} />;
+      break;
+    case "align-top-left":
+      return <IconAlignTopLeft {...restProps} />;
+      break;
+    case "align-top-right":
+      return <IconAlignTopRight {...restProps} />;
+      break;
+    case "align-vertical-left":
+      return <IconAlignVerticalLeft {...restProps} />;
+      break;
+    case "align-vertical-center":
+      return <IconAlignVerticalCenter {...restProps} />;
+      break;
+    case "align-vertical-right":
+      return <IconAlignVerticalRight {...restProps} />;
+      break;
+    case "flip-horizontally":
+      return <IconFlipHorizontally {...restProps} />;
+      break;
+    case "flip-vertically":
+      return <IconFlipVertically {...restProps} />;
+      break;
+    case "font-size":
+      return <IconFontSize {...restProps} />;
+      break;
+    case "line-height":
+      return <IconLineHeight {...restProps} />;
+      break;
+    case "text-bold":
+      return <IconTextBold {...restProps} />;
+      break;
+    case "text-italic":
+      return <IconTextItalic {...restProps} />;
+      break;
+    case "text-underline":
+      return <IconTextUnderline {...restProps} />;
+      break;
+    case "line-width":
+      return <IconLineWidth {...restProps} />;
+      break;
+    case "line-break":
+      return <IconLineBreak {...restProps} />;
+      break;
+    case "title-h1":
+      return <IconTitleH1 {...restProps} />;
+      break;
+    case "title-h2":
+      return <IconTitleH2 {...restProps} />;
+      break;
+    case "title-h3":
+      return <IconTitleH3 {...restProps} />;
+      break;
+    case "indent-left":
+      return <IconIndentLeft {...restProps} />;
+      break;
+    case "indent-right":
+      return <IconIndentRight {...restProps} />;
+      break;
+    case "drop-shadow-up":
+      return <IconDropShadowUp {...restProps} />;
+      break;
+    case "drop-shadow-down":
+      return <IconDropShadowDown {...restProps} />;
+      break;
+    case "drop-shadow-left":
+      return <IconDropShadowLeft {...restProps} />;
+      break;
+    case "drop-shadow-right":
+      return <IconDropShadowRight {...restProps} />;
+      break;
+    case "inner-shadow-up":
+      return <IconInnerShadowUp {...restProps} />;
+      break;
+    case "inner-shadow-down":
+      return <IconInnerShadowDown {...restProps} />;
+      break;
+    case "inner-shadow-left":
+      return <IconInnerShadowLeft {...restProps} />;
+      break;
+    case "inner-shadow-right":
+      return <IconInnerShadowRight {...restProps} />;
+      break;
+    case "layer":
+      return <IconLayer {...restProps} />;
+      break;
+    case "check-list":
+      return <IconCheckList {...restProps} />;
+      break;
+    case "alphabet-list":
+      return <IconAlphabetList {...restProps} />;
+      break;
+    case "checkbox-list":
+      return <IconCheckboxList {...restProps} />;
+      break;
+    case "radio-list":
+      return <IconRadioList {...restProps} />;
+      break;
+    case "number-list":
+      return <IconNumberList {...restProps} />;
+      break;
+    case "mask":
+      return <IconMask {...restProps} />;
+      break;
+    case "delete-strike":
+      return <IconDeleteStrike {...restProps} />;
+      break;
+    case "tail":
+      return <IconTail {...restProps} />;
+      break;
     // 天气和自然
 
     //交通和位置

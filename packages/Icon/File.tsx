@@ -304,7 +304,7 @@ export const IconBook: React.FC<IconProps> = ({
 export const IconClipboard: React.FC<IconProps> = ({
   stroke = "currentcolor",
   size = 24,
-  strokeWidth = 3,
+  strokeWidth = 2,
   style,
   className = "",
 }) => (
