@@ -11,7 +11,7 @@ export const IconImage: React.FC<IconProps> = ({
   <svg
     width={size}
     height={size}
-    viewBox="0 0 24 24"
+    viewBox="0 0 48 48"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     style={style}
@@ -112,27 +112,24 @@ export const IconVolume: React.FC<IconProps> = ({
     onClick={onClick}
   >
     <path
-      d="M12 3V21L5.89925 16.4195H3C2.44771 16.4195 2 15.9718 2 15.4195V8.5054C2 7.9531 2.44771 7.5054 3 7.5054H5.89925L12 3Z"
-      fill="none"
+      d="M25 6V42L12.1884 32.839H6.1C4.94019 32.839 4 31.9436 4 30.839V17.0108C4 15.9062 4.94019 15.0108 6.1 15.0108H12.1884L25 6Z"
       stroke={stroke}
       strokeWidth={strokeWidth}
       strokeLinejoin="round"
     />
     <path
-      d="M16 7.5C16.3116 7.77825 16.5941 8.08985 16.8421 8.4294C17.5694 9.4252 18 10.6611 18 12C18 13.3273 17.5768 14.5534 16.8609 15.5447C16.6084 15.8943 16.3196 16.2147 16 16.5"
-      fill="none"
+      d="M32 15C32.6232 15.5565 33.1882 16.1797 33.6842 16.8588C35.1388 18.8504 36 21.3222 36 24C36 26.6546 35.1536 29.1068 33.7218 31.0894C33.2168 31.7886 32.6392 32.4294 32 33"
       stroke={stroke}
       strokeWidth={strokeWidth}
-      strokeLinejoin="round"
       strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
-      d="M17.1172 20.5931C20.041 18.8479 21.9992 15.6527 21.9992 12.0002C21.9992 8.40447 20.1014 5.25197 17.2527 3.48975"
-      fill="none"
+      d="M34 41C39.9889 37.4287 44 30.8901 44 23.4156C44 16.0574 40.1127 9.60618 34.2776 6"
       stroke={stroke}
       strokeWidth={strokeWidth}
-      strokeLinejoin="round"
       strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -150,34 +147,31 @@ export const IconVolumeMuted: React.FC<IconProps> = ({
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}
-    viewBox="0 0 24 24"
+    viewBox="0 0 48 48"
     fill="none"
     onClick={onClick}
     style={style}
     className={`volume-muted ${className}`}
   >
     <path
-      d="M12 3V21L5.89925 16.4195H3C2.44771 16.4195 2 15.9718 2 15.4195V8.5054C2 7.9531 2.44771 7.5054 3 7.5054H5.89925L12 3Z"
-      fill="none"
+      d="M25 6V42L12.1884 32.839H6.1C4.94019 32.839 4 31.9436 4 30.839V17.0108C4 15.9062 4.94019 15.0108 6.1 15.0108H12.1884L25 6Z"
       stroke={stroke}
       strokeWidth={strokeWidth}
       strokeLinejoin="round"
     />
     <path
-      d="M20.3674 10.1431L16.1248 14.3857"
-      fill="none"
+      d="M41 19L32 29"
       stroke={stroke}
       strokeWidth={strokeWidth}
-      strokeLinejoin="round"
       strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
-      d="M16.1248 10.1431L20.3674 14.3857"
-      fill="none"
+      d="M32 19L41 29"
       stroke={stroke}
       strokeWidth={strokeWidth}
-      strokeLinejoin="round"
       strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

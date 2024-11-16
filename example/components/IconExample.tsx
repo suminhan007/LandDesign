@@ -8,56 +8,87 @@ import Icon from '../../packages/Icon';
 import Button from "../../packages/Button";
 import ColorPicker from '../../packages/ColorPicker';
 import NumberInput from '../../packages/NumberInput';
+import Menu from "../../packages/Menu";
 
 export default function IconExample() {
-  const [color, setColor] = useState<string>('var(--color-text-2)');
+  const [color, setColor] = useState<string>("var(--color-text-2)");
   const [size, setSize] = useState<number>(24);
   const [stroke, setStroke] = useState<number>(2);
 
   const handleIconCopyClick = (name?: string) => {
-    navigator.clipboard.writeText(`<Icon name='${name}' size={${size}} stroke='${color}' strokeWidth={${stroke}}/>`);
+    navigator.clipboard.writeText(
+      `<Icon name='${name}' size={${size}} stroke='${color}' strokeWidth={${stroke}}/>`
+    );
   };
   return (
-    <div className='flex column gap-12'>
-      <div className='flex gap-24'>
+    <div className="flex column gap-12">
+      <div className="flex gap-24">
         <NumberInput
-          prefix='图标大小'
-          suffix='px'
+          prefix="图标大小"
+          suffix="px"
           width={172}
           min={12}
           max={96}
           value={size}
           step={2}
-          onChange={val => setSize(val)}
+          onChange={(val) => setSize(val)}
         />
         <NumberInput
-          prefix='描边粗细'
-          suffix='px'
+          prefix="描边粗细"
+          suffix="px"
           width={172}
           min={1}
           max={8}
           value={stroke}
-          onChange={val => setStroke(val)}
+          onChange={(val) => setStroke(val)}
         />
-        <ColorPicker value={color} size={36} className='radius-6' onChange={val => setColor(val)} />
+        <ColorPicker
+          value={color}
+          size={36}
+          className="radius-6"
+          onChange={(val) => setColor(val)}
+        />
       </div>
-      {ICON_EXAMPLE_DATA.map((item1, index1) => <div key={index1} className='flex column gap-8'>
-        <Title title={item1.title} type='h3' />
-        <StyleIconGrid>
-          {item1.data?.map(item2 => <StyledIconItem
-            key={item2}
-            rtOption={{
-              content: <Button onClick={() => handleIconCopyClick?.(item2)} icon={<Icon name='copy' />} className='relative hover-pop'></Button>,
-              hoverShow: true,
-            }}
-          >
-            <Icon name={item2} size={size} stroke={color} strokeWidth={stroke} />
-            <StyledItemText className='transition-15'>{item2}</StyledItemText>
-          </StyledIconItem>)}
-        </StyleIconGrid>
-      </div>)}
+      <Menu
+        data={ICON_EXAMPLE_DATA?.map((i, idx) => ({
+          key: idx,
+          title: i.title,
+        }))}
+      />
+      {ICON_EXAMPLE_DATA.map((item1, index1) => (
+        <div key={index1} className="flex column gap-8">
+          <Title title={item1.title} type="h3" />
+          <StyleIconGrid>
+            {item1.data?.map((item2) => (
+              <StyledIconItem
+                key={item2}
+                rtOption={{
+                  content: (
+                    <Button
+                      onClick={() => handleIconCopyClick?.(item2)}
+                      icon={<Icon name="copy" />}
+                      className="relative hover-pop"
+                    ></Button>
+                  ),
+                  hoverShow: true,
+                }}
+              >
+                <Icon
+                  name={item2}
+                  size={size}
+                  stroke={color}
+                  strokeWidth={stroke}
+                />
+                <StyledItemText className="transition-15">
+                  {item2}
+                </StyledItemText>
+              </StyledIconItem>
+            ))}
+          </StyleIconGrid>
+        </div>
+      ))}
     </div>
-  )
+  );
 }
 
 const StyledItemText = styled.div`

@@ -1371,7 +1371,7 @@ export const COMPONENTS_OVERVIEW_DATA = [
 export const ICON_EXAMPLE_DATA = [
   {
     title: "导航类",
-    data: ["home", "application", "more", "more-line", "refresh"],
+    data: ["home", "application", "more", "more-line"],
   },
   {
     title: "社交媒体类",
@@ -1394,6 +1394,7 @@ export const ICON_EXAMPLE_DATA = [
       "light",
       "dark",
       "search",
+      "refresh",
     ],
   },
   {

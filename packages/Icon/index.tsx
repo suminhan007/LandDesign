@@ -1,13 +1,8 @@
 import { CommonProps } from "packages/types";
 
+import { IconApplication, IconHome, IconMore, IconMoreLine } from "./Nav";
 import {
-  IconApplication,
-  IconHome,
-  IconMore,
-  IconMoreLine,
   IconRefresh,
-} from "./Nav";
-import {
   IconAvatar,
   IconCollection,
   IconConfigSetting,
@@ -250,12 +245,12 @@ const Icon: React.FC<IconDefaultProps> = ({ name, ...restProps }) => {
     case "more-line":
       return <IconMoreLine {...restProps} />;
       break;
-    case "refresh":
-      return <IconRefresh {...restProps} />;
-      break;
     //社交媒体
 
     // 用户界面
+    case "refresh":
+      return <IconRefresh {...restProps} />;
+      break;
     case "female":
       return <IconFemale {...restProps} />;
       break;
