@@ -1,4 +1,4 @@
-export type { AffixContainerProps, AffixContainerItemProps } from './AffixContainer';
+export type { AffixContainerProps, AffixContainerItemProps, } from './AffixContainer';
 export { default as LandAffixContainer } from './AffixContainer';
 export type { AlertProps } from './Alert';
 export { default as LandAlert } from './Alert';

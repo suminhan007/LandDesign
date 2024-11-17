@@ -1,4 +1,7 @@
-export type { AffixContainerProps, AffixContainerItemProps } from "./AffixContainer";
+export type {
+  AffixContainerProps,
+  AffixContainerItemProps,
+} from "./AffixContainer";
 export { default as LandAffixContainer } from "./AffixContainer";
 
 export type { AlertProps } from "./Alert";
@@ -179,6 +182,6 @@ export type { IconDefaultProps, IconProps } from "./Icon";
 
 export type { CommonProps } from "./types";
 // hooks
-export { default as useFormateTime } from './hooks/useFormateTime';
-export { default as useClickOutside } from './hooks/useClickOutside';
-export { default as useGetHighlightStr } from './hooks/useGetHighlightStr';
+export { default as useFormateTime } from "./hooks/useFormateTime";
+export { default as useClickOutside } from "./hooks/useClickOutside";
+export { default as useGetHighlightStr } from "./hooks/useGetHighlightStr";

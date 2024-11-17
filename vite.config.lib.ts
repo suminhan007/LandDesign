@@ -7,8 +7,8 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'packages'),
-      '@suminhan/land-design': resolve(__dirname, 'packages/index'),
+      '@': resolve(__dirname, './packages'),
+      '@suminhan/land-design': resolve(__dirname, './packages/index'),
     },
   },
   build: {
@@ -47,7 +47,7 @@ export default defineConfig({
       },
       outDir: resolve(__dirname, './lib'),
       include: [
-        resolve(__dirname, './example'),
+        resolve(__dirname, './packages'),
         resolve(__dirname, './packages/index.tsx'),
       ],
       exclude: ['**/node_modules'],
