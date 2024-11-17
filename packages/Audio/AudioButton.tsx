@@ -1,4 +1,4 @@
-import { CommonProps } from "packages/types";
+import { CommonProps } from "../types";
 import Icon from "../Icon";
 import React from "react";
 import AudioAnimation from "./AudioAnimationIcon";

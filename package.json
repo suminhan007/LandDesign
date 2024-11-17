@@ -1,6 +1,6 @@
 {
   "name": "@suminhan/land-design",
-  "version": "0.0.54",
+  "version": "0.0.55",
   "description": "React UI Components",
   "author": {
     "name": "suminhan"
@@ -9,7 +9,7 @@
   "main": "./lib/index.udm.js",
   "style": "./lib/styles/index.scss",
   "module": "./lib/index.es.js",
-  "types": "./lib/index.d.ts",
+  "types": "./lib/land-design/index.d.ts",
   "exports": {
     ".": {
       "require": "./lib/index.umd.js",

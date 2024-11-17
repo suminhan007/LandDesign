@@ -1,4 +1,4 @@
-import { CommonProps } from "packages/types";
+import { CommonProps } from "../types";
 
 import { IconApplication, IconHome, IconMore, IconMoreLine } from "./Nav";
 import {

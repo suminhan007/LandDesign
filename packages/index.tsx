@@ -177,6 +177,7 @@ export { default as LandWatermark } from "./Watermark";
 export { default as Icon } from "./Icon";
 export type { IconDefaultProps, IconProps } from "./Icon";
 
+export type { CommonProps } from "./types";
 // hooks
 export { default as useFormateTime } from './hooks/useFormateTime';
 export { default as useClickOutside } from './hooks/useClickOutside';

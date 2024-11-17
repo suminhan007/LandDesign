@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'example'),
-      '@suminhan/land-design': resolve(__dirname, './packages/index'),
+      '@suminhan/land-design': resolve(__dirname, 'packages/index'),
     },
   },
   build: {

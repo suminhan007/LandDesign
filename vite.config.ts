@@ -1,9 +1,9 @@
 /// <reference types="vitest" />
 // import { readFileSync } from 'fs'
-import path from 'path'
 import { defineConfig } from 'vite'
-import typescript from '@rollup/plugin-typescript'
 import react from '@vitejs/plugin-react'
+import { resolve } from 'path';
+
 
 // const packageJson = JSON.parse(
 //   readFileSync('./package.json', { encoding: 'utf-8' }),
@@ -41,6 +41,12 @@ export default defineConfig({
     //   fileName: (format) => `index.${format}.js`,
     // },
     sourcemap: true,
+  },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'example'),
+      '@wuminhan/land-design': resolve(__dirname, 'packages/index'),
+    },
   },
   base: 'https://suminhan.cn/land-design/',
 })

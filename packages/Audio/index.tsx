@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import AudioButton from "./AudioButton";
 import AudioAnimationIcon from "./AudioAnimationIcon";
-import { CommonProps } from "packages/types";
+import { CommonProps } from "../types";
 import { useEffect, useRef, useState } from "react";
 
 export type AudioProps = {
