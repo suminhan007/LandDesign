@@ -7,7 +7,7 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'example'),
+      '@': resolve(__dirname, 'packages'),
       '@suminhan/land-design': resolve(__dirname, 'packages/index'),
     },
   },
