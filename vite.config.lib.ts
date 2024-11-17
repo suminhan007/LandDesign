@@ -5,9 +5,22 @@ import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'example'),
+      '@suminhan/land-design': resolve(__dirname, './packages/index'),
+    },
+  },
   build: {
+    // minify:'terser',
+    // terserOptions:{
+    //   compress:{
+    //     drop_console:true,
+    //     drop_debugger:true,
+    //   }
+    // },
     lib: {
-      entry: resolve(__dirname, 'index.tsx'),
+      entry: resolve(__dirname, 'packages/index.tsx'),
       name: 'land-design',
       fileName: format => `index.${format}.js`,
     },
@@ -34,8 +47,8 @@ export default defineConfig({
       },
       outputDir: resolve(__dirname, './lib'),
       include: [
-        resolve(__dirname, './packages'),
         resolve(__dirname, './example'),
+        resolve(__dirname, './packages/index.tsx'),
       ],
       exclude: ['**/node_modules'],
     }),

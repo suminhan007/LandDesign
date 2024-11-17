@@ -12,9 +12,10 @@ import react from '@vitejs/plugin-react'
 //   ...(packageJson?.dependencies || {}),
 // }
 
-function resolve(str: string) {
-  return path.resolve(__dirname, str)
-}
+// function resolve(str: string) {
+//   return path.resolve(__dirname, str)
+// }
+const branch = process.env.branch_name;
 
 export default defineConfig({
   plugins: [
@@ -30,7 +31,8 @@ export default defineConfig({
   ],
   build: {
     // 输出文件夹
-    outDir: 'dist',
+    // outDir: 'dist',
+    outDir: `dist/${branch}`, 
     // lib: {
     //   // 组件库源码的入口文件
     //   entry: resolve('packages/index.tsx'),
