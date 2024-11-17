@@ -1,8 +1,8 @@
 /// <reference types="vitest" />
 // import { readFileSync } from 'fs'
-// import path from 'path'
+import path from 'path'
 import { defineConfig } from 'vite'
-// import typescript from '@rollup/plugin-typescript'
+import typescript from '@rollup/plugin-typescript'
 import react from '@vitejs/plugin-react'
 
 // const packageJson = JSON.parse(
@@ -12,9 +12,9 @@ import react from '@vitejs/plugin-react'
 //   ...(packageJson?.dependencies || {}),
 // }
 
-// function resolve(str: string) {
-//   return path.resolve(__dirname, str)
-// }
+function resolve(str: string) {
+  return path.resolve(__dirname, str)
+}
 
 export default defineConfig({
   plugins: [
@@ -23,7 +23,7 @@ export default defineConfig({
     //   target: 'es5',
     //   rootDir: resolve('packages/'),
     //   declaration: true,
-    //   declarationDir: resolve('dist'),
+    //   declarationDir: resolve('lib'),
     //   exclude: resolve('node_modules/**'),
     //   allowSyntheticDefaultImports: true,
     // }),
