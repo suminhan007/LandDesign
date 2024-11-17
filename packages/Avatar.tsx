@@ -4,7 +4,7 @@ import Icon from './Icon';
 import Pop from './Pop';
 import Image from './Image';
 
-type AvatarProps = {
+export type AvatarProps = {
   /** 名称 */
   name?: string;
   /** 名称缩写 */

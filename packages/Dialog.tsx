@@ -4,7 +4,7 @@ import Icon from "./Icon";
 import Divider from "./Divider";
 import Button from "./Button";
 
-type DialogProps = {
+export type DialogProps = {
   /** 是否显示弹窗 */
   show?: boolean;
   /** 是否需要背景遮罩 */
@@ -33,7 +33,7 @@ type DialogProps = {
   submitLabel?: string | ReactNode;
 
   /** 弹窗大小 */
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
 
   /** 关闭弹窗事件 */
   onClose?: () => void;

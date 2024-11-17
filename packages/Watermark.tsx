@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 
-type WatermarkProps = {
+export type WatermarkProps = {
   /** 水印内容 */
   content?: React.ReactNode | string;
   /** 图片水印内容 */

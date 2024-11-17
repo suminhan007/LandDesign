@@ -4,11 +4,11 @@ import Icon from "./Icon";
 import Divider from "./Divider";
 import Button from "./Button";
 
-type DrawerProps = {
+export type DrawerProps = {
   /** 是否显示侧拉窗 */
   show?: boolean;
   /** 侧拉窗位置 */
-  placement?: 'right' | 'bottom';
+  placement?: "right" | "bottom";
   /** 是否需要背景遮罩 */
   mask?: boolean;
   /** 侧拉窗标题 */
@@ -39,7 +39,7 @@ type DrawerProps = {
   /** 侧拉窗最大宽度 */
   maxWidth?: string;
   /** 侧拉窗大小 */
-  size?: 'small' | 'medium' | 'large' | 'auto';
+  size?: "small" | "medium" | "large" | "auto";
 
   /** 关闭侧拉窗事件 */
   onClose?: () => void;

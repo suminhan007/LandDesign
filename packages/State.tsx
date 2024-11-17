@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Link from "./Link";
 import Icon from "./Icon";
 
-type StateProps = {
+export type StateProps = {
   type?: "empty" | "offline";
   title: React.ReactNode | string;
   subTitle?: React.ReactNode | string;

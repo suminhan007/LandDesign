@@ -1,6 +1,6 @@
 import React from "react";
 
-type SwiperProps = {};
+export type SwiperProps = {};
 const Swiper: React.FC<SwiperProps> = ({}) => {
   return <div>Swiper</div>;
 };

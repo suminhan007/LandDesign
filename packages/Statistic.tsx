@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
 
-type StatisticProps = {
+export type StatisticProps = {
   value?: number;
   /** 前缀 */
   prefix?: React.ReactNode;

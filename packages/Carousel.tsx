@@ -1,6 +1,6 @@
 import React from "react";
 
-type CarouselProps = {};
+export type CarouselProps = {};
 const Carousel: React.FC<CarouselProps> = ({}) => {
   return <div>Carousel</div>;
 };

@@ -2,17 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import Divider from "./Divider";
 
-type TimelineProps = {
+export type TimelineProps = {
   data?: {
-    title?: string | React.ReactNode,
-    subTitle?: string | React.ReactNode,
-    desc?: string | React.ReactNode,
+    title?: string | React.ReactNode;
+    subTitle?: string | React.ReactNode;
+    desc?: string | React.ReactNode;
     /** 自定义图标 */
-    icon?: React.ReactNode,
+    icon?: React.ReactNode;
   }[];
   direction?: "row" | "column";
   /** 全局自定义图标 */
-  icon?: React.ReactNode,
+  icon?: React.ReactNode;
 };
 
 const Timeline: React.FC<TimelineProps> = ({ data, direction = "column", icon }) => {

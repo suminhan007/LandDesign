@@ -1,7 +1,7 @@
 import React, { CSSProperties, useEffect, useState } from "react";
 import styled from "styled-components";
 import Divider from "./Divider";
-import Menu, { MenuItemType, MenuProps } from "./Menu";
+import Menu, { MenuProps } from "./Menu";
 import Button from "./Button";
 import Icon from "./Icon";
 
@@ -22,8 +22,6 @@ export type HeaderProps = {
   name?: string | React.ReactNode;
   /* logo 与网站名称之间的分割线 */
   divider?: boolean;
-  /* 导航项数据 */
-  navData?: MenuItemType[];
   /** 导航项位置 */
   align?: "start" | "center" | "end";
   /* 导航项配置 */

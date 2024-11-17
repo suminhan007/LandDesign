@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-type BadgeProps = {
+export type BadgeProps = {
   /** 是否为点 */
   isDot?: boolean;
   /** 徽标数值 */

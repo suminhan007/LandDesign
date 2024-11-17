@@ -4,7 +4,7 @@ import AudioAnimationIcon from "./AudioAnimationIcon";
 import { CommonProps } from "packages/types";
 import { useEffect, useRef, useState } from "react";
 
-type AudioProps = {
+export type AudioProps = {
   /** 音频文件 url */
   audioUrl: string;
   direction?: "row" | "column";

@@ -14,7 +14,7 @@ export type MsSwitchItemType<T = React.ReactNode> = {
   iconTip?: T;
   showIcon?: boolean;
 };
-type Props<T = any> = {
+export type SwitchBarProps<T = any> = {
   width?: string;
   /** 当前选中 */
   value?: T | T[];
@@ -38,7 +38,7 @@ function SwitchBar<T>({
   className = "",
   switchDisabled,
   style,
-}: Props<T>) {
+}: SwitchBarProps<T>) {
   return (
     <StyledLandSwitchBarWrap
       className={`land-switchBar  ${className}`}

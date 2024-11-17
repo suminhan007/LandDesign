@@ -2,8 +2,12 @@ import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
 
-type CollapseProps = {
-  data?: { title: string; details?: string | React.ReactNode, open?: boolean }[];
+export type CollapseProps = {
+  data?: {
+    title: string;
+    details?: string | React.ReactNode;
+    open?: boolean;
+  }[];
   hideIcon?: boolean;
   style?: CSSProperties;
   className?: string;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Link from "./Link";
 import Loading from "./Loading";
 
-type AlertProps = {
+export type AlertProps = {
   type?: "default" | "error" | "fail" | "success" | "warn" | "loading";
   direction?: "row" | "column";
   title: React.ReactNode | string;

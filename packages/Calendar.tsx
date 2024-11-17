@@ -6,9 +6,9 @@ import Select from './Select';
 import axios from 'axios';
 import Switch from "./Switch";
 
-type CalendarProps = {
+export type CalendarProps = {
   /** 语言 */
-  language?: 'zh' | 'en';
+  language?: "zh" | "en";
   /** 最小年份 */
   minYear?: number;
   /** 最大年份 */

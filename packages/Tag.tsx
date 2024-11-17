@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react";
 import Icon from "./Icon";
 import styled from "styled-components";
 
-type TagProps = {
+export type TagProps = {
   children?: React.ReactNode;
   icon?: React.ReactNode;
   canDelete?: boolean;

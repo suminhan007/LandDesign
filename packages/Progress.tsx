@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react";
 import styled from "styled-components";
 
-type ProgressProps = {
+export type ProgressProps = {
   /** 当前进度百分比 */
   value?: number;
   /** 隐藏进度条数值 */
