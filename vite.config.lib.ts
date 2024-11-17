@@ -40,12 +40,12 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      root: '../../',
-      tsConfigFilePath: resolve(__dirname, './tsconfig.json'),
+      root: '../',
+      tsconfigPath: resolve(__dirname, './tsconfig.json'),
       compilerOptions: {
-        rootDir: resolve(__dirname, '../../'),
+        rootDir: resolve(__dirname, '../'),
       },
-      outputDir: resolve(__dirname, './lib'),
+      outDir: resolve(__dirname, './lib'),
       include: [
         resolve(__dirname, './example'),
         resolve(__dirname, './packages/index.tsx'),
