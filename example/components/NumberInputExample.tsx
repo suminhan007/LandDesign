@@ -1,5 +1,4 @@
 import React from 'react'
-import Input from '../../packages/Input'
 import Title from '../../packages/Title'
 import NumberInput from '../../packages/NumberInput'
 

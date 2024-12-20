@@ -81,7 +81,7 @@ const Select: React.FC<SelectProps> = ({
             ? placeholder
             : data?.filter((itm) => itm.value === newSelected)[0].label}
         </p>
-        <Icon name="arrow" className="land-select-value-arrow" />
+        <Icon name="arrow" className="land-select-value-arrow" size={20} />
         {info && <Pop content={info} theme="dark" />}
       </StyleSelectInput>
       <StyleSelectResults

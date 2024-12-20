@@ -106,6 +106,10 @@ import Video from "../packages/Video";
 import Tag from "../packages/Tag";
 import Timeline from "../packages/Timeline";
 import Message from "../packages/Message";
+import HighlightTextareaExample from "./Components/HighlightTextareaExample";
+import HighlightTextarea from "../packages/HighlightTextarea";
+import HighlightOnlyWrapTextareaExample from "./Components/HighlightOnlyWrapTextareaExample";
+import HighlightOnlyWrapTextarea from "../packages/HighlightOnlyWrapTextarea";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -1103,7 +1107,7 @@ export const DISPLAY_COMPONENTS_DATA = [
     desc: "Land Design内置常规图标。",
     props: [{ name: "name", type: "type", desc: "desc" }],
     example: <AudioExample />,
-    demo: <Audio url="https://suminhan.cn/land-design/dapxiang.mp3" />,
+    demo: <Audio audioUrl="https://suminhan.cn/land-design/dapxiang.mp3" />,
   },
   {
     id: "popOver",
@@ -1309,6 +1313,28 @@ export const OTHER_COMPONENTS_DATA = [
   },
 ];
 
+export const PRO_COMPONENTS_DATA = [
+  {
+    id: "highlight-textarea",
+    en: "HighlightTextarea",
+    zh: "高亮富文本输入框",
+    desc: "",
+    props: [{ name: "name", type: "type", desc: "desc" }],
+    example: <HighlightTextareaExample />,
+    demo: <HighlightTextarea />,
+  },
+  {
+    id: "highlight-only-wrap-textarea",
+    en: "HighlightOnlyWrapTextarea",
+    zh: "仅支持换行的高亮富文本输入框",
+    desc: "",
+    props: [{ name: "name", type: "type", desc: "desc" }],
+    example: <HighlightOnlyWrapTextareaExample />,
+    demo: <HighlightOnlyWrapTextarea />,
+  },
+];
+
+
 // 组件数据汇总
 export const COMPONENTS_DATA = [
   {
@@ -1355,6 +1381,11 @@ export const COMPONENTS_DATA = [
     title: "其他",
     data: OTHER_COMPONENTS_DATA,
   },
+  {
+    id: "pro-components",
+    title: "业务组件",
+    data: PRO_COMPONENTS_DATA,
+  },
 ];
 
 export const COMPONENTS_OVERVIEW_DATA = [
@@ -1370,14 +1401,17 @@ export const COMPONENTS_OVERVIEW_DATA = [
 // 图标示例数据
 export const ICON_EXAMPLE_DATA = [
   {
+    id: 'nav',
     title: "导航类",
     data: ["home", "application", "more", "more-line"],
   },
   {
+    id: 'social',
     title: "社交媒体类",
     data: [],
   },
   {
+    id: 'interface',
     title: "用户界面类",
     data: [
       "female",
@@ -1398,6 +1432,7 @@ export const ICON_EXAMPLE_DATA = [
     ],
   },
   {
+    id: 'media',
     title: "媒体控制类",
     data: [
       "image",
@@ -1412,6 +1447,7 @@ export const ICON_EXAMPLE_DATA = [
     ],
   },
   {
+    id: 'docs',
     title: "文件和文档类",
     data: [
       "file",
@@ -1452,10 +1488,12 @@ export const ICON_EXAMPLE_DATA = [
     ],
   },
   {
+    id: 'e-commerce',
     title: "电子商务类",
     data: ["coupon", "ticket", "bank-card", "consume", "commodity", "dollar"],
   },
   {
+    id: 'status',
     title: "反馈和状态类",
     data: [
       "check-stroke",
@@ -1479,10 +1517,12 @@ export const ICON_EXAMPLE_DATA = [
     ],
   },
   {
+    id: 'communication',
     title: "通信类",
     data: [],
   },
   {
+    id: 'operate',
     title: " 操作类",
     data: [
       "switch-gear",
@@ -1539,6 +1579,7 @@ export const ICON_EXAMPLE_DATA = [
     ],
   },
   {
+    id: 'style',
     title: "样式类",
     data: [
       "align-bottom",
@@ -1604,17 +1645,21 @@ export const ICON_EXAMPLE_DATA = [
     ],
   },
   {
+    id: 'device',
     title: " 设备工具类",
     data: ["camera"],
   },
   {
+    id: 'nature',
     title: "天气自然类",
     data: [],
   },
   {
+    id: 'traffic',
     title: "交通位置类",
   },
   {
+    id: 'food',
     title: "食物",
   },
 ];

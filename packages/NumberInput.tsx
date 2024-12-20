@@ -2,7 +2,7 @@ import React, { CSSProperties, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Divider from './Divider';
 import Icon from './Icon';
-import Input, { InputProps } from './Input';
+import Input from './Input';
 
 export type NumberInputProps = {
   /** 当前输入值 */
@@ -21,13 +21,15 @@ export type NumberInputProps = {
   suffix?: string;
   /** 是否禁用输入框 */
   disabled?: boolean;
+  width?: number | string;
   className?: string;
   style?: CSSProperties;
   onChange?: (value: number, event: any,) => void;
-} & InputProps;
+  [key: string]: any;
+};
 
 const NumberInput: React.FC<NumberInputProps> = ({
-  value,
+  value = 0,
   type = 'border',
   step = 1,
   min = 0,
@@ -36,11 +38,11 @@ const NumberInput: React.FC<NumberInputProps> = ({
   suffix,
   disabled,
   onChange,
-  className,
+  width,
   style,
   ...restProps
 }) => {
-  const [newValue, setNewValue] = useState<number>(value);
+  const [newValue, setNewValue] = useState<number>(Number(value));
   useEffect(() => value !== undefined && setNewValue(value), [value]);
   const handleValueChange = (val: number, e: any) => {
     if (val < (min - step / 2) || val > (max + step / 2)) {
@@ -58,7 +60,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
   return (
     <StyledNumberInputWrap
       className='StyledNumberInputWrap'
-      style={style}
+      style={{ width: typeof width === "number" ? `${width}px` : width, ...style }}
       onClick={(e) => e.stopPropagation()}
     >
       <Input
@@ -75,9 +77,9 @@ const NumberInput: React.FC<NumberInputProps> = ({
         {...restProps}
       />
       <div className='land-numberInput-arrow' style={{ borderLeft: type === 'border' ? '1px solid var(--color-border-2)' : '', background: 'inherit' }}>
-        <div className={`land-numberInput-add ${newValue === max ? 'disabled' : ''}`} onClick={(e: any) => handleValueChange?.(Number(newValue) + step, e,)}><Icon name="arrow" /></div>
+        <div className={`land-numberInput-add ${newValue === max ? 'disabled' : ''}`} onClick={(e: any) => handleValueChange?.(Number(newValue) + step, e,)}><Icon name="arrow" size={16} /></div>
         {type === 'border' && <Divider margin={0} lang='32px' />}
-        <div className={`land-numberInput-dec ${newValue === min ? 'disabled' : ''}`} onClick={(e: any) => handleValueChange?.(Number(newValue) - step, e)}><Icon name="arrow" /></div>
+        <div className={`land-numberInput-dec ${newValue === min ? 'disabled' : ''}`} onClick={(e: any) => handleValueChange?.(Number(newValue) - step, e)}><Icon name="arrow" size={16} /></div>
       </div>
     </StyledNumberInputWrap>
   )

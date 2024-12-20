@@ -124,7 +124,7 @@ const SelectTree: React.FC<SelectTreeProps> = ({
             ? placeholder
             : resultValue}
         </p>
-        <Icon name="arrow" className="land-select-value-arrow" />
+        <Icon name="arrow" className="land-select-value-arrow" size={20} />
         {info && <Pop content={info} theme="dark" />}
       </StyleSelectTreeInput>
       <StyleSelectTreeResults

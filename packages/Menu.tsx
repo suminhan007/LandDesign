@@ -89,17 +89,15 @@ const Menu: React.FC<MenuProps> = ({
       {data?.map((item, index) => (
         <div
           key={item.key ?? index}
-          className={`land-menu-item ${
-            item.clickType === ClickType.SIMPLE ? "simple" : ""
-          } ${item.clickType === ClickType.DISABLED ? "disabled" : ""}`}
+          className={`land-menu-item ${item.clickType === ClickType.SIMPLE ? "simple" : ""
+            } ${item.clickType === ClickType.DISABLED ? "disabled" : ""}`}
           style={itemStyle}
         >
           <StyleMenuLink
             role="button"
             key={item.key}
-            className={`land-menu-link ${
-              active === item.key ? "active" : ""
-            } ${itemClassName}`}
+            className={`land-menu-link ${active === item.key ? "active" : ""
+              } ${itemClassName}`}
             onClick={(e) => {
               e.stopPropagation();
               onChange?.(item);

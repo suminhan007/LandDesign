@@ -9,6 +9,7 @@ import Button from "../../packages/Button";
 import ColorPicker from '../../packages/ColorPicker';
 import NumberInput from '../../packages/NumberInput';
 import Menu from "../../packages/Menu";
+import Anchor from '../../packages/Anchor';
 
 export default function IconExample() {
   const [color, setColor] = useState<string>("var(--color-text-2)");
@@ -21,7 +22,7 @@ export default function IconExample() {
     );
   };
   return (
-    <div className="flex column gap-12">
+    <div className="relative flex column gap-12">
       <div className="flex gap-24">
         <NumberInput
           prefix="图标大小"
@@ -49,44 +50,40 @@ export default function IconExample() {
           onChange={(val) => setColor(val)}
         />
       </div>
-      <Menu
-        data={ICON_EXAMPLE_DATA?.map((i, idx) => ({
-          key: idx,
-          title: i.title,
-        }))}
-      />
-      {ICON_EXAMPLE_DATA.map((item1, index1) => (
-        <div key={index1} className="flex column gap-8">
-          <Title title={item1.title} type="h3" />
-          <StyleIconGrid>
-            {item1.data?.map((item2) => (
-              <StyledIconItem
-                key={item2}
-                rtOption={{
-                  content: (
-                    <Button
-                      onClick={() => handleIconCopyClick?.(item2)}
-                      icon={<Icon name="copy" />}
-                      className="relative hover-pop"
-                    ></Button>
-                  ),
-                  hoverShow: true,
-                }}
-              >
-                <Icon
-                  name={item2}
-                  size={size}
-                  stroke={color}
-                  strokeWidth={stroke}
-                />
-                <StyledItemText className="transition-15">
-                  {item2}
-                </StyledItemText>
-              </StyledIconItem>
-            ))}
-          </StyleIconGrid>
-        </div>
-      ))}
+      <div className='mt-24 flex column gap-24'>
+        {ICON_EXAMPLE_DATA.map((item1, index1) => (
+          <div key={index1} className="flex column gap-8">
+            <Title title={item1.title} type="h3" />
+            <StyleIconGrid>
+              {item1.data?.map((item2) => (
+                <StyledIconItem
+                  key={item2}
+                  rtOption={{
+                    content: (
+                      <Button
+                        onClick={() => handleIconCopyClick?.(item2)}
+                        icon={<Icon name="copy" />}
+                        className="relative hover-pop"
+                      ></Button>
+                    ),
+                    hoverShow: true,
+                  }}
+                >
+                  <Icon
+                    name={item2}
+                    size={size}
+                    stroke={color}
+                    strokeWidth={stroke}
+                  />
+                  <StyledItemText className="transition-15">
+                    {item2}
+                  </StyledItemText>
+                </StyledIconItem>
+              ))}
+            </StyleIconGrid>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
