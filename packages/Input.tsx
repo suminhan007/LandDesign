@@ -1,7 +1,6 @@
-import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
-import useGetHighlightStr from "./hooks/useGetHighlightStr";
 
 export type InputProps = {
   type?: 'border' | 'background' | 'transparent';
@@ -27,10 +26,6 @@ export type InputProps = {
   showNumber?: boolean;
   /** 是否禁用 */
   disabled?: boolean;
-  /** 高亮文字数组 */
-  highlightStr?: string[];
-  /** 高亮内容样式 */
-  highlightStyle?: CSSProperties;
   onChange?: (val: string, e?: any) => void;
   /** enter事件 */
   onEnter?: (val: string, e?: any) => void;
@@ -71,8 +66,6 @@ const Input: React.FC<InputProps> = ({
     }, 100);
     return () => clearTimeout(timer);
   }, [value, prefix]);
-
-  const highStringList = useMemo(() => useGetHighlightStr(String(value), highlightStr), [value, highlightStr]);
   /** 控制高两层左右滚动 */
   const inputRef = useRef<HTMLInputElement>(null);
   /* 左右滚动 */
@@ -117,14 +110,6 @@ const Input: React.FC<InputProps> = ({
           onScroll={ScrollLabel}
           {...restProps}
         />
-        {value ? <div ref={InputLabelRef} className="input-label">
-          {
-            highStringList?.map((item, idx) => {
-              if (item.type === 'default') return item.msg;
-              return <span style={highlightStyle} key={item.msg + idx}>{item.msg}</span>;
-            })
-          }
-        </div> : <p className="input-placeholder">{placeholder}</p>}
         {suffix && value && <p className="input-suffix" style={{ transform: `translateX(${suffixLeft}px)` }}>{suffix}</p>}
       </div>
       {afterContent && <div>{afterContent}</div>}
@@ -200,7 +185,6 @@ const StyleInputWrap = styled.div`
     outline: none;
     font-size: 14px;
     caret-color: var(--color-primary-6);
-    -webkit-text-fill-color: transparent;
     &:focus-within,
     &:focus,
     &:focus-visible,

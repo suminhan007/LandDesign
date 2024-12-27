@@ -23,10 +23,6 @@ export type InputProps = {
     showNumber?: boolean;
     /** 是否禁用 */
     disabled?: boolean;
-    /** 高亮文字数组 */
-    highlightStr?: string[];
-    /** 高亮内容样式 */
-    highlightStyle?: CSSProperties;
     onChange?: (val: string, e?: any) => void;
     /** enter事件 */
     onEnter?: (val: string, e?: any) => void;

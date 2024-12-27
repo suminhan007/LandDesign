@@ -1,5 +1,4 @@
 import { default as React, CSSProperties } from 'react';
-import { InputProps } from './Input';
 export type NumberInputProps = {
     /** 当前输入值 */
     value?: number;
@@ -17,9 +16,11 @@ export type NumberInputProps = {
     suffix?: string;
     /** 是否禁用输入框 */
     disabled?: boolean;
+    width?: number | string;
     className?: string;
     style?: CSSProperties;
     onChange?: (value: number, event: any) => void;
-} & InputProps;
+    [key: string]: any;
+};
 declare const NumberInput: React.FC<NumberInputProps>;
 export default NumberInput;
