@@ -8,7 +8,7 @@ export default function WatermarkExample() {
       <div className="flex column gap-12">
         <Title title="常规骨架屏" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
-          <div className="relative width-100" style={{ height: "200px" }}>
+          <div className="relative width-100" style={{ height: "320px" }}>
             <Watermark content="Land Design" />
           </div>
         </div>

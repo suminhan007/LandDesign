@@ -26,7 +26,7 @@ export const IconFile: React.FC<IconProps> = ({
       <path
         d="M43 22H5"
         stroke={stroke}
-        strokeWidth="4"
+        strokeWidth={strokeWidth}
         strokeLinejoin="round"
       />
     </svg>

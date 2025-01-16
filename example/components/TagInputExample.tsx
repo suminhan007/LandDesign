@@ -8,14 +8,14 @@ export default function TagInputExample() {
       <div className="flex column gap-12">
         <Title title="常规输入框" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
-          <TagInput maxLength={20} />
+          <TagInput maxLength={20} width={240} />
         </div>
       </div>
 
       <div className="flex column gap-12">
         <Title title="高亮文字" type="h3" />
         <div className="flex justify-center gap-24 border p-32">
-          <TagInput highlightStr={['不好']} />
+          <TagInput highlightStr={['不好']} width={240} />
         </div>
       </div>
     </div>

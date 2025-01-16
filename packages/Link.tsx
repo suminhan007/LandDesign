@@ -19,7 +19,7 @@ export type LinkProps = {
 
 const Link: React.FC<LinkProps> = ({
   href,
-  target = "_blank",
+  target = "self",
   status = "default",
   disabled,
   active,

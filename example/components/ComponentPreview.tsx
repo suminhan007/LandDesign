@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import Title from '../../packages/Title';
 import Divider from '../../packages/Divider';
 import {
@@ -13,6 +13,7 @@ import {
 } from "../mock";
 
 import Flex from '../../packages/Flex';
+import Anchor from "../../packages/Anchor";
 
 type Props = {
   onClick?: (dropItem: any, item: any) => void;
@@ -28,8 +29,10 @@ const ComponentPreview: React.FC<Props> = ({
     { id: 'avatar', data: DISPLAY_COMPONENTS_DATA, title: "输入展示型" },
     { id: 'alert', data: FEEDBACK_COMPONENTS_DATA, title: "反馈型" },
     { id: 'title', data: TEXT_COMPONENTS_DATA, title: "文字型" },
-    { id: 'icon', data: OTHER_COMPONENTS_DATA, title: "其他" },
+    { id: 'more', data: OTHER_COMPONENTS_DATA, title: "其他" },
   ];
+
+  const anchorData = useMemo(() => data?.map(i => ({key:i.id,href: `#${i.id}`,title:i.title})),[data])
   return (
     <div
       style={{
@@ -39,11 +42,12 @@ const ComponentPreview: React.FC<Props> = ({
         gap: 20,
       }}
     >
+      <Anchor data={anchorData} className={'fixed bg-white pt-24'} style={{right:'24px',top:'64px',zIndex:10}}/>
       <Title title="组件索引" />
       <Divider />
       {data?.map((item) => (
-        <Flex column gap={24}>
-          <div className="color-gray-2 fw-500 fs-20">{item.title}</div>
+        <div className={'flex column gap-24'} id={item.id}>
+          <div className="pt-32 color-gray-2 fw-500 fs-20">{item.title}</div>
           <div
             className="grid gap-24 width-100"
             style={{
@@ -70,7 +74,7 @@ const ComponentPreview: React.FC<Props> = ({
               </div>
             ))}
           </div>
-        </Flex>
+        </div>
       ))}
     </div>
   );

@@ -32,7 +32,7 @@ export default defineConfig({
   build: {
     // 输出文件夹
     // outDir: 'dist',
-    outDir: `dist/${branch}`, 
+    outDir: `dist/${branch}`,
     // lib: {
     //   // 组件库源码的入口文件
     //   entry: resolve('packages/index.tsx'),

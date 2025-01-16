@@ -2,12 +2,13 @@ import React, { CSSProperties, Fragment, useState } from "react";
 import styled from "styled-components";
 
 type DropdownItemType = {
-  id: string;
+  key: string;
   label: string | React.ReactNode;
 };
 export type DropdownProps = {
   dropData?: DropdownItemType[];
-  toggle?: string | React.ReactNode;
+  dropContent?: React.ReactNode;
+  toggle: React.ReactNode;
   placement?: "left" | "right" | "center";
   onChange?: (data: DropdownItemType) => void;
   toggleClassName?: string;
@@ -17,7 +18,8 @@ export type DropdownProps = {
 };
 const Dropdown: React.FC<DropdownProps> = ({
   dropData,
-  toggle = "请选择",
+    dropContent,
+  toggle,
   placement = "left",
   onChange,
   toggleClassName = "",
@@ -44,7 +46,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           >
             {dropData?.map((item) => (
               <StyleDropdownDropItem
-                key={item.id}
+                key={item.key}
                 onClick={() => {
                   onChange?.(item);
                 }}
@@ -52,6 +54,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 {item.label}
               </StyleDropdownDropItem>
             ))}
+            {dropContent}
           </StyleDropdownDrop>
         </StyleDropdownResults>
       </StyleDropdownToggle>

@@ -1,11 +1,12 @@
 import { default as React, CSSProperties } from 'react';
 type DropdownItemType = {
-    id: string;
+    key: string;
     label: string | React.ReactNode;
 };
 export type DropdownProps = {
     dropData?: DropdownItemType[];
-    toggle?: string | React.ReactNode;
+    dropContent?: React.ReactNode;
+    toggle: React.ReactNode;
     placement?: "left" | "right" | "center";
     onChange?: (data: DropdownItemType) => void;
     toggleClassName?: string;

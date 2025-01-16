@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import styled from 'styled-components';
 
 import Title from '../../packages/Title';
@@ -8,7 +8,6 @@ import Icon from '../../packages/Icon';
 import Button from "../../packages/Button";
 import ColorPicker from '../../packages/ColorPicker';
 import NumberInput from '../../packages/NumberInput';
-import Menu from "../../packages/Menu";
 import Anchor from '../../packages/Anchor';
 
 export default function IconExample() {
@@ -21,8 +20,10 @@ export default function IconExample() {
       `<Icon name='${name}' size={${size}} stroke='${color}' strokeWidth={${stroke}}/>`
     );
   };
+    const anchorData = ICON_EXAMPLE_DATA?.map(i => ({key:i.id,href:`#${i.id}`,title:i.title}))
   return (
     <div className="relative flex column gap-12">
+        <Anchor data={anchorData} className={'fixed bg-white pt-24'} style={{right:'24px', top: '64px',zIndex:10}}/>
       <div className="flex gap-24">
         <NumberInput
           prefix="图标大小"
@@ -52,7 +53,7 @@ export default function IconExample() {
       </div>
       <div className='mt-24 flex column gap-24'>
         {ICON_EXAMPLE_DATA.map((item1, index1) => (
-          <div key={index1} className="flex column gap-8">
+          <div id={item1.id} key={index1} className="flex column gap-12 pt-32">
             <Title title={item1.title} type="h3" />
             <StyleIconGrid>
               {item1.data?.map((item2) => (

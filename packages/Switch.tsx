@@ -112,8 +112,8 @@ const StyledSwitchContent = styled.div<{
     display: flex;
     justify-content: start;
     padding: 2px;
-    width: 40px;
-    height: 24px;
+    width: 36px;
+    height: 20px;
     background-color: var(--color-bg-2);
     border-radius: 24px;
     flex-shrink: 0;

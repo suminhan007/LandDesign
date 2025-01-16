@@ -5,7 +5,7 @@ type AudioAnimationProps = {
   size?: number;
 };
 const AudioAnimation: React.FC<AudioAnimationProps> = ({
-  color = "var(--color-text-2)",
+  color = "var(--color-primary-6)",
   size = 12,
 }) => (
   <StyleTemplateSoundCardAnimation

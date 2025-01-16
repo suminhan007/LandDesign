@@ -32,7 +32,6 @@ export default function SelectExample() {
             { value: 3, label: '10' }
           ]}
             title='选择数量'
-            info='选框提示内容'
           />
         </div>
         <Title title="选项包含提示内容" type="h3" info="提示内容的展示形式有两种：整个选项和选项后置图标" />

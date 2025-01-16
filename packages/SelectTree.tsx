@@ -233,7 +233,8 @@ const StyleSelectTreeInput = styled.div`
 const StyleSelectTreeResults = styled.div`
   position: absolute;
   top: 100%;
-  width: 100%;
+  width: fit-content;
+  min-width: 100%;
   padding-top: 4px;
   opacity: 0;
   transform: scaleY(0.8);
@@ -269,6 +270,9 @@ const StyleSelectTreeDropItem = styled.li`
     height: 16px;
     position: relative;
     cursor: default;
+  }
+  .land-select-results-item-label{
+    white-space: nowrap;
   }
   cursor: pointer;
   &:hover {

@@ -10,8 +10,8 @@ export { default as LandAlert } from "./Alert";
 export type { AnchorProps } from "./Anchor";
 export { default as LandAnchor } from "./Anchor";
 
-export type { AutoMediaProps } from "./AutoMedia";
-export { default as LandAutoMedia } from "./AutoMedia";
+export type { AutoContainerProps } from "./AutoContainer";
+export { default as LandAutoContainer } from "./AutoContainer";
 
 export type { AvatarProps } from "./Avatar";
 export { default as LandAvatar } from "./Avatar";

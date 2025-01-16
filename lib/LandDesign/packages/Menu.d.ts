@@ -13,7 +13,7 @@ export type ThemeType = {
     lineColor?: string;
 };
 export type MenuItemType = {
-    key: number | string;
+    key: string;
     title: string;
     path?: string;
     subTitle?: string;
@@ -27,7 +27,7 @@ export type MenuItemType = {
     [key: string]: any;
 };
 export type MenuProps = {
-    active?: number | string;
+    active?: string;
     data?: MenuItemType[];
     direction?: "row" | "column";
     theme?: ThemeType;

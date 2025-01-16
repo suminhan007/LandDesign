@@ -213,55 +213,19 @@ export const IconVideoSmallScreen: React.FC<IconProps> = ({
 export const IconVideoFullWidth: React.FC<IconProps> = ({
   stroke = "currentColor",
   size = 24,
-  fill,
   strokeWidth = 2,
   style,
   className = "",
   reverse,
+    onClick,
 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    style={style}
-    className={`video-full-width ${className}`}
-  >
-    <path
-      d={
-        reverse
-          ? "M18.5459 15.364L15.3639 12.182L18.5459 9.00005"
-          : "M15.1816 9L18.3636 12.182L15.1816 15.364"
-      }
-      fill={fill ? fill : "none"}
-      stroke={fill ? fill : stroke}
-      strokeWidth={strokeWidth}
-      strokeLinejoin="round"
-    />
-    <path
-      d={
-        reverse
-          ? "M5.18164 9.00024L8.36362 12.1822L5.18164 15.3642"
-          : "M8.18164 15.364L4.99966 12.182L8.18164 9.00005"
-      }
-      fill={fill ? fill : "none"}
-      stroke={fill ? fill : stroke}
-      strokeWidth={strokeWidth}
-      strokeLinejoin="round"
-    />
-    <rect
-      x={strokeWidth / 2}
-      y="4.5"
-      width={24 - strokeWidth}
-      height="16"
-      rx="2"
-      fill={fill ? fill : "none"}
-      stroke={fill ? fill : stroke}
-      strokeWidth={strokeWidth}
-      strokeLinejoin="round"
-    />
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 48 48" fill="none" className={`video-fill-width ${className}`} style={style} onClick={onClick}>
+      <path d="M30.3633 18L36.7273 24.364L30.3633 30.728" stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round" style={{transform: reverse ? 'scale(1.-1)':''}}/>
+      <path d="M16.363 30.7279L9.99902 24.3639L16.363 18" stroke={stroke}  strokeWidth={strokeWidth} strokeLinejoin="round" style={{transform: reverse ? 'scale(1.-1)':''}}/>
+      <path
+          d="M42 9H6C3.79086 9 2 10.7909 2 13V37C2 39.2091 3.79086 41 6 41H42C44.2091 41 46 39.2091 46 37V13C46 10.7909 44.2091 9 42 9Z"
+          stroke={stroke} strokeWidth={strokeWidth} strokeLinejoin="round"/>
+    </svg>
 );
 
 export const IconLoop: React.FC<IconProps> = ({

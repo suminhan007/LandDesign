@@ -51,8 +51,12 @@ const StyledLandTag = styled.div`
   padding: 4px 8px;
   border-radius: 2px;
   font-size: 14px;
+  user-select: none;
   svg {
     flex-shrink: 0;
+    &.close{
+      cursor: pointer;
+    }
   }
 `;
 export default Tag;

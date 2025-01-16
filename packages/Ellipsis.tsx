@@ -13,16 +13,14 @@ const Ellipsis: React.FC<EllipsisProps> = ({
   const ellipsisRef = useRef<HTMLDivElement>(null);
   const [ellipsis, setEllipsis] = useState<boolean>(false);
   useEffect(() => {
+    const ellipsis = ellipsisRef.current;
+    if (!ellipsis) return;
     const checkWidth = () => {
       if (line === 1) {
-        if (ellipsisRef.current) {
-          setEllipsis(ellipsisRef.current.offsetWidth < ellipsisRef.current.scrollWidth);
-        }
+        setEllipsis(ellipsis.offsetWidth < ellipsis.scrollWidth);
       }
       if (line > 1) {
-        if (ellipsisRef.current) {
-          setEllipsis(ellipsisRef.current.offsetHeight < ellipsisRef.current.scrollHeight);
-        }
+        setEllipsis(ellipsis.offsetHeight < ellipsis.scrollHeight);
       }
     };
     const observer = new MutationObserver(checkWidth);
@@ -34,10 +32,10 @@ const Ellipsis: React.FC<EllipsisProps> = ({
       observer.disconnect();
       document.body.removeEventListener("resize", checkWidth);
     };
-  }, [text]);
-  return <StyledLandEllipsis className={`${ellipsis ? 'hover-pop' : ''} `} line={line}>
+  }, [line, text]);
+  return <StyledLandEllipsis className='hover-pop' line={line}>
     <div ref={ellipsisRef} className="land-ellipsis-content">{text}</div>
-    {ellipsis && <Pop content='这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字' style={{ maxWidth: '100%' }} />}
+    {ellipsis && <Pop placement="bottom" hideArrow content='这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字' style={{ maxWidth: '100%' }} />}
   </StyledLandEllipsis>;
 };
 

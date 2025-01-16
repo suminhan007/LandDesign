@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import "./app.css";
 import "../packages/styles/atomic.scss";
 import "../packages/styles/variable.scss";
 import "../packages/styles/reset.scss";
 import Title from "../packages/Title";
 import Header from "../packages/Header";
-import { ClickType } from "../packages/Menu";
+import { ClickType } from "../packages";
 import Components from "./Components";
 import Design from "./Design";
 import Animations from "./Animations";
 import Switch from "../packages/Switch";
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 function App() {
-  const [page, setPage] = useState<number | string>(3);
+  const [page, setPage] = useState<string>('3');
+  //@ts-ignore
   const [dark, setDark] = useState<boolean>(false);
+  const navigate = useNavigate();
   return (
     <div className="flex column" style={{ height: "100vh" }}>
       <Header
@@ -21,17 +24,21 @@ function App() {
         name={<Title title="Component Demo Lib" />}
         menuProps={{
           data: [
-            { key: 1, title: "使用指南", clickType: ClickType.SELF },
-            { key: 2, title: "设计语言", clickType: ClickType.SELF },
+            { key: '1', title: "使用指南", clickType: ClickType.SELF,href:'/' },
+            { key: '2', title: "设计语言", clickType: ClickType.SELF,href:'/design' },
             {
-              key: 3,
+              key: '3',
               title: "组件",
               clickType: ClickType.SELF,
+                href:'/component'
             },
-            { key: 4, title: "动画", clickType: ClickType.SELF },
+            { key: '4', title: "动画", clickType: ClickType.SELF,href:'.animation' },
           ],
           active: page,
-          onChange: (item) => setPage(item.key),
+          onChange: (item) => {
+              setPage(item.key);
+              navigate(item.href)
+          },
         }}
         align="end"
         rightComponent={
@@ -43,9 +50,13 @@ function App() {
         }
       />
       <div className="flex-1 flex" style={{ height: "0" }}>
-        {page === 2 && <Design />}
-        {page === 3 && <Components />}
-        {page === 4 && <Animations />}
+          <Routes>
+              <Route path="/" element={<Components />} />
+              <Route path="/design" element={<Design />} />
+              <Route path="/component" element={<Components />} />
+              <Route path="/component?name=components-preview" element={<Components />} />
+              <Route path="/animation" element={<Animations />} />
+          </Routes>
       </div>
     </div>
   );

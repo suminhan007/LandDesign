@@ -8,16 +8,18 @@ import ComponentPreview from "./ComponentPreview";
 // 引入数据
 import { COMPONENTS_DATA } from "../mock";
 import Menu from "../../packages/Menu";
+import {useNavigate} from "react-router-dom";
 type Props = {};
 
 const Components: React.FC<Props> = ({ }) => {
-  const [active, setActive] = useState<number | string>("icon");
-  const [dropActive, setDropActive] = useState<number | string>("icon");
+    const navigate = useNavigate();
+  const [active, setActive] = useState<string>("components-preview");
+  const [dropActive, setDropActive] = useState<string>("components-preview");
+  const href = useMemo(() => window.location.href.split('?name=')[1],[window.location.href]);
   const curItem = useMemo(() => {
     let item: any = { id: 1, en: "Icon", zh: "图标" };
-    item = COMPONENTS_DATA.filter(
-      (itm1) => itm1.id === active
-    )[0]?.data?.filter((itm2) => itm2.id === dropActive)[0];
+    const activeGroupItem = COMPONENTS_DATA.filter(item => item.id === active)[0];
+    item = activeGroupItem?.data?.filter((itm2) => itm2.id === href)[0];
     return item;
   }, [active, dropActive]);
   return (
@@ -39,10 +41,12 @@ const Components: React.FC<Props> = ({ }) => {
         onChange={(item) => {
           setActive(item.key);
           setDropActive(item.key);
+            navigate(`/component?name=${item.key}`)
         }}
         onDropChange={(item, parentItem) => {
           setActive(parentItem.key);
           setDropActive(item.key);
+            navigate(`/component?name=${item.key}`)
         }}
         dropProps={{
           active: dropActive,
@@ -51,14 +55,14 @@ const Components: React.FC<Props> = ({ }) => {
         }}
         direction="column"
         theme={{ activeBg: "var(--color-bg-1)", lineColor: "transparent" }}
-        style={{ width: "240px", height: "100%" }}
+        style={{ width: "252px", height: "100%" }}
         className="py-24 overflow-auto scrollbar-none"
       />
 
       <div className="flex-1 p-24 height-100 overflow-auto border-box">
         <StyledRightContent className="flex column width-100">
           {/* 组件索引 */}
-          {active === 0 && (
+          {active === 'components-preview' && (
             <ComponentPreview
               onClick={(dropItem, item) => {
                 setActive(item.id);
@@ -66,15 +70,17 @@ const Components: React.FC<Props> = ({ }) => {
               }}
             />
           )}
-          {active !== 0 && (
+          {active !== 'components-preview' && (
             <>
               <Title title={`${curItem.zh} ${curItem.en}`} type="h1" />
               {curItem.desc && <Title title={curItem.desc} type="p" />}
               <Divider margin={20} />
-              <Title title="1. 组件预览" type="h2" className="mb-16" />
-              {curItem.example}
-              <Title title="2. API" type="h2" className="my-16" />
-              {curItem.props && (
+                <div id={'组件预览'}>
+                    <Title title="1. 组件预览" type="h2" className="mb-16" />
+                    {curItem.example}
+                </div>
+                <div id={'API'}><Title title="2. API" type="h2" className="my-16"/></div>
+                  {curItem.props && (
                 <Table
                   titleData={[
                     { title: "属性", value: "props" },
@@ -85,26 +91,27 @@ const Components: React.FC<Props> = ({ }) => {
                   style={{ width: "100%" }}
                 />
               )}
-              {curItem.types?.length > 0 && (
-                <>
-                  <Title title="3. Type" type="h2" className="my-16" />
-                  {curItem.types?.map((type) => (
+                <div id={'Type'}>
+                    {curItem.types?.length > 0 && (
                     <>
-                      <Title title={type.name} type="h3" className="mt-16" />
-                      <Title title={type.desc} type="p" className="mt-8" />
-                      <Table
-                        className="width-100 mt-16"
-                        titleData={[
-                          { title: "属性", value: "props" },
-                          { title: "类型", value: "type" },
-                          { title: "描述", value: "desc" },
-                        ]}
-                        data={type.data}
-                      />
+                        <Title title="3. Type" type="h2" className="my-16"/>
+                        {curItem.types?.map((type) => (
+                            <div key={type.id} id={type.name}>
+                                <Title title={type.name} type="h3" className="mt-16"/>
+                                {type.desc && <Title title={type.desc} type="p" className="mt-8"/>}
+                                <Table
+                                    className="width-100 mt-16"
+                                    titleData={[
+                                        {title: "属性", value: "props"},
+                                        {title: "类型", value: "type"},
+                                        {title: "描述", value: "desc"},
+                                    ]}
+                                    data={type.data}
+                                />
+                            </div>
+                        ))}
                     </>
-                  ))}
-                </>
-              )}
+                )}</div>
             </>
           )}
         </StyledRightContent>

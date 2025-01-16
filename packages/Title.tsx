@@ -7,7 +7,7 @@ export type TitleProps = {
   /* 标题内容 */
   title?: string | React.ReactNode;
   /* 标题层级 */
-  type?: "h1" | "h2" | "h3" | "p";
+  type?: "h1" | "h2" | "h3" | "h4" | "p";
   /* 标题前缀 */
   prefix?: string;
   /* 标题角标 */
@@ -38,6 +38,7 @@ const Title: React.FC<TitleProps> = ({
       {type === "h1" && <h1>{title}</h1>}
       {type === "h2" && <h2>{title}</h2>}
       {type === "h3" && <h3>{title}</h3>}
+      {type === "h4" && <h4>{title}</h4>}
       {type === "p" && <p>{title}</p>}
       {info && (
         <div className="land-title-info hover-pop">
@@ -69,6 +70,9 @@ const StyledTitle = styled.div`
   }
   h3 {
     font-size: 16px;
+  }
+  h4{
+    font-size: 14px;
   }
   p {
     font-size: 14px;

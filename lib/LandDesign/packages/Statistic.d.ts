@@ -9,7 +9,7 @@ export type StatisticProps = {
     unit?: string;
     /** 趋势 */
     trendIcon?: "up" | "down" | "default";
-    animation?: boolean;
+    animation?: "increase" | "decrease" | "random";
 };
 declare const Statistic: React.FC<StatisticProps>;
 export default Statistic;

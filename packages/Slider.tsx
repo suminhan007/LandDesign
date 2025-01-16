@@ -101,7 +101,7 @@ const StyledSliderContent = styled.div<{
     background: ${(props) =>
     props.useDivider
       ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-bg-1)  calc(100% - 1px),var(--color-bg-1) 100%) 0 0 / 100% 100%,
-          linear-gradient(to right,transparent calc(100% - 1px), var(--color-border-3) calc(100% - 1px),var(--color-border-3) 100%) 0 0 / ${props.step}% 100%,var(--color-bg-1) 0 0 / 100% 100%`
+          linear-gradient(to right,transparent calc(100% - 1px), var(--color-border-2) calc(100% - 1px),var(--color-border-2) 100%) 0 0 / ${props.step}% 100%,var(--color-bg-1) 0 0 / 100% 100%`
       : "transparent"};
     transition: all 0.2s linear;
   }
@@ -109,7 +109,7 @@ const StyledSliderContent = styled.div<{
     background: ${(props) =>
     props.useDivider
       ? `linear-gradient(to right,transparent calc(100% - 1px), var(--color-bg-2)  calc(100% - 1px),var(--color-bg-2) 100%) 0 0 / 100% 100%,
-          linear-gradient(to right,transparent calc(100% - 1px), var(--color-border-3) calc(100% - 1px),var(--color-border-3) 100%) 0 0 / ${props.step}% 100%,var(--color-bg-2) 0 0 / 100% 100%`
+          linear-gradient(to right,transparent calc(100% - 1px), var(--color-border-2) calc(100% - 1px),var(--color-border-2) 100%) 0 0 / ${props.step}% 100%,var(--color-bg-2) 0 0 / 100% 100%`
       : ""};
   }
 `;
@@ -125,7 +125,7 @@ const StyleInput = styled.input`
   outline: none;
   object-fit: contain;
   &[type="range"] {
-    width: 100% - 4px;
+    width: calc(100% - 4px);
   }
   &::-webkit-slider-runnable-track {
     height: 100%;

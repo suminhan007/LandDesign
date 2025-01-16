@@ -27,10 +27,10 @@ const State: React.FC<StateProps> = ({
   return (
     <StyledLandState>
       {type === "empty" && (
-        <Icon name="check-fill" size={48} fill="var(--color-border-2)" />
+        <Icon name="check-fill" size={32} fill="var(--color-border-2)" />
       )}
       {type === "offline" && (
-        <Icon name="error-fill" size={48} fill="var(--color-border-2)" />
+        <Icon name="error-fill" size={32} fill="var(--color-border-2)" />
       )}
       <div className="land-state-title">
         {title}

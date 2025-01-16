@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Slider from "../../packages/Slider";
 import Title from "../../packages/Title";
 import Icon from "../../packages/Icon";
@@ -57,7 +57,7 @@ export default function SliderExample() {
               <Button
                 type="background"
                 size="small"
-                icon={<Icon name="dec" />}
+                text={'-'}
                 onClick={() => value >= 10 && setValue(value - 10)}
               />
             }

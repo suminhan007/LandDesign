@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import Title from "../../packages/Title";
 import Grid, { gridType } from "../../packages/Grid";
@@ -9,28 +8,11 @@ export default function GridExample() {
       <div className="flex column gap-12">
         <Title title="类型" type="h3" />
         <div className="flex justify-center gap-24 border p-32" style={{ height: '200px' }}>
-          <Grid className="width-100" type={gridType.ColumnFit} autoSize={60} style={{ gridTemplateColumns: 'repeat(2,1fr)' }}>
+          <Grid className="width-100" type={gridType.ColumnRepeat} repeatNum={3}>
             <StyledCardLight></StyledCardLight>
             <StyledCardDark></StyledCardDark>
             <StyledCardLight></StyledCardLight>
-          </Grid>
-        </div>
-        <Title title="对齐方式" type="h3" />
-        <div className="flex justify-center gap-24 border p-32">
-          <Grid>
             <StyledCardLight></StyledCardLight>
-            <StyledCardDark></StyledCardDark>
-            <StyledCardLight></StyledCardLight>
-            <StyledCardDark></StyledCardDark>
-          </Grid>
-        </div>
-        <Title title="间隙" type="h3" />
-        <div className="flex justify-center gap-24 border p-32">
-          <Grid>
-            <StyledCardLight></StyledCardLight>
-            <StyledCardDark></StyledCardDark>
-            <StyledCardLight></StyledCardLight>
-            <StyledCardDark></StyledCardDark>
           </Grid>
         </div>
       </div>

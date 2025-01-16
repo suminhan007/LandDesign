@@ -10,6 +10,7 @@ export default function TitleExample() {
           <Title title="一级标题" type="h1" />
           <Title title="二级标题" type="h2" />
           <Title title="三级标题" type="h3" />
+          <Title title="四级标题" type="h4" />
           <Title title="普通标题" type="p" />
         </div>
       </div>

@@ -18,21 +18,16 @@ export type AffixContainerItemProps = {
   hoverShow?: boolean;
   /** hover 时隐藏 */
   hoverHide?: boolean;
-  /** 隐藏 */
-  hide?: boolean;
   /** 层级 */
   zIndex?: number;
   onClick?: (e: any) => void;
   className?: string;
   style?: CSSProperties;
-  left?: number | string;
-  top?: number | string;
 };
 
 export type AffixContainerProps = {
   ltOption?: AffixContainerItemProps;
   rtOption?: AffixContainerItemProps;
-  rtOption2?: AffixContainerItemProps;
   lbOption?: AffixContainerItemProps;
   rbOption?: AffixContainerItemProps;
   centerOption?: AffixContainerItemProps;
@@ -88,7 +83,6 @@ const AffixContainer: React.FC<AffixContainerProps> = ({
   const [show, setShow] = useState<boolean>(false);
   const [hide, setHide] = useState<boolean>(false);
   const getOpacity = (option: AffixContainerItemProps) => {
-    if (option.hide) return 0;
     if (option.hoverShow) {
       return show ? 1 : 0;
     }

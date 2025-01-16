@@ -29,14 +29,16 @@ const Message: React.FC<MessageProps> = ({
   const toastType = useMemo(() => {
     switch (type) {
       case "default":
-        return { color: "white", background: "black", icon: null };
+        return { color: "white", background: "black", icon: null }; break;
+      case 'success': return { color: 'white', background: 'var(--color-green-6)' }; break;
+      case 'fail': return { color: 'white', background: 'var(--color-red-6)' }; break;
+      case 'warn': return { color: 'white', background: 'var(--color-orange-6)' }; break;
     }
   }, [type]);
   return (
     <StyleToastContainer
-      className={`StyleToastContainer ${
-        newShow ? "show" : "close"
-      } ${className}`}
+      className={`StyleToastContainer ${newShow ? "show" : "close"
+        } ${className}`}
       style={{
         color: toastType?.color,
         backgroundColor: toastType?.background,
@@ -59,7 +61,7 @@ const StyleToastContainer = styled.div`
   transition: opacity var(--transition-2) linear, top var(--transition-2) linear;
   &.show {
     top: 24px;
-    opacity: 0.9;
+    opacity: 1;
   }
   &.close {
     top: 32px;

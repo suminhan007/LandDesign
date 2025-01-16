@@ -32,9 +32,9 @@ const Watermark: React.FC<WatermarkProps> = ({ content, url }) => {
 const StyledLandWatermark = styled.div`
   gap: 64px;
   box-sizing: border-box;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(60px,1fr));
   .land-watermark-item {
-    transform: rotate(-45deg);
+    transform: rotate(-30deg);
     color: var(--color-border-3);
     font-size: 12px;
     white-space: nowrap;

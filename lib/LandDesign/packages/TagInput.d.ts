@@ -5,7 +5,7 @@ export type TagInputProps = {
     tagData?: string[];
     /** 占位符 */
     placeholder?: string;
-    w?: number | string;
+    width?: number | string;
     /** 允许输入的最大标签数 */
     maxLength?: number;
     /** 高亮文字数组 */

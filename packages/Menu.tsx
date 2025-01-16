@@ -21,7 +21,7 @@ export type ThemeType = {
 };
 
 export type MenuItemType = {
-  key: number | string;
+  key: string;
   title: string;
   path?: string;
   subTitle?: string;
@@ -37,7 +37,7 @@ export type MenuItemType = {
 
 export type MenuProps = {
   /* 当前选中项 */
-  active?: number | string;
+  active?: string;
   /* 数据 */
   data?: MenuItemType[];
   /* 导航排列方向 */
@@ -183,7 +183,7 @@ const StyledMenu = styled.div<{
   .land-menu-drop-wrap {
     width: 100%;
     .land-menu-drop {
-      padding: 8px 0px;
+      padding: 8px 0;
     }
     &.open {
       padding: 0;
@@ -223,13 +223,14 @@ const StyleMenuLink = styled.a<{
   position: relative;
   padding: var(--padding-medium);
   display: flex;
+  flex-wrap: ${props => props.column ? "wrap" : "nowrap"};
   align-items: center;
   gap: 8px;
   width: 100%;
   height: 100%;
   font-size: var(--font-content-large);
-  white-space: nowrap;
   box-sizing: border-box;
+  white-space: nowrap;
   transition: background-color var(--transition-15) linear;
   cursor: pointer;
   color: var(--color-text-3);
@@ -284,6 +285,7 @@ const StyleMenuLink = styled.a<{
     position: relative;
     color: transparent;
     font-weight: 600;
+    max-width: 100%;
     &::before {
       content: attr(data-title);
       position: absolute;
@@ -311,6 +313,11 @@ const StyleMenuLink = styled.a<{
     stroke-width: 3px;
   }
   .land-menu-sub-title {
+    flex: 1;
+    width: 1%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: var(--font-content-small);
     opacity: var(--opacity-68);
   }

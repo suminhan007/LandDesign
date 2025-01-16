@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
+import React, { CSSProperties, useCallback,  useRef } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
 
@@ -48,8 +48,6 @@ const Input: React.FC<InputProps> = ({
   width,
   maxLength,
   disabled,
-  highlightStr = ['不好'],
-  highlightStyle = { background: 'var(--color-primary-2)', color: 'var(--color-primary-6)' },
   onChange,
   onEnter,
   onBlur,
@@ -59,13 +57,6 @@ const Input: React.FC<InputProps> = ({
   ...restProps
 }) => {
   const InputLabelRef = useRef<HTMLDivElement>(null);
-  const [suffixLeft, setSuffixLeft] = useState<number>(0);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setSuffixLeft(Number(InputLabelRef.current?.clientWidth) + 8);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, [value, prefix]);
   /** 控制高两层左右滚动 */
   const inputRef = useRef<HTMLInputElement>(null);
   /* 左右滚动 */
@@ -110,10 +101,13 @@ const Input: React.FC<InputProps> = ({
           onScroll={ScrollLabel}
           {...restProps}
         />
-        {suffix && value && <p className="input-suffix" style={{ transform: `translateX(${suffixLeft}px)` }}>{suffix}</p>}
+        {suffix && value && <div className={'input-suffix-content'}>
+          <div className={'suffix-value'}>{value}</div>
+          <p className="input-suffix">{suffix}</p>
+        </div>}
       </div>
       {afterContent && <div>{afterContent}</div>}
-      {(onClear) && <div className={`land-input-clear-icon ${Boolean(value) ? 'show' : ''}`} onClick={onClear}><Icon name="error-fill" fill="var(--color-text-5)" /></div>}
+      {(onClear) && <div className={`land-input-clear-icon ${value ? '' : 'hide'}`} onClick={onClear}><Icon name="error-fill" fill="var(--color-text-5)" /></div>}
     </StyleInputWrap >
   );
 };
@@ -165,9 +159,6 @@ const StyleInputWrap = styled.div`
     }
   }
   
-  &.clear .input-label{
-    max-width: 100%; 
-  }
   .land-input-content{
     position: relative;
     flex: 1;
@@ -176,6 +167,7 @@ const StyleInputWrap = styled.div`
   }
   
   input {
+    padding: 0;
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -193,19 +185,20 @@ const StyleInputWrap = styled.div`
       border: none;
       box-shadow: none;
       background-color: transparent;
-      -webkit-text-fill-color: transparent;
     }
     &::selection {
       background-color: var(--color-primary-2);
     }
+    &::placeholder{
+      color: var(--color-text-5);
+    }
   }
   .land-input-clear-icon{
-    opacity: 1;
     height: 16px;
     flex-shrink: 0;
-    transition: opacity 0.2s linear;
     opacity: 0;
     transition: opacity 0.2s linear;
+    pointer-events: none;
     svg path{
       transition: all 0.2s linear;
     }
@@ -214,6 +207,7 @@ const StyleInputWrap = styled.div`
     }
     &.show{
       opacity: 1;
+      pointer-events:auto;
     }
   }
   .input-beforeContent{
@@ -229,23 +223,21 @@ const StyleInputWrap = styled.div`
     white-space: nowrap;
     font-size: 14px;
   }
-  .input-label{
+  }
+  .input-suffix-content{
     position: absolute;
-    left: 0;
-    max-width: 100%;
-    box-sizing: border-box;
-    color: var(--color-text-2);
+    width: fit-content;
     font-size: 14px;
     white-space: nowrap;
-    overflow: scroll;
-    &::-webkit-scrollbar{
-    width: 0;
-    display: none;
+    .suffix-value {
+      color: transparent;
+    }
   }
-  }
-  .input-placeholder,
   .input-suffix{
     position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(4px,-50%);
     height: 100%;
     display: flex;
     align-items: center;
@@ -258,8 +250,9 @@ const StyleInputWrap = styled.div`
     font-size: 14px;
   }
   &:hover{
-    .land-input-clear-icon{
+    .land-input-clear-icon:not(.hide){
       opacity: 1;
+      pointer-events: auto;
     }
   }
 `;

@@ -9,7 +9,6 @@ import LinkExample from "./Components/LinkExample";
 import MenuExample from "./Components/MenuExample";
 import Link from "../packages/Link";
 import Button from "../packages/Button";
-import React from "react";
 import AffixContainerExample from "./Components/AffixContainerExample";
 import BreadCrumbExample from "./Components/BreadCrumbExample";
 import PaginationExample from "./Components/PaginationExample";
@@ -61,7 +60,7 @@ import NumberInputExample from "./Components/NumberInputExample";
 import UploaderExample from "./components/UploadExample";
 import SwitchExample from "./components/SwitchExample";
 import SliderExample from "./components/SliderExample";
-import AutoMediaExample from "./Components/AutoMediaExample";
+import AutoContainerExample from "./Components/AutoContainerExample";
 import VideoExample from "./Components/VideoExample";
 import RateExample from "./components/RateExample";
 import AvatarExample from "./Components/AvatarExample";
@@ -110,6 +109,9 @@ import HighlightTextareaExample from "./Components/HighlightTextareaExample";
 import HighlightTextarea from "../packages/HighlightTextarea";
 import HighlightOnlyWrapTextareaExample from "./Components/HighlightOnlyWrapTextareaExample";
 import HighlightOnlyWrapTextarea from "../packages/HighlightOnlyWrapTextarea";
+import GridTemplateExample from "./Components/GridTemplateExample";
+import GridTemplate from "../packages/GridTemplate";
+import Dropdown from "../packages/Dropdown";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -127,6 +129,9 @@ export const COMMON_COMPONENTS_DATA = [
         desc: "图标填充颜色",
         optional: true,
       },
+      { name: "onClick", type: "(e:any) => void", desc: "点击事件", optional: true },
+      { name: "style", type: "CSSProperties", desc: "自定义图标样式", optional: true },
+      { name: "className", type: "string", desc: "自定义图标类名", optional: true },
     ],
     example: <IconExample />,
     demo: <Icon name="check-fill" size={36} />,
@@ -206,6 +211,8 @@ export const COMMON_COMPONENTS_DATA = [
         desc: "a 标签对应的 target 属性",
       },
       { name: "onClick", type: "func", desc: "按钮点击事件" },
+      { name: "style", type: "CSSProperties", desc: "自定义按钮样式", optional: true },
+      { name: "className", type: "string", desc: "自定义按钮类名", optional: true },
     ],
     example: <ButtonExample />,
     demo: <Button text="按钮"></Button>,
@@ -242,11 +249,13 @@ export const COMMON_COMPONENTS_DATA = [
       },
       {
         name: "tipProps",
-        type: <Link href="#MenuItemType">tipProps</Link>,
+        type: <Link href="/component?name=popover">tipProps</Link>,
         desc: "链接提示气泡属性",
         optional: true,
       },
       { name: "children", type: "element", desc: "链接内容", optional: true },
+      { name: "style", type: "CSSProperties", desc: "自定义链接样式", optional: true },
+      { name: "className", type: "string", desc: "自定义链接类名", optional: true },
     ],
     example: <LinkExample />,
     demo: <Link>链接</Link>,
@@ -292,6 +301,8 @@ export const LAYOUT_COMPONENTS_DATA = [
         desc: "分割线包含内容时对齐方式",
         optional: true,
       },
+      { name: "style", type: "CSSProperties", desc: "自定义分割线样式", optional: true },
+      { name: "className", type: "string", desc: "自定义分割线类名", optional: true },
     ],
     example: <DividerExample />,
     demo: <Divider />,
@@ -306,16 +317,16 @@ export const LAYOUT_COMPONENTS_DATA = [
         name: "w",
         type: "string",
         desc: "盒子的宽度，默认为[100%]",
-        nedd: true,
+        optional: true,
       },
-      { name: "h", type: "string", desc: "盒子的高度", nedd: true },
+      { name: "h", type: "string", desc: "盒子的高度", optional: true },
       {
         name: "column",
         type: "boolean",
         desc: "flex 主轴的方向是否垂直",
-        nedd: true,
+        optional: true,
       },
-      { name: "wrap", type: "boolean", desc: "元素是否换行", nedd: true },
+      { name: "wrap", type: "boolean", desc: "元素是否换行", optional: true },
       {
         name: "justify",
         type: "'start' | 'center' | 'end'",
@@ -336,6 +347,8 @@ export const LAYOUT_COMPONENTS_DATA = [
         optional: true,
       },
       { name: "children", type: "element", desc: "自定义元素", optional: true },
+      { name: "style", type: "CSSProperties", desc: "自定义Flex布局样式", optional: true },
+      { name: "className", type: "string", desc: "自定义Flex布局类名", optional: true },
     ],
     example: <FlexExample />,
     demo: (
@@ -366,8 +379,10 @@ export const LAYOUT_COMPONENTS_DATA = [
         desc: "自动填充模式下的最小宽度/高度",
       },
       { name: "repeatNum", type: "number", desc: "按行或按列重复时的重复数量" },
-      { name: "gao", type: "number | number[]", desc: "行列间隙" },
+      { name: "gap", type: "number | number[]", desc: "行列间隙" },
       { name: "children", type: "element", desc: "自定义元素", optional: true },
+      { name: "style", type: "CSSProperties", desc: "自定义Grid布局样式", optional: true },
+      { name: "className", type: "string", desc: "自定义Grid布局类名", optional: true },
     ],
     example: <GridExample />,
     demo: (
@@ -391,7 +406,8 @@ export const LAYOUT_COMPONENTS_DATA = [
     id: "layout",
     en: "Layout",
     zh: "布局",
-    props: [{ name: "name", type: "type", desc: "desc" }],
+    props: [{ name: "children", type: "element", desc: "内容" },{ name: "style", type: "CSSProperties", desc: "自定义Layout样式", optional: true },
+      { name: "className", type: "string", desc: "自定义Layout类名", optional: true },],
     example: <LayoutExample />,
     demo: (
       <Layout className="border width-100 ratio-1">
@@ -428,43 +444,52 @@ export const LAYOUT_COMPONENTS_DATA = [
 
 export const NAV_COMPONENTS_DATA = [
   {
-    id: "201",
+    id: "affixContainer",
     en: "affixContainer",
     zh: "图钉",
     desc: "图钉用于在容器内部指定位置展示内容",
     props: [
-      {
-        name: "placement",
-        type: "'lt' | 'lb' | 'rt' | 'rb'",
-        desc: "快捷设置图钉位置",
-      },
-      { name: "gap", type: "number", desc: "快捷定位时图钉与四周的距离" },
-      {
-        name: "offsetData",
-        type: "{ left?: number, right?: number, top?: number, bottom?: number }",
-        desc: "基于 absolute 定位的自定义位置",
-      },
-      { name: "hover", type: "boolean", desc: "鼠标悬浮时隐藏图钉" },
-      { name: "hoverShow", type: "boolean", desc: "鼠标悬浮时显示图钉" },
-      {
-        name: "innerStyle",
-        type: "CSSProperties",
-        desc: "图钉元素对应的 style",
-      },
-      {
-        name: "innerClassName",
-        type: "string",
-        desc: "图钉元素对应的 className",
-      },
+      { name: "ltOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "左上角图钉" },
+      { name: "rtOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "右上角图钉" },
+      { name: "lbOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "左下角图钉" },
+      { name: "rbOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "右下角图钉" },
+      { name: "centerOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "中心图钉" },
+      { name: "lcOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "左侧中心图钉" },
+      { name: "rcOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "右侧中心图钉" },
+      { name: "tcOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "顶部中心图钉" },
+      { name: "bcOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "底部中心图钉" },
+      { name: "customOption", type: (<><Link href="#AffixContainerItemProps">AffixContainerItemProps</Link></>), desc: "自定义位置的图钉" },
+      { name: "disabled", type: "boolean", desc: "是否禁用图钉" },
       { name: "Style", type: "CSSProperties", desc: "图钉定位容器对应的style" },
       {
         name: "className",
         type: "string",
         desc: "图钉定位容器对应的className",
       },
-      { name: "content", type: "element", desc: "图钉元素" },
-      { name: "children", type: "element", desc: "图钉容器元素" },
+      { name: "children", type: "element", desc: "图钉容器内容" },
+      { name: "onClick", type: "(e:any) => void", desc: "图钉容器的点击事件" },
     ],
+    types: [{
+      name: 'AffixContainerItemProps',
+      data: [
+        { name: "content", type: "element", desc: "图钉元素内容" },
+        { name: "gap", type: "number", desc: "快捷定位时图钉与四周的距离" },
+        { name: "radius", type: "element", desc: "设置图钉圆角" },
+        { name: "dark", type: "element", desc: "设置图标为暗色样式" },
+        { name: "squareSize", type: "element", desc: "设置图钉为等边形，并设置大小" },
+        { name: "custom", type: "element", desc: "不使用默认的图钉样式" },
+        { name: "hover", type: "boolean", desc: "鼠标悬浮时隐藏图钉" },
+        { name: "hoverShow", type: "boolean", desc: "鼠标悬浮时显示图钉" },
+        { name: "zIndex", type: "number", desc: "设置图标的层级，默认为1" },
+        { name: "Style", type: "CSSProperties", desc: "自定义图钉的style" },
+        {
+          name: "className",
+          type: "string",
+          desc: "自定义图钉的className",
+        },
+        { name: "onClick", type: "(e:any) => void", desc: "图钉点击事件" },
+      ]
+    }],
     example: <AffixContainerExample />,
     demo: (
       <AffixContainer
@@ -482,7 +507,19 @@ export const NAV_COMPONENTS_DATA = [
     en: "anchor",
     zh: "锚点",
     desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
+    props: [
+        { name: "data", type: <><Link href={'#AnchorItemType'}>AnchorItemType</Link></>, desc: "desc" },
+      {name:'style', type:'CSSProperties',desc:'自定义style'},
+      {name:'className', type:'string',desc:'自定义className'},
+    ],
+    types:[{
+      name: 'AnchorItemType',
+      data: [
+        {name:'key', type:'string',desc:'唯一标识'},
+        {name:'href', type:'string',desc:'锚点链接'},
+        {name:'title', type:'string',desc:'锚点标题'},
+      ]
+    }],
     example: <AnchorExample />,
     demo: (
       <Anchor
@@ -491,6 +528,7 @@ export const NAV_COMPONENTS_DATA = [
           { key: "API", href: "#API", title: "API" },
           { key: "Type", href: "#Type", title: "Type" },
         ]}
+
       />
     ),
   },
@@ -499,15 +537,30 @@ export const NAV_COMPONENTS_DATA = [
     en: "Breadcrumb",
     zh: "面包屑",
     desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
+    props: [
+        { name: "data", type: <><Link href={'#BreadCrumbItemType'}>BreadCrumbItemType</Link>[]</>, desc: "desc" },
+      {name:'current',type: 'string',desc:'当前所在的层级'},
+      {name:'onChange',type:'(item: BreadCrumbItemType) => void',desc:'点击切换事件',optional: true}
+    ],
+    types: [
+      {
+        name: 'BreadCrumbItemType',
+      data:[
+        {name:'key', type:'string',desc:'唯一标识'},
+        {name:'label', type:'string',desc:'内容'},
+        {name:'tip', type:'string'},
+        {name:'maxWidth', type:'string'},
+      ]}
+    ],
     example: <BreadCrumbExample />,
     demo: (
       <BreadCrumb
         data={[
-          { key: 1, label: "页面1" },
-          { key: 2, label: "页面页面页面页面1-1", maxWidth: 100 },
-          { key: 3, label: "页面页面页面页面1-1-2" },
+            { key: '1', label: "页面1" },
+          { key: '2', label: "页面页面页面页面1-1", maxWidth: 100 },
+          { key: '3', label: "页面页面页面页面1-1-2" },
         ]}
+        current={'3'}
       />
     ),
   },
@@ -572,10 +625,10 @@ export const NAV_COMPONENTS_DATA = [
     demo: (
       <Menu
         data={[
-          { key: 1, title: "Navigation 1", clickType: ClickType.SELF },
-          { key: 2, title: "Navigation 2", clickType: ClickType.SELF },
+          { key: '1', title: "Navigation 1", clickType: ClickType.SELF },
+          { key: '2', title: "Navigation 2", clickType: ClickType.SELF },
         ]}
-        active={1}
+        active={'1'}
         style={{ height: "64px" }}
       />
     ),
@@ -693,9 +746,19 @@ export const NAV_COMPONENTS_DATA = [
     en: "Dropdown",
     zh: "下拉菜单",
     desc: "锚点用于跳转至页面指定位置。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
+    props: [
+      {name:'toggle',type: 'element',desc:'下拉触发节点',optional: false},
+      { name: "dropData", type: <><Link href={'#DropdownItemType'}>DropdownItemType</Link>[]</>, desc: "下拉列表数据" },
+      {name:'dropContent',type: "element",desc:'自定义下拉内容',optional: true},
+      {name:'placement',type:"'left'|'right'|'bottom'",desc:'下拉面板展开的方向'},
+      {name:'onChange', type:'(data:DropdownItemType) => void',desc:'点击下拉列表',optional: true},
+      {name:'toggleClassName',type:'string',desc:'自定义toggle节点的类名',optional: true},
+      {name:'toggleStyle',type:'CSSProperties',desc:'自定义toggle节点的style',optional: true},
+      {name:'dropClassName',type:'string',desc:'自定义下拉框节点的类名',optional: true},
+      {name:'dropStyle',type:'CSSProperties',desc:'自定义下拉框节点的style',optional: true},
+    ],
     example: <FlexExample />,
-    demo: <></>,
+    demo: <Dropdown toggle={<Button text={'点击下拉'}/>} dropContent={<>下拉内容</>}/>,
   },
 ];
 
@@ -1027,15 +1090,6 @@ export const DISPLAY_COMPONENTS_DATA = [
     demo: <Calendar />,
   },
   {
-    id: "carousel",
-    en: "Carousel",
-    zh: "走马灯",
-    desc: "Land Design内置常规图标。",
-    props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <FlexExample />,
-    demo: <></>,
-  },
-  {
     id: "collapse",
     en: "Collapse",
     zh: "折叠面板",
@@ -1303,12 +1357,12 @@ export const TEXT_COMPONENTS_DATA = [
 
 export const OTHER_COMPONENTS_DATA = [
   {
-    id: "auto-media",
-    en: "AutoMedia",
+    id: "auto-Container",
+    en: "AutoContainer",
     zh: "媒体自适应容器",
     desc: "",
     props: [{ name: "name", type: "type", desc: "desc" }],
-    example: <AutoMediaExample />,
+    example: <AutoContainerExample />,
     demo: <></>,
   },
 ];
@@ -1332,13 +1386,28 @@ export const PRO_COMPONENTS_DATA = [
     example: <HighlightOnlyWrapTextareaExample />,
     demo: <HighlightOnlyWrapTextarea />,
   },
+  {
+    id: "grid-template",
+    en: "GridTemplate",
+    zh: "宫格图模版",
+    desc: "",
+    props: [{ name: "type", type: "string", desc: "设置宫格数量，默认为1" },
+    { name: "ratio", type: "number", desc: "设置宫格图比例，默认为1" },
+    { name: "gap", type: "number", desc: "设置宫格间距，默认为2" },
+    { name: "gridStyle", type: "CSSProperties", desc: "设置单个宫格样式" },
+    { name: "gridClassName", type: "string", desc: "设置单个宫格类名" },
+    { name: "children", type: "element", desc: "自定义功能内容，默认展示成宫格图模版" },
+    ],
+    example: <GridTemplateExample />,
+    demo: <GridTemplate />,
+  },
 ];
 
 
 // 组件数据汇总
 export const COMPONENTS_DATA = [
   {
-    id: 0,
+    id: 'components-preview',
     title: "组件概览",
   },
   {
@@ -1352,7 +1421,7 @@ export const COMPONENTS_DATA = [
     data: LAYOUT_COMPONENTS_DATA,
   },
   {
-    id: "affix",
+    id: "affixContainer",
     title: "导航型",
     data: NAV_COMPONENTS_DATA,
   },
@@ -1377,12 +1446,12 @@ export const COMPONENTS_DATA = [
     data: TEXT_COMPONENTS_DATA,
   },
   {
-    id: "auto-media",
+    id: "auto-container",
     title: "其他",
     data: OTHER_COMPONENTS_DATA,
   },
   {
-    id: "pro-components",
+    id: "highlight-textarea",
     title: "业务组件",
     data: PRO_COMPONENTS_DATA,
   },
@@ -1442,7 +1511,6 @@ export const ICON_EXAMPLE_DATA = [
       "volume-muted",
       "video-small-screen",
       "video-full-width",
-      "video-contain-width",
       "loop",
     ],
   },
@@ -1596,9 +1664,9 @@ export const ICON_EXAMPLE_DATA = [
       "align-bottom-left",
       "align-bottom-center",
       "align-bottom-right",
-      "align-horizontally-bottom",
-      "align-horizontally-center",
-      "align-horizontally-top",
+      "align-horizontal-bottom",
+      "align-horizontal-center",
+      "align-horizontal-top",
       "align-left-bottom",
       "align-left-center",
       "align-left-top",

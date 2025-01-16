@@ -1,4 +1,3 @@
-import React from "react";
 import Switch from "../../packages/Switch";
 import Title from "../../packages/Title";
 import Icon from "../../packages/Icon";

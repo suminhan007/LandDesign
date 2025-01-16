@@ -8,7 +8,7 @@ export type TagInputProps = {
   tagData?: string[];
   /** 占位符 */
   placeholder?: string;
-  w?: number | string;
+  width?: number | string;
   /** 允许输入的最大标签数 */
   maxLength?: number;
   /** 高亮文字数组 */
@@ -29,7 +29,7 @@ export type TagInputProps = {
 const TagInput: React.FC<TagInputProps> = ({
   tagData = [],
   placeholder = '按下回车以输入标签',
-  w = '100%',
+  width = '100%',
   maxLength = 5,
   highlightStr = [],
   highlightStyle = { background: 'var(--color-primary-2)', color: 'var(--color-primary-6)' },
@@ -67,7 +67,7 @@ const TagInput: React.FC<TagInputProps> = ({
   return (
     <StyleTagInputWrap
       className={`land-tagInput ${className}`}
-      style={{ width: typeof w === "number" ? `${w}px` : w, ...wrapStyle }}
+      style={{ width: typeof width === "number" ? `${width}px` : width, ...wrapStyle }}
     >
       <div className="flex-1 flex flex-wrap gap-4 w-fit-content shrink-0">
         {tags?.map((item, index) => <StyledInputTag
@@ -90,10 +90,7 @@ const TagInput: React.FC<TagInputProps> = ({
         />
       </div>
       <div className="land-tagInput-number">
-        {<Icon name="error-fill" className="land-input-clear-icon" fill="var(--color-text-5)"
-          onClick={() => {
-            setTags([])
-          }} />}
+        {tags?.length > 0 && <div className='land-input-clear-icon' onClick={() => setTags([])}><Icon name="error-fill" className="land-input-clear-icon" fill="var(--color-text-5)" /></div>}
         <div><span>{tags.length}</span>/{maxLength}</div>
       </div>
     </StyleTagInputWrap>
@@ -118,6 +115,18 @@ const StyleTagInputWrap = styled.div`
     &:focus-within,
     &:hover{
       background-color: var(--color-bg-3);
+      .land-input-clear-icon{
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+    .land-input-clear-icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      cursor: pointer;
     }
     
 

@@ -57,7 +57,7 @@ const Avatar: React.FC<AvatarProps> = ({
       {imgUrl && <div className='land-avatar-hidden-container'><Image url={imgUrl} /></div>}
       {content}
       {(!name && !imgUrl && !content) && <div className='land-avatar-hidden-container'>
-        <Icon name='avatar' stroke={color} size={size / 1.2} strokeWidth={3} />
+        <Icon name='avatar' stroke={color} size={size / 1.35} strokeWidth={3} />
       </div>}
     </StyledAvatarWrap>
   )
@@ -84,7 +84,7 @@ const StyledAvatarWrap = styled.div<{
     cursor: default;
     .land-avatar-name{
       color: ${props => props.color};
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 500;
     }
     .land-avatar-hidden-container{

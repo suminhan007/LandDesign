@@ -55,7 +55,7 @@ const CollapseItem: React.FC<Props> = ({
         className="land-collapse-item-title"
         onClick={(e) => { e.stopPropagation(); setIsOpen(!isOpen) }}
       >
-        {!hideIcon && <Icon name="arrow" strokeWidth={4} />}
+        {!hideIcon && <Icon name="arrow" strokeWidth={4} size={16} stroke='var(--color-text-3)' />}
         {title}
       </div>
       <div
@@ -90,7 +90,7 @@ const StyledLandCollapse = styled.div`
       }
     }
     .land-collapse-item-details {
-      color: var(--color-text-4);
+      color: var(--color-text-3);
       overflow: hidden;
       transition: max-height var(--transition-15) linear;
       .land-collapse-item-details-content {
