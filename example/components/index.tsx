@@ -16,7 +16,7 @@ const Components: React.FC<Props> = ({ }) => {
   const [active, setActive] = useState<string>("components-preview");
   const [dropActive, setDropActive] = useState<string>("");
     useEffect(() => {
-        const href = window.location.href.split('/name=');
+        const href = window.location.href.split('/?name=');
         if(href.length<2 || (href?.length>=2 && href[1] === 'components-preview')){
             setDropActive('components-preview');
             setActive('components-preview');
@@ -59,16 +59,16 @@ const Components: React.FC<Props> = ({ }) => {
           if(target?.data) {
               const targetKey = target?.data[0].id;
               setDropActive(targetKey);
-              navigate(`/land-design/component/name=${item.key}-${targetKey}`)
+              navigate(`/?name=${item.key}-${targetKey}`)
           }else {
               setDropActive(item.key);
-              navigate(`/land-design/component/name=${item.key}`);
+              navigate(`/?name=${item.key}`);
           }
         }}
         onDropChange={(item, parentItem) => {
           setActive(parentItem.key);
           setDropActive(item.key);
-            navigate(`/land-design/component/name=${parentItem.key}-${item.key}`)
+            navigate(`/?name=${parentItem.key}-${item.key}`)
         }}
         dropProps={{
           active: dropActive,

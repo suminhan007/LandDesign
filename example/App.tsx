@@ -13,12 +13,12 @@ import Switch from "../packages/Switch";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 
 function App() {
-  const [page, setPage] = useState<string>('component');
+  const [page, setPage] = useState<string>('/land-design/component/name=components-preview');
   //@ts-ignore
   const [dark, setDark] = useState<boolean>(false);
   const navigate = useNavigate();
   useEffect(() => {
-      const href = window.location.href?.split('/land-design/');
+      const href = window.location.href?.split('/land-design/#/');
       if(href?.length >=2){
           const targetHref = href[1]?.split('/')[0];
           setPage(targetHref);
@@ -31,15 +31,15 @@ function App() {
         name={<Title title="Component Demo Lib" />}
         menuProps={{
           data: [
-            { key: 'newer', title: "使用指南", clickType: ClickType.SELF,href:'/land-design/newer' },
-            { key: 'design', title: "设计语言", clickType: ClickType.SELF,href:'/land-design/design' },
+            { key: 'newer', title: "使用指南", clickType: ClickType.SELF,href:'newer' },
+            { key: 'design', title: "设计语言", clickType: ClickType.SELF,href:'design' },
             {
               key: 'component',
               title: "组件",
               clickType: ClickType.SELF,
-                href:'/land-design/component/name=components-preview'
+                href:'component/?name=components-preview'
             },
-            { key: 'animation', title: "动画", clickType: ClickType.SELF,href:'/land-design/animation' },
+            { key: 'animation', title: "动画", clickType: ClickType.SELF,href:'animation' },
           ],
           active: page,
           onChange: (item) => {
@@ -58,11 +58,11 @@ function App() {
       />
       <div className="flex-1 flex" style={{ height: "0" }}>
           <Routes>
-              <Route path="" element={<Components />} />
-              <Route path="/land-design/design" element={<Design />} />
-              <Route path="/land-design/component/:name" element={<Components />} />
-              {/*<Route path="/component/?name=components-preview" element={<Components />} />*/}
-              <Route path="/land-design/animation" element={<Animations />} />
+              <Route path="/" element={<Components />} />
+              <Route path="design" element={<Design />} />
+              <Route path="component" element={<Components />} />
+              <Route path="/component/?name=components-preview" element={<Components />} />
+              <Route path="animation" element={<Animations />} />
           </Routes>
       </div>
     </div>
