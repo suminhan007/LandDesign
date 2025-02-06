@@ -27,6 +27,7 @@ export type SelectProps = {
     /** 是否禁用 */
     disabled?: boolean;
     onChange?: (item: SelectItemType) => void;
+    type?: 'border' | 'background' | 'transparent' | 'text';
     className?: string;
     style?: CSSProperties;
 };

@@ -13,13 +13,13 @@ type Props = {};
 
 const Components: React.FC<Props> = ({ }) => {
     const navigate = useNavigate();
-  const [active, setActive] = useState<string>("components-preview");
+  const [active, setActive] = useState<string>("componentsPreview");
   const [dropActive, setDropActive] = useState<string>("");
     useEffect(() => {
-        const href = window.location.href.split('/?name=');
-        if(href.length<2 || (href?.length>=2 && href[1] === 'components-preview')){
-            setDropActive('components-preview');
-            setActive('components-preview');
+        const href = window.location.href.split('?name=');
+        if(href.length<2 || (href?.length>=2 && href[1] === 'componentsPreview')){
+            setDropActive('componentsPreview');
+            setActive('componentsPreview');
         }else{
             const targetHref = href[1]?.split('-');
             setDropActive(targetHref[1]);
@@ -27,14 +27,12 @@ const Components: React.FC<Props> = ({ }) => {
         }
     }, [window.location.href]);
     const curItem = useMemo(() => {
-        let item: any = { id: 1, en: "Icon", zh: "图标" };
-        if(dropActive === 'components-preview'){
-            return null;
-        }else{
-            const activeGroupItem = COMPONENTS_DATA.filter(item => item.id === active)[0];
+        let item: any = { id: 'componentsPreview', en: "componentsPreview", zh: "组件概览" };
+        if(active !== 'componentsPreview'){
+          const activeGroupItem = COMPONENTS_DATA.filter(item => item.id === active)[0];
             //@ts-ignore
             item = activeGroupItem?.data?.filter((itm2) => itm2.id === dropActive)[0];
-            return item;
+            return item;  
         }
     }, [active, dropActive]);
   return (
@@ -59,16 +57,16 @@ const Components: React.FC<Props> = ({ }) => {
           if(target?.data) {
               const targetKey = target?.data[0].id;
               setDropActive(targetKey);
-              navigate(`/?name=${item.key}-${targetKey}`)
+              navigate(`?name=${item.key}-${targetKey}`)
           }else {
               setDropActive(item.key);
-              navigate(`/?name=${item.key}`);
+              navigate(`?name=${item.key}`);
           }
         }}
         onDropChange={(item, parentItem) => {
           setActive(parentItem.key);
           setDropActive(item.key);
-            navigate(`/?name=${parentItem.key}-${item.key}`)
+            navigate(`?name=${parentItem.key}-${item.key}`)
         }}
         dropProps={{
           active: dropActive,
@@ -84,7 +82,7 @@ const Components: React.FC<Props> = ({ }) => {
       <div className="flex-1 p-24 height-100 overflow-auto border-box">
         <StyledRightContent className="flex column width-100">
           {/* 组件索引 */}
-          {active === 'components-preview' && (
+          {dropActive === 'componentsPreview' && (
             <ComponentPreview
               onClick={(dropItem, item) => {
                 setActive(item.id);
@@ -92,7 +90,7 @@ const Components: React.FC<Props> = ({ }) => {
               }}
             />
           )}
-          {active !== 'components-preview' && curItem && (
+          {active !== 'componentsPreview' && curItem && (
             <>
               <Title title={`${curItem.zh} ${curItem.en}`} type="h1" />
               {curItem.desc && <Title title={curItem.desc} type="p" />}

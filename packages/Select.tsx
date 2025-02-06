@@ -33,6 +33,7 @@ export type SelectProps = {
   /** 是否禁用 */
   disabled?: boolean;
   onChange?: (item: SelectItemType) => void;
+  type?: 'border' | 'background' | 'transparent' | 'text';
   className?: string;
   style?: CSSProperties;
 };
@@ -40,7 +41,8 @@ const Select: React.FC<SelectProps> = ({
   data,
   placeholder = "请选择",
   selected = "0",
-  width = "100px",
+  type='border',
+  width,
   title,
   titleInfo,
   info,
@@ -64,11 +66,11 @@ const Select: React.FC<SelectProps> = ({
         width: typeof width === "number" ? `${width}px` : width,
         ...style,
       }}
-      className={className}
+      className={`land-select ${className}`}
     >
       {title && <Title title={title} type="p" info={titleInfo} />}
       <StyleSelectInput
-        className={`hover-pop ${show ? "show" : ""} ${disabled ? 'disabled' : ''}`}
+        className={`land-select-input hover-pop ${type} ${show ? "show" : ""} ${disabled ? 'disabled' : ''}`}
         onClick={(e: React.UIEvent) => { if (disabled) return; e.stopPropagation(); setShow(!show); }}
       >
         <p
@@ -161,11 +163,41 @@ const StyleSelectInput = styled.div`
   &.show svg {
     transform: rotate(180deg);
   }
+  &.background{
+    border: none;
+    background-color: var(--color-bg-1);
+    transition: background-color var(--transition-15) linear;
+    &:hover:not(.disabled){
+      background-color: var(--color-bg-2);
+    }
+    &:active:not(.disabled){
+      background-color: var(--color-bg-3);
+    }
+  }
+  &.text{
+    border: none;
+    transition: background-color var(--transition-15) linear;
+    &:hover:not(.disabled) {
+      background-color: var(--color-bg-1);
+    }
+    &:active:not(.disabled) {
+      background-color: var(--color-bg-2);
+    }
+  }
+  &.transparent{
+    padding: 0;
+    border: none;
+    transition: color var(--transition-15) linear;
+    &:hover:not(.disabled) p.land-select-trigger{
+      color: var(--color-text-1);
+    }
+  }
 `;
 const StyleSelectResults = styled.div`
   position: absolute;
   top: 100%;
   width: 100%;
+  min-width: min-content;
   padding-top: 4px;
   opacity: 0;
   transform: scaleY(0.8);
@@ -197,11 +229,14 @@ const StyleSelectDropItem = styled.li`
   position: relative;
   display: flex;
   align-items: center;
+  gap: 4px;
+  align-items: center;
   justify-content: space-between;
   border-radius: var(--radius-4);
   padding: var(--padding-medium);
   color: var(--color-text-2);
   font-size: var(--font-content-medium);
+  white-space: nowrap;
   .land-select-item-info{
     height: 16px;
     position: relative;

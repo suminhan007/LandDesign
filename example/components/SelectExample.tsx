@@ -61,6 +61,37 @@ export default function SelectExample() {
           ]}
           />
         </div>
+
+        <Title title="设置不同样式" type="h3" />
+        <div className="flex justify-center gap-24 border p-32">
+          <Select data={[
+            { value: 1, label: '选项1' },
+            { value: 2, label: '选项2' },
+            { value: 3, label: '选项3', disabled: true, info: '此选项暂无法选择' }
+          ]}
+          />
+           <Select data={[
+            { value: 1, label: '选项1' },
+            { value: 2, label: '选项2' },
+            { value: 3, label: '选项3', disabled: true, info: '此选项暂无法选择' }
+          ]}
+            type='background'
+          />
+           <Select data={[
+            { value: 1, label: '选项1' },
+            { value: 2, label: '选项2' },
+            { value: 3, label: '选项3', disabled: true, info: '此选项暂无法选择' }
+          ]}
+            type='text'
+          />
+           <Select data={[
+            { value: 1, label: '选项1' },
+            { value: 2, label: '选项2' },
+            { value: 3, label: '选项3', disabled: true, info: '此选项暂无法选择' }
+          ]}
+            type='transparent'
+          />
+        </div>
       </div>
     </div>
   )

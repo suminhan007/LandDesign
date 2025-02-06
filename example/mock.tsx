@@ -112,6 +112,7 @@ import HighlightOnlyWrapTextarea from "../packages/HighlightOnlyWrapTextarea";
 import GridTemplateExample from "./Components/GridTemplateExample";
 import GridTemplate from "../packages/GridTemplate";
 import Dropdown from "../packages/Dropdown";
+import React from "react";
 
 export const COMMON_COMPONENTS_DATA = [
   {
@@ -1407,7 +1408,7 @@ export const PRO_COMPONENTS_DATA = [
 // 组件数据汇总
 export const COMPONENTS_DATA = [
   {
-    id: 'components-preview',
+    id: 'componentsPreview',
     title: "组件概览",
   },
   {
