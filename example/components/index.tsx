@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 import Title from "../../packages/Title";
 import Table from "../../packages/Table";
@@ -14,14 +14,29 @@ type Props = {};
 const Components: React.FC<Props> = ({ }) => {
     const navigate = useNavigate();
   const [active, setActive] = useState<string>("components-preview");
-  const [dropActive, setDropActive] = useState<string>("components-preview");
-  const href = useMemo(() => window.location.href.split('?name=')[1],[window.location.href]);
-  const curItem = useMemo(() => {
-    let item: any = { id: 1, en: "Icon", zh: "图标" };
-    const activeGroupItem = COMPONENTS_DATA.filter(item => item.id === active)[0];
-    item = activeGroupItem?.data?.filter((itm2) => itm2.id === href)[0];
-    return item;
-  }, [active, dropActive]);
+  const [dropActive, setDropActive] = useState<string>("");
+    useEffect(() => {
+        const href = window.location.href.split('/name=');
+        if(href.length<2 || (href?.length>=2 && href[1] === 'components-preview')){
+            setDropActive('components-preview');
+            setActive('components-preview');
+        }else{
+            const targetHref = href[1]?.split('-');
+            setDropActive(targetHref[1]);
+            setActive(targetHref[0]);
+        }
+    }, [window.location.href]);
+    const curItem = useMemo(() => {
+        let item: any = { id: 1, en: "Icon", zh: "图标" };
+        if(dropActive === 'components-preview'){
+            return null;
+        }else{
+            const activeGroupItem = COMPONENTS_DATA.filter(item => item.id === active)[0];
+            //@ts-ignore
+            item = activeGroupItem?.data?.filter((itm2) => itm2.id === dropActive)[0];
+            return item;
+        }
+    }, [active, dropActive]);
   return (
     <>
       <Menu
@@ -40,13 +55,20 @@ const Components: React.FC<Props> = ({ }) => {
         active={active}
         onChange={(item) => {
           setActive(item.key);
-          setDropActive(item.key);
-            navigate(`/component?name=${item.key}`)
+          const target = COMPONENTS_DATA?.filter(itm => itm.id === item.key)[0];
+          if(target?.data) {
+              const targetKey = target?.data[0].id;
+              setDropActive(targetKey);
+              navigate(`/land-design/component/name=${item.key}-${targetKey}`)
+          }else {
+              setDropActive(item.key);
+              navigate(`/land-design/component/name=${item.key}`);
+          }
         }}
         onDropChange={(item, parentItem) => {
           setActive(parentItem.key);
           setDropActive(item.key);
-            navigate(`/component?name=${item.key}`)
+            navigate(`/land-design/component/name=${parentItem.key}-${item.key}`)
         }}
         dropProps={{
           active: dropActive,
@@ -70,7 +92,7 @@ const Components: React.FC<Props> = ({ }) => {
               }}
             />
           )}
-          {active !== 'components-preview' && (
+          {active !== 'components-preview' && curItem && (
             <>
               <Title title={`${curItem.zh} ${curItem.en}`} type="h1" />
               {curItem.desc && <Title title={curItem.desc} type="p" />}

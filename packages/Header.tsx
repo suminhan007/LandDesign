@@ -90,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({
         />}
       </StyledHeaderNav>
       {rightComponent && (
-        <div className="land-header-btns">{rightComponent}</div>
+        <div className="land-header-right">{rightComponent}</div>
       )}
       {/* 移动端展开按钮 */}
       {menuProps && menuProps.data && menuProps.data?.length > 0 && (
@@ -122,8 +122,7 @@ const StyledHeader = styled.header<{
   height: ${(props) => props.height};
   border-bottom: ${(props) =>
     props.borderBottom ? "1px solid var(--color-border-2)" : ""};
-  background: ${(props) =>
-    props.filter ? "rgba(255, 255, 255, 0.8)" : "var(--color-bg-white)"};
+  background: ${(props) => props.filter ? "rgba(255, 255, 255, 0.8)" : "var(--color-bg-white)"};
   backdrop-filter: ${(props) => (props.filter ? "var(--blur-small)" : "")};
   box-sizing: border-box;
   z-index: 1000;
@@ -138,6 +137,7 @@ const StyledHeader = styled.header<{
     gap: var(--gap-12);
     height: 100%;
     cursor: pointer;
+    flex-shrink: 0;
   }
   .land-header-application {
     appearance: none;
@@ -171,7 +171,7 @@ const StyledHeader = styled.header<{
     will-change: transform, opacity;
     z-index: -1;
   }
-  .land-header-btns {
+  .land-header-right {
     display: flex;
     align-items: center;
     gap: var(--gap-12);
@@ -179,9 +179,13 @@ const StyledHeader = styled.header<{
   .land-button {
     display: none;
   }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 767px) {
+    gap: 16px;
     .land-button {
       display: flex;
+    }
+    .land-header-right{
+      margin-left: auto;
     }
   }
 `;
@@ -205,10 +209,10 @@ const StyledHeaderNav = styled.div<{
       transform: translateX(-50%);
     }
   }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 767px) {
     position: fixed;
     top: 64px;
-    right: 0px;
+    right: 0;
     flex: none;
     width: fit-content;
     height: fit-content;
@@ -222,7 +226,7 @@ const StyledHeaderNav = styled.div<{
       border: 1px solid var(--color-border-1);
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
-      transition: opacity 0.2 linear;
+      transition: opacity 0.2s linear;
       opacity: ${(props) => (props.showMobileNav ? "1" : "0")};
       .land-menu-link.active::after {
         opacity: 0;

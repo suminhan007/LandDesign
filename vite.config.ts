@@ -48,5 +48,5 @@ export default defineConfig({
       '@suminhan/land-design': resolve(__dirname, './packages/index'),
     },
   },
-  base: 'https://suminhan.cn/land-design/',
+  base: 'https://suminhan.cn',
 })
