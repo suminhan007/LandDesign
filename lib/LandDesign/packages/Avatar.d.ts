@@ -1,4 +1,5 @@
 import { default as React, CSSProperties } from 'react';
+import { PopProps } from './Pop';
 export type AvatarProps = {
     /** 名称 */
     name?: string;
@@ -18,6 +19,8 @@ export type AvatarProps = {
     color?: string;
     /** 头像框边框 */
     border?: string;
+    pop?: React.ReactNode;
+    popProps?: PopProps;
     style?: CSSProperties;
     className?: string;
 };

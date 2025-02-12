@@ -14,6 +14,8 @@ export type HeaderProps = {
     menuProps?: MenuProps;
     rightComponent?: React.ReactNode;
     onLogoClick?: () => void;
+    /** 到移动端的尺寸*/
+    mobileSize?: number;
     style?: CSSProperties;
     className?: string;
 };

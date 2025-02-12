@@ -30,6 +30,8 @@ export type HeaderProps = {
   rightComponent?: React.ReactNode;
   /* logo 点击事件 */
   onLogoClick?: () => void;
+  /** 到移动端的尺寸*/
+  mobileSize?: number;
   style?: CSSProperties;
   className?: string;
 };
@@ -47,6 +49,7 @@ const Header: React.FC<HeaderProps> = ({
   align,
   menuProps,
   rightComponent,
+                                         mobileSize=767,
   style,
   className = "",
 }) => {
@@ -63,6 +66,7 @@ const Header: React.FC<HeaderProps> = ({
       filter={filter}
       borderBottom={borderBottom}
       applications={Boolean(applications)}
+      mobileSize={mobileSize}
     >
       <div className="land-header-logo" onClick={onLogoClick}>
         {applications && (
@@ -82,6 +86,7 @@ const Header: React.FC<HeaderProps> = ({
         className="land-header-nav"
         align={align}
         showMobileNav={showMobileNav}
+        mobileSize={mobileSize}
       >
         {menuProps && <Menu border={false}
           {...menuProps}
@@ -110,6 +115,7 @@ const StyledHeader = styled.header<{
   filter?: number;
   borderBottom?: boolean;
   applications?: boolean;
+  mobileSize?: number;
 }>`
   display: flex;
   align-items: center;
@@ -179,7 +185,7 @@ const StyledHeader = styled.header<{
   .land-button {
     display: none;
   }
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: ${props => `${props.mobileSize}px`}) {
     gap: 16px;
     .land-button {
       display: flex;
@@ -193,6 +199,7 @@ const StyledHeader = styled.header<{
 const StyledHeaderNav = styled.div<{
   align?: string;
   showMobileNav?: boolean;
+  mobileSize?: number;
 }>`
   display: flex;
   flex: 1;
@@ -209,7 +216,7 @@ const StyledHeaderNav = styled.div<{
       transform: translateX(-50%);
     }
   }
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: ${props => `${props.mobileSize}px`}) {
     position: fixed;
     top: 64px;
     right: 0;

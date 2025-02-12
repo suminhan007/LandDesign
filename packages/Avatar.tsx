@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react'
 import styled from 'styled-components';
 import Icon from './Icon';
-import Pop from './Pop';
+import Pop, {PopProps} from './Pop';
 import Image from './Image';
 
 export type AvatarProps = {
@@ -23,6 +23,8 @@ export type AvatarProps = {
   color?: string;
   /** 头像框边框 */
   border?: string;
+  pop?:React.ReactNode;
+  popProps?: PopProps,
   style?: CSSProperties;
   className?: string;
 };
@@ -37,6 +39,8 @@ const Avatar: React.FC<AvatarProps> = ({
   bg = 'var(--color-primary-2)',
   color = 'var(--color-primary-6)',
   border = '',
+                                         pop,
+                                         popProps,
   style,
   className = '',
 }) => {
@@ -52,7 +56,7 @@ const Avatar: React.FC<AvatarProps> = ({
     >
       {name && <>
         <p className='land-avatar-name ellipsis'>{abbreviationName}</p>
-        <Pop content={name} />
+        {pop && <Pop content={pop} {...popProps}/>}
       </>}
       {imgUrl && <div className='land-avatar-hidden-container'><Image url={imgUrl} /></div>}
       {content}
