@@ -17,7 +17,7 @@ export type ButtonProps = {
   /* 按钮文字对齐方式 */
   justify?: "center" | "start" | "end";
   /* 按钮风格 */
-  type?: "text" | "background" | "border" | "line";
+  type?: "text" | "background" | "border" | "line" | 'transparent';
   /* 按钮状态 */
   status?: "default" | "primary" | "warning" | "danger" | "success";
   /** 按钮尺寸 */
@@ -176,11 +176,11 @@ const StyledButton = styled.div<{
   height: ${(props) => (props.height ? props.height : "fit-content")};
   color: ${(props) =>
     props.color ? `${props.color}6)` : "var(--color-text-2)"};
-  &:hover:not(.disabled) {
+  &:hover:not(.disabled):not(.transparent) {
     color: ${(props) =>
     props.color ? `${props.color}5)` : "var(--color-text-3)"};
   }
-  &:active:not(.disabled) {
+  &:active:not(.disabled):not(.transparent) {
     color: ${(props) =>
     props.color ? `${props.color}7)` : "var(--color-text-1)"};
   }
@@ -253,6 +253,20 @@ const StyledButton = styled.div<{
     }
     &:active:not(.disabled) {
       border-color: ${(props) => `${props.color}7)`};
+    }
+  }
+  &.transparent{
+    padding: 0;
+    background-color: transparent;
+    color: ${(props) =>
+        props.color ? `${props.color}6)` : "var(--color-text-3)"};
+    &:hover:not(.disabled) {
+      color: ${(props) =>
+          props.color ? `${props.color}6)` : "var(--color-text-1)"};
+    }
+    &:active:not(.disabled) {
+      color: ${(props) =>
+          props.color ? `${props.color}7)` : "var(--color-text-1)"};
     }
   }
 

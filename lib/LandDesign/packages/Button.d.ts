@@ -7,7 +7,7 @@ export type ButtonProps = {
     width?: string;
     height?: string;
     justify?: "center" | "start" | "end";
-    type?: "text" | "background" | "border" | "line";
+    type?: "text" | "background" | "border" | "line" | 'transparent';
     status?: "default" | "primary" | "warning" | "danger" | "success";
     /** 按钮尺寸 */
     size?: 'small' | 'default' | 'large';

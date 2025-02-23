@@ -1,4 +1,5 @@
 import { default as React, CSSProperties, ReactNode } from 'react';
+import { ButtonProps } from './Button';
 export type DrawerProps = {
     /** 是否显示侧拉窗 */
     show?: boolean;
@@ -28,6 +29,10 @@ export type DrawerProps = {
     cancelLabel?: string | ReactNode;
     /** 确定按钮文案 */
     submitLabel?: string | ReactNode;
+    cancelDisabled?: boolean;
+    submitDisabled?: boolean;
+    cancelButtonProps?: ButtonProps;
+    submitButtonProps?: ButtonProps;
     /** 侧拉窗最小宽度 */
     minWidth?: string;
     /** 侧拉窗最大宽度 */

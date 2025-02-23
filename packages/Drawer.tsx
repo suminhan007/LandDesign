@@ -2,7 +2,7 @@ import React, { CSSProperties, ReactNode, useMemo } from "react";
 import styled from "styled-components";
 import Icon from "./Icon";
 import Divider from "./Divider";
-import Button from "./Button";
+import Button, {ButtonProps} from "./Button";
 
 export type DrawerProps = {
   /** 是否显示侧拉窗 */
@@ -33,6 +33,10 @@ export type DrawerProps = {
   cancelLabel?: string | ReactNode;
   /** 确定按钮文案 */
   submitLabel?: string | ReactNode;
+  cancelDisabled?: boolean;
+  submitDisabled?: boolean;
+  cancelButtonProps?:ButtonProps;
+  submitButtonProps?: ButtonProps;
 
   /** 侧拉窗最小宽度 */
   minWidth?: string;
@@ -77,6 +81,10 @@ const Drawer: React.FC<DrawerProps> = ({
   useFooterDivider = true,
   cancelLabel = '取消',
   submitLabel = '确定',
+                                         cancelDisabled,
+    submitDisabled,
+    cancelButtonProps,
+    submitButtonProps,
   minWidth,
   maxWidth,
   size = 'auto',
@@ -144,8 +152,8 @@ const Drawer: React.FC<DrawerProps> = ({
       {useFooterDivider && <Divider />}
       {footerComponent || <div className="land-drawer-footer">
         {footerRightComponent || ((cancelLabel || submitLabel || onCancel || onSubmit) && <div className="land-drawer-footer-btn">
-          {onCancel && <Button type="background" status="default" onClick={onCancel}>{cancelLabel}</Button>}
-          {onSubmit && <Button type="background" status="primary" onClick={onSubmit}>{submitLabel}</Button>}
+          {onCancel && <Button type="background" disabled={cancelDisabled} status="default" onClick={onCancel} {...cancelButtonProps}>{cancelLabel}</Button>}
+          {onSubmit && <Button type="background" disabled={submitDisabled} status="primary" onClick={onSubmit} {...submitButtonProps}>{submitLabel}</Button>}
         </div>)}
         {footerLeftComponent}
       </div>}
@@ -168,7 +176,7 @@ const StyledLandDrawer = styled.div<{
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  overflow: auto;
+  overflow: hidden;
   z-index: 1000;
   .land-drawer-mask{
     opacity: 0;
@@ -249,6 +257,7 @@ const StyledLandDrawer = styled.div<{
       display: flex;
       align-items: center;
       height: 100%;
+      flex-shrink: 0;
       .land-drawer-header-title{
         font-size: 16px;
         font-weight: 500;
